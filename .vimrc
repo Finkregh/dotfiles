@@ -65,6 +65,12 @@ map <F2> :Hexplore!<CR>
 " open new tab
 map <F3> :Texplore!<CR>
 
+" bind <ALT>-LEFT / <ALT>-RIGHT to move complete tab to left/right
+" FIXME eventually change noremap to map
+noremap <silent> <M-Left> :exe "silent! tabmove " . (tabpagenr() - 2)<CR>
+noremap <silent> <M-Right> :exe "silent! tabmove " . tabpagenr()<CR>
+
+
 set showcmd			" Show (partial) command in status line.
 set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
