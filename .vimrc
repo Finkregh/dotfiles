@@ -1,4 +1,5 @@
 
+
 " ===== ENCODING ====
 " we are UTF-8
 set encoding=utf-8
@@ -74,7 +75,7 @@ noremap <silent> <M-Right> :exe "silent! tabmove " . tabpagenr()<CR>
 set showcmd			" Show (partial) command in status line.
 set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
-"set smartcase		" Do smart case matching
+set smartcase		" Do smart case matching
 set incsearch		" Incremental search
 "set autowrite		" Automatically save before commands like :next and :make
 "set hidden         " Hide buffers when they are abandoned
@@ -126,6 +127,7 @@ set loadplugins
 "set statusline=%{GitBranchInfoString} 
 set statusline=%#StatusLineNC#\ Git\ %#ErrorMsg#\ %{GitBranchInfoTokens()[0]}\ %#StatusLine#
 set laststatus=2
+set number
 
 
 " ==== COMPILING & ETC ====
@@ -133,3 +135,11 @@ augroup PO
 	autocmd FileType po compiler po
 augroup END 
 
+
+" ==== GVIM SPECIFIC ====
+set guifont=Bitstream\ Vera\ Sans\ mono\ 9
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+"map <UP> gk
+"map <DOWN> gj

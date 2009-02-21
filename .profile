@@ -21,3 +21,28 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+
+
+# Some readline stuff that is fairly common
+HISTSIZE=10000
+HISTCONTROL="erasedups"
+
+INPUTRC="/etc/inputrc"
+LESS="-R"
+LC_COLLATE="C"
+
+export HISTSIZE HISTCONTROL INPUTRC LESS LC_COLLATE
+
+# Load profiles from /etc/profile.d
+if test -d /etc/profile.d/; then
+    for profile in /etc/profile.d/*.sh; do
+        test -x $profile && . $profile
+    done
+    unset profile
+fi
+
+# Termcap is outdated, old, and crusty, kill it.
+unset TERMCAP
+
+# Man is much better than us at figuring this out
+unset MANPATH
