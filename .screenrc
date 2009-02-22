@@ -1,0 +1,101 @@
+#----------------------------------------------------#
+# File:         ~/.screenrc                          #
+# Version:      0.1                                  #
+# Author:       Florian "Bluewind" Pritz <f-p@gmx.at>#
+#----------------------------------------------------#
+
+#--------------------
+# Statusline by heartcore <http://heartcore.mcx2.org>
+#--------------------
+hardstatus off
+hardstatus alwayslastline
+#hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %l %{g}]'
+#hardstatus string '%{= kG}[ %{G}%H %{g}%{= kG}]%{=b W} %=%-w%{r}(%{b}%n %t%{r})%{=b W}%+w%=%{= kG}[%{B} %l %{g}%{= kG}]'
+hardstatus string '%{= kG}[ %{G}%H %{g}%{= kG}]%{=b W} %=%-w%{r}(%{b}%n %t%{r})%{=b W}%+w%=%{= kG} [ %{= d}%d.%m.%y || %c %{= kG}] [%{B} %l %{g}%{= kG}]'
+scrollback 10000
+
+#--------------------
+# Autostart
+#--------------------
+#screen 0 -t irssi irssi
+#screen 1 -t ncmpc ncmpc -c
+#screen 2 -t zsh zsh
+
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
+
+### Created by Brad Sims <bsims@abnt.org> 25/06/2004 
+
+### I got tired of .screenrc's on the internet being so 
+### poorly commented... So being a good GNUbie I took matters
+### into my own hands; and wrote this dotfile.
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
+
+##    Explanation of hardstatus line    ##
+
+# Ignore the ' marks if you use these examples for yourself
+
+# Note that if you want to use the color brown under konsole
+# You actually use bright yellow (%{Y}). 
+
+# Note the embeded space after the colon, I feel 
+#  it just looks nicer with a blank between the
+#  text and console edge:
+#   '%{=b}%{G} Screen(s): '
+
+# This prints the window listing in blue:
+#   '%{b}%w'
+
+# This right-aligns what follows:
+#   '%='
+
+# This displays the time (hours and minutes) in 12hr format 
+# and adds an AM/PM flag, in bold green:
+#   '%{G}%C%A'
+
+# This displays the day of the week:
+#   '%D'
+
+#This displays the date in Mon/day/year format:
+# and again I embeded a space to give me one space
+# between the text and console edge:
+#  '%M/%d/%Y '
+
+# The resulting command give you a status line that 
+#  looks like this: 
+#   | 0* bash  <blanks zapped>         5:30PM  Fri, Jun/25/2004 |
+#  (The pipes indicate the edges of the xterm/console).
+
+# Green text, time, and date; windows in blue:
+#hardstatus alwayslastline "%{=b}%{G} %{b}%w %=%{kG}%W%s  %D, %M/%d/%Y "
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
+
+##    Some general options    ##
+
+# Turn off start message:
+startup_message off
+
+# Set messages timeout to one second: 
+msgwait 1
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
+
+##    Keybindings    ##
+
+# bind F7  to detach screen session from this terminal
+# bind F8  to kill current screen window.
+# bind F9  to create a new screen
+# bind F10 to rename current screen window
+# bind F5 to move to previous window
+# bind F6 to move to next window
+bindkey -k k7 detach
+bindkey -k k8 kill
+bindkey -k k9 screen
+bindkey -k k; title
+bindkey -k k5 prev
+bindkey -k k6 next
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
+

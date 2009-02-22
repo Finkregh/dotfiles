@@ -8,9 +8,10 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-xterm-color)
+# FIXME sometimes...
+## set a fancy prompt (non-color, unless we know we "want" color)
+#case "$TERM" in
+#xterm-color)
 	# via http://www.cboltz.de/de/linux/bashprompt/
 	# PS1version=' \[\e[46m\]8.1\[\e[0m\]'
 	PS1error='$( ret=$? ; test $ret -gt 0 && echo "\[\e[41;93m\]   [$ret]   \[\e[0m\]" )'
@@ -19,11 +20,11 @@ xterm-color)
 	PS1="$PS1error$PS1user@\h:$PS1color\w\[\e[0m\]$PS1version> "
 	tty | grep pts > /dev/null && PS1="$PS1\[\e]0;\w - \u@\h\a\]";
 	export PS1
-    ;;
-*)
-    PS1='\u@\h:\w\$ '
-    ;;
-esac
+#    ;;
+#*)
+#    PS1='\u@\h:\w\$ '
+#    ;;
+#esac
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
