@@ -35,13 +35,14 @@ xterm*|rxvt*)
     ;;
 esac
 
-# special screen-specific stuff for window titles
-case $TERM in
-    screen*)
-        trap 'echo -ne "\ek${BASH_COMMAND%%\ *}\e\\"' DEBUG
-        PROMPT_COMMAND='echo -ne "\ek$(short_pwd 15)\e\\"'
-        ;;
-esac
+# FIXME screen does not like this ...
+## special screen-specific stuff for window titles
+#case $TERM in
+#    screen*)
+#        trap 'echo -ne "\ek${BASH_COMMAND%%\ *}\e\\"' DEBUG
+#        PROMPT_COMMAND='echo -ne "\ek$(short_pwd 15)\e\\"'
+#        ;;
+#esac
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
