@@ -110,6 +110,7 @@ set t_Co=256
 "colorscheme inkpot
 colorscheme charged256
 
+
 syntax on
 set background=dark
 
