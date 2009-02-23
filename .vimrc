@@ -99,7 +99,6 @@ if has("autocmd")
 endif
 
 
-
 " ==== COLORS ====
 " set number of colors to 256
 set t_Co=256
