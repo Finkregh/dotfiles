@@ -46,3 +46,17 @@ unset TERMCAP
 
 # Man is much better than us at figuring this out
 unset MANPATH
+
+# add some predefined colors
+export GREY="\033[1;30m"
+export LIGHT_GREY="\033[0;37m"
+export CYAN="\033[0;36m"
+export LIGHT_CYAN="\033[1;36m"
+export RED="\033[00;31m"
+export LIGHT_RED="\033[01;31m"
+export GREEN="\033[00;32m"
+export LIGHT_GREEN="\033[01;32m"
+export BLUE="\033[00;34m"
+export LIGHT_BLUE="\033[01;34m"
+export NO_COLOUR="\033[0m"
+

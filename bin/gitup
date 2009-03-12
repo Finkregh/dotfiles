@@ -1,0 +1,12 @@
+#!/bin/sh
+for repo in anleitungen configs devel/trunk juniper-configs nagios-configs scripts scriptdump-own ; do
+	cd ~/tmp.wrk/$repo
+	echo "\n$LIGHT_BLUE""upgrading $repo $NO_COLOUR"
+	git svn fetch
+	git svn rebase 
+	echo "$LIGHT_GREEN""maintainance-run for $repo $LIGHT_GREY"
+	git fsck
+	git count-objects
+	git gc
+	echo "$GREEN""done with $repo $NO_COLOUR"
+done
