@@ -26,6 +26,12 @@ shopt -s checkwinsize
 #    ;;
 #esac
 
+# == add ~/bin/ to PATH ==
+if [ -d ~/bin ] ; then
+	PATH="${PATH}":~/bin
+fi
+
+
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
