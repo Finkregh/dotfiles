@@ -68,6 +68,7 @@ if [ -f ~/.bash_alias_axxeo ]; then
     source ~/.bash_alias_axxeo
 fi
 
+set TERM xterm-256color; export TERM
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
     eval "`dircolors -b`"
@@ -75,6 +76,22 @@ if [ "$TERM" != "dumb" ]; then
     #alias dir='ls --color=auto --format=vertical'
     #alias vdir='ls --color=auto --format=long'
 fi
+
+
+# add some predefined colors
+GREY="\033[1;30m"
+LIGHT_GREY="\033[0;37m"
+CYAN="\033[0;36m"
+LIGHT_CYAN="\033[1;36m"
+RED="\033[00;31m"
+LIGHT_RED="\033[01;31m"
+GREEN="\033[00;32m"
+LIGHT_GREEN="\033[01;32m"
+BLUE="\033[00;34m"
+LIGHT_BLUE="\033[01;34m"
+NO_COLOUR="\033[0m"
+
+export GREY LIGHT_GREY CYAN LIGHT_CYAN RED LIGHT_RED GREEN LIGHT_GREEN BLUE LIGHT_BLUE NO_COLOUR
 
 
 # Make sure our customised gtkrc file is loaded.

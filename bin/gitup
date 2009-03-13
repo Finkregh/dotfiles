@@ -1,9 +1,21 @@
 #!/bin/sh
-for repo in anleitungen configs devel/trunk juniper-configs nagios-configs scripts scriptdump-own ; do
-	cd ~/tmp.wrk/$repo
+for repo in anis anleitungen configs foxadmin-trunk juniper-configs nagios-configs scripts juniper-configs scriptdump-own jeriko ; do
+	cd ~/devel/$repo
 	echo "\n$LIGHT_BLUE""upgrading $repo $NO_COLOUR"
 	git svn fetch
 	git svn rebase 
+	echo "$LIGHT_GREEN""maintainance-run for $repo $LIGHT_GREY"
+	git fsck
+	git count-objects
+	git gc
+	echo "$GREEN""done with $repo $NO_COLOUR"
+done
+
+# non-svn
+for repo in ipv6wall pytress gitosis-admin gitosis-admin-failedprojects.de ; do
+	cd ~/devel/$repo
+	echo "\n$LIGHT_BLUE""upgrading $repo $NO_COLOUR"
+	git pull
 	echo "$LIGHT_GREEN""maintainance-run for $repo $LIGHT_GREY"
 	git fsck
 	git count-objects
