@@ -1,4 +1,4 @@
-
+set modeline
 
 " ===== ENCODING ====
 " we are UTF-8
@@ -11,12 +11,19 @@ set termencoding=utf-8
 set sts=4
 " tabstop (what will be written)
 set ts=4
-" no expandtab (tabs = spaces = :ugly:, tabs should always be tabs)
-set noet
 " amount of spaces per tab
 set sw=4
-" inserts spaces instead of tabs on line-beginning
-set nosmarttab
+if $HOSTNAME =~ "jim3"
+	" inserts spaces instead of tabs on line-beginning
+	set smarttab
+	" no expandtab (tabs = spaces = :ugly:, tabs should always be tabs)
+	set et
+else
+	" inserts spaces instead of tabs on line-beginning
+	set nosmarttab
+	" no expandtab (tabs = spaces = :ugly:, tabs should always be tabs)
+	set noet
+endif
 
 " load indentation rules according to the detected filetype.
 if has("autocmd")
