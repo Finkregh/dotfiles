@@ -6,6 +6,11 @@ set encoding=utf-8
 set termencoding=utf-8
 
 
+" ==== COMMANDS ====
+" switch to directory of current file
+command! CD cd %:p:h
+
+
 " ===== TABS & SPACES ====
 " soft-tabstop (what we see)
 set sts=4
@@ -62,6 +67,12 @@ set nohlsearch
 " Show spaces used for indenting (so you use only tabs for indenting).
 :match ExtraWhitespace /^\t*\zs \+/
 
+" Show  tab characters. Visual Whitespace.
+set list
+set listchars=tab:>.
+
+
+
 " highlight some things in comments
 let c_comment_strings = 1
 " SQL-Highlighting in PHP-Strings (1=yes 0=no)
@@ -99,11 +110,11 @@ set mouse=			" disable the fsckn mouse
 noremap # :s/^\([ \t]*\)\(.*\)$/\1#\2<cr>:nohl<cr>:silent! set hl<CR>
 noremap 3 :s/^\([ \t]*\)#\(.*\)$/\1\2<cr>:nohl<cr>:silent! set hl<CR>
 
+set pastetoggle=<F11>
 
 " ==== COMPLETION ====
 " folding by syntax
 set fdm=syntax
-
 
 " DOCU ME
 set wildmenu
