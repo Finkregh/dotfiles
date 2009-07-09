@@ -62,6 +62,13 @@ set nohlsearch
 " Show spaces used for indenting (so you use only tabs for indenting).
 :match ExtraWhitespace /^\t*\zs \+/
 
+" highlight some things in comments
+let c_comment_strings = 1
+" SQL-Highlighting in PHP-Strings (1=yes 0=no)
+let php_sql_query = 1
+let php_minlines=300
+let php_htmlInStrings=1
+
 
 " ==== EDITING & MOVING & BINDS ====
 " always keep 3 lines an bottom/top
@@ -79,7 +86,6 @@ noremap <silent> <M-Left> :exe "silent! tabmove " . (tabpagenr() - 2)<CR>
 noremap <silent> <M-Right> :exe "silent! tabmove " . tabpagenr()<CR>
 
 
-set showcmd			" Show (partial) command in status line.
 set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
@@ -88,7 +94,17 @@ set incsearch		" Incremental search
 "set hidden         " Hide buffers when they are abandoned
 set mouse=			" disable the fsckn mouse
 
-" completion
+" Folkes magic  # adder/remover 
+" was vnoremap
+noremap # :s/^\([ \t]*\)\(.*\)$/\1#\2<cr>:nohl<cr>:silent! set hl<CR>
+noremap 3 :s/^\([ \t]*\)#\(.*\)$/\1\2<cr>:nohl<cr>:silent! set hl<CR>
+
+
+" ==== COMPLETION ====
+" folding by syntax
+set fdm=syntax
+
+
 " DOCU ME
 set wildmenu
 set wildmode=list:longest,full
@@ -135,6 +151,8 @@ set loadplugins
 set statusline=%#StatusLineNC#\ Git\ %#ErrorMsg#\ %{GitBranchInfoTokens()[0]}\ %#StatusLine#
 set laststatus=2
 set number
+set showcmd			" Show (partial) command in status line.
+set showmode		" Insert, Replace or Visual mode put a message on the last line
 
 
 " ==== COMPILING & ETC ====
