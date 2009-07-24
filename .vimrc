@@ -1,4 +1,12 @@
-set modeline
+" ==== DEBIAN SPECIFICS ====
+" This line should not be removed as it ensures that various options are
+" properly set to work with the Vim-related packages available in Debian.
+runtime! debian.vim
+
+
+set loadplugins
+
+
 
 " ===== ENCODING ====
 " we are UTF-8
@@ -149,13 +157,6 @@ set background=dark
 
 
 
-" ==== DEBIAN SPECIFICS ====
-" This line should not be removed as it ensures that various options are
-" properly set to work with the Vim-related packages available in Debian.
-runtime! debian.vim
-
-
-set loadplugins
 
 " ==== MENU & BARS ====
 "set statusline=%{GitBranchInfoString} 
@@ -179,3 +180,5 @@ set guioptions-=T
 set guioptions-=r
 "map <UP> gk
 "map <DOWN> gj
+
+set modeline
