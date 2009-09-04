@@ -1,26 +1,34 @@
 #!/bin/sh
 for repo in anis anleitungen configs foxadmin-trunk juniper-configs nagios-configs scripts juniper-configs scriptdump-own jeriko ; do
 	cd ~/devel/$repo
-	echo "\n$LIGHT_BLUE""upgrading $repo $NO_COLOUR"
-	git svn fetch #&
-	#sleep 3 ; pkill -f $!
-	git svn rebase #&
-	#sleep 3 ; pkill -f $!
-	echo "$LIGHT_GREEN""maintainance-run for $repo $LIGHT_GREY"
-	git fsck
-	git count-objects
-	git gc
-	echo "$GREEN""done with $repo $NO_COLOUR"
+	if [ ! "git co master" ]; then
+		exit 1
+	else
+		echo "\n$LIGHT_BLUE""upgrading $repo $NO_COLOUR"
+		git svn fetch #&
+		#sleep 3 ; pkill -f $!
+		git svn rebase #&
+		#sleep 3 ; pkill -f $!
+		echo "$LIGHT_GREEN""maintainance-run for $repo $LIGHT_GREY"
+		git fsck
+		git count-objects
+		git gc
+		echo "$GREEN""done with $repo $NO_COLOUR"
+	fi
 done
 
 # non-svn
 for repo in ipv6wall pytress gitosis-admin gitosis-admin-failedprojects.de ; do
 	cd ~/devel/$repo
-	echo "\n$LIGHT_BLUE""upgrading $repo $NO_COLOUR"
-	git pull
-	echo "$LIGHT_GREEN""maintainance-run for $repo $LIGHT_GREY"
-	git fsck
-	git count-objects
-	git gc
-	echo "$GREEN""done with $repo $NO_COLOUR"
+	if [[ ! git co master ]]; then
+		exit 1
+	else
+		echo "\n$LIGHT_BLUE""upgrading $repo $NO_COLOUR"
+		git pull
+		echo "$LIGHT_GREEN""maintainance-run for $repo $LIGHT_GREY"
+		git fsck
+		git count-objects
+		git gc
+		echo "$GREEN""done with $repo $NO_COLOUR"
+	fi
 done
