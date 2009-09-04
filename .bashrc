@@ -132,3 +132,7 @@ export BROWSER=firefox
 export PAGER=less
 export MANPAGER=less
 export MAILCHECK=0
+
+
+# Futurama :)
+curl -Is slashdot.org | egrep '^X-(F|B|L)' | cut -d \- -f 2

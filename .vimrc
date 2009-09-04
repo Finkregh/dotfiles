@@ -6,6 +6,55 @@ runtime! debian.vim
 
 set loadplugins
 
+" ==== HIGHLIGHTS ====
+" spellchecking
+" :set spell spelllang=de
+
+" prefix wrapped lines (we dont like this anymore..)
+" set sbr=++\ 
+
+" mark too long lines
+"      match ErrorMsg /\%>80v.\+/
+
+" do not search highlighted
+set nohlsearch
+
+" add ExtraWhitespace-group, set colors of that
+:highlight ExtraWhitespace ctermbg=darkgreen ctermfg=darkgreen
+" light grey:
+":highlight ExtraWhitespace ctermfg=238 ctermbg=234
+
+" Show trailing whitespace:
+:match ExtraWhitespace /\s\+$/
+
+" Show trailing whitepace and spaces before a tab:
+:match ExtraWhitespace /\s\+$\| \+\ze\t/
+
+" Show tabs that are not at the start of a line:
+:match ExtraWhitespace /[^\t]\zs\t\+/
+
+" Show spaces used for indenting (so you use only tabs for indenting).
+":match ExtraWhitespace /^\t*\zs \+/
+
+" show spaces on leaving insert-mode
+autocmd InsertLeave * redraw!
+autocmd ColorScheme * highlight ExtraWhitespace ctermfg=darkgreen ctermbg=darkgreen
+"autocmd InsertEnter * match ExtraWhiteSpace /\s\+\%#\@<!$/
+
+" Show  tab characters. Visual Whitespace.
+set list
+set listchars=tab:>.
+
+
+
+" highlight some things in comments
+let c_comment_strings = 1
+" SQL-Highlighting in PHP-Strings (1=yes 0=no)
+let php_sql_query = 1
+let php_minlines=300
+let php_htmlInStrings=1
+
+
 
 
 " ===== ENCODING ====
@@ -44,49 +93,6 @@ if has("autocmd")
 endif
 
 
-
-" ==== HIGHLIGHTS ====
-" spellchecking
-" :set spell spelllang=de
-
-" prefix wrapped lines (we dont like this anymore..)
-" set sbr=++\ 
-
-" mark too long lines
-"      match ErrorMsg /\%>80v.\+/
-
-" do not search highlighted
-set nohlsearch
-
-" add ExtraWhitespace-group, set colors of that
-":highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-" light grey:
-:highlight ExtraWhitespace ctermfg=238 ctermbg=234
-
-" Show trailing whitespace:
-:match ExtraWhitespace /\s\+$/
-
-" Show trailing whitepace and spaces before a tab:
-:match ExtraWhitespace /\s\+$\| \+\ze\t/
-
-" Show tabs that are not at the start of a line:
-:match ExtraWhitespace /[^\t]\zs\t\+/
-
-" Show spaces used for indenting (so you use only tabs for indenting).
-:match ExtraWhitespace /^\t*\zs \+/
-
-" Show  tab characters. Visual Whitespace.
-set list
-set listchars=tab:>.
-
-
-
-" highlight some things in comments
-let c_comment_strings = 1
-" SQL-Highlighting in PHP-Strings (1=yes 0=no)
-let php_sql_query = 1
-let php_minlines=300
-let php_htmlInStrings=1
 
 
 " ==== EDITING & MOVING & BINDS ====
