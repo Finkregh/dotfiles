@@ -33,7 +33,9 @@ endif
 " set sbr=++\ 
 
 " mark too long lines
-"      match ErrorMsg /\%>80v.\+/
+"match ErrorMsg /\%>80v.\+/
+highlight OverLength ctermbg=darkred
+match OverLength /\%81v.*/
 
 " do not search highlighted
 set nohlsearch
@@ -85,6 +87,8 @@ set mouse=			" disable the fsckn mouse
 " DOCU ME
 set wildmenu
 set wildmode=list:longest,full
+
+filetype plugin on
 
 " do not move instantly to search-result
 set nois
@@ -138,8 +142,14 @@ augroup END
 
 " ==== GVIM SPECIFIC ====
 set guifont=Bitstream\ Vera\ Sans\ mono\ 9
-set guioptions-=m
-set guioptions-=T
-set guioptions-=r
+"set guioptions-=m
+"set guioptions-=T
+"set guioptions-=r
 "map <UP> gk
 "map <DOWN> gj
+
+" ==== sup mailclient ====
+" syntax coloration when composing emails
+au BufRead sup.*        set ft=mail
+
+

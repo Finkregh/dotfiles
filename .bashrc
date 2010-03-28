@@ -94,6 +94,26 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 export MIKTEX_REPOSITORY=ftp://ftp.tu-chemnitz.de/pub/tex/systems/win32/miktex/tm/packages/
 
 
+cp_progress()
+{
+	strace -q -ewrite cp -- "${1}" "${2}" 2>&1 \
+	  | awk '{
+		 count += $NF
+		 if (count % 10 == 0) {
+			percentcount = count / total_size * 100
+			cols = '`echo $COLUMNS`' - 10
+			percent = count / total_size * cols
+			printf "%3d%% [", percentcount
+			for (i=0;i<=percent;i++)
+			   printf "="
+			printf ">"
+			for (i=percent;i<cols;i++)
+			   printf " "
+			printf "]\r"
+		 }
+	 }
+	END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
+}
 
 source ~/.bash_svn
 
