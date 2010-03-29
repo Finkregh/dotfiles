@@ -1,0 +1,23 @@
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	ui = true
+
+[color "diff"]
+	whitespace = red reverse
+
+[core]
+	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+
+[user]
+	email = finkregh@mafia-server.net
+	name = Oluf Lorenzen
+
+[alias]
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+	df = diff
+	lg = log -p
