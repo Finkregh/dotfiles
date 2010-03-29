@@ -14,10 +14,10 @@ set loadplugins
 " set sbr=++\ 
 
 " mark too long lines
-"      match ErrorMsg /\%>80v.\+/
-highlight OverLength ctermbg=darkred
-match OverLength /\%81v.*/
-
+augroup vimrc_autocmds
+  autocmd BufRead * highlight OverLength ctermbg=darkgrey guibg=#592929
+  autocmd BufRead * match OverLength /\%72v.*/
+augroup END
 
 " do not search highlighted
 set nohlsearch
