@@ -84,13 +84,16 @@ else
 	" inserts spaces instead of tabs on line-beginning
 	set nosmarttab
 	" no expandtab (tabs = spaces = :ugly:, tabs should always be tabs)
-	set noet
+	set et
 endif
 
 " load indentation rules according to the detected filetype.
 if has("autocmd")
 	filetype indent on
 endif
+
+filetype on            " enables filetype detection
+filetype plugin on     " enables filetype specific plugins
 
 
 
