@@ -1,29 +1,10 @@
+" ==== DEBIAN SPECIFICS ====
+" This line should not be removed as it ensures that various options are
+" properly set to work with the Vim-related packages available in Debian.
+runtime! debian.vim
 
 
-" ===== ENCODING ====
-" we are UTF-8
-set encoding=utf-8
-set termencoding=utf-8
-
-
-" ===== TABS & SPACES ====
-" soft-tabstop (what we see)
-set sts=4
-" tabstop (what will be written)
-set ts=4
-" no expandtab (tabs = spaces = :ugly:, tabs should always be tabs)
-set noet
-" amount of spaces per tab
-set sw=4
-" inserts spaces instead of tabs on line-beginning
-set nosmarttab
-
-" load indentation rules according to the detected filetype.
-if has("autocmd")
-	filetype indent on
-endif
-
-
+set loadplugins
 
 " ==== HIGHLIGHTS ====
 " spellchecking
@@ -33,17 +14,18 @@ endif
 " set sbr=++\ 
 
 " mark too long lines
-"match ErrorMsg /\%>80v.\+/
+"      match ErrorMsg /\%>80v.\+/
 highlight OverLength ctermbg=darkred
 match OverLength /\%81v.*/
+
 
 " do not search highlighted
 set nohlsearch
 
 " add ExtraWhitespace-group, set colors of that
-":highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+:highlight ExtraWhitespace ctermbg=darkgreen ctermfg=darkgreen
 " light grey:
-:highlight ExtraWhitespace ctermfg=238 ctermbg=234
+":highlight ExtraWhitespace ctermfg=238 ctermbg=234
 
 " Show trailing whitespace:
 :match ExtraWhitespace /\s\+$/
@@ -55,7 +37,68 @@ set nohlsearch
 :match ExtraWhitespace /[^\t]\zs\t\+/
 
 " Show spaces used for indenting (so you use only tabs for indenting).
-:match ExtraWhitespace /^\t*\zs \+/
+":match ExtraWhitespace /^\t*\zs \+/
+
+" show spaces on leaving insert-mode
+autocmd InsertLeave * redraw!
+autocmd ColorScheme * highlight ExtraWhitespace ctermfg=darkgreen ctermbg=darkgreen
+"autocmd InsertEnter * match ExtraWhiteSpace /\s\+\%#\@<!$/
+
+" Show  tab characters. Visual Whitespace.
+set list
+set listchars=tab:>.
+
+
+
+" highlight some things in comments
+let c_comment_strings = 1
+" SQL-Highlighting in PHP-Strings (1=yes 0=no)
+let php_sql_query = 1
+let php_minlines=300
+let php_htmlInStrings=1
+
+
+
+
+" ===== ENCODING ====
+" we are UTF-8
+set encoding=utf-8
+set termencoding=utf-8
+
+
+" ==== COMMANDS ====
+" switch to directory of current file
+command! CD cd %:p:h
+
+
+" ===== TABS & SPACES ====
+" soft-tabstop (what we see)
+set sts=4
+" tabstop (what will be written)
+set ts=4
+" amount of spaces per tab
+set sw=4
+if $HOSTNAME =~ "jim3"
+	" inserts spaces instead of tabs on line-beginning
+	set smarttab
+	" no expandtab (tabs = spaces = :ugly:, tabs should always be tabs)
+	set et
+else
+	" inserts spaces instead of tabs on line-beginning
+	set nosmarttab
+	" no expandtab (tabs = spaces = :ugly:, tabs should always be tabs)
+	set et
+endif
+
+" load indentation rules according to the detected filetype.
+if has("autocmd")
+	filetype indent on
+endif
+
+filetype on            " enables filetype detection
+filetype plugin on     " enables filetype specific plugins
+
+
 
 
 " ==== EDITING & MOVING & BINDS ====
@@ -74,7 +117,6 @@ noremap <silent> <M-Left> :exe "silent! tabmove " . (tabpagenr() - 2)<CR>
 noremap <silent> <M-Right> :exe "silent! tabmove " . tabpagenr()<CR>
 
 
-set showcmd			" Show (partial) command in status line.
 set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
@@ -83,12 +125,20 @@ set incsearch		" Incremental search
 "set hidden         " Hide buffers when they are abandoned
 set mouse=			" disable the fsckn mouse
 
-" completion
+" Folkes magic  # adder/remover 
+" was vnoremap
+noremap # :s/^\([ \t]*\)\(.*\)$/\1#\2<cr>:nohl<cr>:silent! set hl<CR>
+noremap 3 :s/^\([ \t]*\)#\(.*\)$/\1\2<cr>:nohl<cr>:silent! set hl<CR>
+
+set pastetoggle=<F11>
+
+" ==== COMPLETION ====
+" folding by syntax
+set fdm=syntax
+
 " DOCU ME
 set wildmenu
 set wildmode=list:longest,full
-
-filetype plugin on
 
 " do not move instantly to search-result
 set nois
@@ -103,7 +153,6 @@ if has("autocmd")
 endif
 
 
-
 " ==== COLORS ====
 " set number of colors to 256
 set t_Co=256
@@ -114,24 +163,20 @@ set t_Co=256
 "colorscheme inkpot
 colorscheme charged256
 
+
 syntax on
 set background=dark
 
 
 
-" ==== DEBIAN SPECIFICS ====
-" This line should not be removed as it ensures that various options are
-" properly set to work with the Vim-related packages available in Debian.
-runtime! debian.vim
-
-
-set loadplugins
 
 " ==== MENU & BARS ====
 "set statusline=%{GitBranchInfoString} 
 set statusline=%#StatusLineNC#\ Git\ %#ErrorMsg#\ %{GitBranchInfoTokens()[0]}\ %#StatusLine#
 set laststatus=2
 set number
+set showcmd			" Show (partial) command in status line.
+set showmode		" Insert, Replace or Visual mode put a message on the last line
 
 
 " ==== COMPILING & ETC ====
@@ -151,5 +196,4 @@ set guifont=Bitstream\ Vera\ Sans\ mono\ 9
 " ==== sup mailclient ====
 " syntax coloration when composing emails
 au BufRead sup.*        set ft=mail
-
-
+set modeline
