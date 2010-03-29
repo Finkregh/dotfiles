@@ -20,7 +20,7 @@ done
 # non-svn
 for repo in ipv6wall pytress gitosis-admin gitosis-admin-failedprojects.de ; do
 	cd ~/devel/$repo
-	if [[ ! git co master ]]; then
+	if [ ! "git co master" ]; then
 		exit 1
 	else
 		echo "\n$LIGHT_BLUE""upgrading $repo $NO_COLOUR"
