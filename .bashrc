@@ -28,7 +28,7 @@ shopt -s checkwinsize
 
 # == add ~/bin/ to PATH ==
 if [ -d ~/bin ] ; then
-	PATH="${PATH}":~/bin
+	PATH="${PATH}":~/bin:~/bin/python/bin
 fi
 
 
@@ -62,6 +62,8 @@ fi
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
+
+. ~/devel/easygit/bash-completion-eg.sh
 
 # work-specifics
 if [ -f ~/.bash_alias_axxeo ]; then
