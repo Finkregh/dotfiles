@@ -15,6 +15,9 @@ set loadplugins
 
 " mark too long lines
 "      match ErrorMsg /\%>80v.\+/
+highlight OverLength ctermbg=darkred
+match OverLength /\%81v.*/
+
 
 " do not search highlighted
 set nohlsearch
@@ -184,10 +187,13 @@ augroup END
 
 " ==== GVIM SPECIFIC ====
 set guifont=Bitstream\ Vera\ Sans\ mono\ 9
-set guioptions-=m
-set guioptions-=T
-set guioptions-=r
+"set guioptions-=m
+"set guioptions-=T
+"set guioptions-=r
 "map <UP> gk
 "map <DOWN> gj
 
+" ==== sup mailclient ====
+" syntax coloration when composing emails
+au BufRead sup.*        set ft=mail
 set modeline
