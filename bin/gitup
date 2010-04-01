@@ -1,5 +1,10 @@
 #!/bin/sh
-for repo in anis anleitungen configs foxadmin-trunk juniper-configs nagios-configs scripts juniper-configs scriptdump-own jeriko ; do
+REPOLIST='
+anis anleitungen configs foxadmin-trunk juniper-configs
+../bin/eg-files nagios-configs scripts juniper-configs
+scriptdump-own jeriko
+'
+for repo in $REPOLSIT ; do
 	cd ~/devel/$repo
 	if [ ! "git co master" ]; then
 		exit 1
