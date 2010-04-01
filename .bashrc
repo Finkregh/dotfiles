@@ -63,7 +63,7 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-. ~/devel/easygit/bash-completion-eg.sh
+. ~/bin/eg-files/bash-completion-eg.sh
 
 # work-specifics
 if [ -f ~/.bash_alias_axxeo ]; then
