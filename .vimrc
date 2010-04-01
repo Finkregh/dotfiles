@@ -132,6 +132,14 @@ noremap 3 :s/^\([ \t]*\)#\(.*\)$/\1\2<cr>:nohl<cr>:silent! set hl<CR>
 
 set pastetoggle=<F11>
 
+
+" show doiff to original file
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+        \ | wincmd p | diffthis
+endif
+
+
 " ==== COMPLETION ====
 " folding by syntax
 set fdm=syntax
