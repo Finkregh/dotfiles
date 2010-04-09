@@ -8,7 +8,8 @@
 	whitespace = red reverse
 
 [core]
-	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	autocrlf = input
 
 [user]
 	email = finkregh@mafia-server.net
@@ -21,3 +22,11 @@
 	co = checkout
 	df = diff
 	lg = log -p
+	tree = log --graph --pretty=oneline --abbrev-commit --all --decorate
+	stree = log --pretty=oneline --topo-order --graph --abbrev-commit
+    wdiff = diff --color-words
+    wmdiff = diff master --color-words
+    wshow = show --color-words
+    wmshow = show master --color-words
+
+    merge = merge --ff-only
