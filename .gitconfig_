@@ -28,5 +28,13 @@
     wmdiff = diff master --color-words
     wshow = show --color-words
     wmshow = show master --color-words
-
     merge = merge --ff-only
+    pull = pull --rebase
+
+[gui]
+    fontui   = -family terminus -size 9 -weight normal -slant roman -underline 0 -overstrike 0
+    fontdiff = -family terminus -size 9 -weight normal -slant roman -underline 0 -overstrike 0
+[mergetool "gvimdiff3"]
+	cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[mergetool "vimdiff3"]
+	cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
