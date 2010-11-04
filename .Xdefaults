@@ -1,0 +1,95 @@
+! anrxc X application resource database
+
+!{{{ XTERM
+xterm*internalBorder:        0
+xterm*loginShell:         true
+xterm*scrollBar:         false
+xterm*cursorBlink:       false
+!xterm*geometry:         80x26
+xterm*saveLines:         65535
+xterm*dynamicColors:        on
+xterm*highlightSelection: true
+! Appearance
+xterm*utf8:          2
+xterm*eightBitInput: true
+xterm*font:        -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-2
+xterm*boldFont:    -xos4-terminus-bold-*-*-*-12-*-*-*-*-*-iso8859-2
+xterm*cursorColor: #DCDCCC
+! Zenburn
+xterm*background:  #000000
+xterm*foreground:  #ffffff
+!xterm*color0:      #1E2320
+!xterm*color1:      #705050
+!xterm*color2:      #60b48a
+!xterm*color3:      #dfaf8f
+!xterm*color4:      #506070
+!xterm*color5:      #dc8cc3
+!xterm*color6:      #8cd0d3
+!xterm*color7:      #dcdccc
+!xterm*color8:      #709080
+!xterm*color9:      #dca3a3
+!xterm*color10:     #c3bf9f
+!xterm*color11:     #f0dfaf
+!xterm*color12:     #94bff3
+!xterm*color13:     #ec93d3
+!xterm*color14:     #93e0e3
+!xterm*color15:     #ffffff
+!}}}
+
+!{{{ XPDF
+xpdf*foreground:     black
+xpdf*background:     white
+xpdf*urlCommand:     /usr/local/bin/firefox %s
+xpdf*antialias:      yes
+xpdf*enableFreetype: yes
+!}}}
+
+!{{{ XFONTSEL
+XFontSel*menu*showUnselectable:       false
+XFontSel*sampleText.background:      TEXTBG
+XFontSel*MenuButton.shadowWidth:          0
+XFontsel*Toggle*ToggleStyle:          check
+XFontsel*MenuButton*Justify:           left
+XFontsel*MenuButton*MenuButtonStyle: select
+xfontsel*Font: -xos4-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-2
+xfontsel.pane.commandBox.quitButton.background:           #777777
+xfontsel.pane.commandBox.quitButton.foreground:           snow
+xfontsel.pane.commandBox.ownButton.background:            orange3
+xfontsel.pane.commandBox.ownButton.foreground:            snow
+xfontsel.pane.commandBox.countLabel.background:           snow
+xfontsel.pane.viewPort.sampleText.background:             #777777
+xfontsel.pane.viewPort.sampleText.foreground:             snow
+xfontsel.pane.fieldBox.field0.background:  #777777
+xfontsel.pane.fieldBox.field0.foreground:  snow
+xfontsel.pane.fieldBox.field1.background:  #777777
+xfontsel.pane.fieldBox.field1.foreground:  snow
+xfontsel.pane.fieldBox.field2.background:  #777777
+xfontsel.pane.fieldBox.field2.foreground:  snow
+xfontsel.pane.fieldBox.field3.background:  #777777
+xfontsel.pane.fieldBox.field3.foreground:  snow
+xfontsel.pane.fieldBox.field4.background:  #777777
+xfontsel.pane.fieldBox.field4.foreground:  snow
+xfontsel.pane.fieldBox.field5.background:  #777777
+xfontsel.pane.fieldBox.field5.foreground:  snow
+xfontsel.pane.fieldBox.field6.background:  #777777
+xfontsel.pane.fieldBox.field6.foreground:  snow
+xfontsel.pane.fieldBox.field7.background:  #777777
+xfontsel.pane.fieldBox.field7.foreground:  snow
+xfontsel.pane.fieldBox.field8.background:  #777777
+xfontsel.pane.fieldBox.field8.foreground:  snow
+xfontsel.pane.fieldBox.field9.background:  #777777
+xfontsel.pane.fieldBox.field9.foreground:  snow
+xfontsel.pane.fieldBox.field10.background: #777777
+xfontsel.pane.fieldBox.field10.foreground: snow
+xfontsel.pane.fieldBox.field11.background: #777777
+xfontsel.pane.fieldBox.field11.foreground: snow
+xfontsel.pane.fieldBox.field12.background: #777777
+xfontsel.pane.fieldBox.field12.foreground: snow
+xfontsel.pane.fieldBox.field13.background: #777777
+xfontsel.pane.fieldBox.field13.foreground: snow
+xfontsel.pane.fieldBox*foreground:         #000000
+xfontsel.pane.fieldBox.MenuButton.borderWidth:   1
+xfontsel.pane.fieldBox.MenuButton.internalHeight:1
+xfontsel.pane.fieldBox.MenuButton.internalWidth: 2
+xfontsel.pane.fieldBox.MenuButton.shapeStyle:    rectangle
+!}}}
