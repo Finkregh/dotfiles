@@ -36,7 +36,7 @@
        the active window is -->
   </placement>
   <theme>
-    <name>TropicBomb</name>
+    <name>Carbon</name>
     <titleLayout>NLDSIMC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
@@ -137,7 +137,7 @@
      cases. -->
   <margins>
     <top>0</top>
-    <bottom>23</bottom>
+    <bottom>25</bottom>
     <left>0</left>
     <right>0</right>
   </margins>
