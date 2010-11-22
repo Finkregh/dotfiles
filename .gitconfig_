@@ -30,6 +30,9 @@
     wmshow = show master --color-words
     merge = merge --ff-only
     pull = pull --rebase
+    graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format: %h -> { %p }' \"$@\" | sed 's/[0-9a-f]\\+/\"&\"/g' ; echo '}'; }; %f"
+    #git graphviz HEAD^^..HEAD | dotty /dev/stdin
+    #git graphviz --first-parent master | dotty /dev/stdin
 
 [gui]
     fontui   = -family terminus -size 9 -weight normal -slant roman -underline 0 -overstrike 0
