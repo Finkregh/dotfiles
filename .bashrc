@@ -101,12 +101,6 @@ export GREY LIGHT_GREY CYAN LIGHT_CYAN RED LIGHT_RED GREEN LIGHT_GREEN BLUE LIGH
 # Make sure our customised gtkrc file is loaded.
 export GTK2_RC_FILES=$HOME/.gtkrc-2.0
 
-alias ipcalc="ipcalc -n"
-alias vless='vim -u /usr/share/vim/vim70/macros/less.vim'
-alias dig='dig +multiline'
-
-alias clean_svn_metadata='find . -type d -name ".svn" -print0 | xargs -0 rm -rdf'
-
 #LESS man page colors
 export GROFF_NO_SGR=1
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -117,9 +111,7 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-
 export MIKTEX_REPOSITORY=ftp://ftp.tu-chemnitz.de/pub/tex/systems/win32/miktex/tm/packages/
-
 
 cp_progress()
 {
@@ -157,6 +149,18 @@ export PAGER=less
 export MANPAGER=less
 export MAILCHECK=0
 
-
 # Futurama :)
 curl -Is slashdot.org | egrep '^X-(F|B|L)' | cut -d \- -f 2
+
+# stuff from archlinux-skel
+complete -cf sudo
+
+shopt -s cdspell
+shopt -s checkwinsize
+shopt -s cmdhist
+shopt -s dotglob
+shopt -s expand_aliases
+shopt -s extglob
+shopt -s histappend
+shopt -s hostcomplete
+shopt -s nocaseglob
