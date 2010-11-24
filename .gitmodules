@@ -1,0 +1,8 @@
+[submodule ".bash_completion.d/git-flow-completion"]
+	path = .bash_completion.d/git-flow-completion
+	url = git://github.com/bobthecow/git-flow-completion.git
+[submodule "bin/gitflow.git"]
+	path = bin/gitflow.git
+	url = https://github.com/nvie/gitflow.git
+#   dont forget to:
+#       cd bin/gitflow.git; git submodule init ; git submodule update
