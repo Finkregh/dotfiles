@@ -169,7 +169,8 @@ set t_Co=256
 "colorscheme gardener
 "colorscheme desert256
 "colorscheme inkpot
-colorscheme charged256
+"colorscheme charged256
+colorscheme jellybeans
 
 
 syntax on
