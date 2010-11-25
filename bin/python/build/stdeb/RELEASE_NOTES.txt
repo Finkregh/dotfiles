@@ -1,0 +1,84 @@
+(See CHANGELOG.txt for lists of changes. This file provides
+information for those upgrading from previous versions of stdeb.)
+
+Release 0.6.0
+=============
+
+A new ``debianize`` command was added. This command builds a
+``debian/`` directory alongside your setup.py file.
+
+No backwards incompatible changes were made with this release.
+
+Release 0.5.1
+=============
+
+This is a bugfix release. This fixes a bug that caused the
+debian/control Description: field to be wrong.
+
+No backwards incompatible changes were made with this release.
+
+Release 0.5.0
+=============
+
+The following backwards incompatible changes were made:
+
+* The --process-dependencies option to py2dsc was dropped, because
+  this functionality went beyond the scope of the py2dsc script. The
+  functionality could be added to a new script if desired.
+
+* The ability to pass command options to sdist_dsc by specifying them
+  to bdist_deb was removed. In other words, if you did this in the
+  past::
+
+    python setup.py bdist_deb --no-backwards-compatibility
+
+  You must now do this::
+
+    python setup.py sdist_dsc --no-backwards-compatibility bdist_deb
+
+The deprecations were made:
+
+* The stdeb.cfg file location has been moved from the .egg-info
+  directory into the directory holding setup.py. The old location will
+  work, but is deprecated and will be removed sometime in the future.
+
+* Some options to the sdist_dsc command have now changed.
+  (--default-maintiner should now be --maintainer,
+  --default-distribution should now be --suite), although the old way
+  will still work, as it is only deprecated for now.
+
+Release 0.4.3
+=============
+
+This is a bugfix release. The most significant change is that by
+default the "DH_OPTIONS=--buildsystem=python_distutils" environment
+variable is passed to debhelper. This causes debhelper to ignore
+Makefiles and forces use of "python setup.py install".
+
+No backwards incompatible changes were made with this release.
+
+Release 0.4.2
+=============
+
+This is a bugfix release fixing a couple issues. The most significant
+fix is that if a package specified "XS-Python-Version" in stdeb.cfg,
+the binary package wouldn't install the Python packages.
+
+No backwards incompatible changes were made with this release.
+
+Release 0.4.1
+=============
+
+This release maintains backward compatibility with old versions of
+stdeb and debhelper, but stdeb now allows packages that don't carry
+the cruft of backward compatibility. To disable all backwards
+compatibility, specify the --no-backwards-compatibility flag. This
+will set --pycentral-backwards-compatibility=False and
+--workaround-548392=False. You may set these flags individually if
+desired.
+
+By "maintains backward compatibility with stdeb", I mean that newer
+packages made with newer stdeb (0.4.1 and up) will properly upgrade
+from older package made with older versions of stdeb (less than
+0.4.0). The problem, in particular, is the migration from
+python-central. See Debian bug #479852 for more information.

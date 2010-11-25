@@ -1,0 +1,258 @@
+= Release 0.6 (2010-06-18) =
+
+2010-06-18 Do not die if sources.list does not contain deb-src
+           lines. (Debian Bug#580376)
+
+2010-06-18 Document need to call "apt-file update". Emit nicer error
+           when user needs to call "apt-file update". (Closes #568122)
+
+2010-06-18 Allow stopping if a requirement can't be satisfied. (Closes
+           GH-7) Patch originally from Zooko.
+
+2010-06-18 Create debian/source/format. (Closes GH-27)
+
+2010-06-16 Added {$misc:Depends} to depends. (Closes #568692)
+
+2010-06-03 Update to Standards-Version 3.8.4
+
+2010-06-02 Bugfix: separate binary-arch and binary-indep targets.
+
+2010-05-02 Add 'debianize' distutils command to create debian
+           directory. This was suggested by Barry Warsaw in Python
+           issue 1054967.
+
+2010-05-02 Don't change dots to dashes in debian package names. (This
+           was suggested by Barry Warsaw in Python issue 1054967.)
+           Allow underscores in python package names, replace dashes
+           with underscores (Derek Smith).
+
+2010-02-05 Bugfix: add python-pkg-resouces to Depends for stdeb
+           itself.
+
+= Release 0.5.1 (2010-01-09) =
+
+2010-01-08 Fix bug where default description was wrong. Patch by
+           Roland Sommer. (Closes GH-19).
+
+2009-12-30 The option 'Distribution' option is changed to 'Suite'
+
+2009-12-30 Limit long description to 20 lines.
+
+= Release 0.5.0 (2009-12-30) =
+
+2009-12-30 All stdeb.cfg options can now be set using distutils
+           command option passing. This required a couple of renamings
+           (--default-maintiner should now be --maintainer,
+           --default-distribution should now be --suite), although the
+           old way will still work, as it is only deprecated for now.
+
+2009-12-30 Add pypi-install script to automatically download a package
+           distribution, build a .deb file from it, and install
+           it. (Closes GH-16)
+
+2009-12-30 Don't allow specifying sdist_dsc options to bdist_deb
+
+2009-12-29 The --process-dependencies option to py2dsc was dropped,
+           because this functionality went beyond the scope of the
+           py2dsc script. The functionality could be added to a new
+           script if desired.
+
+2009-12-29 Add Section option to stdeb.cfg. (Closes GH-13)
+
+2009-12-29 Move stdeb.cfg file from egg-info directory to alongside setup.py
+
+2009-12-28 --guess-conflicts-provides-replaces option. Provides
+           automatic finding of original Debian source package's
+           binaries, and create Conflicts/Provides/Replaces entries in
+           debian/control for them. (Closes GH-17)
+
+2009-12-28 Remove dependency on setuptools. (Closes GH-18)
+
+= Release 0.4.3 (2009-12-28) =
+
+2009-12-01 add '--force-buildsystem' command option to allow forcing
+           of python-distutils build system, even in presence of
+           Makefile (defaults to True)
+
+2009-11-30 Fixed a typo on the sdist_dsc.py which was throwing
+           exception from paver. Fix #14
+
+= Release 0.4.2 (2009-11-02) =
+
+2009-11-02 Bump debian/compat to '7'.
+
+2009-11-02 Don't include python-central in build package's Depends list.
+
+2009-11-02 bugfix: actually parse list of supported Python versions correctly
+
+= Release 0.4.1 (2009-10-04) =
+
+2009-10-03 Emit warnings if debhelper and python-support too old
+
+2009-10-03 Update and improve documentation
+
+2009-10-03 Allow command-line specified breaking of backward
+           compatibility. (Closes GH-12)
+
+2009-10-01 Fix incorrect handling of symlinks. (Ximin Luo)
+
+2009-10-01 relax dependency on python-support down to 0.8.4 for Debian
+           Lenny
+
+2009-10-01 only include python-all-dev in Build-Deps if extension
+           modules present (Alexander D. Sedov)
+
+2009-09-29 bdist_deb accepts all sdist_dsc arguments (Gerry Reno)
+
+= Release 0.4 (2009-09-27) =
+
+2009-06-01 Use debhelper 7 by default
+
+2009-06-01 Switch from python-central to python-support
+
+2009-06-02 workaround Debian #479852: remove left over python-central symlinks
+
+2009-03-23 Unset environment variables set by dpkg-buildpackage
+
+= Release 0.3.2 (2009-10-04) =
+
+2009-09-29 bdist_deb accepts all sdist_dsc arguments (Gerry Reno)
+
+2009-09-29 add --disable-single-version-externally-managed option
+           (initial patch from Gerry Reno)
+
+
+= Release 0.3.1 (2009-09-27) =
+
+2009-09-22 Implement bdist_deb command (initial patch from Gerry Reno)
+
+= Release 0.3 (2009-03-21) =
+
+2009-03-14 On Python2.6, pass "--install-layout=deb" to the distutils install
+           command. This is required for Ubuntu Jaunty, and the current
+           implementation in stdeb is also compatible with the python2.6
+           package in Debian experimental.
+
+2009-02-24 bugfix to autofind-depends feature: include good package if found,
+           even when version information not specified
+
+= Release 0.2.3 (2009-02-17) =
+
+2009-02-16 new patch from zooko to improve regexp search for dependencies
+
+2009-02-14 fix a crash with an undefined variable 'ver' (from Brett)
+
+2009-02-14 Add --ignore-install-requires option. (From Brett)
+           adds the ignore-install-requires command line option to
+           keep stdeb from guessing python packages names from
+           requires.txt and lets you specify your own Depends: without
+           adding those from the egg requires.txt....
+
+= Release 0.2.2 (2009-01-29) =
+
+2009-01-29 Rename README.txt to README.rst so it renders on github
+           better.
+
+2009-06-29 Integrate zooko's autofind-depends patch.
+
+2008-04-28 Allow comments after config entry
+
+= Release 0.2.1 (2008-04-26) =
+
+2008-04-26 Find .egg-info directory in debian/rules using a glob
+           rather than attempting to guess it, which was fragile.
+
+2008-04-26 Use Python2.5's subprocess.check_call() instead of our
+ 	   home-brewed version.
+
+2008-04-26 Use "date -R" instead of "822-date".
+
+2008-04-26 Erase temporary directories created on prior run of stdeb.
+
+2008-04-26 Don't break if no author is specified in setup.py.
+
+2008-04-26 Add tests for more styles of packages.
+
+= Release 0.2 (2008-04-26) =
+
+2008-03-27 Add ability to pass environment variables to setup.py
+           script.
+
+2008-03-18 Do not allow '.' in source package names.
+
+2008-01-20 Allows a user to build every dependency a package has
+           stated on it's setup.py, recursively.
+
+2007-10-29 Allow upstream tarball to have different name from debian
+           .orig.tar.gz but keep md5sum.
+
+2007-05-28 Fix bug where python distribution name contained '-' but
+           setuptools renamed this to '_'.
+
+2007-05-11 Fix py2dsc script to properly set __file__ and __name__.
+
+2007-04-18 Fix bug where .egg-info renaming failed when upstream
+           version contained '-'.
+
+= Release 0.2.a1 (2007-04-02) =
+
+2007-04-02 Make default distribution 'unstable'
+
+2007-03-28 Removed versioned Python interpreter from packages in
+           /usr/bin and /usr/lib. Bump version to 0.2.a1. Include
+           version in autogenerated debian/rules and debian/changelog.
+
+2007-03-15 pycentral support enabled by default
+
+2007-02-04 fix for cases in which setup.py wants __file__ variable
+
+2006-09-07 added --patch-posix to support posix-mode patches
+
+2006-09-07 always extract source using "dpkg-source -x"
+
+2006-09-07 moved working directory for patches one level shallower
+           (may require patch level 1 instead of patch level 0)
+
+2006-08-25 added Forced-Upstream-Version field in .cfg file
+
+2006-08-22 patching source works when --premade-distfile option is
+           given but distfile must be regenerated
+
+2006-08-22 patch level supported via --patch-level option
+
+2006-08-22 Add support for bzip2 tarballs
+
+2006-08-13 Generate source by copying tree, not "python setup.py
+           sdist"
+
+2006-08-13 Patches can be applied prior to first call to setup.py
+
+2006-07-21 Allow patches to upstream source via Stdeb-Patch-File in
+           .cfg file.
+
+2006-07-21 Don't bother trying to rename .egg-info directories.
+
+2006-07-09 Ability to specify MIME-Desktop-Files, MIME-File, and
+	   Shared-MIME-File in configuration file.
+
+2006-07-09 Use of dh_python for generation of postinst and prerm
+	   scripts.
+
+2006-07-05 Auto-generation of debian/postinst and debian/prerm scripts
+           that create and remove .pyc and .pyo files.
+
+2006-06-21 Upstream .tar.gz files can be used exactly, allowing
+	   md5sums to match.
+
+2006-06-21 Expanded source directory is only deleted when commandline
+	   option is set.
+
+===========================================================
+2006-06-14 Release 0.1, svn version 11
+
+2006-06-18 Refactored to support calling from scripts.
+
+===========================================================
+2006-06-14 Release 0.0.1, svn version 3
+
+2006-06-14 Initial import of repository and initial release.
