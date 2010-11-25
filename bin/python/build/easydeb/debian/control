@@ -1,0 +1,23 @@
+Source: python-pypi-easydeb
+Section: python
+Priority: extra
+Maintainer: Vincenzo Di Massa <hawk.it@tiscali.it>
+Build-Depends: debhelper (>= 4.2.28), unzip, python, python-setuptools (>= 0.6a1-2), python-dev, python2.3, python2.3-setuptools (>= 0.6a1-2), python2.3-dev, python2.4, python2.4-setuptools (>= 0.6a1-2), python2.4-dev
+Standards-Version: 3.6.1
+
+Package: python-pypi-easydeb
+Architecture: all
+Depends: ${python:Depends}, python-setuptools (>= 0.6a1-2)
+Description: Tool for automatically creating python modules packages
+
+Package: python2.4-pypi-easydeb
+Architecture: all
+Depends: ${python:Depends}, python2.4-setuptools (>= 0.6a1-2)
+Description: Tool for automatically creating python modules packages
+
+Package: python2.3-pypi-easydeb
+Architecture: all
+Depends: ${python:Depends}, python2.3-setuptools (>= 0.6a1-2)
+Description: Tool for automatically creating python modules packages
+
+

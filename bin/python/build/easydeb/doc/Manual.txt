@@ -1,0 +1,45 @@
+easy-deb manual
+
+
+Introduction:
+easy-deb is a tool to generate python modules debian packages automatically.
+The packager just needs to tell easy-deb (on the command line) what python
+module he wants to package.
+easy-deb will try to hadle dependencies and will extract metadata from the
+source python module distribution to populate the debian package metadata
+fields.
+
+
+Relation to setuptools:
+easy-deb uses stuptools to install python modules as python eggs. Python eggs
+are the upcoming python package format. A python egg is basically a zip file or
+a directory that has a EGG-INFO matadata subdirectory and the python module
+files.
+Modules inside egg files are not importable using the import statement: before
+using an egg it is necessary use the require("modulename") function from the
+pkg_resources package. After this function call the module can be imported using
+the import statement.
+pkg_resources.require() function can find eggs only if they are on sys.path.
+Setuptools has its own dependency system, but it easy-deb does not use it.
+
+
+Dependencies:
+easy-deb accepts dependencies on the command line, but it also tries to get them
+from the python distribution PKG-INFO file.
+Dependencies on the command line are plain debian package names.
+Dependencies found in PKG-INFO, where python conventions are used to refer to
+software packages, must be mapped to debian package names. This task is done
+using a mapping database. This database has key-value pairs, where key is the
+python name and value is a list of debian names.
+
+If easy-deb can find the debian names for a python requirement it adds these
+names to the list of dependencies into the generated package control file. If it
+can't find the debian names, it propts the user that PKG-INFO has dependency
+information, but it can't be converted because there aren't the needed keys into
+the mapping database.
+
+A special option of easy-deb allows the packager to save the needed dependency
+information into a per package database. Saved dependencies will be reused if
+the same module is packaged again.
+
+

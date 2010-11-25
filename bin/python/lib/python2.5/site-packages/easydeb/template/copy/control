@@ -1,0 +1,12 @@
+Source: python-pypi-%%PKGNAME%%
+Section: python
+Priority: extra
+Maintainer: %%MAINTAINER%%
+Build-Depends: debhelper (>= 4.2.28), unzip, %%BUILDDEPS%%
+Standards-Version: 3.6.1
+
+Package: python-pypi-%%PKGNAME%%
+Architecture: %%ARCH%%
+Depends: ${python:Depends}, %%DEPS%%
+Description: %%DESCRIPTION%%
+

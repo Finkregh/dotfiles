@@ -1,0 +1,151 @@
+.TH easy-deb 1 
+.SH NAME
+easy\-deb automatic packager of python modules
+.SH SYNOPSIS
+.B easy-deb 
+[options] (pypi\-modulename | archive\-file\-name| url)
+
+.SH DESCRIPTION
+easy\-deb creates a debian source packages of the python module specified in the
+command line parameter. 
+
+After its execution you will have the source package into a deb\-pkg\-<modulename>
+directory. To compile the source package use the standard debian tools (debuild or
+"fakeroot debian/rules binary"). 
+
+The source distribution for the module passed on the command line can be a module 
+name, and URL, or a filename: easy-deb will use setuptools to download and
+unpack, then it will create the debian subdirectory and populate its files with
+metadata extracted from the module distribution. 
+.br
+Generated debian source packages will compile into binary debian packages
+containing python eggs (see: 
+.B http://peak.telecommunity.com/DevCenter/PythonEggs
+). Dependencies are automatically converted from python 
+.B 'Requires:'
+lines to debian package names using a conversion databas.
+
+Eggs installed by the binary package can be handled using 
+.B update-pypi (1).
+
+.SH OPTIONS
+.TP
+.B \-h, --help            
+show this help message and exit
+.TP
+.B \-v VERSIONS, \-\-python\-versions=VERSIONS
+Coma separated list of python versions to package for.
+E.g.: -v 2.3,2.4
+.TP
+.B \-d DEPS, \-\-debian\-deps=DEPS
+Standard debian dependency string. %v is replaced with python version.
+.TP
+.B \-b BDEPS, \-\-debian\-build\-deps=BDEPS
+Standard debian dependency string. %v is replaced with python version.
+.TP
+.B \-f FIND_LINKS, \-\-find\-links=FIND_LINKS
+Additionnal links to scan, comma separated.
+.TP
+.B \-D DEST_DIR, \-\-dest-dir=DEST_DIR
+Distribution downloaded into file.
+.TP
+.B \-r DEBIAN_RELEASE, \-\-debian\-release=DEBIAN_RELEASE
+Debian release number.
+.TP
+.B \-m MAPPING_DBS, \-\-mapping\-dbs=MAPPING_DBS
+Comma separated list of mapping file locations.
+.TP
+.B \-\-deps\-dbs=DEPS_DBS
+Comma separated list of dependency file locations. The last of this list will be used to write deps when -u is used
+.TP
+.B \-\-config\-file=CONFIG_FILE
+Config file location.
+.TP
+.B \-c, \-\-common\-dir
+Create a package that compiles into a single binary package. Future versions of 
+.B dh_python (1)
+will be able to install this kind of package into all python installations.
+.TP
+.B \-a, \-\-arch\-dep
+Build arch dep packages.
+.TP
+.B \-u, \-\-update\-package\-options
+Update the default dependencies and python version for this python module into the deps-database.
+
+.SH EXAMPLE
+To install module "graph":
+
+.nf
+$ easy-deb -v2.4 graph -D /tmp/
+$ cd /tmp/deb-pkg-graph0.4/graph-0.4
+$ fakeroot debian/rules binary
+$ sudo dpkg -i ../*.deb
+
+$ update-pypi -a graph
+.fi
+
+.SH FILES
+.TP
+.B /etc/easydeb/config.cfg
+Main configuration file. Used to set up system wide default parameters.
+.TP
+.B /etc/easydeb/{/,common,*}deps.db
+The -u option saves and loads databases of dependencies. Such databases list the debian package names that are dependencies for each known module. The file format is the same used by config.cfg. There is one section per module. Each section can have deps: , bdeps:  and pyvers.
+.TP
+.B /etc/easydeb/common/mapping.db
+There is another kind of database that is used to map the python requirements found into PKG-INFO to debian package names: again the sintax is the same used for the config file. There is one section [easydeb] containing all mappings. A mapping can map a python requirement to a comma separated list of debian package names.
+.br
+
+For example:
+.nf
+python_name: debian_name1, debian_name2 ...
+.fi
+.br
+
+like in:
+.nf
+tk: tk8.0-dev, python%v-tk
+.fi
+
+Note that %v is replaced with the python version.
+.br
+Note also that you must not provide version information into this file like "(>= 2.3.4)".
+.br
+Dependencies extracted from the conversion are added to the build-deps.
+
+.SH "CONFIGURATION FILE"
+The configuration file consists of sections, led by a "[section]" header and followed by "name: value" entries, with continuations in the style of RFC 822; "name=value" is also accepted. Note that leading whitespace is removed from values. The optional values can contain format strings which refer to other values in the same section, or values in a special DEFAULT section. Additional defaults can be provided on initialization and retrieval. Lines beginning with "#" or ";" are ignored and may be used to provide comments. 
+
+For example: 
+
+.nf
+[My Section]
+foodir: %(dir)s/whatever
+dir=frob
+.fi
+
+would resolve the "%(dir)s" to the value of "dir" ("frob" in this case). All reference expansions are done on demand. 
+.br
+The configuation file must have a [easydeb] section which can contain defaults for: \-\-python\-versions \-\-mapping\-dbs \-\-deps\-dbs maintainer.
+For example:
+
+.nf
+[easydeb]
+options-dir: /var/lib/easydeb/options/
+
+maintainer: Vincenzo Di Massa <hawk.it@tiscali.it>
+.fi
+
+.SH THANKS
+ 
+ Goolge ( Google SoC, Open Source Program, Chris, Natalie, ... )
+ 
+ Ubuntu ( Matthias (doko) Klose, Matt (mdz) Zimmerman, 
+    Natalie Woo, and all the other great people there )
+ 
+ Phillip J. Eby ( for the great setuptools )
+ 
+ Agnese ( For all her support and patience )
+
+.SH "SEE ALSO"
+.B update-pypi (1) 

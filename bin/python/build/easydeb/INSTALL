@@ -1,0 +1,24 @@
+Dependencies:
+^^^^^^^^^^^^
+
+ setuptools >= 0.6a0 (download from cvs or from http://hawk.linuxpratico.net/pypi)
+
+Installation:
+^^^^^^^^^^^^
+ just use easy_install like:
+
+ $ easy_install.py easydeb # requires internet connection
+
+ or 
+
+ $ easy_install.py easydeb.x.y.z.tar.gz
+
+ or
+
+ $ cd <path to easy install sources>
+ $ easy_install .
+
+
+ If you install into a temporay dir (-d /path/to) you can autopackage easy-deb:
+
+ # /path/to/easy-deb /path/to/easydeb.x.y.z.tar.gz

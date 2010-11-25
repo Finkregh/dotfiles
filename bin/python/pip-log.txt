@@ -412,3 +412,87 @@ Traceback (most recent call last):
   File "/usr/lib/python2.5/os.py", line 213, in renames
     rename(old, new)
 OSError: [Errno 18] Invalid cross-device link
+------------------------------------------------------------
+/usr/lib/python2.5/site-packages/pip-0.6.1-py2.5.egg/pip.py run on Thu Nov 25 10:08:14 2010
+Downloading/unpacking pip
+  Getting page http://pypi.python.org/simple/pip
+  URLs to search for versions for pip:
+  * http://pypi.python.org/simple/pip/
+  Getting page http://pip.openplans.org
+  Analyzing links from page http://pypi.python.org/simple/pip/
+    Found link http://pypi.python.org/packages/source/p/pip/pip-0.4.tar.gz#md5=b45714d04f8fd38fe8e3d4c7600b91a2 (from http://pypi.python.org/simple/pip/), version: 0.4
+    Found link http://pypi.python.org/packages/source/p/pip/pip-0.8.tar.gz#md5=468d9adc309f33ad51cee38f0d455429 (from http://pypi.python.org/simple/pip/), version: 0.8
+    Found link http://pypi.python.org/packages/source/p/pip/pip-0.8.1.tar.gz#md5=5d40614774781b118dd3f10c0d038cbc (from http://pypi.python.org/simple/pip/), version: 0.8.1
+    Found link http://pypi.python.org/packages/source/p/pip/pip-0.6.3.tar.gz#md5=0602fa9179cfaa98e41565d4a581d98c (from http://pypi.python.org/simple/pip/), version: 0.6.3
+    Found link http://pypi.python.org/packages/source/p/pip/pip-0.7.tar.gz#md5=8d4b4f7266fe0808569182e6832d74ac (from http://pypi.python.org/simple/pip/), version: 0.7
+    Found link http://pypi.python.org/packages/source/p/pip/pip-0.6.tar.gz#md5=083ff408ca5314cf0561ff79a048cd9a (from http://pypi.python.org/simple/pip/), version: 0.6
+    Found link http://pypi.python.org/packages/source/p/pip/pip-0.2.1.tar.gz#md5=d2af655c1a87e03799442d045c1d6743 (from http://pypi.python.org/simple/pip/), version: 0.2.1
+    Found link http://pypi.python.org/packages/source/p/pip/pip-0.5.tar.gz#md5=63eed8673e40628534cc0aa9c98e8f3d (from http://pypi.python.org/simple/pip/), version: 0.5
+    Found link http://pypi.python.org/packages/source/p/pip/pip-0.5.1.tar.gz#md5=d4bdaa5f5f5bf8c6263ace75a0882232 (from http://pypi.python.org/simple/pip/), version: 0.5.1
+    Found link http://pypi.python.org/packages/source/p/pip/pip-0.6.1.tar.gz#md5=7560e3055c66afb99ac4a7892389a237 (from http://pypi.python.org/simple/pip/), version: 0.6.1
+    Found link http://pypi.python.org/packages/source/p/pip/pip-0.6.2.tar.gz#md5=9a43e0a2ce8833069f41c347932bdb25 (from http://pypi.python.org/simple/pip/), version: 0.6.2
+    Found link http://pypi.python.org/packages/source/p/pip/pip-0.7.1.tar.gz#md5=420c83ad67bdcb542f772eb64392cce6 (from http://pypi.python.org/simple/pip/), version: 0.7.1
+    Found link http://pypi.python.org/packages/source/p/pip/pip-0.7.2.tar.gz#md5=cfe73090aaa0d3b0c104179a627859d1 (from http://pypi.python.org/simple/pip/), version: 0.7.2
+    Found link http://pypi.python.org/packages/source/p/pip/pip-0.2.tar.gz#md5=9eda07c8be7105aa774c7eb51c023294 (from http://pypi.python.org/simple/pip/), version: 0.2
+    Found link http://pypi.python.org/packages/source/p/pip/pip-0.3.1.tar.gz#md5=78102ddbb040a183dd361b5d432cdf88 (from http://pypi.python.org/simple/pip/), version: 0.3.1
+    Found link http://pypi.python.org/packages/source/p/pip/pip-0.3.tar.gz#md5=8fccb5b49c6377cbfb1949ccd7be43b3 (from http://pypi.python.org/simple/pip/), version: 0.3
+    Skipping link http://pip.openplans.org (from http://pypi.python.org/simple/pip/); not a file
+    Skipping link http://bitbucket.org/ianb/pip/issues/ (from http://pypi.python.org/simple/pip/); not a file
+    Skipping link http://groups.google.com/group/python-virtualenv?hl=en (from http://pypi.python.org/simple/pip/); not a file
+    Skipping link http://oss.openplans.org/pip/ (from http://pypi.python.org/simple/pip/); not a file
+    Skipping link http://peak.telecommunity.com/DevCenter/EasyInstall (from http://pypi.python.org/simple/pip/); not a file
+    Skipping link http://pip.openplans.org/requirement-format.html (from http://pypi.python.org/simple/pip/); unknown archive format: .html
+    Skipping link http://pypi.python.org/mirrors (from http://pypi.python.org/simple/pip/); not a file
+    Skipping link http://trac.openplans.org/poacheggs/ (from http://pypi.python.org/simple/pip/); not a file
+    Skipping link http://virtualenv.openplans.org (from http://pypi.python.org/simple/pip/); not a file
+    Skipping link http://www.doughellmann.com/projects/virtualenvwrapper/ (from http://pypi.python.org/simple/pip/); not a file
+    Skipping link http://www.python.org/dev/peps/pep-0381/ (from http://pypi.python.org/simple/pip/); not a file
+    Found link http://bitbucket.org/ianb/pip/get/tip.gz#egg=pip-dev (from http://pypi.python.org/simple/pip/), version: dev
+  Analyzing links from page http://pip.openplans.org
+    Skipping link http://pip.openplans.org/_static/nature.css (from http://pip.openplans.org); unknown archive format: .css
+    Skipping link http://pip.openplans.org/_static/pygments.css (from http://pip.openplans.org); unknown archive format: .css
+    Skipping link http://pip.openplans.org/news.html (from http://pip.openplans.org); unknown archive format: .html
+    Skipping link http://pip.openplans.org#pip (from http://pip.openplans.org); not a file
+    Skipping link http://pip.openplans.org/configuration.html (from http://pip.openplans.org); unknown archive format: .html
+    Skipping link http://pip.openplans.org/how-to-contribute.html (from http://pip.openplans.org); unknown archive format: .html
+    Skipping link http://pip.openplans.org/license.html (from http://pip.openplans.org); unknown archive format: .html
+    Skipping link http://pip.openplans.org#introduction (from http://pip.openplans.org); not a file
+    Skipping link http://pypi.python.org/pypi/ (from http://pip.openplans.org); not a file
+    Skipping link http://pip.openplans.org#pip-compared-to-easy-install (from http://pip.openplans.org); not a file
+    Skipping link http://pypi.python.org/pypi/virtualenv (from http://pip.openplans.org); not a file
+    Skipping link http://pip.openplans.org#community (from http://pip.openplans.org); not a file
+    Skipping link http://pypi.python.org/pypi/pip (from http://pip.openplans.org); not a file
+    Skipping link http://pip.openplans.org#uninstall (from http://pip.openplans.org); not a file
+    Skipping link http://pip.openplans.org#requirements-files (from http://pip.openplans.org); not a file
+    Skipping link http://pip.openplans.org#freezing-requirements (from http://pip.openplans.org); not a file
+    Skipping link http://pip.openplans.org#bundles (from http://pip.openplans.org); not a file
+    Skipping link http://pip.openplans.org#requirements-file (from http://pip.openplans.org); not a file
+    Skipping link http://pip.openplans.org#using-pip-with-virtualenv (from http://pip.openplans.org); not a file
+    Skipping link http://pip.openplans.org#using-pip-with-virtualenvwrapper (from http://pip.openplans.org); not a file
+    Skipping link http://pip.openplans.org#using-pip-with-buildout (from http://pip.openplans.org); not a file
+    Skipping link http://pypi.python.org/pypi/zc.buildout (from http://pip.openplans.org); unknown archive format: .buildout
+    Skipping link http://pypi.python.org/pypi/gp.recipe.pip (from http://pip.openplans.org); unknown archive format: .pip
+    Skipping link http://pip.openplans.org#command-line-completion (from http://pip.openplans.org); not a file
+    Skipping link http://pip.openplans.org#searching-for-packages (from http://pip.openplans.org); not a file
+    Skipping link http://pypi.python.org/pypi (from http://pip.openplans.org); not a file
+    Skipping link http://pip.openplans.org#mirror-support (from http://pip.openplans.org); not a file
+    Skipping link http://sphinx.pocoo.org/ (from http://pip.openplans.org); not a file
+  Using version 0.8.1 (newest of versions: 0.8.1, 0.8, 0.7.2, 0.7.1, 0.7, 0.6.3, 0.6.2, 0.6.1, 0.6, 0.5.1, 0.5, 0.4, 0.3.1, 0.3, 0.2.1, 0.2, dev)
+  Downloading from URL http://pypi.python.org/packages/source/p/pip/pip-0.8.1.tar.gz#md5=5d40614774781b118dd3f10c0d038cbc (from http://pypi.python.org/simple/pip/)
+Exception:
+Traceback (most recent call last):
+  File "/usr/lib/python2.5/site-packages/pip-0.6.1-py2.5.egg/pip.py", line 482, in main
+    self.run(options, args)
+  File "/usr/lib/python2.5/site-packages/pip-0.6.1-py2.5.egg/pip.py", line 675, in run
+    requirement_set.install_files(finder, force_root_egg_info=self.bundle)
+  File "/usr/lib/python2.5/site-packages/pip-0.6.1-py2.5.egg/pip.py", line 2429, in install_files
+    self.unpack_url(url, location, self.is_download)
+  File "/usr/lib/python2.5/site-packages/pip-0.6.1-py2.5.egg/pip.py", line 2576, in unpack_url
+    chunk = resp.read(4096)
+  File "/usr/lib/python2.5/socket.py", line 309, in read
+    data = self._sock.recv(recv_size)
+  File "/usr/lib/python2.5/httplib.py", line 529, in read
+    s = self.fp.read(amt)
+  File "/usr/lib/python2.5/socket.py", line 309, in read
+    data = self._sock.recv(recv_size)
+KeyboardInterrupt

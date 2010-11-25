@@ -1,0 +1,5 @@
+Package: python%%PYVERS%%-pypi-%%PKGNAME%%
+Architecture: %%ARCH%%
+Depends: ${python:Depends}, %%DEPS%%
+Description: %%DESCRIPTION%%
+

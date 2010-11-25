@@ -1,0 +1,6 @@
+python-pypi-%%PKGNAME%% (%%VERSION%%) %%DIST%%; urgency=low
+
+  * %%DESCRIPTION%%
+
+ -- %%MAINTAINER%%  %%DATE%%
+

@@ -1,0 +1,13 @@
+python-pypi-%%PKGNAME%%
+---------------------------
+
+Snapshot, taken from PyPi. This package was created using the semi automatic debian package creator easy-deb.
+
+Downloaded from %%LOCATION%% on %%DATE%%
+Author is %%AUTHOR%%
+
+Module Description:
+%%DESCRIPTION%%
+
+%%LONGDESCRIPTION%%
+

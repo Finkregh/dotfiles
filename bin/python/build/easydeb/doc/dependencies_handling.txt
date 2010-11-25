@@ -1,0 +1,15 @@
+easy-deb dependency handling:
+
+easy-deb tries to understand nedded dependencies for packages it buils automatically.
+To do this, easydeb searches a PKG-INFO file in the top dir of the module sources. That file must comply with version 1.1 or 1.2.
+
+If the PKG-INFO file has "Requires:" lines they must be mapped to debian package names.
+The mapping is done using a hand written database of mappings (well, you can have more than one database configured in the config.cfg file).
+
+When mappings for "requirements" in PKG-INFO are found in the database, they are used to build the source package. A mapping i something that maps a python reqirement to a list of debian package names. A single mapping can be like "tk: tk8.0-dev, python%v-tk" where "tk" is mapped to two package names.
+
+If a module distribution does not provide a PKG-INFO file with "Requires:" line, nothing is done automatically: the user can pass easy-deb the needed dependencies on the cmdline (using -d and -b)
+
+If the user wants to save the dependencies and python version when packaging a module, she can use the -u option. 
+After using -u option easy-deb will always use the same options.
+
