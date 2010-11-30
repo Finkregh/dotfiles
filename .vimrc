@@ -139,6 +139,18 @@ if !exists(":DiffOrig")
         \ | wincmd p | diffthis
 endif
 
+" " folding with F9
+" inoremap <F9> <C-O>za
+" nnoremap <F9> za
+" onoremap <F9> <C-C>za
+" vnoremap <F9> zf
+" 
+" " Here is an alternative procedure: In normal mode, press Space to toggle the
+" " current fold open/closed. However, if the cursor is not in a fold, move to
+" " the right (the default behavior). In addition, with the manual fold method,
+" " you can create a fold by visually selecting some lines, then pressing Space.
+" nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
+" vnoremap <Space> zf
 
 " ==== COMPLETION ====
 " folding by syntax
