@@ -134,6 +134,11 @@ cp_progress()
 	END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
 }
 
+find_broken_symlinks()
+{
+    for i in `find $1 -type l`; do [ -e $i ] || echo $i is broken; done
+{
+
 source ~/.bash_svn
 
 export EDITOR=/usr/bin/vim
