@@ -6,6 +6,21 @@ runtime! debian.vim
 
 set loadplugins
 
+" ==== COLORS ====
+syntax on
+set background=dark
+
+" set number of colors to 256
+set t_Co=256
+
+" colorschemes /w 256-colors
+"colorscheme gardener
+colorscheme desert256
+"colorscheme inkpot
+"colorscheme charged256
+"colorscheme jellybeans
+
+
 " ==== HIGHLIGHTS ====
 " spellchecking
 " :set spell spelllang=de
@@ -14,35 +29,39 @@ set loadplugins
 " set sbr=++\ 
 
 " mark too long lines
-augroup vimrc_autocmds
-  autocmd BufRead * highlight OverLength ctermbg=darkgrey guibg=#592929
-  autocmd BufRead * match OverLength /\%72v.*/
-augroup END
+"augroup vimrc_autocmds
+"  autocmd BufRead * highlight OverLength ctermbg=darkgrey guibg=#592929
+"  autocmd BufRead * match OverLength /\%72v.*/
+"augroup END
 
 " do not search highlighted
 set nohlsearch
 
-" add ExtraWhitespace-group, set colors of that
-:highlight ExtraWhitespace ctermbg=darkgreen ctermfg=darkgreen
+" add ExtraWhitespace-group, set colors of that 
+highlight ExtraWhitespaceTrail term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
+highlight ExtraWhitespaceBefore term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
+"highlight ExtraWhitespaceTab term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
+"highlight ExtraWhitespaceExtra term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
 " light grey:
-":highlight ExtraWhitespace ctermfg=238 ctermbg=234
+"highlight ExtraWhitespace ctermfg=238 ctermbg=234
 
 " Show trailing whitespace:
-:match ExtraWhitespace /\s\+$/
+match ExtraWhitespaceTrail /\s\+$/
 
 " Show trailing whitepace and spaces before a tab:
-:match ExtraWhitespace /\s\+$\| \+\ze\t/
+match ExtraWhitespaceBefore /\s\+$\| \+\ze\t/
 
 " Show tabs that are not at the start of a line:
-:match ExtraWhitespace /[^\t]\zs\t\+/
+"match ExtraWhitespaceTab /[^\t]\zs\t\+/
 
 " Show spaces used for indenting (so you use only tabs for indenting).
-":match ExtraWhitespace /^\t*\zs \+/
+"match ExtraWhitespaceExtra /^\t*\zs \+/
 
 " show spaces on leaving insert-mode
-autocmd InsertLeave * redraw!
-autocmd ColorScheme * highlight ExtraWhitespace ctermfg=darkgreen ctermbg=darkgreen
-"autocmd InsertEnter * match ExtraWhiteSpace /\s\+\%#\@<!$/
+"autocmd InsertLeave * redraw!
+"autocmd ColorScheme * highlight ExtraWhitespace ctermfg=darkgreen ctermbg=darkgreen
+"autocmd InsertEnter * 2match trailExtraWhiteSpace /\s\+\%#\@<!$/
+
 
 " Show  tab characters. Visual Whitespace.
 set list
@@ -139,12 +158,12 @@ if !exists(":DiffOrig")
         \ | wincmd p | diffthis
 endif
 
-" " folding with F9
-" inoremap <F9> <C-O>za
-" nnoremap <F9> za
-" onoremap <F9> <C-C>za
-" vnoremap <F9> zf
-" 
+" folding with F9
+inoremap <F9> <C-O>za
+nnoremap <F9> za
+onoremap <F9> <C-C>za
+vnoremap <F9> zf
+
 " " Here is an alternative procedure: In normal mode, press Space to toggle the
 " " current fold open/closed. However, if the cursor is not in a fold, move to
 " " the right (the default behavior). In addition, with the manual fold method,
@@ -173,20 +192,6 @@ if has("autocmd")
 endif
 
 
-" ==== COLORS ====
-" set number of colors to 256
-set t_Co=256
-
-" colorschemes /w 256-colors
-"colorscheme gardener
-"colorscheme desert256
-"colorscheme inkpot
-"colorscheme charged256
-colorscheme jellybeans
-
-
-syntax on
-set background=dark
 
 
 
