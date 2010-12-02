@@ -137,7 +137,7 @@ cp_progress()
 find_broken_symlinks()
 {
     for i in `find $1 -type l`; do [ -e $i ] || echo $i is broken; done
-{
+}
 
 source ~/.bash_svn
 
