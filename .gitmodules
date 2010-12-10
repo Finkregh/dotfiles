@@ -6,3 +6,9 @@
 	url = https://github.com/nvie/gitflow.git
 #   dont forget to:
 #       cd bin/gitflow.git; git submodule init ; git submodule update
+[submodule "bin/git-hooks.git"]
+	path = bin/git-hooks.git
+	url = https://github.com/Finkregh/git-hooks.git
+[submodule ".global_ignore"]
+	path = .global_ignore
+	url = git@github.com:Finkregh/gitignore.git

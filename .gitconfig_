@@ -10,6 +10,7 @@
 [core]
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	autocrlf = input
+	excludesfile = /home/ol/.global_ignore/
 
 [user]
 	email = finkregh@mafia-server.net
