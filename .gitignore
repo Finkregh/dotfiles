@@ -1,1 +1,3 @@
 bin/python/build/**
+# contains passwords, etc...
+bin/send-to-jabber.pl
