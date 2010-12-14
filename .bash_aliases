@@ -43,3 +43,7 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
+
+# debug bash scripts
+alias debug_enable="export PS4='+${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}: '"
+alias debug_disable="export PS4=''"

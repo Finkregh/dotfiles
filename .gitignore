@@ -1,0 +1,6 @@
+bin/python/build/**
+# contains passwords, etc...
+.xsend_
+
+*.pyc
+bin/python/**
