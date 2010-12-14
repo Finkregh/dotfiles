@@ -1,6 +1,0 @@
-include *.txt
-include *.rst
-include test.sh
-include test-pypi-install.sh
-include stdeb.cfg
-include MANIFEST.in

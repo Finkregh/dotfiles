@@ -1,3 +1,0 @@
-#!/bin/bash
-
-update-pypi -a easydeb

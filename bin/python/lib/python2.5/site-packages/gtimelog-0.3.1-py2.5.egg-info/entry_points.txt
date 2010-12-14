@@ -1,4 +1,0 @@
-
-    [gui_scripts]
-    gtimelog = gtimelog.main:main
-    

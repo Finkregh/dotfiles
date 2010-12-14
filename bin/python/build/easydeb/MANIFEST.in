@@ -1,5 +1,0 @@
-include INSTALL MANIFEST.in COPYING TODO
-recursive-include debian/ *
-recursive-include doc/ *
-recursive-include data/ *
-recursive-include easydeb/template/ *

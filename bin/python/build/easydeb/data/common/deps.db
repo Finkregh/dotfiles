@@ -1,5 +1,0 @@
-[graph]
-python-versions = ['2.3', '2.4']
-bdeps = python%v, python%v-setuptools (>= 0.6a1-2), python%v-dev
-deps = python%v-setuptools (>= 0.6a1-2)
-
