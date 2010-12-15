@@ -9,3 +9,6 @@
 [submodule "bin"]
 	path = bin
 	url = git@github.com:Finkregh/dotfiles-bin.git
+[submodule ".vim"]
+	path = .vim
+	url = git@github.com:Finkregh/dotfiles-vim.git
