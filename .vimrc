@@ -3,6 +3,9 @@
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
+" activate pathogen
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 
 " ==== generics ====
 set hidden
