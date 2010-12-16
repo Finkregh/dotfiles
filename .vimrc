@@ -440,3 +440,6 @@ let Tlist_Exit_OnlyWindow = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_File_Fold_Auto_Close = 1
 
+" === vim-branch-info ===
+let g:git_branch_status_head_current=1
+let g:git_branch_status_ignore_remotes=1
