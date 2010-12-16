@@ -170,9 +170,9 @@ au!
 	au FileType python set expandtab
 	" setup file type for snipmate
 	"--------------------------------------------------------------------------
-	au FileType python set ft=python.django
-	au FileType xhtml set ft=htmldjango.html
-	au FileType html set ft=htmldjango.html
+" 	au FileType python set ft=python.django
+" 	au FileType xhtml set ft=htmldjango.html
+" 	au FileType html set ft=htmldjango.html
 
 	" kill calltip window if we move cursor or leave insert mode
 	au CursorMovedI * if pumvisible() == 0|pclose|endif
