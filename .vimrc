@@ -139,55 +139,55 @@ set wildmode=longest:full,list
 set wildignore=*.o,*.obj,*.bak,*.exe,*.py[co],*.swp,*~,*.pyc,.svn
 
 " ==== Autocommands ====
-if has("autocmd")
-augroup vimrcEx
-au!
-	" In plain-text files and svn commit buffers, wrap automatically at 78 chars
-	au FileType text,svn setlocal tw=78 fo+=t
+autocmd FileType python compiler pylint
+autocmd FileType po compiler po
+autocmd BufWrite *.py :call DeleteTrailingWS()
+" jump to the last position when reopening a file
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal g'\"" | endif
 
-	" In all files, try to jump back to the last spot cursor was in before exiting
-	au BufReadPost *
-		\ if line("'\"") > 0 && line("'\"") <= line("$") |
-		\   exe "normal g`\"" |
-		\ endif
+" In plain-text files and svn commit buffers, wrap automatically at 78 chars
+au FileType text,svn setlocal tw=78 fo+=t
 
-	" Use :make to check a script with perl
-	au FileType perl set makeprg=perl\ -c\ %\ $* errorformat=%f:%l:%m
+" In all files, try to jump back to the last spot cursor was in before exiting
+au BufReadPost *
+	\ if line("'\"") > 0 && line("'\"") <= line("$") |
+	\   exe "normal g`\"" |
+	\ endif
 
-	" Use :make to compile c, even without a makefile
-	au FileType c,cpp if glob('Makefile') == "" | let &mp="gcc -o %< %" | endif
+" Use :make to check a script with perl
+au FileType perl set makeprg=perl\ -c\ %\ $* errorformat=%f:%l:%m
 
-	" Switch to the directory of the current file, unless it's a help file.
-	au BufEnter * if &ft != 'help' | silent! cd %:p:h | endif
+" Use :make to compile c, even without a makefile
+au FileType c,cpp if glob('Makefile') == "" | let &mp="gcc -o %< %" | endif
 
-	" Insert Vim-version as X-Editor in mail headers
-	au FileType mail sil 1  | call search("^$")
-				 \ | sil put! ='X-Editor: Vim-' . Version()
-	" smart indenting for python
-	au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-	autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
-	set iskeyword+=.,_,$,@,%,#
-	au FileType python set expandtab
-	" setup file type for snipmate
-	"--------------------------------------------------------------------------
-" 	au FileType python set ft=python.django
-" 	au FileType xhtml set ft=htmldjango.html
-" 	au FileType html set ft=htmldjango.html
+" Switch to the directory of the current file, unless it's a help file.
+au BufEnter * if &ft != 'help' | silent! cd %:p:h | endif
 
-	" kill calltip window if we move cursor or leave insert mode
-	au CursorMovedI * if pumvisible() == 0|pclose|endif
-	au InsertLeave * if pumvisible() == 0|pclose|endif
-	
-	autocmd FileType python set omnifunc=pythoncomplete#Complete
-	autocmd FileType python.django set omnifunc=pythoncomplete#Complete
-	autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-	autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-	autocmd FileType htmldjango.html set omnifunc=htmlcomplete#CompleteTags
-	autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+" Insert Vim-version as X-Editor in mail headers
+au FileType mail sil 1  | call search("^$")
+			 \ | sil put! ='X-Editor: Vim-' . Version()
+" smart indenting for python
+au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
+set iskeyword+=.,_,$,@,%,#
+au FileType python set expandtab
+" setup file type for snipmate
+"--------------------------------------------------------------------------
+" au FileType python set ft=python.django
+au FileType xhtml set ft=htmldjango.html
+au FileType html set ft=htmldjango.html
 
-	augroup END
-endif
+" kill calltip window if we move cursor or leave insert mode
+au CursorMovedI * if pumvisible() == 0|pclose|endif
+au InsertLeave * if pumvisible() == 0|pclose|endif
 
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType python.django set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType htmldjango.html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 " ==== colors/display ====
 syntax on
@@ -255,7 +255,6 @@ func! DeleteTrailingWS()
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
 
 " ==== EDITING & MOVING & BINDS/MAPPINGS ====
 """" Movement
@@ -347,10 +346,10 @@ if !exists(":DiffOrig")
 endif
 
 " folding with F9
-inoremap <F9> <C-O>za
-nnoremap <F9> za
-onoremap <F9> <C-C>za
-vnoremap <F9> zf
+inoremap <F10> <C-O>za
+nnoremap <F10> za
+onoremap <F10> <C-C>za
+vnoremap <F10> zf
 
 " Here is an alternative procedure: In normal mode, press Space to toggle the
 " current fold open/closed. However, if the cursor is not in a fold, move to
@@ -363,16 +362,10 @@ vnoremap <Space> zf
 " folding by syntax
 "set fdm=syntax
 
-" jump to the last position when reopening a file
-if has("autocmd")
-	au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-		\| exe "normal g'\"" | endif
-endif
-
 
 " ==== MENU & BARS ====
 "set statusline=%{GitBranchInfoString}
-set statusline=%#StatusLineNC#\ Git\ %#ErrorMsg#\ %{GitBranchInfoTokens()[0]}\ %#StatusLine#\ %<%f%m%r%y%=%b\ 0x%B\ \ %l,%c%V\ %P
+set statusline=%#StatusLineNC#\ Git\ %#ErrorMsg#\ %{GitBranchInfoTokens()[0]}\ %#StatusLine#\ %#PyHelperStatus#%{TagInStatusLine()}%#StatusLine#\ \|\ %<%f\ [%R%M%Y]\ %=\[%b\|0x%B\]\ \ [l:%l,col:%c%V\ %P]
 set laststatus=2    " Always show statusline, even if only 1 window
 set showcmd         " Show (partial) command in status line.
 set showmode        " Insert, Replace or Visual mode put a message on the last line
@@ -388,7 +381,6 @@ set guitablabel=%N/\ %t\ %M
 
 " ==== COMPILING & ETC ====
 augroup PO
-	autocmd FileType po compiler po
 augroup END
 
 
@@ -443,3 +435,12 @@ let Tlist_File_Fold_Auto_Close = 1
 " === vim-branch-info ===
 let g:git_branch_status_head_current=1
 let g:git_branch_status_ignore_remotes=1
+
+
+" === vim-pylint ===
+let g:pylint_onwrite = 1
+let g:pylint_show_rate = 1
+let g:pylint_cwindow = 1
+
+" === vim-pythonhelper ===
+highlight PyHelperStatus ctermbg=245 ctermfg=000
