@@ -4,3 +4,4 @@ bin/python/build/**
 
 *.pyc
 bin/python/**
+doc/tags
