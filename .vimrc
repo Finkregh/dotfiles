@@ -218,10 +218,12 @@ set t_Co=256
 
 " colorschemes /w 256-colors
 "colorscheme gardener
-colorscheme desert256
+"colorscheme desert256
 "colorscheme inkpot
 "colorscheme charged256
 "colorscheme jellybeans
+colorscheme solarized
+set background=dark                     " I use dark background
 
 
 " ==== HIGHLIGHTS ====

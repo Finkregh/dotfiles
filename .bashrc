@@ -28,7 +28,7 @@ shopt -s checkwinsize
 
 # == add ~/bin/ to PATH ==
 if [ -d ~/bin ] ; then
-	PATH="${PATH}":~/bin:~/bin/python/bin
+	PATH="${PATH}":~/bin:~/bin/python/bin:~/sd/bin
 fi
 
 
@@ -70,6 +70,10 @@ fi
 # work-specifics
 if [ -f ~/.bash_alias_axxeo ]; then
     source ~/.bash_alias_axxeo
+fi
+
+if [ -f ~/.bashrc_axxeo ]; then
+    source ~/.bashrc_axxeo
 fi
 
 set TERM xterm-256color; export TERM

@@ -1,3 +1,4 @@
 set go=mTb
 set nobeep
 set vb
+set hlsearch
