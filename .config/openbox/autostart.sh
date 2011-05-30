@@ -7,4 +7,4 @@ wicd-config &
 setxkbmap -layout us_intl &
 bmpanel2 &
 BatterySystemTray &
-obmixer &
+kmix &
