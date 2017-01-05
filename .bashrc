@@ -34,5 +34,73 @@ export HISTSIZE=100000
 export HISTFILESIZE=""
 
 export PATH="$PATH:$HOME/bin"
-export EDITOR="vim"
+export EDITOR=vim
+export VISUAL=vim
+export BROWSER=google-chrome-stable
+export PAGER=less
+export MANPAGER=less
 
+#LESS man page colors
+export GROFF_NO_SGR=1
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'                           
+export LESS_TERMCAP_so=$'\E[01;44;33m'                                 
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+shopt -s cdspell
+shopt -s checkwinsize
+shopt -s cmdhist
+shopt -s dotglob
+shopt -s expand_aliases
+shopt -s extglob
+shopt -s histappend
+shopt -s hostcomplete
+shopt -s nocaseglob
+
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+    ;;
+*)
+    ;;
+esac
+
+# FIXME sometimes...
+## set a fancy prompt (non-color, unless we know we "want" color)
+#case "$TERM" in
+#xterm-color)
+	# via http://www.cboltz.de/de/linux/bashprompt/
+	# PS1version=' \[\e[46m\]8.1\[\e[0m\]'
+	PS1error='$( ret=$? ; test $ret -gt 0 && echo "\[\e[41;93m\]   [$ret]   \[\e[0m\]" )'
+	PS1user="$( test `whoami` == root && echo '\[\e[41m\]' )\u\[\e[0m\]"
+	PS1color='\[\e[1;37;44m\]' # Farbe Arbeitsverzeichnis
+	PS1="$PS1error$PS1user@\h:$PS1color\w\[\e[0m\]$PS1version> "
+	tty | grep pts > /dev/null && PS1="$PS1\[\e]0;\w - \u@\h\a\]";
+	export PS1
+#    ;;
+#*)
+#    PS1='\u@\h:\w\$ '
+#    ;;
+#esac
+
+
+
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe.sh ] && eval "$(/usr/bin/lesspipe.sh)"
+
+#for file in `find ~/.bash_completion.d/* -maxdepth 0 -type l` ; do . $file ; done
