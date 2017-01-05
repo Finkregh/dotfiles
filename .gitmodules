@@ -1,0 +1,6 @@
+[submodule ".bash_files/ansible-completion"]
+	path = .bash_files/ansible-completion
+	url = https://github.com/dysosmus/ansible-completion.git
+[submodule ".vim"]
+	path = .vim
+	url = git@github.com:Finkregh/dotfiles-vim.git
