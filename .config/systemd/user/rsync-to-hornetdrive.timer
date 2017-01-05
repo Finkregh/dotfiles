@@ -2,7 +2,7 @@
 Description=rsync userhome to hornetdrive every 5 minutes
 
 [Timer]
-OnCalendar=*:0/10
+OnCalendar=*:0/5
 
 [Install]
 WantedBy=timers.target
