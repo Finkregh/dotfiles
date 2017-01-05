@@ -1,3 +1,2 @@
-.ssh/id_* filter=git-crypt diff=git-crypt
-.ssh/config.local filter=git-crypt diff=git-crypt
+.ssh/* filter=git-crypt diff=git-crypt
 .bashrc.sensitive filter=git-crypt diff=git-crypt
