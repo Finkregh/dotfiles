@@ -7,20 +7,6 @@
 
 PS1='[\u@\h \W]\$ '
 
-if [ -x /usr/bin/keychain ] ; then
-    [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
-    [ -f $HOME/.keychain/$HOSTNAME-sh ] && \
-        . $HOME/.keychain/$HOSTNAME-sh
-    [ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] && \
-        . $HOME/.keychain/$HOSTNAME-sh-gpg
-
-    keychain --quiet
-    eval $(keychain --systemd --quiet --eval)
-    eval $(/usr/bin/keychain --eval --systemd ~/.ssh/id_rsa)
-    eval $(/usr/bin/keychain --eval --systemd ~/.ssh/id_rsa.frv)
-    eval $(keychain --quiet --eval)
-fi
-
 export HISTIGNORE="&:[bf]g:exit"
 export HISTCONTROL=ignoredups
 # read this number of lines into history buffer on startup
@@ -104,3 +90,19 @@ fi
 [ -x /usr/bin/lesspipe.sh ] && eval "$(/usr/bin/lesspipe.sh)"
 
 #for file in `find ~/.bash_completion.d/* -maxdepth 0 -type l` ; do . $file ; done
+
+
+if [ -x /usr/bin/keychain ] ; then
+    [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
+    [ -f $HOME/.keychain/$HOSTNAME-sh ] && \
+        . $HOME/.keychain/$HOSTNAME-sh
+    [ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] && \
+        . $HOME/.keychain/$HOSTNAME-sh-gpg
+
+    keychain --quiet
+    eval $(keychain --systemd --quiet --eval)
+    /usr/bin/keychain --systemd ~/.ssh/id_rsa
+    /usr/bin/keychain --systemd ~/.ssh/id_rsa
+    #eval $(/usr/bin/keychain --eval --systemd ~/.ssh/id_rsa.frv)
+    eval $(keychain --quiet --eval)
+fi
