@@ -3,4 +3,4 @@ Description=rsync userhome to hornetdrive every 5 minutes
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/rsync -az --delete --exclude=$USER/.local --exclude=$USER/HORNETDRIVE --exclude=$USER/Drives --exclude=$USER/.hornetdrive --exclude=$USER/VirtualBox* --exclude=$USER/.cache --exclude=$USER/Downloads $HOME $HOME/Drives/linux-home/
+ExecStart=/usr/bin/sh -c "/usr/bin/rsync -az --delete --exclude=$USER/.local --exclude=$USER/HORNETDRIVE --exclude=$USER/Drives --exclude=$USER/.hornetdrive --exclude=$USER/VirtualBox* --exclude=$USER/.cache --exclude=$USER/Downloads $HOME $HOME/Drives/linux-home/"
