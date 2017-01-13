@@ -20,3 +20,5 @@ alias debug_disable="export PS4=''"
 
 alias man="man -LC"
 alias lintian="lintian --suppress-tags bad-distribution-in-changes-file"
+
+alias ip="ip -c"
