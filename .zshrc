@@ -74,4 +74,4 @@ if [ -x /usr/bin/keychain ] ; then
     eval $(keychain --quiet --eval)
 fi
 
-source ~/bin/liquidprompt/liquidprompt
+#source ~/bin/liquidprompt/liquidprompt
