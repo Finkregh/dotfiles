@@ -49,7 +49,10 @@ export VISUAL=vim
 export BROWSER=google-chrome-stable
 export PAGER=less
 export MANPAGER=less
+export MANWIDTH=${MANWIDTH:-80}
+export COLORTERM="yes"
 
+. ~/.zsh_functions
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -94,7 +97,33 @@ fi
 zplug load --verbose
 
 
+bindkey -e
+
 bindkey "^R" history-incremental-search-backward
+bindkey '^H' backward-kill-word
+## use Ctrl-left-arrow and Ctrl-right-arrow for jumping to word-beginnings on
+## the command line.
+# URxvt sequences:
+bind2maps emacs viins vicmd -- -s '\eOc' forward-word
+bind2maps emacs viins vicmd -- -s '\eOd' backward-word
+# These are for xterm:
+bind2maps emacs viins vicmd -- -s '\e[1;5C' forward-word
+bind2maps emacs viins vicmd -- -s '\e[1;5D' backward-word
+## the same for alt-left-arrow and alt-right-arrow
+# URxvt again:
+bind2maps emacs viins vicmd -- -s '\e\e[C' forward-word
+bind2maps emacs viins vicmd -- -s '\e\e[D' backward-word
+# Xterm again:
+bind2maps emacs viins vicmd -- -s '^[[1;3C' forward-word
+bind2maps emacs viins vicmd -- -s '^[[1;3D' backward-word
+# Also try ESC Left/Right:
+bind2maps emacs viins vicmd -- -s '\e'${key[Right]} forward-word
+bind2maps emacs viins vicmd -- -s '\e'${key[Left]}  backward-word
+
+# ctrl-delete:
+bindkey -M emacs '^[[3;5~' kill-word
+# urxvt
+bindkey -M emacs '^[[3^' kill-word
 
 
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
