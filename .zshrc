@@ -83,6 +83,7 @@ export PAGER=less
 export MANPAGER=less
 export MANWIDTH=${MANWIDTH:-80}
 export COLORTERM="yes"
+export JAVA_TOOL_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
 
 . ~/.zsh_functions
 if [ -f ~/.bash_aliases ]; then
