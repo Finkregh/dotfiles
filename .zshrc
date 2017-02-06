@@ -44,13 +44,36 @@ zstyle ':completion:*:kill:*'   force-list always
 #export HISTCONTROL=ignoredups
 # read this number of lines into history buffer on startup
 # carefull with this, it will increase bash memory footprint and load time
-export HISTSIZE=100000
+export HISTSIZE=40000
 # HISTFILESIZE is set *after* bash reads the history file
 # (which is done after reading any configs like .bashrc)
 # if it is unset at this point it is set to the same value as HISTSIZE
 # therefore we must set it to NIL, in which case it isn't "unset",
 # but doesn't have a value either, go figure
 #export HISTFILESIZE=""
+export SAVEHIST=$HISTSIZE
+## Command history configuration
+if [ -z "$HISTFILE" ]; then
+    HISTFILE=$HOME/.zsh_history
+fi
+
+# Show history
+case $HIST_STAMPS in
+  "mm/dd/yyyy") alias history='fc -fl 1' ;;
+  "dd.mm.yyyy") alias history='fc -El 1' ;;
+  "yyyy-mm-dd") alias history='fc -il 1' ;;
+  *) alias history='fc -l 1' ;;
+esac
+
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+#setopt share_history # share command history data
+
 
 export PATH="$PATH:$HOME/bin"
 export EDITOR=vim
