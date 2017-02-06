@@ -175,9 +175,16 @@ POWERLEVEL9K_RAM_FOREGROUND="249"
 POWERLEVEL9K_RAM_ELEMENTS=(ram_free)
 
 #POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="red"
+POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S}"
 
+local user_symbol="$"
+if [[ $(print -P "%#") =~ "#" ]]; then
+    user_symbol = "#"
+fi
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="\n"
-POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%K{white}%F{black} `date +%T` %f%k%F{white}%f "
+#POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%K{white}%F{black} time %f%k%F{white}%f "
+POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{blue}%} $user_symbol%{%b%f%k%F{blue}%} %{%f%}"
+
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs load battery)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs time load battery)
