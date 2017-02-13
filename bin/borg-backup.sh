@@ -3,6 +3,8 @@
 REPOSITORY="/mnt/usb-green/borg-laptop"
 _NOTIFY_TIMEOUT=10000
 
+pacman -Qqe > ~/backup/package-list.txt
+
 sudo zpool status usb-green || exit 1
 
 IFS= read -s  -p Password: pwd
