@@ -114,6 +114,8 @@ if [[ ! -d ~/.zplug ]]; then
   git clone https://github.com/zplug/zplug ~/.zplug
 fi
 source ~/.zplug/init.zsh
+# let zplug manage itself
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
@@ -127,7 +129,7 @@ zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 if ! zplug check; then
     zplug install
 fi
-zplug load --verbose
+zplug load --verbose || zplug update
 
 
 # Make sure that the terminal is in application mode when zle is active, since
