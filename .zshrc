@@ -7,7 +7,7 @@
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -110,8 +110,10 @@ if [ -x /usr/bin/keychain ] ; then
     eval $(keychain --quiet --eval)
 fi
 
-if [[ ! -d ~/.zplug ]]; then
-  git clone https://github.com/zplug/zplug ~/.zplug
+if [[ ! -d ~/dotfiles/.zplug ]]; then
+  git clone https://github.com/zplug/zplug ~/dotfiles/.zplug
+  $(cd ~/dotfiles ; stow .)
+  source ~/.zplug/init.zsh && zplug update --self
 fi
 source ~/.zplug/init.zsh
 # let zplug manage itself
