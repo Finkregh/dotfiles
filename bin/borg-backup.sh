@@ -12,7 +12,7 @@ export BORG_PASSPHRASE="${pwd}"
 echo ""
 
 notify-send -t ${_NOTIFY_TIMEOUT} -u normal "starting borg backup" "home"
-sudo BORG_PASSPHRASE="${pwd}"  borg create  --compression lz4 -v --stats ${REPOSITORY}::lorenzen-home-'{now:%Y-%m-%d}' /home/lorenzen --exclude /home/lorenzen/.cache # || { echo >&2 "first backup-run failed, exiting!"; exit 1; }
+sudo BORG_PASSPHRASE="${pwd}"  borg create --progress --compression lz4 -v --stats ${REPOSITORY}::lorenzen-home-'{now:%Y-%m-%d}' /home/lorenzen --exclude /home/lorenzen/.cache # || { echo >&2 "first backup-run failed, exiting!"; exit 1; }
 
 # Use the `prune` subcommand to maintain 7 daily, 4 weekly and 6 monthly
 # archives of THIS machine. The '{hostname}-' prefix is very important to
@@ -25,7 +25,7 @@ notify-send -t ${_NOTIFY_TIMEOUT} -u normal "finished borg backup" "home"
 
 notify-send -t ${_NOTIFY_TIMEOUT} -u normal "starting borg backup" "system"
 
-sudo BORG_PASSPHRASE="${pwd}"  borg create --one-file-system -v --stats --compression lz4 ${REPOSITORY}::system-'{now:%Y-%m-%d}' / \
+sudo BORG_PASSPHRASE="${pwd}"  borg create --progress --one-file-system -v --stats --compression lz4 ${REPOSITORY}::system-'{now:%Y-%m-%d}' / \
                --exclude /proc \
                --exclude /media \
                --exclude /home \
