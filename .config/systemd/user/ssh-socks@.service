@@ -1,0 +1,17 @@
+[Unit]
+Description=Setup a ssh-socks tunnel to %I
+After=network.target
+
+[Service]
+#Type=forking
+EnvironmentFile=%h/.config/systemd/env/%p.%i
+ExecStart=/usr/bin/ssh -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -o ControlPersist=no -o ControlMaster=no -o ControlPath=none -i ${SSH_KEY} -CND ${LOCAL_BIND_PORT} ${SSH_USER}@${REMOTE_HOST}
+
+#StartLimitIntervalSec=
+#StartLimitBurst=
+# Restart every >2 seconds to avoid StartLimitInterval failure
+RestartSec=30
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
