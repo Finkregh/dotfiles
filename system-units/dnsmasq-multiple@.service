@@ -1,0 +1,12 @@
+[Unit]
+Description=A lightweight DHCP and caching DNS server - multi-server-unit
+After=network.target
+Documentation=man:dnsmasq(8)
+
+[Service]
+ExecStartPre=/usr/bin/dnsmasq --test -C /etc/dnsmasq-%i.conf
+ExecStart=/usr/bin/dnsmasq -k --user=dnsmasq --pid-file -C /etc/dnsmasq-%i.conf
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target
