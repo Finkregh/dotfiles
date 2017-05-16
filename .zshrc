@@ -136,7 +136,8 @@ zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 if ! zplug check; then
     zplug install
 fi
-zplug load --verbose || zplug update
+zplug update
+zplug load
 
 
 # Make sure that the terminal is in application mode when zle is active, since
