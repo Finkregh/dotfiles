@@ -7,3 +7,6 @@
 [submodule "bin/liquidprompt"]
 	path = bin/liquidprompt
 	url = https://github.com/nojhan/liquidprompt.git
+[submodule "bin/emojify"]
+	path = bin/emojify-git
+	url = https://github.com/mrowa44/emojify
