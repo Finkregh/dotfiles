@@ -102,13 +102,13 @@ if [ -x /usr/bin/keychain ] ; then
     [ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] && \
         . $HOME/.keychain/$HOSTNAME-sh-gpg
 
-    keychain --systemd --quiet --agents gpg,ssh
+    #keychain --systemd --quiet --agents gpg,ssh
     eval $(keychain --systemd --quiet --eval --agents gpg,ssh --inherit any)
     /usr/bin/keychain --systemd ~/.ssh/id_rsa
     /usr/bin/keychain --systemd ~/.ssh/id_rsa
     /usr/bin/keychain --systemd --agents gpg --inherit any 7B6AC70A98241722383F9E3AAAA9E7B042A11ACB
     #eval $(/usr/bin/keychain --eval --systemd ~/.ssh/id_rsa.frv)
-    eval $(keychain --quiet --eval --agents gpg,ssh)
+    #eval $(keychain --quiet --eval --agents gpg,ssh)
 fi
 
 if [[ ! -d ~/dotfiles/.zplug ]]; then
