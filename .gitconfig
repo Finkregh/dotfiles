@@ -53,3 +53,5 @@
 
 [diff "odf"]
       textconv=odt2txt
+[diff "localizablestrings"]
+    textconv = "iconv -f utf-16 -t utf-8"
