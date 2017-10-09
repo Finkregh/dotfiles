@@ -95,20 +95,19 @@ fi
 
 #[[ $- = *i* ]] && source ~/bin/liquidprompt/liquidprompt
 
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null
 if [ -x /usr/bin/keychain ] ; then
+    sleep 0.$[ ( $RANDOM % 9 ) ]
+    eval $(keychain --systemd --quiet --eval --agents gpg,ssh --inherit any --quick)
+    /usr/bin/keychain --systemd --quick --inherit any --agents "ssh" ~/.ssh/id_rsa ~/.ssh/id_ecdsa
+    /usr/bin/keychain --systemd --quick --inherit any --agents "gpg" 7B6AC70A98241722383F9E3AAAA9E7B042A11ACB 0xAAA9E7B042A11ACB
+
     [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
     [ -f $HOME/.keychain/$HOSTNAME-sh ] && \
         . $HOME/.keychain/$HOSTNAME-sh
     [ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] && \
         . $HOME/.keychain/$HOSTNAME-sh-gpg
-
-    #keychain --systemd --quiet --agents gpg,ssh
-    eval $(keychain --systemd --quiet --eval --agents gpg,ssh --inherit any)
-    /usr/bin/keychain --systemd ~/.ssh/id_rsa
-    /usr/bin/keychain --systemd ~/.ssh/id_rsa
-    /usr/bin/keychain --systemd --agents gpg --inherit any 7B6AC70A98241722383F9E3AAAA9E7B042A11ACB
-    #eval $(/usr/bin/keychain --eval --systemd ~/.ssh/id_rsa.frv)
-    #eval $(keychain --quiet --eval --agents gpg,ssh)
 fi
 
 if [[ ! -d ~/dotfiles/.zplug ]]; then
