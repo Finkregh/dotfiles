@@ -68,17 +68,10 @@ set sts=4
 set ts=4
 " amount of spaces per tab
 set sw=4
-if $HOSTNAME =~ "jim3"
-	" inserts spaces instead of tabs on line-beginning
-	set smarttab
-	" no expandtab (tabs = spaces = :ugly:, tabs should always be tabs)
-	set et
-else
-	" inserts spaces instead of tabs on line-beginning
-	set nosmarttab
-	" no expandtab (tabs = spaces = :ugly:, tabs should always be tabs)
-	set et
-endif
+" inserts spaces instead of tabs on line-beginning
+set smarttab
+" no expandtab (tabs = spaces = :ugly:, tabs should always be tabs)
+set et
 
 " set up tags
 set tags=tags;~/
