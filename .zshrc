@@ -119,7 +119,7 @@ source ~/.zplug/init.zsh
 # let zplug manage itself
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
-#zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "plugins/git", from:oh-my-zsh
