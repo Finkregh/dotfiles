@@ -263,3 +263,10 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs time load battery)
 
 archey3 || true
+
+# show lockfile if it exists...
+# https://github.com/zplug/zplug/issues/374
+if [ -e $_zplug_lock ] ; then
+    ls -la $_zplug_lock
+fi
+#set -m
