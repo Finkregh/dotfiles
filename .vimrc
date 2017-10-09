@@ -432,10 +432,16 @@ let g:pyflakes_use_quickfix = 0
 "let g:git_branch_status_ignore_remotes=1
 "
 "
-"" === vim-pylint ===
-"let g:pylint_onwrite = 1
-"let g:pylint_show_rate = 1
-"let g:pylint_cwindow = 1
-"
+" pylint is unsupported, switch to syntastic
+" === syntastic ===
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
 "" === vim-pythonhelper ===
 "highlight PyHelperStatus ctermbg=245 ctermfg=000
