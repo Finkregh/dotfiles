@@ -119,7 +119,7 @@ source ~/.zplug/init.zsh
 # let zplug manage itself
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
-zplug "zsh-users/zsh-syntax-highlighting"
+#zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "plugins/git", from:oh-my-zsh
@@ -128,8 +128,8 @@ zplug "b4b4r07/emoji-cli"
 zplug "zdharma/fast-syntax-highlighting"
 zplug "chrissicool/zsh-256color"
 
-zplug 'dracula/zsh', as:theme
-zplug "themes/gnzh", from:oh-my-zsh, as:theme
+#zplug 'dracula/zsh', as:theme
+#zplug "themes/gnzh", from:oh-my-zsh, as:theme
 zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 
 if ! zplug check; then
