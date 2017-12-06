@@ -224,8 +224,8 @@ set background=dark                     " I use dark background
 " :set spell spelllang=de
 
 " Show  tab characters. Visual Whitespace.
-set list
-set listchars=tab:>.
+"set list
+"set listchars=tab:>.
 
 " highlight some things in comments
 let c_comment_strings = 1
