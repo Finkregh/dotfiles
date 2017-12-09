@@ -124,6 +124,7 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
+zplug "plugins/pass", from:oh-my-zsh
 zplug "b4b4r07/emoji-cli"
 zplug "zdharma/fast-syntax-highlighting"
 zplug "chrissicool/zsh-256color"
