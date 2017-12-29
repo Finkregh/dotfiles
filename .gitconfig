@@ -22,7 +22,7 @@
 [user]
 	email = finkregh@mafia-server.net
 	Name = Oluf Lorenzen
-	signingkey = 327E822C55338A8A51AF2CC4FFC01051DEE0B735
+	signingkey = 0xFFC01051DEE0B735
 
 [alias]
 	st = status
