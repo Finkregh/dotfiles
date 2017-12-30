@@ -49,6 +49,12 @@ assign [class="^HORNETDRIVE$"] $ws7
 # tabs-outliner
 assign [class=Google-chrome instance=crx_eggkanocgddhmamlbiijnphhppkpkmkl] $ws2
 for_window [class=Google-chrome instance=crx_eggkanocgddhmamlbiijnphhppkpkmkl] floating enable
+# Hangouts
+assign [class="crx_knipolnnllmklapflnccelgolnpehhpl"] $ws1
+# signal
+assign [class="crx_bikioccmkafdpakkkcpdbppfkghcmihk"] $ws1
+
+
 
 assign [class=google-chrome] $ws2
 assign [class=Firefox] $ws2
@@ -180,7 +186,7 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1
+bindsym $mod+1 workspace $ws1; layout tabbed
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
@@ -224,6 +230,7 @@ exec --no-startup-id blueberry-tray &
 exec --no-startup-id setxkbmap us -variant intl
 # fancy workspace switch etc
 exec --no-startup-id compton -CGb
+exec --no-startup-id light-locker --lock-on-suspend &
 exec --no-startup-id nm-applet
 #exec --no-startup-id sudo wicd-gtk -t
 #exec --no-startup-id sudo wpa_gui -t
