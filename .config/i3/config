@@ -38,7 +38,7 @@ assign [class=".*Thunderbird.*"] $ws1
 assign [class=".*vivaldi.*"] $ws2
 assign [class="^UXTerm$"] $ws3
 assign [class="^Konsole$"] $ws3
-assign [class="^termite"] $ws3
+assign [class="^termite$"] $ws3
 assign [class="^URxvt$"] $ws3
 assign [class="^Komodo edit$"] $ws4
 assign [class="^Atom$"] $ws4
@@ -70,7 +70,6 @@ client.focused #888888 #dddddd #222222 #2e9ef4
 client.focused_inactive #333333 #555555 #bbbbbb #484e50
 client.unfocused #333333 #333333 #888888 #292d2e
 client.urgent #2f343a #900000 #ffffff #900000
-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -228,7 +227,7 @@ exec --no-startup-id compton -CGb
 exec --no-startup-id nm-applet
 #exec --no-startup-id sudo wicd-gtk -t
 #exec --no-startup-id sudo wpa_gui -t
-exec --no-startup-id feh  --bg-scale /home/finkregh/Pictures/wallpapers/simplewall2560x1600.jpg
+exec --no-startup-id feh  --bg-scale /home/finkregh/Pictures/wallpapers/old/old/wallpapers/organic3_wall.jpg
 #exec --no-startup-id feh  --bg-fill --no-xinerama /home/max/56641_rick_and_morty.jpg
 #exec --no-startup-id urxvtd -q -f -o
 #exec --no-startup-id "urxvtc -name 'cmus' -e sh -c 'cmus'"
@@ -264,10 +263,10 @@ bindsym $mod+r mode "resize"
 #bar {
 #        status_command i3status
 #}
-bar {
-  output LVDS1
-  status_command i3blocks
-}
+#bar {
+#  output LVDS1
+#  status_command i3blocks
+#}
 #bar {
 #  output eDP1
 #  status_command i3blocks
