@@ -1,14 +1,36 @@
+[colors]
+;My colors are set from .Xresources to match everything else
+background_i3wmthemer 	= ${xrdb:background}
+foreground_i3wmthemer 	= ${xrdb:foreground}
+color00_i3wmthemer	      = ${xrdb:color0}
+color01_i3wmthemer      = ${xrdb:color1}
+color02_i3wmthemer	      = ${xrdb:color2}
+color03_i3wmthemer	      = ${xrdb:color3}
+color04_i3wmthemer	      = ${xrdb:color4}
+color05_i3wmthemer	      = ${xrdb:color5}
+color06_i3wmthemer	      = ${xrdb:color6}
+color07_i3wmthemer	      = ${xrdb:color7}
+color08_i3wmthemer	      = ${xrdb:color8}
+color09_i3wmthemer	      = ${xrdb:color9}
+color10_i3wmthemer	    = ${xrdb:color10}
+color11_i3wmthemer	    = ${xrdb:color11}
+color12_i3wmthemer	    = ${xrdb:color12}
+color13_i3wmthemer	    = ${xrdb:color13}
+color14_i3wmthemer	    = ${xrdb:color14}
+color15_i3wmthemer	    = ${xrdb:color15}
+
+
 [bar/top]
 dpi = 96
 monitor = LVDS1
 width = 100%
 height = 20
 
-background = #88000000
-foreground = #ccffffff
+background = ${colors.background_i3wmthemer}
+foreground =  ${colors.foreground_i3wmthemer}
 
-line-color = ${bar/bottom.background}
-line-size = 4
+line-size = 3
+line-color = ${colors.color04_i3wmthemer}
 
 spacing = 2
 padding = 2
@@ -50,14 +72,16 @@ font-1 = MaterialIcons:size=10;6
 font-2 = Termsynu:size=8:antialias=false;2
 font-3 = FontAwesome:size=10;4
 
-modules-left =
+modules-left = 
+modules-center = xwindow
 modules-right = pkg temperature cpu memory
 
 tray-position = left
 tray-maxsize = 40
 tray-transparent = true
-tray-background = ${self.background}
+tray-background = ${colors.background_i3wmthemer}
 tray-padding = 4
+
 
 [module/backlight]
 type = internal/xbacklight
@@ -129,7 +153,7 @@ format = <label-state> <label-mode>
 ; Default: %mode%
 label-mode = %mode%
 label-mode-padding = 2
-label-mode-background = #e60053
+label-mode-background = ${colors.color04_i3wmthemer}
 
 ; Available tokens:
 ;   %name%
@@ -138,10 +162,9 @@ label-mode-background = #e60053
 ;   %output%
 ; Default: %icon%  %name%
 label-focused = %icon%
-label-focused-foreground = #ffffff
-#label-focused-background = #3f3f3f
-#label-focused-underline = #fba922
-label-focused-underline = #ffffff
+label-focused-foreground = ${colors.color04_i3wmthemer}
+label-focused-background = ${colors.background_i3wmthemer}
+label-focused-underline = ${colors.color04_i3wmthemer}
 label-focused-padding = 4
 
 ; Available tokens:
@@ -151,6 +174,8 @@ label-focused-padding = 4
 ; Default: %icon%  %name%
 label-unfocused = %icon%
 label-unfocused-padding = 4
+label-unfocused-background = ${colors.background_i3wmthemer}
+label-unfocused-foreground = ${colors.foreground_i3wmthemer}
 
 ; Available tokens:
 ;   %name%
@@ -158,8 +183,9 @@ label-unfocused-padding = 4
 ;   %index%
 ; Default: %icon%  %name%
 label-visible = %icon%
-#label-visible-underline = #555555
 label-visible-padding = 4
+lable-visible-foreground = ${colors.color04_i3wmthemer}
+label-visible-underline = ${colors.color04_i3wmthemer}
 
 ; Available tokens:
 ;   %name%
@@ -167,10 +193,11 @@ label-visible-padding = 4
 ;   %index%
 ; Default: %icon%  %name%
 label-urgent = %icon%
-label-urgent-foreground = #ffffff
-#label-urgent-background = #bd2c40
-label-urgent-underline = #bd2c40
 label-urgent-padding = 6
+#label-urgent-underline = #bd2c40
+label-urgent-foreground = ${colors.foreground_i3wmthemer}
+label-urgent-background = ${colors.background_i3wmthemer}
+label-urgent-underline = ${colors.color02_i3wmthemer}
 
 [module/cpu]
 type = internal/cpu
