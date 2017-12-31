@@ -113,11 +113,13 @@ animation-charging-framerate = 750
 [module/i3]
 type = internal/i3
 
-ws-icon-0 = term;
-ws-icon-1 = web;
-ws-icon-2 = code;
+fuzzy-match = true
+
+ws-icon-0 = shell;
+ws-icon-1 = browser;
+ws-icon-2 = editor;
 ws-icon-3 = music;
-ws-icon-4 = irssi;
+ws-icon-4 = comm;
 ws-icon-default = 
 
 format = <label-state> <label-mode>
@@ -135,40 +137,40 @@ label-mode-background = #e60053
 ;   %index%
 ;   %output%
 ; Default: %icon%  %name%
-label-focused = %index%
+label-focused = %icon%
 label-focused-foreground = #ffffff
 #label-focused-background = #3f3f3f
 #label-focused-underline = #fba922
 label-focused-underline = #ffffff
-label-focused-padding = 2
+label-focused-padding = 4
 
 ; Available tokens:
 ;   %name%
 ;   %icon%
 ;   %index%
 ; Default: %icon%  %name%
-label-unfocused = %index%
-label-unfocused-padding = 2
+label-unfocused = %icon%
+label-unfocused-padding = 4
 
 ; Available tokens:
 ;   %name%
 ;   %icon%
 ;   %index%
 ; Default: %icon%  %name%
-label-visible = %index%
+label-visible = %icon%
 #label-visible-underline = #555555
-label-visible-padding = 2
+label-visible-padding = 4
 
 ; Available tokens:
 ;   %name%
 ;   %icon%
 ;   %index%
 ; Default: %icon%  %name%
-label-urgent = %index%
-label-urgent-foreground = #000000
+label-urgent = %icon%
+label-urgent-foreground = #ffffff
 #label-urgent-background = #bd2c40
 label-urgent-underline = #bd2c40
-label-urgent-padding = 2
+label-urgent-padding = 6
 
 [module/cpu]
 type = internal/cpu
@@ -231,7 +233,8 @@ interval = 3.0
 ping-interval = 10
 
 format-connected = <ramp-signal> <label-connected>
-label-connected = %essid%
+#label-connected = %essid%
+label-connected = %essid%: %local_ip% %signal%~
 label-disconnected =    not connected
 label-disconnected-foreground = #66
 
@@ -270,7 +273,7 @@ ramp-volume-3 = 
 [module/temperature]
 type = internal/temperature
 interval = 2
-thermal-zone = 8
+thermal-zone = 0
 warn-temperature = 70
 
 format = <ramp> <label>
@@ -286,6 +289,11 @@ ramp-1 = 
 ramp-2 = 
 ramp-3 = 
 ramp-4 = 
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:120:...%
+label-padding = 4
 
 [module/pkg]
 type = custom/script
