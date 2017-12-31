@@ -10,16 +10,16 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 set $mod Mod4
 
-set $ws1 1:comm
-set $ws2 2:browser
-set $ws3 3:shell
-set $ws4 4:editor
-set $ws5 5:ssh
-set $ws6 6:music
-set $ws7 7:hodr
-set $ws8 8:todo
-set $ws9 9:mon
-set $ws10 10:vwmare
+set $ws1 comm
+set $ws2 browser
+set $ws3 shell
+set $ws4 editor
+set $ws5 ssh
+set $ws6 music
+set $ws7 hodr
+set $ws8 todo
+set $ws9 mon
+set $ws10 vwmare
 
 #workspace 1:comm output DP2-2
 #workspace 2:browser output eDP1
@@ -218,7 +218,8 @@ bindsym $mod+Shift+r restart
 set $mode_system (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id i3lock-fancy; mode "default"
-    bindsym s exec --no-startup-id i3exit suspend; mode "default"
+#bindsym s exec --no-startup-id i3exit suspend; mode "default"
+    bindsym s exec --no-startup-id systemctl suspend; mode "default"
     bindsym e exec --no-startup-id i3-msg exit; mode "default"
     bindsym h exec --no-startup-id i3exit hibernate; mode "default"
     bindsym r exec --no-startup-id systemctl reboot; mode "default"
