@@ -240,13 +240,10 @@ exec_always --no-startup-id ~/.config/i3/polybar.sh &
 exec --no-startup-id blueberry-tray &
 exec --no-startup-id setxkbmap us -variant intl
 # fancy workspace switch etc
-exec --no-startup-id compton -CGb
-exec --no-startup-id light-locker --lock-on-suspend &
-exec --no-startup-id nm-applet
-#exec --no-startup-id sudo wicd-gtk -t
-#exec --no-startup-id sudo wpa_gui -t
-exec --no-startup-id feh  --bg-scale /home/finkregh/Pictures/wallpapers/old/old/wallpapers/organic3_wall.jpg
-#exec --no-startup-id feh  --bg-fill --no-xinerama /home/max/56641_rick_and_morty.jpg
+exec --no-startup-id compton -CGb &
+exec --no-startup-id nm-applet &
+# wallpaper-changer
+exec --no-startup-id variety &
 #exec --no-startup-id urxvtd -q -f -o
 #exec --no-startup-id "urxvtc -name 'cmus' -e sh -c 'cmus'"
 
