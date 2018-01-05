@@ -21,13 +21,13 @@ set $ws8 todo
 set $ws9 mon
 set $ws10 vwmare
 
-#workspace 1:comm output DP2-2
-#workspace 2:browser output eDP1
-#workspace 3:shell output DP1
-#workspace 4:editor output DP1
+workspace 1:comm output eDP1
+workspace 2:browser output DP1-1
+workspace 3:shell output DP1-1
+workspace 4:editor output DP1-1
 #workspace 5:ssh output DP1
-#workspace 6:music output eDP1
-#workspace 7:hodr output DP2-2
+workspace 6:music output DP1-2
+workspace 7:hodr output DP1-1
 #workspace 8:todo output DP2-2
 #workspace 9:mon output DP2-2
 
