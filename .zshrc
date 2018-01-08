@@ -83,6 +83,7 @@ export PAGER=less
 export MANPAGER=less
 export MANWIDTH=${MANWIDTH:-80}
 export COLORTERM="yes"
+export TERM=xterm-256color
 export JAVA_TOOL_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
 
 . ~/.zsh_functions
