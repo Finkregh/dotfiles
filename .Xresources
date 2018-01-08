@@ -65,7 +65,7 @@ rofi.color-urgent: #1e1e20, #c5c8c6, #1e1e20, #1e1e20, #dc7f41
 
 rofi.separator-style: solid
 rofi.sidebar-mode: false
-rofi.lines: 5
+rofi.lines: 15
 rofi.font: FantasqueSansMono Nerd Font 13
 rofi.bw: 1
 rofi.columns: 1
