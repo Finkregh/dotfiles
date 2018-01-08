@@ -258,6 +258,8 @@ mode "$mode_system" {
 bindsym $mod+Shift+e mode "$mode_system"
 
 
+#exec_always --no-startup-id ~/.config/i3/screenset.sh &
+
 exec --no-startup-id xautolock -time 10 -locker 'i3lock-fancy' &
 exec_always --no-startup-id ~/.config/i3/polybar.sh &
 exec --no-startup-id blueberry-tray &
