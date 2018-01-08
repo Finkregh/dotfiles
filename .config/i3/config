@@ -34,8 +34,9 @@ workspace 7:hodr output DP1-1
 assign [class="^Virtual"] $ws1
 assign [class="^Sky"] $ws1
 assign [class="^Pidgin"] $ws1
-assign [class=".*Thunderbird.*"] $ws1
-assign [class=".*vivaldi.*"] $ws2
+assign [class="keepass2"] $ws2
+assign [class="Google-chrome"] $ws2
+assign [class="Thunderbird"] $ws4
 assign [class="^UXTerm$"] $ws3
 assign [class="^Konsole$"] $ws3
 assign [class="^termite$"] $ws3
