@@ -37,47 +37,47 @@ filter_unmatched_urls = true
 # emit escape sequences for extra modified keys
 #modify_other_keys = false
 
-# special
 [colors]
+# https://github.com/hukl/Smyck-Color-Scheme/
 
 # special
-foreground      = #ffffff
-foreground_bold = #ffffff
-cursor          = #ffffff
-#background      = #000000
-background = rgba(0, 0, 0, 0.75)
+foreground      = #f7f7f7
+foreground_bold = #f7f7f7
+cursor          = #f7f7f7
+background      = #1d1d1d
+#background = #31363b
 
 # black
-color0  = #2e3436
-color8  = #555753
+color0  = #000000
+color8  = #4b4b4b
 
 # red
-color1  = #a40000
-color9  = #ef2929
+color1  = #c75646
+color9  = #d6837c
 
 # green
-color2  = #4e9a06
-color10 = #8ae234
+color2  = #7da900
+color10 = #c4f137
 
 # yellow
-color3  = #c4a000
-color11 = #fce94f
+color3  = #d0b03d
+color11 = #fee14d
 
 # blue
-color4  = #3465a4
-color12 = #729fcf
+color4  = #407d99
+color12 = #8dcff0
 
 # magenta
-color5  = #75507b
-color13 = #ad7fa8
+color5  = #ba8acc
+color13 = #f79aff
 
 # cyan
-color6  = #16989A
-color14 = #00FFFF
+color6  = #207383
+color14 = #6ad9cf
 
 # white
-color7  = #babdb9
-color15 = #eeeeec
+color7  = #a1a1a1
+color15 = #f7f7f7
 
 [hints]
 #font = xos4 Terminus 8
