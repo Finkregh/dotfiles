@@ -271,8 +271,6 @@ exec --no-startup-id variety &
 exec --no-startup-id mono --verify-all /usr/share/keepass/KeePass.exe &
 exec --no-startup-id /usr/bin/pidgin &
 
-exec --no-startup-id /home/lorenzen/HORNETDRIVE/HORNETDRIVE.bin &
-
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
