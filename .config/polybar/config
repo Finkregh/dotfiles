@@ -42,7 +42,7 @@ font-2 = MiscTermsynu:size=8:antialias=false;2
 font-3 = FontAwesome:size=10;4
 
 modules-left = i3
-modules-right = volume backlight wireless-network wired-network battery date
+modules-right = audioplayer volume backlight wireless-network wired-network battery date
 
 
 [bar/bottom]
@@ -324,6 +324,17 @@ interval = 1200
 format = <label>
 label = "%output:0:30%"
 exec = ~/.config/polybar/pkg.sh
+
+[module/audioplayer]
+type = custom/script
+interval = 10
+exec = echo -n "  " ; playerctl metadata xesam:artist ; echo -n " - "; playerctl metadata xesam:title
+click-left = playerctl previous
+click-middle = playerctl play-pause
+click-right = playerctl next
+scroll-up = playerctl -p vlc volume 0.05+
+scroll-down = playerctl -p vlc volume 0.05-
+
 
 ; vim:ft=dosini
 
