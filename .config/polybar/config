@@ -22,7 +22,6 @@ color15_i3wmthemer	    = ${xrdb:color15}
 
 [bar/top]
 dpi = 96
-monitor = LVDS1
 monitor = ${env:MONITOR:LVDS1}
 width = 100%
 height = 20
