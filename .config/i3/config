@@ -274,6 +274,8 @@ exec --no-startup-id variety &
 #exec --no-startup-id "urxvtc -name 'cmus' -e sh -c 'cmus'"
 exec --no-startup-id mono --verify-all /usr/share/keepass/KeePass.exe &
 exec --no-startup-id /usr/bin/pidgin &
+#exec --no-startup-id parcellite &
+exec --no-startup-id clipit &
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
