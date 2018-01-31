@@ -13,3 +13,6 @@
 [submodule "bin/restic-tools"]
 	path = bin/restic-tools
 	url = git@github.com:binarybucks/restic-tools.git
+[submodule "bin/git-what-branch-src"]
+	path = bin/git-what-branch-src
+	url = https://github.com/SethRobertson/git-what-branch.git
