@@ -329,6 +329,7 @@ exec = ~/.config/polybar/pkg.sh
 type = custom/script
 interval = 10
 exec = echo -n "  " ; playerctl metadata xesam:artist ; echo -n " - "; playerctl metadata xesam:title
+exec-if = pgrep -x spotify
 click-left = playerctl previous
 click-middle = playerctl play-pause
 click-right = playerctl next
