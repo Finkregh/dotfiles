@@ -70,7 +70,7 @@ font-3 = FontAwesome5Free:size=10;4
 
 modules-left = 
 modules-center = xwindow
-modules-right = pkg temperature cpu memory
+modules-right = cpu memory
 
 tray-position = left
 tray-maxsize = 40
@@ -100,11 +100,11 @@ bar-empty-foreground = #44
 
 [module/battery]
 type = internal/battery
-full-at = 98
+full-at = 90
 
-format-charging = <animation-charging> <label-charging>
+format-charging = <animation-charging>
 format-discharging = <ramp-capacity> <label-discharging>
-format-full = <ramp-capacity> <label-full>
+format-full = <ramp-capacity>
 
 ramp-capacity-0 = 
 ramp-capacity-0-foreground = #f53c3c
@@ -255,9 +255,9 @@ interface = wlp3s0
 interval = 3.0
 ping-interval = 10
 
-format-connected = <ramp-signal> <label-connected>
+format-connected = <ramp-signal>
 #label-connected = %essid%
-label-connected = %essid%: %local_ip% %signal%~
+label-connected = %local_ip%
 label-disconnected =    not connected
 label-disconnected-foreground = #66
 
@@ -278,7 +278,7 @@ type = internal/network
 interface = enp0s25
 interval = 3.0
 
-label-connected =    %{T3}%local_ip%%{T-}
+label-connected =   
 label-disconnected-foreground = #66
 
 [module/volume]
@@ -328,7 +328,9 @@ exec = ~/.config/polybar/pkg.sh
 [module/audioplayer]
 type = custom/script
 interval = 10
-exec = echo -n "  " ; playerctl metadata xesam:artist ; echo -n " - "; playerctl metadata xesam:title
+format-prefix = "  "
+format-prefix-foreground = #1ED760
+exec = playerctl metadata xesam:artist ; echo -n " - "; playerctl metadata xesam:title
 exec-if = pgrep -x spotify
 click-left = playerctl previous
 click-middle = playerctl play-pause
