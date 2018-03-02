@@ -9,6 +9,7 @@ REPOSITORY="/mnt/usb-green/borg-laptop"
 _NOTIFY_TIMEOUT=10000
 
 pacman -Qqe > /root/backup/package-list.txt
+pacman -Qqet > /root/backup/package-list.nodeps.txt
 
 zpool status usb-green || zpool import usb-green || exit 1
 
