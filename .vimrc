@@ -430,13 +430,12 @@ let g:pyflakes_use_quickfix = 0
 "" === vim-branch-info ===
 "let g:git_branch_status_head_current=1
 "let g:git_branch_status_ignore_remotes=1
-"
-"
-" pylint is unsupported, switch to syntastic
-" === syntastic ===
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+
+" === ale ===
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\   'bash': ['shfmt','shellcheck'],
+\}
 
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
@@ -445,3 +444,8 @@ let g:syntastic_check_on_wq = 0
 
 "" === vim-pythonhelper ===
 "highlight PyHelperStatus ctermbg=245 ctermfg=000
+"
+" === pack management (vim 8) ===
+packloadall
+
+silent! helptags ALL
