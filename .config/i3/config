@@ -66,6 +66,7 @@ assign [class="VirtualBox"] $ws9
 #for_window [class="Spotify"] move to workspace $ws6
 #for_window [class="gpodder"] move to workspace $ws6
 #for_window [class="mpv"] floating enable
+for_window [class=Gimp] floating enable
 # Dialog handling
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
