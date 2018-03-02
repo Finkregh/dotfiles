@@ -8,9 +8,9 @@ execute pathogen#infect('bundle/{}')
 
 " ==== generics ====
 set hidden
-let mapleader = ","
+let g:mapleader = ","
 set encoding=utf-8
-set ffs=unix,dos,mac "Default file types
+set fileformats=unix,dos,mac "Default file types
 
 "Set backup to a location
 set backup
@@ -48,7 +48,7 @@ filetype plugin indent on				" Let filetype plugins indent for me
 
 
 """ Windows
-if exists(":tab")						" Try to move to other windows if changing buf
+if exists(':tab')						" Try to move to other windows if changing buf
 set switchbuf=useopen,usetab
 else									" Try other windows & tabs if available
 	set switchbuf=useopen
