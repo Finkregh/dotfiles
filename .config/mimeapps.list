@@ -19,6 +19,9 @@ text/plain=mousepad.desktop
 application/pdf=epdfview.desktop
 application/x-bittorrent=transmission-gtk.desktop
 inode/directory=spacefm-folder-handler.desktop
+application/x-compressed-tar=xarchiver.desktop
+application/x-tar=xarchiver.desktop
+application/zip=xarchiver.desktop
 x-scheme-handler/unknown=google-chrome.desktop
 
 [Added Associations]
