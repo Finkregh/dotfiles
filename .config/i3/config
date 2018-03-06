@@ -165,7 +165,7 @@ bindsym XF86AudioPrev exec playerctl previous
 
 bindsym $mod+k focus down
 #bindsym $mod+l exec --no-startup-id i3lock -e -t -u -i /home/max/pluto_wp.png 
-bindsym $mod+l exec --no-startup-id i3lock-fancy
+bindsym $mod+l exec --no-startup-id i3lock -t -i /home/lorenzen/Pictures/wallpapers/tiling/_s_a96b57c96d57e0f0g64h2E0A2F1705165111493A0C315B145D400E45iBF.png
 bindsym $mod+odiaeresis focus right
 bindsym $mod+x move workspace to output right
 
@@ -262,7 +262,7 @@ bindsym $mod+Shift+e mode "$mode_system"
 
 #exec_always --no-startup-id ~/.config/i3/screenset.sh &
 
-exec --no-startup-id xautolock -time 10 -locker 'i3lock-fancy' &
+exec --no-startup-id xautolock -time 10 -locker 'i3lock -t -i /home/lorenzen/Pictures/wallpapers/tiling/_s_a96b57c96d57e0f0g64h2E0A2F1705165111493A0C315B145D400E45iBF.png' &
 exec_always --no-startup-id ~/.config/i3/polybar.sh &
 exec --no-startup-id blueberry-tray &
 exec_always --no-startup-id setxkbmap us -variant intl &
