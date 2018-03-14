@@ -2,10 +2,16 @@
 
 _CONNECTED_SCREENS=$(xrandr | grep '\Wconnected' | awk '{ print $1 }')
 
-if [[ $_CONNECTED_SCREENS =~ HDMI1 ]]; then
-    export MONITOR=HDMI1
-elif [[ $_CONNECTED_SCREENS =~ DP1-1 ]]; then
-    export MONITOR=DP1-1
+if [[ $_CONNECTED_SCREENS =~ HDMI2 ]]; then
+    export MONITOR=HDMI2
+    export POLY_DPI=96
+    export POLYBAR_TRAY_POSITION_EXTERNAL=left
+elif [[ $_CONNECTED_SCREENS =~ DP1 ]]; then
+    export MONITOR=DP1
+    export POLYBAR_TRAY_POSITION_EXTERNAL=left
+else
+    export POLYBAR_TRAY_POSITION_EXTERNAL=none
+    export POLYBAR_TRAY_POSITION_LAPTOP=left
 fi
 
 # Terminate already running bar instances
