@@ -277,6 +277,8 @@ exec --no-startup-id mono --verify-all /usr/share/keepass/KeePass.exe &
 exec --no-startup-id /usr/bin/pidgin &
 #exec --no-startup-id parcellite &
 exec --no-startup-id clipit &
+exec --no-startup-id zeal --platformtheme qt5ct &
+exec --no-startup-id flameshot &
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
