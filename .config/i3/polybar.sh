@@ -9,6 +9,7 @@ if [[ $_CONNECTED_SCREENS =~ HDMI2 ]]; then
 elif [[ $_CONNECTED_SCREENS =~ DP1 ]]; then
     export MONITOR=DP1
     export POLYBAR_TRAY_POSITION_EXTERNAL=left
+    export POLYBAR_TRAY_MAXSIZE=20
 else
     export POLYBAR_TRAY_POSITION_EXTERNAL=none
     export POLYBAR_TRAY_POSITION_LAPTOP=left
