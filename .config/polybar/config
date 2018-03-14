@@ -63,7 +63,7 @@ padding-right = 4
 module-margin-left = 0
 module-margin-right = 6
 
-font-0 = FantasqueSansMono Nerd Font:size=10;4
+font-0 = FantasqueSansMono Nerd Font:size=8;4
 font-1 = MaterialIcons:size=10;6
 font-2 = MiscTermsynu:size=8:antialias=false;2
 font-3 = FontAwesome5Free:size=10;4
@@ -72,7 +72,40 @@ modules-left =
 modules-center = xwindow
 modules-right = cpu memory
 
-tray-position = left
+tray-position = ${env:POLYBAR_TRAY_POSITION_EXTERNAL:none}
+tray-maxsize = 40
+tray-transparent = true
+tray-background = ${colors.background_i3wmthemer}
+tray-padding = 4
+
+[bar/bottom-laptop]
+dpi = ${bar/top.dpi}
+monitor = ${bar/top-laptop.monitor}
+bottom = true
+width = ${bar/top-laptop.width}
+height = ${bar/top-laptop.height}
+
+background = ${bar/top-laptop.background}
+foreground = ${bar/top-laptop.foreground}
+
+line-color = ${bar/top-laptop.background}
+line-size = 2
+
+spacing = 3
+padding-right = 4
+module-margin-left = 0
+module-margin-right = 6
+
+font-0 = FantasqueSansMono Nerd Font:size=8;4
+font-1 = MaterialIcons:size=10;6
+font-2 = MiscTermsynu:size=8:antialias=false;2
+font-3 = FontAwesome5Free:size=10;4
+
+modules-left = 
+modules-center = xwindow
+modules-right = cpu memory
+
+tray-position = ${env:POLYBAR_TRAY_POSITION_LAPTOP:none}
 tray-maxsize = 40
 tray-transparent = true
 tray-background = ${colors.background_i3wmthemer}
