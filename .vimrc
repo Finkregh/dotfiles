@@ -122,9 +122,9 @@ nmap <leader>9 "9p
 nmap <leader>r :registers<CR>
 
 """"" Folding
-set foldmethod=indent					" By default, use indent to determine folds
-set foldlevelstart=99					" All folds open by default
-set nofoldenable
+set foldmethod=syntax                   " indent via syntax
+"set foldlevelstart=99					" All folds open by default
+set foldenable
 
 """" Command Line
 set wildmenu							" Autocomplete features in the status bar
@@ -193,6 +193,11 @@ au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
 " OO
 " Make trailing whitespace be flagged as bad.
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.yml match BadWhitespace /\s\+$/
+" ansible
+au BufNewFile,BufRead * if s:isAnsible() | set ft=ansible | en
+"au BufNewFile,BufRead *.j2 set ft=ansible_template
+"au BufNewFile,BufRead hosts set ft=ansible_hosts
+
 
 filetype plugin indent on
 set iskeyword+=.
@@ -250,6 +255,20 @@ func! DeleteTrailingWS()
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
+
+function! s:isAnsible()
+  let l:filepath = expand('%:p')
+  let l:filename = expand('%:t')
+  if l:filepath =~ '\v/(tasks|roles|handlers)/.*\.ya?ml$' | return 1 | en
+  if l:filepath =~ '\v/(group|host)_vars/' | return 1 | en
+  if l:filename =~ '\v(playbook|site|main|local)\.ya?ml$' | return 1 | en
+
+  let l:shebang = getline(1)
+  if l:shebang =~# '^#!.*/bin/env\s\+ansible-playbook\>' | return 1 | en
+  if l:shebang =~# '^#!.*/bin/ansible-playbook\>' | return 1 | en
+
+  return 0
+endfunction
 
 " ==== EDITING & MOVING & BINDS/MAPPINGS ====
 """" Movement
@@ -360,7 +379,7 @@ vnoremap <Space> zf
 
 " ==== MENU & BARS ====
 "set statusline=%{GitBranchInfoString}
-set statusline=%#StatusLineNC#\ Git\ %#ErrorMsg#\ %{GitBranchInfoTokens()[0]}\ %#StatusLine#\ %#PyHelperStatus#%{TagInStatusLine()}%#StatusLine#\ \|\ %<%f\ [%R%M%Y]\ %=\[%b\|0x%B\]\ \ [l:%l,col:%c%V\ %P]
+set statusline=%#StatusLineNC#\ Git\ %#ErrorMsg#\ %{GitBranchInfoTokens()[0]}\ %#StatusLine#\ \|\ %<%f\ [%R%M%Y]\ %=\[%b\|0x%B\]\ \ [l:%l,col:%c%V\ %P]
 set laststatus=2    " Always show statusline, even if only 1 window
 set showcmd         " Show (partial) command in status line.
 set showmode        " Insert, Replace or Visual mode put a message on the last line
@@ -434,8 +453,12 @@ let g:pyflakes_use_quickfix = 0
 " === ale ===
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-\   'bash': ['shfmt','shellcheck'],
+\   'sh': ['shfmt'],
+\   'python': ['autopep8', 'yapf'],
 \}
+"\   'ansible': ['trim_whitespace','remove_trailing_lines'],
+" always show gutter-line (remove pop-in-pop-out flicker)
+let g:ale_sign_column_always = 1
 
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
