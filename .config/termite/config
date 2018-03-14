@@ -6,7 +6,7 @@ mouse_autohide = false
 allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
-clickable_url = false
+clickable_url = true
 #font = xos4 Terminus 8
 #font = "Terminus 8px"
 #font = SauceCodePro Nerd Font Mono:style=Regular 11
@@ -20,10 +20,10 @@ search_wrap = true
 #geometry = 640x480
 
 # "system", "on" or "off"
-cursor_blink = off
+cursor_blink = on
 
 # "block", "underline" or "ibeam"
-cursor_shape = underline
+cursor_shape = block
 
 # $BROWSER is used by default if set, with xdg-open as a fallback
 #browser = xdg-open
