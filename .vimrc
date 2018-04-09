@@ -465,6 +465,8 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
+let g:ale_sh_shfmt_options = '-i 4'
+
 "" === vim-pythonhelper ===
 "highlight PyHelperStatus ctermbg=245 ctermfg=000
 "
