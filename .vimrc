@@ -29,6 +29,8 @@ set formatoptions-=tc					" I can format for myself, thank you very much
 set nosmartindent
 "set autoindent
 set cindent
+set showbreak=↳                         " display dots in front of wrapped lines
+set breakindent                         " indent warpped lines
 set matchpairs+=<:>						" specially for html
 set showmatch							" Briefly jump to the previous matching parent
 
