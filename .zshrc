@@ -267,7 +267,7 @@ POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{blue}%} $user_symb
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs virtualenv)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs time)
 
-archey3 || true
+neofetch || true
 
 # show lockfile if it exists...
 # https://github.com/zplug/zplug/issues/374
