@@ -22,7 +22,7 @@ color15_i3wmthemer	    = ${xrdb:color15}
 
 [bar/top]
 dpi = 96
-monitor = ${env:MONITOR:LVDS1}
+monitor = ${env:MONITOR:HDMI2}
 width = 100%
 height = 25
 
@@ -43,6 +43,30 @@ font-3 = FontAwesome:size=10;4
 
 modules-left = i3
 modules-right = audioplayer volume backlight wireless-network wired-network battery date
+
+[bar/top-laptop]
+dpi = 96
+monitor = LVDS1
+width = ${bar/top.width}
+height = 25
+
+background = ${bar/top.background}
+foreground = ${bar/top.foreground}
+
+line-color = ${bar/top.background}
+line-size = 2
+
+spacing = 2
+padding = 2
+module-margin = 2
+
+font-0 = FantasqueSansMono Nerd Font:size=11;4
+font-1 = MaterialIcons:size=10;6
+font-2 = MiscTermsynu:size=8:antialias=false;2
+font-3 = FontAwesome5Free:size=10;4
+
+modules-left = i3
+modules-right = volume backlight wireless-network wired-network battery date
 
 
 [bar/bottom]
