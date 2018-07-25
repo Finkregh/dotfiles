@@ -2,7 +2,10 @@
 
 _CONNECTED_SCREENS=$(xrandr | grep '\Wconnected' | awk '{ print $1 }')
 
-if [[ $_CONNECTED_SCREENS =~ HDMI2 ]]; then
+if [[ $_CONNECTED_SCREENS = eDP1 ]]; then
+    export POLYBAR_TRAY_POSITION_EXTERNAL=none
+    export POLYBAR_TRAY_POSITION_LAPTOP=left
+elif [[ $_CONNECTED_SCREENS =~ HDMI2 ]]; then
     export MONITOR=HDMI2
     export POLY_DPI=96
     export POLYBAR_TRAY_POSITION_EXTERNAL=left
