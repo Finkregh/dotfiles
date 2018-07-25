@@ -45,10 +45,10 @@ modules-left = i3
 modules-right = audioplayer volume backlight wireless-network wired-network battery battery1 date
 
 [bar/top-laptop]
-dpi = 96
-monitor = LVDS1
+dpi = 192
+monitor = eDP1
 width = ${bar/top.width}
-height = 25
+height = 40
 
 background = ${bar/top.background}
 foreground = ${bar/top.foreground}
