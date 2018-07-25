@@ -122,32 +122,6 @@ bindsym $mod+Shift+q kill
 #bindsym $mod+d exec dmenu_run -fn "Hack"
 bindsym $mod+d exec rofi -show combi
 
-# change focus
-bindsym $mod+F1 exec --no-startup-id  'spacefm'
-bindsym $mod+F2 exec --no-startup-id  'vivaldi'
-#bindsym $mod+F3 exec --no-startup-id  'thunderbird'
-bindsym $mod+F3 exec --no-startup-id  '/home/max/.config/thunderbirdstartup.sh'
-#bindsym $mod+F4 exec --no-startup-id  "pac --no-splash"
-bindsym $mod+F4 exec --no-startup-id  "atom"
-#bindsym $mod+F5 exec --no-startup-id  "VBoxManage startvm Skype"
-bindsym $mod+F5 exec --no-startup-id  'pidgin'
-bindsym $mod+F6 exec --no-startup-id   'spotify'
-#bindsym $mod+F7 exec --no-startup-id  '/opt/Enpass/bin/runenpass.sh'
-bindsym $mod+F7 exec --no-startup-id  'hornetdrive'
-bindsym $mod+F9 exec --no-startup-id  'parcellite'
-
-#spotify control
-bindsym $mod+F11 exec --no-startup-id '/home/max/.spotify-control/startstop.sh'
-bindsym $mod+F10 exec --no-startup-id '/home/max/.spotify-control/prev.sh'
-bindsym $mod+F12 exec --no-startup-id '/home/max/.spotify-control/next.sh'
-bindsym $mod+shift+F12 exec --no-startup-id '/home/max/mcstart.sh'
-#bindsym $mod+0x23 exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -10%
-#bindsym $mod+0x2b exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +10%
-#bindsym $mod+udiaeresis exec --no-startup-id '/home/max/.pulseaudiocontrol/mute.sh'
-#bindsym $mod+0x23 exec pulseaudio-ctl down
-#bindsym $mod+0x2b exec pulseaudio-ctl up
-#bindsym $mod+0xe4 exec pulseaudio-ctl mute
-
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
