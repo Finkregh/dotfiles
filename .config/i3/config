@@ -302,5 +302,5 @@ bindsym $mod+r mode "resize"
 for_window [class="^.*"] border pixel 1
 
 # Setups the gaps
-#gaps inner 10
-#gaps outer 0
+gaps inner 5
+gaps outer 0
