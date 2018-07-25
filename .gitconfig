@@ -20,9 +20,9 @@
     editor = vim
 
 [user]
-	email = finkregh@mafia-server.net
+	email = oluf.lorenzen@b1-systems.de
 	Name = Oluf Lorenzen
-	signingkey = 0xFFC01051DEE0B735
+	signingkey = 0xED60E77F614BF553
 
 [alias]
 	st = status

@@ -101,8 +101,8 @@ gpg-connect-agent updatestartuptty /bye >/dev/null
 if [ -x /usr/bin/keychain ] ; then
     sleep 0.$[ ( $RANDOM % 9 ) ]
     eval $(keychain --systemd --quiet --eval --agents gpg,ssh --inherit any --quick)
-    /usr/bin/keychain --systemd --quick --inherit any --agents "ssh" ~/.ssh/id_rsa
-    /usr/bin/keychain --systemd --quick --inherit any --agents "gpg" 0xFFC01051DEE0B735
+    /usr/bin/keychain --systemd --quick --inherit any --agents "ssh" ~/.ssh/id_rsa ~/.ssh/id_ed25519
+    /usr/bin/keychain --systemd --quick --inherit any --agents "gpg" 0xED60E77F614BF553
 
     [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
     [ -f $HOME/.keychain/$HOSTNAME-sh ] && \
