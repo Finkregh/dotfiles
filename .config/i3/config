@@ -13,8 +13,8 @@ set $mod Mod4
 set $ws1 comm
 set $ws2 browser
 set $ws3 shell
-set $ws4 editor
-set $ws5 ssh
+set $ws4 mail
+set $ws5 editor
 set $ws6 music
 set $ws7 hodr
 set $ws8 todo
@@ -25,8 +25,8 @@ workspace 1:comm output eDP1
 workspace 2:browser output DP1-1
 workspace 3:shell output DP1-1
 workspace 4:editor output DP1-1
-#workspace 5:ssh output DP1
-workspace 6:music output DP1-2
+workspace 5:mail output DP1-1
+workspace 6:music output DP1-1
 workspace 7:hodr output DP1-1
 #workspace 8:todo output DP2-2
 #workspace 9:mon output DP2-2
@@ -34,19 +34,18 @@ workspace 7:hodr output DP1-1
 assign [class="^Virtual"] $ws1
 assign [class="^Sky"] $ws1
 assign [class="^Pidgin"] $ws1
+assign [class="^Gajim"] $ws1
+assign [class="Gtimelog"] $ws1
 assign [class="keepass2"] $ws2
+assign [class="keepassxc"] $ws2
 assign [class="Google-chrome"] $ws2
 assign [class="Thunderbird"] $ws4
 assign [class="^UXTerm$"] $ws3
 assign [class="^Konsole$"] $ws3
 assign [class="^termite$"] $ws3
 assign [class="^URxvt$"] $ws3
-assign [class="^Komodo edit$"] $ws4
-assign [class="^Atom$"] $ws4
-assign [class="^Pac$"] $ws5
+assign [class="^Atom$"] $ws5
 assign [class="^Spotify"] $ws6
-assign [class="^gPodder"] $ws6
-assign [class="^HORNETDRIVE$"] $ws7
 # tabs-outliner
 assign [class=Google-chrome instance=crx_eggkanocgddhmamlbiijnphhppkpkmkl] $ws2
 for_window [class=Google-chrome instance=crx_eggkanocgddhmamlbiijnphhppkpkmkl] floating enable
@@ -66,6 +65,7 @@ assign [class="VirtualBox"] $ws9
 #for_window [class="Spotify"] move to workspace $ws6
 #for_window [class="gpodder"] move to workspace $ws6
 #for_window [class="mpv"] floating enable
+for_window [class="Gtimelog"] floating enable
 for_window [class=Gimp] floating enable
 # Dialog handling
 for_window [window_role="pop-up"] floating enable
@@ -214,13 +214,13 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1; layout tabbed
+bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
+bindsym $mod+3 workspace $ws3; layout tabbed
 bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
+bindsym $mod+7 workspace $ws7; layout tabbed
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
@@ -260,7 +260,7 @@ mode "$mode_system" {
 bindsym $mod+Shift+e mode "$mode_system"
 
 
-#exec_always --no-startup-id ~/.config/i3/screenset.sh &
+exec_always --no-startup-id ~/.config/i3/screenset.sh &
 
 exec --no-startup-id xautolock -time 10 -locker 'i3lock -t -i /home/lorenzen/Pictures/wallpapers/tiling/_s_a96b57c96d57e0f0g64h2E0A2F1705165111493A0C315B145D400E45iBF.png' &
 exec_always --no-startup-id ~/.config/i3/polybar.sh &
@@ -273,10 +273,13 @@ exec --no-startup-id nm-applet &
 exec --no-startup-id variety &
 #exec --no-startup-id urxvtd -q -f -o
 #exec --no-startup-id "urxvtc -name 'cmus' -e sh -c 'cmus'"
-exec --no-startup-id mono --verify-all /usr/share/keepass/KeePass.exe &
-exec --no-startup-id /usr/bin/pidgin &
+exec --no-startup-id keepassxc --platformtheme qt5ct &
+# GDK_SCALE=2 
+exec --no-startup-id /usr/bin/gajim &
+exec --no-startup-id /usr/bin/thunderbird &
 #exec --no-startup-id parcellite &
 exec --no-startup-id clipit &
+exec --no-startup-id gtimelog &
 exec --no-startup-id zeal --platformtheme qt5ct &
 exec --no-startup-id flameshot &
 
