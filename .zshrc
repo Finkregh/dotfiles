@@ -111,6 +111,10 @@ if [ -x /usr/bin/keychain ] ; then
         . $HOME/.keychain/$HOSTNAME-sh-gpg
 fi
 
+if [ -e /opt/google-cloud-sdk/completion.zsh.inc ] ; then
+    source /opt/google-cloud-sdk/completion.zsh.inc
+fi
+
 if [[ ! -d ~/dotfiles/.zplug ]]; then
   git clone https://github.com/zplug/zplug ~/dotfiles/.zplug
   $(cd ~/dotfiles ; stow .)
