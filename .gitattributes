@@ -1,3 +1,0 @@
-.ssh/* filter=git-crypt diff=git-crypt
-.bashrc.sensitive filter=git-crypt diff=git-crypt
-#.ssh/config diff=localizablestrings
