@@ -62,7 +62,7 @@ assign [class="VirtualBox"] $ws9
 #assign [class="nagstamon"] $ws9
 #for_window [class="Vmware"] move to workspace vmware
 #for_window [class="Microsoft Lync"] move to workspace $ws9
-#for_window [class="Spotify"] move to workspace $ws6
+for_window [class="Spotify"] move to workspace $ws6
 #for_window [class="gpodder"] move to workspace $ws6
 #for_window [class="mpv"] floating enable
 for_window [class="Gtimelog"] floating enable
@@ -256,6 +256,7 @@ exec --no-startup-id clipit &
 exec --no-startup-id gtimelog &
 exec --no-startup-id zeal --platformtheme qt5ct &
 exec --no-startup-id flameshot &
+exec --no-startup-id spotify --force-device-scale-factor=1.5 &
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
