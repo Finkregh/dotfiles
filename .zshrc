@@ -279,3 +279,11 @@ if [ -e $_zplug_lock ] ; then
     ls -la $_zplug_lock
 fi
 #set -m
+
+export KUBECONFIG=~/.kube/config
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+eval "$(direnv hook zsh)"
+source ~/.bash_os_aliases
+
+fpath=(/usr/local/share/zsh-completions $fpath)
