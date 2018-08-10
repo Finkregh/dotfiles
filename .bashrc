@@ -101,8 +101,7 @@ if [ -x /usr/bin/keychain ] ; then
 
     keychain --quiet
     eval $(keychain --systemd --quiet --eval)
-    /usr/bin/keychain --systemd ~/.ssh/id_rsa
-    /usr/bin/keychain --systemd ~/.ssh/id_rsa
-    #eval $(/usr/bin/keychain --eval --systemd ~/.ssh/id_rsa.frv)
+    /usr/bin/keychain ~/.ssh/id_rsa ~/.ssh/id_ed25519
+    /usr/bin/keychain ~/.ssh/id_rsa ~/.ssh/id_ed25519
     eval $(keychain --quiet --eval)
 fi
