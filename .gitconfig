@@ -20,9 +20,9 @@
     editor = vim
 
 [user]
-	email = oluf.lorenzen@b1-systems.de
-	Name = Oluf Lorenzen
-	signingkey = 0xED60E77F614BF553
+	email = benjamin.oluf.lorenzen@sap.com
+	Name = Benjamin Oluf Lorenzen
+	signingkey = 0x243278FC323BBE52
 
 [alias]
 	st = status
