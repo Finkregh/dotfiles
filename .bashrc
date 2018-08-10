@@ -90,18 +90,26 @@ fi
 [ -x /usr/bin/lesspipe.sh ] && eval "$(/usr/bin/lesspipe.sh)"
 
 #for file in `find ~/.bash_completion.d/* -maxdepth 0 -type l` ; do . $file ; done
+for file in `find /usr/local/etc/bash_completion.d/* -maxdepth 0 -type l` ; do . $file ; done
 
-
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null
 if [ -x /usr/bin/keychain ] ; then
+    eval $(keychain --quiet --eval --agents gpg,ssh --inherit any --quick)
+    /usr/bin/keychain --quick --inherit any --agents "ssh" ~/.ssh/id_rsa ~/.ssh/id_ed25519
+    /usr/bin/keychain --quick --inherit any --agents "gpg" 0x243278FC323BBE52
+    eval $(keychain --quiet --eval)
+
     [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
     [ -f $HOME/.keychain/$HOSTNAME-sh ] && \
         . $HOME/.keychain/$HOSTNAME-sh
     [ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] && \
         . $HOME/.keychain/$HOSTNAME-sh-gpg
-
-    keychain --quiet
-    eval $(keychain --systemd --quiet --eval)
-    /usr/bin/keychain ~/.ssh/id_rsa ~/.ssh/id_ed25519
-    /usr/bin/keychain ~/.ssh/id_rsa ~/.ssh/id_ed25519
-    eval $(keychain --quiet --eval)
 fi
+
+export KUBECONFIG=~/.kube/config
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
+eval "$(direnv hook bash)"
+source ~/.bash_os_aliases
