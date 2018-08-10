@@ -31,6 +31,11 @@ export LANG=en_US.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
+alias fping="docker exec -ti f5vpn ping"
+alias ftraceroute="docker exec -ti f5vpn traceroute"
+alias ftelnet="docker exec -ti f5vpn telnet"
+alias fcurl="docker exec -ti f5vpn curl"
+alias ftcpdump="docker exec -ti f5vpn tcpdump"
 
 # enable caching
 zstyle ':completion:*' use-cache on
