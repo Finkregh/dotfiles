@@ -1,9 +1,0 @@
-[Unit]
-Description=Daemon to start Shadowsocks Client
-Wants=network-online.target
-After=network.target
-
-[Service]
-Type=simple
-# https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment%20variables%20in%20spawned%20processes
-ExecStart=/usr/bin/sslocal -c ${HOME}/ss-gui-config.json --pid-file /run/sslocal.pid --log-file /tmp/sslocal.log   

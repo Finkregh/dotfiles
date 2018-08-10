@@ -1,8 +1,0 @@
-[Default Applications]
-application/x-rar=xarchiver.desktop;
-application/x-compressed-tar=xarchiver.desktop;
-image/x-apple-ios-png=mirage.desktop;
-image/jpeg=mirage.desktop;
-text/plain=gvim.desktop;
-application/pdf=evince.desktop;
-application/zip=xarchiver.desktop;
