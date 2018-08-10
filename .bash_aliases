@@ -18,7 +18,7 @@ alias free='free -m'                      # show sizes in MB
 alias debug_enable="export PS4='+${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}: '"
 alias debug_disable="export PS4=''"
 
-alias man="man -LC"
+#alias man="man -LC"
 alias lintian="lintian --suppress-tags bad-distribution-in-changes-file"
 
-alias ip="ip -c"
+#alias ip="ip -c"
