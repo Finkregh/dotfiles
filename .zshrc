@@ -285,10 +285,17 @@ if [ -e $_zplug_lock ] ; then
 fi
 #set -m
 
+alias k=kubectl
+alias o=openstack
 export KUBECONFIG=~/.kube/config
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 eval "$(direnv hook zsh)"
-source ~/.bash_os_aliases
+source ~/work/os-cd/.bash_os_aliases
+if [ $commands[kubectl] ]; then
+  source <(kubectl completion zsh)
+fi
 
 fpath=(/usr/local/share/zsh-completions $fpath)
+
+. ~/.venv/bin/activate
