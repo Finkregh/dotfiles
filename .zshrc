@@ -296,6 +296,9 @@ if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
 fi
 
+# GITHUB_TOKEN etc
+. ~/.env-secrets
+
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 . ~/.venv/bin/activate

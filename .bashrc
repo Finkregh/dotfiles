@@ -114,3 +114,6 @@ export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 eval "$(direnv hook bash)"
 source ~/.bash_os_aliases
 source <(kubectl completion bash)
+
+# GITHUB_TOKEN etc
+. ~/.env-secrets
