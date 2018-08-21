@@ -135,7 +135,11 @@ zplug "plugins/pass", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
 #zplug "plugins/gpg-agent", from:oh-my-zsh
-zplug "b4b4r07/emoji-cli"
+zplug "plugins/kubectl", from:oh-my-zsh
+zplug "plugins/helm", from:oh-my-zsh
+zplug "plugins/iterm2", from:oh-my-zsh
+zplug "plugins/golang", from:oh-my-zsh
+zplug "plugins/docker", from:oh-my-zsh, use:"_docker"
 zplug "zdharma/fast-syntax-highlighting"
 zplug "chrissicool/zsh-256color"
 
@@ -270,7 +274,7 @@ POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="\n"
 POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{blue}%} $user_symbol%{%b%f%k%F{blue}%} %{%f%}"
 
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs virtualenv)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs virtualenv kubecontext)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs time)
 
 neofetch || true
