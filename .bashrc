@@ -19,7 +19,7 @@ export HISTSIZE=100000
 # but doesn't have a value either, go figure
 export HISTFILESIZE=""
 
-export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/bin:$HOME/go/bin"
 export EDITOR=vim
 export VISUAL=vim
 export BROWSER=google-chrome-stable
