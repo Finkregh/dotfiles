@@ -75,7 +75,7 @@ setopt inc_append_history
 #setopt share_history # share command history data
 
 
-export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
+export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
 export EDITOR=vim
 export VISUAL=vim
 export BROWSER=google-chrome-stable
