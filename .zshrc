@@ -305,3 +305,28 @@ fi
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 . ~/.venv/bin/activate
+
+# openstack-manually
+function set-region {
+	export OS_REGION_NAME=$1
+	export OS_REGION=$1
+	export OS_AUTH_URL=https://identity-3.$1.cloud.sap/v3
+	kubectl config use-context $1
+	monsoonctl
+	monsoonctl
+}
+
+function set-project {
+	export OS_PROJECT_NAME=$1
+}
+
+function set-domain {
+	export OS_PROJECT_DOMAIN_NAME=$1
+	export OS_USER_DOMAIN_NAME=$1
+}
+
+function set-ccadmin {
+	export OS_PROJECT_DOMAIN_NAME=ccadmin
+	export OS_USER_DOMAIN_NAME=ccadmin
+	export OS_PROJECT_NAME=cloud_admin
+}
