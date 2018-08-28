@@ -291,8 +291,10 @@ alias o=openstack
 export KUBECONFIG=~/.kube/config
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-eval "$(direnv hook zsh)"
-source ~/work/os-cd/.bash_os_aliases
+if [[ "$(type _direnv_hook)" != *"is a shell function from"* ]] ; then
+    eval "$(direnv hook zsh)"
+fi
+. ~/work/os-cd/.bash_os_aliases
 if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
 fi
