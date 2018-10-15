@@ -335,3 +335,15 @@ function set-ccadmin {
 	export OS_USER_DOMAIN_NAME=ccadmin
 	export OS_PROJECT_NAME=cloud_admin
 }
+
+# crude daily homebrew update
+if [ ! -e /tmp/brew-update-timer ] ; then
+    touch /tmp/brew-update-timer
+    brew upgrade
+    brew cask upgrade
+fi
+if test $(find /tmp/brew-update-timer -mtime +1); then
+    brew upgrade
+    brew cask upgrade
+    touch /tmp/brew-update-timer
+fi
