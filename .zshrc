@@ -270,7 +270,7 @@ if [[ $(print -P "%#") =~ "#" ]]; then
 fi
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="\n"
 #POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%K{white}%F{black} time %f%k%F{white}%f "
-POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{blue}%} $user_symbol%{%b%f%k%F{blue}%} %{%f%}"
+POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{196}%} $user_symbol%{%b%f%k%F{blue}%} %{%f%}"
 
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs virtualenv)
