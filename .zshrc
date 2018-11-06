@@ -141,6 +141,7 @@ zplug "plugins/helm", from:oh-my-zsh
 zplug "plugins/iterm2", from:oh-my-zsh
 zplug "plugins/golang", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh, use:"_docker"
+#zplug "jessfraz/dotfiles", use:".dockerfunc"
 zplug "zdharma/fast-syntax-highlighting"
 zplug "chrissicool/zsh-256color"
 
