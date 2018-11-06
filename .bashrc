@@ -108,7 +108,7 @@ if [ -x /usr/bin/keychain ] ; then
 fi
 
 export KUBECONFIG=~/.kube/config
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/sbin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 eval "$(direnv hook bash)"
