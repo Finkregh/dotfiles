@@ -99,19 +99,19 @@ fi
 
 #[[ $- = *i* ]] && source ~/bin/liquidprompt/liquidprompt
 
-export GPG_TTY=$(tty)
-gpg-connect-agent updatestartuptty /bye >/dev/null
+#export GPG_TTY=$(tty)
+#gpg-connect-agent updatestartuptty /bye >/dev/null
 if [ -x /usr/local/bin/keychain ] ; then
     sleep 0.$[ ( $RANDOM % 9 ) ]
-    eval $(keychain --quiet --eval --agents gpg,ssh --inherit any --quick)
+    eval $(keychain --quiet --eval --agents ssh --inherit any --quick)
     keychain --quick --inherit any --agents "ssh" ~/.ssh/id_rsa ~/.ssh/id_ed25519
-    keychain --quick --inherit any --agents "gpg" 0x243278FC323BBE52
+    #keychain --quick --inherit any --agents "gpg" 0x243278FC323BBE52
 
     [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
     [ -f $HOME/.keychain/$HOSTNAME-sh ] && \
         . $HOME/.keychain/$HOSTNAME-sh
-    [ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] && \
-        . $HOME/.keychain/$HOSTNAME-sh-gpg
+    #[ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] && \
+    #    . $HOME/.keychain/$HOSTNAME-sh-gpg
 fi
 
 if [ -e /opt/google-cloud-sdk/completion.zsh.inc ] ; then
