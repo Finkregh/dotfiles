@@ -58,3 +58,5 @@
     textconv = "iconv -f utf-16 -t utf-8"
 [commit]
 	gpgsign = true
+[icdiff]
+	options = --highlight --line-numbers
