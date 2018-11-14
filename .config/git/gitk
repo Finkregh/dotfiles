@@ -1,6 +1,6 @@
-set mainfont {{Lucida Grande} 9}
-set textfont {Monaco 9}
-set uifont {{Lucida Grande} 9 bold}
+set mainfont {{Lucida Grande} 15}
+set textfont {{LiterationMono Nerd Font Mono} 14}
+set uifont {{Lucida Grande} 15 bold}
 set tabstop 8
 set findmergefiles 0
 set maxgraphpct 50
