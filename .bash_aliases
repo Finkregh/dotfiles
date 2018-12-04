@@ -22,3 +22,7 @@ alias debug_disable="export PS4=''"
 alias lintian="lintian --suppress-tags bad-distribution-in-changes-file"
 
 #alias ip="ip -c"
+
+# hide secrets
+alias env="env | sed -E 's/^(OS_PASSWORD=|GITHUB_TOKEN=).*$/\1***********/'"
+alias set="set | sed -E 's/^(OS_PASSWORD=|GITHUB_TOKEN=).*$/\1***********/'"
