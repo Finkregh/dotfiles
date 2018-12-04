@@ -125,7 +125,7 @@ nmap <leader>r :registers<CR>
 
 """"" Folding
 set foldmethod=syntax                   " indent via syntax
-"set foldlevelstart=99					" All folds open by default
+set foldlevelstart=99					" All folds open by default
 set foldenable
 
 """" Command Line
