@@ -312,6 +312,8 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 
 . ~/.venv/bin/activate
 
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
 # openstack-manually
 function set-region {
 	export OS_REGION_NAME=$1
