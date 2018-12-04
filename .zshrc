@@ -33,6 +33,7 @@ alias ftraceroute="docker exec -ti f5vpn traceroute"
 alias ftelnet="docker exec -ti f5vpn telnet"
 alias fcurl="docker exec -ti f5vpn curl"
 alias ftcpdump="docker exec -ti f5vpn tcpdump"
+alias fmtr="docker exec -ti f5vpn mtr"
 
 # enable caching
 zstyle ':completion:*' use-cache on
@@ -117,51 +118,6 @@ fi
 if [ -e /opt/google-cloud-sdk/completion.zsh.inc ] ; then
     source /opt/google-cloud-sdk/completion.zsh.inc
 fi
-
-if [[ ! -d ~/dotfiles/.zplug ]]; then
-  git clone https://github.com/zplug/zplug ~/dotfiles/.zplug
-  $(cd ~/dotfiles ; stow .)
-  source ~/.zplug/init.zsh && zplug update --self
-fi
-source ~/.zplug/init.zsh
-# let zplug manage itself
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-
-#zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh
-zplug "plugins/pass", from:oh-my-zsh
-zplug "plugins/colored-man-pages", from:oh-my-zsh
-zplug "plugins/git-extras", from:oh-my-zsh
-#zplug "plugins/gpg-agent", from:oh-my-zsh
-zplug "plugins/kubectl", from:oh-my-zsh
-zplug "plugins/helm", from:oh-my-zsh
-zplug "plugins/iterm2", from:oh-my-zsh
-zplug "plugins/golang", from:oh-my-zsh
-zplug "plugins/docker", from:oh-my-zsh, use:"_docker"
-#zplug "jessfraz/dotfiles", use:".dockerfunc"
-zplug "zdharma/fast-syntax-highlighting"
-zplug "chrissicool/zsh-256color"
-
-#zplug 'dracula/zsh', as:theme
-#zplug "themes/gnzh", from:oh-my-zsh, as:theme
-zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
-
-if ! zplug check; then
-    zplug install
-fi
-if [ ! -e /tmp/zplug-update-timer ] ; then
-    touch /tmp/zplug-update-timer
-    zplug update
-fi
-if test $(find /tmp/zplug-update-timer -mtime +1); then
-    zplug update
-    touch /tmp/zplug-update-timer
-fi
-zplug load
-
 
 # Make sure that the terminal is in application mode when zle is active, since
 # only then values from $terminfo are valid
@@ -249,48 +205,6 @@ bindkey -M emacs '^[[3;5~' kill-word
 bindkey -M emacs '^[[3^' kill-word
 
 
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-
-POWERLEVEL9K_VCS_GIT_ICON=''
-POWERLEVEL9K_VCS_STAGED_ICON='\u00b1'
-POWERLEVEL9K_VCS_UNTRACKED_ICON='\u25CF'
-POWERLEVEL9K_VCS_UNSTAGED_ICON='\u00b1'
-POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON='\u2193'
-POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON='\u2191'
-
-POWERLEVEL9K_RAM_BACKGROUND="black"
-POWERLEVEL9K_RAM_FOREGROUND="249"
-POWERLEVEL9K_RAM_ELEMENTS=(ram_free)
-
-_P9K_DIR_BACKGROUND="039"
-POWERLEVEL9K_DIR_DEFAULT_BACKGROUND=${_P9K_DIR_BACKGROUND}
-POWERLEVEL9K_DIR_HOME_BACKGROUND=${_P9K_DIR_BACKGROUND}
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND=${_P9K_DIR_BACKGROUND}
-
-POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S}"
-
-local user_symbol="$"
-if [[ $(print -P "%#") =~ "#" ]]; then
-    user_symbol = "#"
-fi
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="\n"
-#POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%K{white}%F{black} time %f%k%F{white}%f "
-POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{196}%} $user_symbol%{%b%f%k%F{blue}%} %{%f%}"
-
-
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs virtualenv kubecontext)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs time)
-
-neofetch || true
-
-# show lockfile if it exists...
-# https://github.com/zplug/zplug/issues/374
-if [ -e $_zplug_lock ] ; then
-    ls -la $_zplug_lock
-fi
-#set -m
 
 alias k=kubectl
 alias o=openstack
@@ -338,6 +252,94 @@ function set-ccadmin {
 	export OS_USER_DOMAIN_NAME=ccadmin
 	export OS_PROJECT_NAME=cloud_admin
 }
+
+if [[ ! -d ~/dotfiles/.zplug ]]; then
+  git clone https://github.com/zplug/zplug ~/dotfiles/.zplug
+  $(cd ~/dotfiles ; stow .)
+  source ~/.zplug/init.zsh && zplug update --self
+fi
+source ~/.zplug/init.zsh
+# let zplug manage itself
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+
+#zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/tmux", from:oh-my-zsh
+zplug "plugins/pass", from:oh-my-zsh
+zplug "plugins/colored-man-pages", from:oh-my-zsh
+zplug "plugins/git-extras", from:oh-my-zsh
+#zplug "plugins/gpg-agent", from:oh-my-zsh
+zplug "plugins/kubectl", from:oh-my-zsh
+zplug "plugins/helm", from:oh-my-zsh
+zplug "plugins/iterm2", from:oh-my-zsh
+zplug "plugins/golang", from:oh-my-zsh
+zplug "plugins/docker", from:oh-my-zsh, use:"_docker"
+#zplug "jessfraz/dotfiles", use:".dockerfunc"
+zplug "zdharma/fast-syntax-highlighting"
+zplug "chrissicool/zsh-256color"
+
+#zplug 'dracula/zsh', as:theme
+#zplug "themes/gnzh", from:oh-my-zsh, as:theme
+zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+
+if ! zplug check; then
+    zplug install
+fi
+if [ ! -e /tmp/zplug-update-timer ] ; then
+    touch /tmp/zplug-update-timer
+    zplug update
+fi
+if test $(find /tmp/zplug-update-timer -mtime +1); then
+    zplug update
+    touch /tmp/zplug-update-timer
+fi
+zplug load
+
+# show lockfile if it exists...
+# https://github.com/zplug/zplug/issues/374
+if [ -e $_zplug_lock ] ; then
+    ls -la $_zplug_lock
+fi
+#set -m
+
+# POWERLEVEL9K config
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
+POWERLEVEL9K_MODE='nerdfont-complete'
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+
+POWERLEVEL9K_VCS_GIT_ICON=''
+POWERLEVEL9K_VCS_STAGED_ICON='\u00b1'
+POWERLEVEL9K_VCS_UNTRACKED_ICON='\u25CF'
+POWERLEVEL9K_VCS_UNSTAGED_ICON='\u00b1'
+POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON='\u2193'
+POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON='\u2191'
+
+POWERLEVEL9K_RAM_BACKGROUND="black"
+POWERLEVEL9K_RAM_FOREGROUND="249"
+POWERLEVEL9K_RAM_ELEMENTS=(ram_free)
+
+_P9K_DIR_BACKGROUND="039"
+POWERLEVEL9K_DIR_DEFAULT_BACKGROUND=${_P9K_DIR_BACKGROUND}
+POWERLEVEL9K_DIR_HOME_BACKGROUND=${_P9K_DIR_BACKGROUND}
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND=${_P9K_DIR_BACKGROUND}
+
+POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S}"
+
+local user_symbol="$"
+if [[ $(print -P "%#") =~ "#" ]]; then
+    user_symbol = "#"
+fi
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="\n"
+#POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%K{white}%F{black} time %f%k%F{white}%f "
+POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{196}%} $user_symbol%{%b%f%k%F{blue}%} %{%f%}"
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs virtualenv kubecontext)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs time)
+
+# running stuff
+neofetch || true
 
 # crude daily homebrew update
 if [ ! -e /tmp/brew-update-timer ] ; then
