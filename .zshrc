@@ -76,7 +76,7 @@ setopt inc_append_history
 setopt interactivecomments # enable bash-style comments # like this
 
 
-export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+export PATH="$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$PATH"
 export EDITOR=vim
 export VISUAL=vim
 export BROWSER=google-chrome-stable
@@ -115,46 +115,6 @@ fi
 if [ -e /opt/google-cloud-sdk/completion.zsh.inc ] ; then
     source /opt/google-cloud-sdk/completion.zsh.inc
 fi
-
-if [[ ! -d ~/dotfiles/.zplug ]]; then
-  git clone https://github.com/zplug/zplug ~/dotfiles/.zplug
-  $(cd ~/dotfiles ; stow .)
-  source ~/.zplug/init.zsh && zplug update --self
-fi
-source ~/.zplug/init.zsh
-# let zplug manage itself
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-
-#zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh
-zplug "plugins/pass", from:oh-my-zsh
-zplug "plugins/colored-man-pages", from:oh-my-zsh
-zplug "plugins/git-extras", from:oh-my-zsh
-#zplug "plugins/gpg-agent", from:oh-my-zsh
-zplug "b4b4r07/emoji-cli"
-zplug "zdharma/fast-syntax-highlighting"
-zplug "chrissicool/zsh-256color"
-
-#zplug 'dracula/zsh', as:theme
-#zplug "themes/gnzh", from:oh-my-zsh, as:theme
-zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
-
-if ! zplug check; then
-    zplug install
-fi
-if [ ! -e /tmp/zplug-update-timer ] ; then
-    touch /tmp/zplug-update-timer
-    zplug update
-fi
-if test $(find /tmp/zplug-update-timer -mtime +1); then
-    zplug update
-    touch /tmp/zplug-update-timer
-fi
-zplug load
-
 
 # Make sure that the terminal is in application mode when zle is active, since
 # only then values from $terminfo are valid
@@ -241,7 +201,58 @@ bindkey -M emacs '^[[3;5~' kill-word
 # urxvt
 bindkey -M emacs '^[[3^' kill-word
 
+if [[ ! -d ~/dotfiles/.zplug ]]; then
+  git clone https://github.com/zplug/zplug ~/dotfiles/.zplug
+  $(cd ~/dotfiles ; stow .)
+  source ~/.zplug/init.zsh && zplug update --self
+fi
+source ~/.zplug/init.zsh
+# let zplug manage itself
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
+#zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/tmux", from:oh-my-zsh
+zplug "plugins/pass", from:oh-my-zsh
+zplug "plugins/colored-man-pages", from:oh-my-zsh
+zplug "plugins/git-extras", from:oh-my-zsh
+#zplug "plugins/gpg-agent", from:oh-my-zsh
+zplug "plugins/kubectl", from:oh-my-zsh
+zplug "plugins/helm", from:oh-my-zsh
+zplug "plugins/iterm2", from:oh-my-zsh
+zplug "plugins/golang", from:oh-my-zsh
+zplug "plugins/docker", from:oh-my-zsh, use:"_docker"
+#zplug "jessfraz/dotfiles", use:".dockerfunc"
+zplug "zdharma/fast-syntax-highlighting"
+zplug "chrissicool/zsh-256color"
+
+#zplug 'dracula/zsh', as:theme
+#zplug "themes/gnzh", from:oh-my-zsh, as:theme
+zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+
+if ! zplug check; then
+    zplug install
+fi
+if [ ! -e /tmp/zplug-update-timer ] ; then
+    touch /tmp/zplug-update-timer
+    zplug update
+fi
+if test $(find /tmp/zplug-update-timer -mtime +1); then
+    zplug update
+    touch /tmp/zplug-update-timer
+fi
+zplug load
+
+# show lockfile if it exists...
+# https://github.com/zplug/zplug/issues/374
+if [ -e $_zplug_lock ] ; then
+    ls -la $_zplug_lock
+fi
+#set -m
+
+# POWERLEVEL9K config
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
 POWERLEVEL9K_MODE='nerdfont-complete'
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
@@ -278,9 +289,3 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs time)
 
 neofetch || true
 
-# show lockfile if it exists...
-# https://github.com/zplug/zplug/issues/374
-if [ -e $_zplug_lock ] ; then
-    ls -la $_zplug_lock
-fi
-#set -m
