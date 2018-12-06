@@ -106,3 +106,5 @@ if [ -x /usr/bin/keychain ] ; then
     #eval $(/usr/bin/keychain --eval --systemd ~/.ssh/id_rsa.frv)
     eval $(keychain --quiet --eval)
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
