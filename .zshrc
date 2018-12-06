@@ -119,6 +119,8 @@ if [ -e /opt/google-cloud-sdk/completion.zsh.inc ] ; then
     source /opt/google-cloud-sdk/completion.zsh.inc
 fi
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Make sure that the terminal is in application mode when zle is active, since
 # only then values from $terminfo are valid
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then

@@ -117,3 +117,5 @@ source <(kubectl completion bash)
 
 # GITHUB_TOKEN etc
 . ~/.env-secrets
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
