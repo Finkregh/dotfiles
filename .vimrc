@@ -3,8 +3,44 @@
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
-" activate pathogen
-execute pathogen#infect('bundle/{}')
+" ==== plugins via plug.vim ====
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+
+" Make sure you use single quotes
+
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree'
+Plug 'Finkregh/vim-dnstools'
+Plug 'clones/vim-autocomplpop'
+Plug 'altercation/vim-colors-solarized'
+Plug 'clones/vim-l9'
+Plug 'taq/vim-git-branch-info'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'chr4/sslsecure.vim'
+Plug 'fatih/vim-go'
+Plug 'w0rp/ale'
+Plug 'MicahElliott/Rocannon'
+
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+"Plug 'junegunn/vim-easy-align'
+
+" Multiple Plug commands can be written in a single line using | separators
+"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+" On-demand loading
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+" Plugin outside ~/.vim/plugged with post-update hook
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+" Initialize plugin system
+call plug#end()
 
 " ==== generics ====
 set hidden
