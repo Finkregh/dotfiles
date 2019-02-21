@@ -25,7 +25,8 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'chr4/sslsecure.vim'
 Plug 'fatih/vim-go'
 Plug 'w0rp/ale'
-Plug 'MicahElliott/Rocannon'
+" this breaks yaml files..
+"Plug 'MicahElliott/Rocannon'
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 "Plug 'junegunn/vim-easy-align'
