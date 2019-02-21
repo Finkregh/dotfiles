@@ -52,8 +52,8 @@ set fileformats=unix,dos,mac "Default file types
 "Set backup to a location
 set backup
 set backupdir=$HOME/temp/vim_backups//,~/tmp//,/var/tmp//,/tmp//
-set directory=$HOME/temp/vim_swp/,~/tmp/,/var/tmp/tmp/,/tmp/
-set undodir=$HOME/temp/vim_undo/,~/tmp/,/var/tmp/,/tmp/
+set directory=$HOME/temp/vim_swp//,~/tmp//,/var/tmp/tmp//,/tmp//
+set undodir=$HOME/temp/vim_undo//,~/tmp//,/var/tmp//,/tmp//
 "set noswapfile
 
 set loadplugins
