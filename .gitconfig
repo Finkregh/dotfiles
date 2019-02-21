@@ -29,6 +29,7 @@
 	ci = commit
 	br = branch
 	co = checkout
+    cp = cherry-pick
 	df = diff
 	lg = log -p
 	tree = log --graph --pretty=oneline --abbrev-commit --all --decorate
@@ -61,3 +62,9 @@
     verbose = true
 [icdiff]
 	options = --highlight --line-numbers
+[fetch]
+	prune = true
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
