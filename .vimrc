@@ -492,6 +492,7 @@ let g:pyflakes_use_quickfix = 0
 " === ale ===
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'sh': ['shfmt'],
 \   'python': ['autopep8', 'yapf'],
 \}
