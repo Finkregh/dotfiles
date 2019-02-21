@@ -346,11 +346,15 @@ neofetch || true
 # crude daily homebrew update
 if [ ! -e /tmp/brew-update-timer ] ; then
     touch /tmp/brew-update-timer
+    brew update
     brew upgrade
     brew cask upgrade
+    brew cleanup --prune 30
 fi
 if test $(find /tmp/brew-update-timer -mtime +1); then
+    brew update
     brew upgrade
     brew cask upgrade
+    brew cleanup --prune 30
     touch /tmp/brew-update-timer
 fi
