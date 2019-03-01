@@ -25,6 +25,7 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'chr4/sslsecure.vim'
 Plug 'fatih/vim-go'
 Plug 'w0rp/ale'
+Plug 'PProvost/vim-ps1'
 " this breaks yaml files..
 "Plug 'MicahElliott/Rocannon'
 Plug 'christoomey/vim-conflicted'
