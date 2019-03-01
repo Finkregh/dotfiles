@@ -38,6 +38,8 @@ Plug 'PProvost/vim-ps1'
 " this breaks yaml files..
 "Plug 'MicahElliott/Rocannon'
 Plug 'christoomey/vim-conflicted'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 "Plug 'junegunn/vim-easy-align'
@@ -47,9 +49,6 @@ Plug 'christoomey/vim-conflicted'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-
-" Plugin outside ~/.vim/plugged with post-update hook
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Initialize plugin system
 call plug#end()
@@ -401,5 +400,13 @@ let g:ale_sh_shfmt_options = '-i 4'
 "" === vim-pythonhelper ===
 "highlight PyHelperStatus ctermbg=245 ctermfg=000
 "
+"" === fzf
+" make FZF respect gitignore if `ag` is installed
+" you will obviously need to install `ag` for this to work
+if (executable('ag'))
+    let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+endif
+nnoremap <C-P> :Files<CR>
+
 " === pack management (vim 8) ===
 packloadall
