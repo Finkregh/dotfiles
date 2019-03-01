@@ -203,9 +203,9 @@ bindkey -M emacs '^[[3;5~' kill-word
 # urxvt
 bindkey -M emacs '^[[3^' kill-word
 
-if [[ ! -d ~/dotfiles/.zplug ]]; then
-  git clone https://github.com/zplug/zplug ~/dotfiles/.zplug
-  $(cd ~/dotfiles ; stow .)
+if [[ ! -d ~/.zplug ]]; then
+  git clone https://github.com/zplug/zplug ~/.zplug
+  echo "perhaps run 'cd ~/dotfiles ; stow --no-folding .'"
   source ~/.zplug/init.zsh && zplug update --self
 fi
 source ~/.zplug/init.zsh
