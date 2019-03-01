@@ -25,7 +25,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
-Plug 'Finkregh/vim-dnstools'
 Plug 'clones/vim-autocomplpop'
 Plug 'altercation/vim-colors-solarized'
 Plug 'clones/vim-l9'
