@@ -10,6 +10,8 @@
 "inoremap <Left>  <NOP>
 "inoremap <Right> <NOP>
 
+let g:python2_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 " ==== plugins via plug.vim ====
 " FIXME please...
@@ -40,6 +42,7 @@ Plug 'christoomey/vim-conflicted'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 "Plug 'junegunn/vim-easy-align'
@@ -419,6 +422,19 @@ nnoremap <C-P> :Files<CR>
 " === editorconfig
 " properly work with fugitive
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" === YouCompleteMe
+" disable auto_triggering ycm suggestions pane and instead
+" use semantic completion only on Ctrl+n
+let ycm_trigger_key = '<C-n>'
+let g:ycm_auto_trigger = 0
+let g:ycm_key_invoke_completion = ycm_trigger_key
+
+" this is some arcane magic to allow cycling through the YCM options
+" with the same key that opened it.
+" See http://vim.wikia.com/wiki/Improve_completion_popup_menu for more info.
+let g:ycm_key_list_select_completion = ['<TAB>', '<C-j>']
+inoremap <expr> ycm_trigger_key pumvisible() ? "<C-j>" : ycm_trigger_key;<Paste>
 
 " === pack management (vim 8) ===
 packloadall
