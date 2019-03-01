@@ -36,6 +36,10 @@ alias fcurl="docker exec -ti f5vpn curl"
 alias ftcpdump="docker exec -ti f5vpn tcpdump"
 alias fmtr="docker exec -ti f5vpn mtr"
 
+# rather use nvim instead of vim... faster async editing
+alias vim="nvim"
+alias vimdiff="nvim -d"
+
 # enable caching
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.cache/zsh
