@@ -32,6 +32,10 @@ export LANG=en_US.UTF-8
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
+# rather use nvim instead of vim... faster async editing
+alias vim="nvim"
+alias vimdiff="nvim -d"
+
 # enable caching
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.cache/zsh
