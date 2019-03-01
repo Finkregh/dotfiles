@@ -40,6 +40,7 @@ Plug 'PProvost/vim-ps1'
 Plug 'christoomey/vim-conflicted'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'editorconfig/editorconfig-vim'
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 "Plug 'junegunn/vim-easy-align'
@@ -407,6 +408,10 @@ if (executable('ag'))
     let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 endif
 nnoremap <C-P> :Files<CR>
+
+" === editorconfig
+" properly work with fugitive
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " === pack management (vim 8) ===
 packloadall
