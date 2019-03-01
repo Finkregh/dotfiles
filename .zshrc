@@ -256,9 +256,9 @@ function set-ccadmin {
 	export OS_PROJECT_NAME=cloud_admin
 }
 
-if [[ ! -d ~/dotfiles/.zplug ]]; then
-  git clone https://github.com/zplug/zplug ~/dotfiles/.zplug
-  $(cd ~/dotfiles ; stow .)
+if [[ ! -d ~/.zplug ]]; then
+  git clone https://github.com/zplug/zplug ~/.zplug
+  echo "perhaps run 'cd ~/dotfiles ; stow --no-folding .'"
   source ~/.zplug/init.zsh && zplug update --self
 fi
 source ~/.zplug/init.zsh
