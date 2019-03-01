@@ -42,6 +42,7 @@
     pull = pull --rebase
     tt = timetrack
     graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format: %h -> { %p }' \"$@\" | sed 's/[0-9a-f]\\+/\"&\"/g' ; echo '}'; }; %f"
+	conflicted = !vim +Conflicted
     #git graphviz HEAD^^..HEAD | dotty /dev/stdin
     #git graphviz --first-parent master | dotty /dev/stdin
 

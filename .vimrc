@@ -27,6 +27,7 @@ Plug 'fatih/vim-go'
 Plug 'w0rp/ale'
 " this breaks yaml files..
 "Plug 'MicahElliott/Rocannon'
+Plug 'christoomey/vim-conflicted'
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 "Plug 'junegunn/vim-easy-align'
@@ -397,6 +398,7 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
         \ | wincmd p | diffthis
 endif
+set diffopt+=vertical
 
 " folding with F9
 inoremap <F10> <C-O>za
