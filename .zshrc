@@ -220,11 +220,6 @@ zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/pass", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
-#zplug "plugins/gpg-agent", from:oh-my-zsh
-zplug "plugins/kubectl", from:oh-my-zsh
-zplug "plugins/helm", from:oh-my-zsh
-zplug "plugins/iterm2", from:oh-my-zsh
-zplug "plugins/golang", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh, use:"_docker"
 #zplug "jessfraz/dotfiles", use:".dockerfunc"
 zplug "zdharma/fast-syntax-highlighting"
@@ -252,7 +247,6 @@ zplug load
 if [ -e $_zplug_lock ] ; then
     ls -la $_zplug_lock
 fi
-#set -m
 
 # POWERLEVEL9K config
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
