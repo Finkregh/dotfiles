@@ -339,6 +339,9 @@ POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{196}%} $user_symbo
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs virtualenv kubecontext)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs time)
 
+# ruby garbage
+eval "$(rbenv init -)"
+
 # running stuff
 neofetch || true
 
