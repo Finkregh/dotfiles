@@ -61,6 +61,7 @@ call plug#end()
 " ==== generics ====
 set hidden
 let g:mapleader = ","
+let maplocalleader = ","
 set encoding=utf-8
 set fileformats=unix,dos,mac "Default file types
 
