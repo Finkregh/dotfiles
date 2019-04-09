@@ -95,6 +95,9 @@ export COLORTERM="yes"
 export TERM=xterm-256color
 export JAVA_TOOL_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
 
+autoload -Uz compinit
+compinit
+
 . ~/.zsh_functions
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
