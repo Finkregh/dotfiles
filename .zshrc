@@ -259,6 +259,14 @@ function set-ccadmin {
 	export OS_PROJECT_NAME=cloud_admin
 }
 
+# openstack / k8s via ccloud_multitool
+function cld {
+    exec {fd_ccloud}>>/dev/stdout
+    . =(ccloud-multitool --stdout-fd $fd_ccloud "$@")
+    exec {fd_ccloud}>&-
+}
+source <(cld completion zsh --prog-name cld)
+
 if [[ ! -d ~/.zplug ]]; then
   git clone https://github.com/zplug/zplug ~/.zplug
   echo "perhaps run 'cd ~/dotfiles ; stow --no-folding .'"
