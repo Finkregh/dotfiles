@@ -283,7 +283,8 @@ zplug "chrissicool/zsh-256color"
 
 #zplug 'dracula/zsh', as:theme
 #zplug "themes/gnzh", from:oh-my-zsh, as:theme
-zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+#zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
 if ! zplug check; then
     zplug install
