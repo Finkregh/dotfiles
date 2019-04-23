@@ -105,6 +105,8 @@ au BufRead,BufNewFile *.html set ai sw=2 sts=2 et tw=72 " Doc strs
 au BufRead,BufNewFile *.json set ai sw=4 sts=4 et tw=72 " Doc strs
 au BufNewFile *.html,*.py,*.pyw,*.c,*.h,*.json set fileformat=unix
 au! BufRead,BufNewFile *.json setfiletype json
+" make markdown break at 80 chars
+au BufRead,BufNewFile *.md setlocal textwidth=80
 
 " soft-tabstop (what we see)
 set sts=4
