@@ -1,2 +1,4 @@
 # allow cherry-pick in diff-view
 bind diff C !git cherry-pick %(commit)
+# revert via !
+bind main ! !git revert %(commit)
