@@ -232,9 +232,7 @@ zplug "plugins/docker", from:oh-my-zsh, use:"_docker"
 zplug "zdharma/fast-syntax-highlighting"
 zplug "chrissicool/zsh-256color"
 
-#zplug 'dracula/zsh', as:theme
-#zplug "themes/gnzh", from:oh-my-zsh, as:theme
-#zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+# also needed for purepower!
 zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
 if ! zplug check; then
@@ -256,40 +254,7 @@ if [ -e $_zplug_lock ] ; then
     ls -la $_zplug_lock
 fi
 
-# POWERLEVEL9K config
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-
-POWERLEVEL9K_VCS_GIT_ICON=''
-POWERLEVEL9K_VCS_STAGED_ICON='\u00b1'
-POWERLEVEL9K_VCS_UNTRACKED_ICON='\u25CF'
-POWERLEVEL9K_VCS_UNSTAGED_ICON='\u00b1'
-POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON='\u2193'
-POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON='\u2191'
-
-POWERLEVEL9K_RAM_BACKGROUND="black"
-POWERLEVEL9K_RAM_FOREGROUND="249"
-POWERLEVEL9K_RAM_ELEMENTS=(ram_free)
-
-_P9K_DIR_BACKGROUND="039"
-POWERLEVEL9K_DIR_DEFAULT_BACKGROUND=${_P9K_DIR_BACKGROUND}
-POWERLEVEL9K_DIR_HOME_BACKGROUND=${_P9K_DIR_BACKGROUND}
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND=${_P9K_DIR_BACKGROUND}
-
-POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S}"
-
-local user_symbol="$"
-if [[ $(print -P "%#") =~ "#" ]]; then
-    user_symbol = "#"
-fi
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="\n"
-#POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%K{white}%F{black} time %f%k%F{white}%f "
-POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="%{%B%F{yellow}%K{196}%} $user_symbol%{%b%f%k%F{blue}%} %{%f%}"
-
-
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs virtualenv)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs time)
+source ~/.config/zsh/.purepower
 
 neofetch || true
 
