@@ -84,7 +84,7 @@ setopt inc_append_history
 setopt interactivecomments # enable bash-style comments # like this
 
 
-export PATH="$HOME/bin:$HOME/go/bin:$PATH"
+export PATH="$HOME/Library/Python/2.7/bin:$HOME/bin:$HOME/go/bin:$PATH"
 export EDITOR=vim
 export VISUAL=vim
 export BROWSER=google-chrome-stable
