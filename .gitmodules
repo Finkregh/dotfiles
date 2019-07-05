@@ -1,18 +1,3 @@
-[submodule ".bash_files/ansible-completion"]
-	path = .bash_files/ansible-completion
-	url = https://github.com/dysosmus/ansible-completion.git
 [submodule ".vim"]
 	path = .vim
 	url = git@github.com:Finkregh/dotfiles-vim.git
-[submodule "bin/liquidprompt"]
-	path = bin/liquidprompt
-	url = https://github.com/nojhan/liquidprompt.git
-[submodule "bin/emojify"]
-	path = bin/emojify-git
-	url = https://github.com/mrowa44/emojify
-[submodule "bin/restic-tools"]
-	path = bin/restic-tools
-	url = git@github.com:binarybucks/restic-tools.git
-[submodule "bin/git-what-branch-src"]
-	path = bin/git-what-branch-src
-	url = https://github.com/SethRobertson/git-what-branch.git
