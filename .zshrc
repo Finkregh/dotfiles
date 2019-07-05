@@ -231,6 +231,7 @@ zplug "plugins/docker", from:oh-my-zsh, use:"_docker"
 #zplug "jessfraz/dotfiles", use:".dockerfunc"
 zplug "zdharma/fast-syntax-highlighting"
 zplug "chrissicool/zsh-256color"
+zplug "SethRobertson/git-what-branch", as:command, use:"git-what-branch"
 
 # also needed for purepower!
 zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
