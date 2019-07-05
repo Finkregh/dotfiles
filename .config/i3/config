@@ -43,6 +43,7 @@ assign [class="Thunderbird"] $ws4
 assign [class="^UXTerm$"] $ws3
 assign [class="^Konsole$"] $ws3
 assign [class="^termite$"] $ws3
+assign [class="^kitty"] $ws3
 assign [class="^URxvt$"] $ws3
 assign [class="^Atom$"] $ws5
 assign [class="^Spotify"] $ws6
@@ -125,7 +126,7 @@ floating_modifier $mod
 #bindsym $mod+Return exec uxterm 
 #bindsym $mod+Return exec urxvtc
 #bindsym $mod+Return exec konsole
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+Shift+q kill
