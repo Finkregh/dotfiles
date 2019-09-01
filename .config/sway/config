@@ -122,7 +122,6 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 bindsym $mod+k focus down
-#bindsym $mod+l exec --no-startup-id i3lock -e -t -u -i /home/max/pluto_wp.png
 bindsym $mod+l exec --no-startup-id i3lock -t -i ~/Pictures/wallpapers/tiling/_s_a96b57c96d57e0f0g64h2E0A2F1705165111493A0C315B145D400E45iBF.png
 bindsym $mod+odiaeresis focus right
 bindsym $mod+x move workspace to output right
