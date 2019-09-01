@@ -239,6 +239,7 @@ set ruler                               " line numbers and column the cursor is 
 set number                              " Show line numbering
 set numberwidth=1                       " Use 1 col + 1 space for numbers
 set ttyfast
+set cursorcolumn
 
 
 " ==== HIGHLIGHTS ====
