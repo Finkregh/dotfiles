@@ -398,6 +398,7 @@ let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'sh': ['shfmt'],
+\   'xml': ['xmllint'],
 \}
 " always show gutter-line (remove pop-in-pop-out flicker)
 let g:ale_sign_column_always = 1
