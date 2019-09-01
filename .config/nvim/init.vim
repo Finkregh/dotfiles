@@ -46,6 +46,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'tomtom/tcomment_vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 "Plug 'junegunn/vim-easy-align'
@@ -222,7 +223,7 @@ au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
 " Make trailing whitespace be flagged as bad.
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.yml match BadWhitespace /\s\+$/
 " ansible
-au BufNewFile,BufRead * if s:isAnsible() | set ft=ansible | en
+au BufNewFile,BufRead * if s:isAnsible() | set ft=yaml.ansible | en
 "au BufNewFile,BufRead *.j2 set ft=ansible_template
 "au BufNewFile,BufRead hosts set ft=ansible_hosts
 
@@ -442,6 +443,11 @@ let g:ycm_key_invoke_completion = ycm_trigger_key
 " See http://vim.wikia.com/wiki/Improve_completion_popup_menu for more info.
 let g:ycm_key_list_select_completion = ['<TAB>', '<C-j>']
 inoremap <expr> ycm_trigger_key pumvisible() ? "<C-j>" : ycm_trigger_key;<Paste>
+
+" === ansible-vim
+" two newlines = complete unindent
+let g:ansible_unindent_after_newline = 1
+
 
 " === pack management (vim 8) ===
 packloadall
