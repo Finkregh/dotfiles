@@ -17,7 +17,7 @@
     whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
     autocrlf = input
     excludesfile = ~/.global_ignore/
-    editor = vim
+    editor = nvim
 
 [user]
 	email = oluf.lorenzen@b1-systems.de
