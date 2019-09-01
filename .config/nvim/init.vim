@@ -30,6 +30,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'clones/vim-autocomplpop'
 Plug 'altercation/vim-colors-solarized'
+Plug 'hukl/Smyck-Color-Scheme', { 'do': 'rm ~/.local/share/nvim/plugged/Smyck-Color-Scheme/colors; mkdir ~/.local/share/nvim/plugged/Smyck-Color-Scheme/colors; ln -s ~/.local/share/nvim/plugged/Smyck-Color-Scheme/smyck.vim ~/.local/share/nvim/plugged/Smyck-Color-Scheme/colors/' }
 Plug 'clones/vim-l9'
 Plug 'taq/vim-git-branch-info'
 Plug 'Glench/Vim-Jinja2-Syntax'
