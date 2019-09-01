@@ -212,6 +212,7 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 " ==== colors/display ====
 syntax on
 let python_highlight_all=1
+colorscheme smyck
 
 " Bad hitespace
 highlight BadWhitespace ctermbg=red guibg=red
