@@ -161,6 +161,9 @@ fi
 # Feh - commented, as it may cause problems with Nautilus, (see bug https://bugs.launchpad.net/variety/+bug/1047083)
 feh --bg-max "$WP" 2> /dev/null
 
+# sway
+swaymsg output "*" background "$WP" fill 2> /dev/null
+
 # MATE after 1.6
 gsettings set org.mate.background picture-filename "$WP" 2> /dev/null
 
