@@ -18,6 +18,8 @@
     autocrlf = input
     excludesfile = ~/.global_ignore/
     editor = nvim
+	quotepath = true
+	commitGraph = true
 
 [user]
 	email = oluf.lorenzen@b1-systems.de
@@ -69,3 +71,8 @@
 	rebase = true
 [rebase]
 	autoStash = true
+[gc]
+	writeCommitGraph = true
+[rerere]
+	enabled = true
+	autoupdate = true
