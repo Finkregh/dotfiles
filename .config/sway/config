@@ -227,6 +227,8 @@ exec --no-startup-id flameshot &
 exec --no-startup-id insync start &
 # notification stuff
 exec --no-startup-id mako &
+# auto-backlight
+exec --no-startup-id clight &
 
 # resize window (you can also use the mouse for that)
 mode "resize" {

@@ -259,6 +259,8 @@ exec --no-startup-id zeal --platformtheme qt5ct &
 exec --no-startup-id flameshot &
 exec --no-startup-id spotify --force-device-scale-factor=1.5 &
 exec --no-startup-id insync start &
+# auto-backlight
+exec --no-startup-id clight &
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
