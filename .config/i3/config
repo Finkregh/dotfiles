@@ -40,11 +40,6 @@ assign [class="keepass2"] $ws2
 assign [class="keepassxc"] $ws2
 assign [class="Google-chrome"] $ws2
 assign [class="Thunderbird"] $ws4
-assign [class="^UXTerm$"] $ws3
-assign [class="^Konsole$"] $ws3
-assign [class="^termite$"] $ws3
-assign [class="^kitty"] $ws3
-assign [class="^URxvt$"] $ws3
 assign [class="^Atom$"] $ws5
 assign [class="^Spotify"] $ws6
 # tabs-outliner
@@ -60,12 +55,7 @@ assign [class="crx_bikioccmkafdpakkkcpdbppfkghcmihk"] $ws1
 assign [class=google-chrome] $ws2
 assign [class=Firefox] $ws2
 assign [class="VirtualBox"] $ws9
-#assign [class="nagstamon"] $ws9
-#for_window [class="Vmware"] move to workspace vmware
-#for_window [class="Microsoft Lync"] move to workspace $ws9
 for_window [class="Spotify"] move to workspace $ws6
-#for_window [class="gpodder"] move to workspace $ws6
-#for_window [class="mpv"] floating enable
 for_window [class="Gtimelog"] floating enable
 for_window [class=Gimp] floating enable
 # Dialog handling
@@ -151,7 +141,6 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 bindsym $mod+k focus down
-#bindsym $mod+l exec --no-startup-id i3lock -e -t -u -i /home/max/pluto_wp.png 
 bindsym $mod+l exec --no-startup-id i3lock -t -i ~/Pictures/wallpapers/tiling/_s_a96b57c96d57e0f0g64h2E0A2F1705165111493A0C315B145D400E45iBF.png
 bindsym $mod+odiaeresis focus right
 bindsym $mod+x move workspace to output right
@@ -203,11 +192,11 @@ bindsym $mod+a focus parent
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3; layout tabbed
+bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7; layout tabbed
+bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
@@ -266,7 +255,6 @@ exec --no-startup-id /usr/bin/gajim &
 exec --no-startup-id /usr/bin/thunderbird &
 #exec --no-startup-id parcellite &
 exec --no-startup-id clipit &
-exec --no-startup-id gtimelog &
 exec --no-startup-id zeal --platformtheme qt5ct &
 exec --no-startup-id flameshot &
 exec --no-startup-id spotify --force-device-scale-factor=1.5 &
