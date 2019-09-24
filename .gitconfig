@@ -22,9 +22,9 @@
 	commitGraph = true
 
 [user]
-	email = oluf.lorenzen@b1-systems.de
+	email = finkregh@mafia-server.net
 	Name = Oluf Lorenzen
-	signingkey = 0xED60E77F614BF553
+	signingkey = 0xFFC01051DEE0B735
 
 [alias]
 	st = status
