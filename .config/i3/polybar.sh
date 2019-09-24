@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 _CONNECTED_SCREENS=$(xrandr | grep '\Wconnected' | awk '{ print $1 }')
 
