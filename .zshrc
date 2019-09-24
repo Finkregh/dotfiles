@@ -276,16 +276,14 @@ source ~/.zplug/init.zsh
 # let zplug manage itself
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
-#zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
-zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/pass", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
-zplug "plugins/git-extras", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh, use:"_docker"
 zplug "zdharma/fast-syntax-highlighting"
 zplug "chrissicool/zsh-256color"
+zplug "plugins/git-extras", from:oh-my-zsh
 
 #zplug 'dracula/zsh', as:theme
 #zplug "themes/gnzh", from:oh-my-zsh, as:theme
