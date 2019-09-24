@@ -220,18 +220,13 @@ source ~/.zplug/init.zsh
 # let zplug manage itself
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
-#zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-completions"
-zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/pass", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
-zplug "plugins/git-extras", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh, use:"_docker"
-#zplug "jessfraz/dotfiles", use:".dockerfunc"
 zplug "zdharma/fast-syntax-highlighting"
 zplug "chrissicool/zsh-256color"
-zplug "SethRobertson/git-what-branch", as:command, use:"git-what-branch"
-# also needed for purepower!
+zplug "plugins/git-extras", from:oh-my-zsh
 zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 zplug "zsh-users/zsh-autosuggestions"
 
