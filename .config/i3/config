@@ -257,10 +257,10 @@ exec --no-startup-id /usr/bin/thunderbird &
 exec --no-startup-id clipit &
 exec --no-startup-id zeal --platformtheme qt5ct &
 exec --no-startup-id flameshot &
-exec --no-startup-id spotify --force-device-scale-factor=1.5 &
 exec --no-startup-id insync start &
-# auto-backlight
-exec --no-startup-id clight &
+exec --no-startup-id redshift-gtk -l 52.42692:9.47368 &
+## auto-backlight
+#exec --no-startup-id clight &
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
