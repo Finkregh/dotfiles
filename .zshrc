@@ -311,6 +311,13 @@ if test $(find /tmp/zplug-update-timer -mtime +1); then
 fi
 zplug load
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # show lockfile if it exists...
 # https://github.com/zplug/zplug/issues/374
 if [ -e $_zplug_lock ] ; then
@@ -322,8 +329,8 @@ source ~/.config/zsh/.purepower
 # ruby garbage
 eval "$(rbenv init -)"
 
-# running stuff
-neofetch || true
+# fancy logo, stats, etc
+#neofetch || true
 
 # crude daily homebrew update
 if [ ! -e /tmp/brew-update-timer ] ; then
