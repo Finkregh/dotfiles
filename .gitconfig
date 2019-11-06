@@ -1,25 +1,25 @@
 [push]
-	default = simple
+    default = simple
 
 [credential]
-	helper = cache --timeout=28800
+    helper = cache --timeout=28800
 
 [color]
-	diff = auto
-	status = auto
-	branch = auto
-	ui = true
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
 
 [color "diff"]
-	whitespace = red reverse
+    whitespace = red reverse
 
 [core]
     whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
     autocrlf = input
     excludesfile = ~/.global_ignore/
     editor = nvim
-	quotepath = true
-	commitGraph = true
+    quotepath = true
+    commitGraph = true
 
 [user]
 	email = oluf.lorenzen@b1-systems.de
@@ -27,17 +27,17 @@
 	signingkey = 0xED60E77F614BF553
 
 [alias]
-	st = status
-	ci = commit
-	br = branch
-	co = checkout
+    st = status
+    ci = commit
+    br = branch
+    co = checkout
     cp = cherry-pick
-	df = diff
-	lg = log -p
+    df = diff
+    lg = log -p
     ph = push origin HEAD
     phf = push origin HEAD --force-with-lease
-	tree = log --graph --pretty=oneline --abbrev-commit --all --decorate
-	stree = log --pretty=oneline --topo-order --graph --abbrev-commit
+    tree = log --graph --pretty=oneline --abbrev-commit --all --decorate
+    stree = log --pretty=oneline --topo-order --graph --abbrev-commit
     wdiff = diff --color-words
     wmdiff = diff master --color-words
     wshow = show --color-words
@@ -46,7 +46,7 @@
     pull = pull --rebase
     tt = timetrack
     graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format: %h -> { %p }' \"$@\" | sed 's/[0-9a-f]\\+/\"&\"/g' ; echo '}'; }; %f"
-	conflicted = !nvim +Conflicted
+    conflicted = !nvim +Conflicted
     #git graphviz HEAD^^..HEAD | dotty /dev/stdin
     #git graphviz --first-parent master | dotty /dev/stdin
 
@@ -54,9 +54,9 @@
     fontui   = -family terminus -size 9 -weight normal -slant roman -underline 0 -overstrike 0
     fontdiff = -family terminus -size 9 -weight normal -slant roman -underline 0 -overstrike 0
 [mergetool "gvimdiff3"]
-	cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+    cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 [mergetool "vimdiff3"]
-	cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+    cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 
 [diff "odf"]
       textconv=odt2txt
@@ -66,15 +66,15 @@
     gpgsign = true
     verbose = true
 [icdiff]
-	options = --highlight --line-numbers
+    options = --highlight --line-numbers
 [fetch]
-	prune = true
+    prune = true
 [pull]
-	rebase = true
+    rebase = true
 [rebase]
-	autoStash = true
+    autoStash = true
 [gc]
-	writeCommitGraph = true
+    writeCommitGraph = true
 [rerere]
-	enabled = true
-	autoupdate = true
+    enabled = true
+    autoupdate = true
