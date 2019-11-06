@@ -34,6 +34,8 @@
     cp = cherry-pick
 	df = diff
 	lg = log -p
+    ph = push origin HEAD
+    phf = push origin HEAD --force-with-lease
 	tree = log --graph --pretty=oneline --abbrev-commit --all --decorate
 	stree = log --pretty=oneline --topo-order --graph --abbrev-commit
     wdiff = diff --color-words
