@@ -270,6 +270,11 @@ function cld {
 }
 source <(cld completion zsh --prog-name cld)
 
+# BEGIN ansible-managed: packages
+source ~/.local/share/b1-ccee-aliases.sh
+source ~/.local/share/zsh/b1-ccee-functions.sh
+# END ansible-managed: packages
+
 if [[ ! -d ~/.zplug ]]; then
   git clone https://github.com/zplug/zplug ~/.zplug
   echo "perhaps run 'cd ~/dotfiles ; stow --no-folding .'"
