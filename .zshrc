@@ -94,6 +94,9 @@ export MANWIDTH=${MANWIDTH:-80}
 export COLORTERM="yes"
 export TERM=xterm-256color
 export JAVA_TOOL_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
+# python crashes otherwise...
+# needs `ln -s /usr/local/Cellar/openssl/1.0.2t/lib/libssl.1.0.0.dylib /usr/local/lib/libssl.dylib ; ln -s /usr/local/Cellar/openssl/1.0.2t/lib/libcrypto.1.0.0.dylib /usr/local/lib/libcrypto.dylib`
+export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/opt/openssl/lib
 
 autoload -Uz compinit
 compinit
