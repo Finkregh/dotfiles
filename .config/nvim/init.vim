@@ -164,7 +164,6 @@ set wildignore=*.o,*.obj,*.bak,*.exe,*.py[co],*.swp,*~,*.pyc,.svn
 " ==== Autocommands ====
 autocmd FileType python compiler pylint
 autocmd FileType po compiler po
-autocmd BufWrite *.py :call DeleteTrailingWS()
 " jump to the last position when reopening a file
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal g'\"" | endif
@@ -192,7 +191,6 @@ au FileType mail sil 1  | call search("^$")
 			 \ | sil put! ='X-Editor: Vim-' . Version()
 " smart indenting for python
 au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 set iskeyword+=.,_,$,@,%,#
 au FileType python set expandtab
 " setup file type for snipmate
@@ -362,10 +360,6 @@ augroup END
 
 
 " ==== plugin-configs ====
-
-"pyflakes gives me probles on Linux PPC and quickfix, so just
-"deactivate quickfix use with pyflakes
-let g:pyflakes_use_quickfix = 0
 
 "" ==== sup mailclient ====
 "" syntax coloration when composing emails
