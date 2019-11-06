@@ -239,7 +239,10 @@ set ruler                               " line numbers and column the cursor is 
 set number                              " Show line numbering
 set numberwidth=1                       " Use 1 col + 1 space for numbers
 set ttyfast
-set cursorcolumn
+set nocursorcolumn
+" only enable cursorcolumn on yaml files, otherwise not needed
+au BufRead,BufNewFile *.yml set cursorcolumn
+au BufRead,BufNewFile *.yaml set cursorcolumn
 
 
 " ==== HIGHLIGHTS ====
