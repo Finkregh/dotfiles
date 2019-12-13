@@ -81,6 +81,8 @@ setopt hist_verify
 setopt inc_append_history
 #setopt share_history # share command history data
 setopt interactivecomments # enable bash-style comments # like this
+# If a command is issued that can’t be executed as a normal command, and the command is the name of a directory, perform the cd command to that directory
+setopt auto_cd
 
 
 export PATH="$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$PATH"
