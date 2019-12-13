@@ -36,6 +36,9 @@ export LANG=en_US.UTF-8
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
+# rather use exa instead of ls
+alias ls="exa --group-directories-first"
+
 # enable caching
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.cache/zsh
