@@ -40,6 +40,9 @@ alias fmtr="docker exec -ti f5vpn mtr"
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
+# rather use exa instead of ls
+alias ls="exa --group-directories-first"
+
 # enable caching
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.cache/zsh
