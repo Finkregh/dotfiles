@@ -46,7 +46,7 @@ modules-right = audioplayer volume backlight wireless-network wired-network batt
 
 [bar/top-laptop]
 dpi = 192
-monitor = eDP1
+monitor = eDP-1
 width = ${bar/top.width}
 height = 40
 
