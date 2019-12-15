@@ -88,6 +88,7 @@ export PAGER=less
 export MANPAGER=less
 export MANWIDTH=${MANWIDTH:-80}
 export COLORTERM="yes"
+eval $(dircolors -p | perl -pe 's/^((CAP|S[ET]|O[TR]|M|E)\w+).*/$1 00/' | dircolors -)
 export TERM=xterm-256color
 export JAVA_TOOL_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
 
