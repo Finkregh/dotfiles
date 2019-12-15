@@ -220,7 +220,6 @@ source ~/.zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 #zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/pass", from:oh-my-zsh
@@ -231,9 +230,9 @@ zplug "plugins/docker", from:oh-my-zsh, use:"_docker"
 zplug "zdharma/fast-syntax-highlighting"
 zplug "chrissicool/zsh-256color"
 zplug "SethRobertson/git-what-branch", as:command, use:"git-what-branch"
-
 # also needed for purepower!
 zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
+zplug "zsh-users/zsh-autosuggestions"
 
 if ! zplug check; then
     zplug install
@@ -257,4 +256,3 @@ fi
 source ~/.config/zsh/.purepower
 
 neofetch || true
-
