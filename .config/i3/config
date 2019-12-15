@@ -243,19 +243,19 @@ exec_always --no-startup-id ~/.config/i3/polybar.sh &
 exec --no-startup-id blueberry-tray &
 exec_always --no-startup-id setxkbmap us -variant intl &
 # fancy workspace switch etc
-exec --no-startup-id compton -CGb &
+#exec --no-startup-id compton -CGb &
 exec --no-startup-id nm-applet &
 # wallpaper-changer
 exec --no-startup-id variety &
 #exec --no-startup-id urxvtd -q -f -o
 #exec --no-startup-id "urxvtc -name 'cmus' -e sh -c 'cmus'"
-exec --no-startup-id keepassxc --platformtheme qt5ct &
-# GDK_SCALE=2 
-exec --no-startup-id /usr/bin/gajim &
+#exec --no-startup-id keepassxc --platformtheme qt5ct &
+# GDK_SCALE=2
+#exec --no-startup-id /usr/bin/gajim &
 exec --no-startup-id /usr/bin/thunderbird &
 #exec --no-startup-id parcellite &
 exec --no-startup-id clipit &
-exec --no-startup-id zeal --platformtheme qt5ct &
+#exec --no-startup-id zeal --platformtheme qt5ct &
 exec --no-startup-id flameshot &
 exec --no-startup-id spotify --force-device-scale-factor=1.5 &
 exec --no-startup-id insync start &
