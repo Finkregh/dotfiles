@@ -89,9 +89,9 @@ setopt interactivecomments # enable bash-style comments # like this
 setopt auto_cd
 
 
-export PATH="$HOME/Library/Python/2.7/bin:$HOME/bin:$HOME/go/bin:$PATH"
-export EDITOR=vim
-export VISUAL=vim
+export PATH="$HOME/Library/Python/3.7/bin:$HOME/Library/Python/2.7/bin:$HOME/bin:$HOME/go/bin:$PATH"
+export EDITOR=nvim
+export VISUAL=nvim
 export BROWSER=google-chrome-stable
 export PAGER=less
 export MANPAGER=less
@@ -237,13 +237,9 @@ function krc {
 }
 
 alias o=openstack
-export KUBECONFIG=~/.kube/config
+export KUBECONFIG=~/.config/ccloud_multitool/kubeconfig
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/sbin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-if [[ "$(type _direnv_hook)" != *"is a shell function from"* ]] ; then
-    eval "$(direnv hook zsh)"
-fi
-. ~/work/os-cd/.bash_os_aliases
 if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
 fi
@@ -289,6 +285,7 @@ source <(cld completion zsh --prog-name cld)
 # BEGIN ansible-managed: packages
 source ~/.local/share/b1-ccee-aliases.sh
 source ~/.local/share/zsh/b1-ccee-functions.sh
+source ~/.ssh/os_pass
 # END ansible-managed: packages
 
 if [[ ! -d ~/.zplug ]]; then
@@ -364,3 +361,5 @@ if test $(find /tmp/brew-update-timer -mtime +1); then
     brew cleanup --prune 30
     touch /tmp/brew-update-timer
 fi
+
+source /Users/c5276249/Library/Preferences/org.dystroy.broot/launcher/bash/br
