@@ -92,7 +92,7 @@ font-1 = MaterialIcons:size=10;6
 font-2 = MiscTermsynu:size=8:antialias=false;2
 font-3 = FontAwesome5Free:size=10;4
 
-modules-left = 
+modules-left =
 modules-center = xwindow
 modules-right = cpu memory
 
@@ -125,7 +125,7 @@ font-1 = MaterialIcons:size=10;6
 font-2 = MiscTermsynu:size=8:antialias=false;2
 font-3 = FontAwesome5Free:size=10;4
 
-modules-left = 
+modules-left =
 modules-center = xwindow
 modules-right = cpu memory
 
@@ -371,7 +371,7 @@ type = internal/network
 interface = enp0s25
 interval = 3.0
 
-label-connected =   
+label-connected = 
 label-disconnected-foreground = #66
 
 [module/volume]
@@ -433,4 +433,3 @@ scroll-down = playerctl -p vlc volume 0.05-
 
 
 ; vim:ft=dosini
-
