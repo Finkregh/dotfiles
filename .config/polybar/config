@@ -21,8 +21,8 @@ color15_i3wmthemer	    = ${xrdb:color15}
 
 
 [bar/top]
-dpi = 96
-monitor = ${env:MONITOR:HDMI2}
+dpi = ${env:POLY_DPI:96}
+monitor = ${env:MONITOR:HDMI-2}
 width = 100%
 height = 25
 
