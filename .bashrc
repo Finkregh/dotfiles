@@ -119,3 +119,18 @@ source <(kubectl completion bash)
 . ~/.env-secrets
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+source /Users/c5276249/Library/Preferences/org.dystroy.broot/launcher/bash/br
+# BEGIN ansible-managed: packages
+source ~/.local/share/b1-ccee-aliases.sh
+source ~/.local/share/bash/b1-ccee-functions.sh
+source ~/.ssh/os_pass
+# END ansible-managed: packages
+# BEGIN ansible-managed: oscd
+if [ -f ~/.bash_os_aliases ]; then
+    . ~/.bash_os_aliases
+fi
+if [ "$(type -t _direnv_hook)" != "function" ]; then
+  eval "$(direnv hook bash)"
+fi
+# END ansible-managed: oscd

@@ -47,6 +47,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'tomtom/tcomment_vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
+Plug 'rhysd/vim-grammarous'
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 "Plug 'junegunn/vim-easy-align'
