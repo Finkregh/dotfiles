@@ -400,6 +400,7 @@ let g:ale_fixers = {
 \   'xml': ['xmllint'],
 \   'python': ['black', 'isort'],
 \   'php': ['php_cs_fixer', 'phpcbf'],
+\   'markdown': ['prettier', 'textlint'],
 \}
 " always show gutter-line (remove pop-in-pop-out flicker)
 let g:ale_sign_column_always = 1
