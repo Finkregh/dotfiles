@@ -231,9 +231,14 @@ zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh, use:"_docker"
 zplug "zdharma/fast-syntax-highlighting"
 zplug "chrissicool/zsh-256color"
+zplug "plugins/colorize", from:oh-my-zsh
+zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
-zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
+zplug "plugins/pip", from:oh-my-zsh
+zplug "chmouel/kss", use:"_kss", as:command, use:"kss"
 zplug "zsh-users/zsh-autosuggestions"
+
+zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
 if ! zplug check; then
     zplug install
@@ -248,12 +253,12 @@ if test $(find /tmp/zplug-update-timer -mtime +1); then
 fi
 zplug load
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+## Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+## Initialization code that may require console input (password prompts, [y/n]
+## confirmations, etc.) must go above this block, everything else may go below.
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
 
 # show lockfile if it exists...
 # https://github.com/zplug/zplug/issues/374
