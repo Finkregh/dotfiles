@@ -264,3 +264,5 @@ fi
 source ~/.config/zsh/.purepower
 
 neofetch || true
+
+source /home/ol/.config/broot/launcher/bash/br

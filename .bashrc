@@ -108,3 +108,5 @@ if [ -x /usr/bin/keychain ] ; then
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+source /home/ol/.config/broot/launcher/bash/br
