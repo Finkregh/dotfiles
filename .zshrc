@@ -86,8 +86,8 @@ setopt auto_cd
 
 
 export PATH="$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$PATH"
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 export BROWSER=google-chrome-stable
 export PAGER=less
 export MANPAGER=less
