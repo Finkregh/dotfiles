@@ -225,6 +225,17 @@ bindkey -M emacs '^[[3^' kill-word
 
 
 alias k=kubectl
+alias ks="kubectl-sync"
+alias kl="kubectl-logon"
+alias kc="kubectl config use-context"
+function kn { kubectl config set-context $(kubectl config current-context) --namespace }
+function krc {
+    for context in $(kubectl-sync ls | awk '/kubectl logon/ {print $2}'); do
+        kubectl config use-context $context && \
+        kubectl-logon -u $OS_USERNAME -p $OS_PASSWORD
+    done
+}
+
 alias o=openstack
 export KUBECONFIG=~/.kube/config
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/sbin:$PATH"
