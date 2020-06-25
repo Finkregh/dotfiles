@@ -239,6 +239,7 @@ source ~/.zplug/init.zsh
 # let zplug manage itself
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
+zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "plugins/pass", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
@@ -250,7 +251,7 @@ zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
 zplug "plugins/pip", from:oh-my-zsh
 zplug "chmouel/kss", use:"_kss", as:command, use:"kss"
-zplug "zsh-users/zsh-autosuggestions"
+zplug "bigH/git-fuzzy", use:"bin/git-fuzzy", as:command
 
 zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
