@@ -309,6 +309,7 @@ zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
 zplug "plugins/pip", from:oh-my-zsh
 zplug "chmouel/kss", use:"_kss", as:command, use:"kss"
+zplug "bigH/git-fuzzy", use:"bin/git-fuzzy", as:command
 
 zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 

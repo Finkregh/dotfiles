@@ -49,6 +49,7 @@
     conflicted = !nvim +Conflicted
     #git graphviz HEAD^^..HEAD | dotty /dev/stdin
     #git graphviz --first-parent master | dotty /dev/stdin
+    f = fuzzy
 
 [gui]
     fontui   = -family terminus -size 9 -weight normal -slant roman -underline 0 -overstrike 0
