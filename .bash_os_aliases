@@ -1,101 +1,112 @@
+#!/bin/bash
+
 function mycd() {
-  if [ $# -eq 0 ]; then
-    cd
-    return
-  fi
   local OS_BASE_PATH="openstack"
-  ###
-  if [ ! -d ~/"${OS_BASE_PATH}" ]; then
-    # Create a BASE_PATH directory
-    mkdir -p ~/"${OS_BASE_PATH}"
+  local BASE_PATH="$(realpath -m ~/"${OS_BASE_PATH}")"
+  if [[ "$1" == "https://dashboard."* ]]; then
+    set -- "${BASE_PATH}/$(sed -E -e 's/https:\/\/dashboard\.([a-z][a-z]-[a-z][a-z]-[0-9]|staging).cloud.sap(\/[^\/]*)(\/[^\/]*)\/.*/\1\2\3/' <<<"$1")"
+  fi
+  local NEW_PATH="$(realpath -m "${1:-/}")"
+  if [ $# -ne 1 ] || [[ ! "$NEW_PATH" == "$BASE_PATH"* ]]; then
+    cd "$@"
+    return $?
   fi
   ###
-  if [ ! -f ~/"${OS_BASE_PATH}"/.envrc ]; then
-    cat >~/"${OS_BASE_PATH}"/.envrc <<EOL
+  if [ ! -d "${BASE_PATH}" ]; then
+    # Create a BASE_PATH directory
+    mkdir -p "${BASE_PATH}"
+  fi
+  ###
+  if [ ! -f "${BASE_PATH}/.envrc" ]; then
+    cat > "${BASE_PATH}/.envrc" <<EOL
 if [ -f ~/.ssh/os_pass ]; then
   . ~/.ssh/os_pass
 fi
 export OS_USERNAME="\${USER}"
 if [ -z "\${OS_PASSWORD}" ]; then
   echo "Please enter your OpenStack Password: "
-  read -sr OS_PASSWORD_INPUT
-  export OS_PASSWORD=\${OS_PASSWORD_INPUT}
+  read -sr OS_PASSWORD
+  export OS_PASSWORD
 fi
 EOL
-    direnv allow ~/"${OS_BASE_PATH}"/.envrc
+    direnv allow "${BASE_PATH}/.envrc"
   fi
   ###
-  local BASE_PATH="$(realpath -m ~/"${OS_BASE_PATH}")"
-  local NEW_PATH="$(realpath -m "$@")"
   local HOMEDIR="$(echo ~ | cut -d/ -f2)"
-  local OIFS="${IFS}"
-  local IFS='/'
+  local segments
+  if [[ "$SHELL" == *"bin/zsh" ]]; then
+    segments=(${(s:/:)NEW_PATH})
+  else
+    IFS="/" read -ra segments <<<"$NEW_PATH"
+  fi
   local i=0
   local k=0
-  for path in ${NEW_PATH}; do
+  for ospath in "${segments[@]}"; do
+    if [ -z "${ospath}" ]; then
+      continue;
+    fi
     i=$((i+1))
     case ${i} in
-    1) continue
+    1)
+      if [ "${ospath}" = "${HOMEDIR}" ]; then
+        k=$((k+1))
+      fi
       ;;
     2)
-      if [ "${path}" = "${HOMEDIR}" ]; then
+      if [ "${ospath}" = "${USER}" ]; then
         k=$((k+1))
       fi
       ;;
     3)
-      if [ "${path}" = "${USER}" ]; then
+      if [ "${ospath}" = "${OS_BASE_PATH}" ]; then
         k=$((k+1))
       fi
       ;;
     4)
-      if [ "${path}" = "${OS_BASE_PATH}" ]; then
+      if [ -n "${ospath}" ] && egrep -q '^([a-z][a-z]-[a-z][a-z]-[0-9]|staging)$' <<<"${ospath}"; then
         k=$((k+1))
+        local REGION="${ospath}"
       fi
       ;;
     5)
-      if [ -n "${path}" ] && echo "${path}" | egrep -q '^([a-z][a-z]-[a-z][a-z]-[0-9]|staging)$'; then
+      if [ -n "${ospath}" ]; then
         k=$((k+1))
-        local REGION="${path}"
+        local DOMAIN="${ospath}"
       fi
       ;;
     6)
-      if [ -n "${path}" ]; then
+      if [ -n "${ospath}" ]; then
         k=$((k+1))
-        local DOMAIN="${path}"
-      fi
-      ;;
-    7)
-      if [ -n "${path}" ]; then
-        k=$((k+1))
-        local PROJECT="${path}"
+        local PROJECT="${ospath}"
       fi
       ;;
     *)
-      local IFS="${OIFS}"
       cd "$@"
-      return
+      return $?
       break
       ;;
     esac
   done
-  local IFS="${OIFS}"
 
   if [ ${k} -gt 3 ]; then
     if [ ! -d "${HOME}/.kube/certs/kubernetes.${REGION}.cloud.sap" ]; then
       mkdir -p "${HOME}/.kube/certs/kubernetes.${REGION}.cloud.sap"
     fi
+    if [ ! -d "${BASE_PATH}/${REGION}" ]; then
+      mkdir -p "${BASE_PATH}/${REGION}"
+    fi
     if [ ! -f "${BASE_PATH}/${REGION}"/kubeconfig ]; then
-      cat >"${BASE_PATH}/${REGION}"/kubeconfig <<EOL
+      cat > "${BASE_PATH}/${REGION}"/kubeconfig <<EOL
 apiVersion: v1
 clusters:
 - cluster:
-    certificate-authority: certs/kubernetes.${REGION}.cloud.sap/ca.pem
+    certificate-authority: ${HOME}/.kube/certs/kubernetes.${REGION}.cloud.sap/ca.pem
     server: https://apiserver.${REGION}.cloud.sap/
   name: ${REGION}
 contexts:
 - context:
     cluster: ${REGION}
-    namespace: default
+    namespace: monsoon3
     user: client@kubernetes.${REGION}.cloud.sap
   name: ${REGION}
 current-context: ${REGION}
@@ -108,23 +119,44 @@ users:
     client-key: ${HOME}/.kube/certs/kubernetes.${REGION}.cloud.sap/client-key.pem
 EOL
     fi
-    if [ ! -f "${BASE_PATH}/${REGION}"/.envrc ]; then
-      cat >"${BASE_PATH}/${REGION}"/.envrc <<EOL
-source ~/"${OS_BASE_PATH}"/.envrc
-export KUBECONFIG=${BASE_PATH}/${REGION}/kubeconfig
+    if [ ! -f "${BASE_PATH}/${REGION}/.envrc" ]; then
+      cat > "${BASE_PATH}/${REGION}/.envrc" <<EOL
+source "${BASE_PATH}/.envrc"
+export KUBECONFIG="${BASE_PATH}/${REGION}/kubeconfig"
+monsoonctl
 EOL
-      direnv allow "${BASE_PATH}/${REGION}"/.envrc
+      direnv allow "${BASE_PATH}/${REGION}/.envrc"
     fi
   fi
 
-  if [ ${k} = 6 ]; then
-    if [ ! -d "${BASE_PATH}/${REGION}/${DOMAIN}/${PROJECT}" ]; then
-      mkdir -p "${BASE_PATH}/${REGION}/${DOMAIN}/${PROJECT}"
+  if [ ${k} = 5 ]; then
+    if [ ! -f "${BASE_PATH}/${REGION}/${DOMAIN}/.envrc" ]; then
+      if [ ! -d "${BASE_PATH}/${REGION}/${DOMAIN}" ]; then
+        mkdir -p "${BASE_PATH}/${REGION}/${DOMAIN}"
+      fi
+      cat > "${BASE_PATH}/${REGION}/${DOMAIN}/.envrc" <<EOL
+source "${BASE_PATH}/${REGION}/.envrc"
+source "${BASE_PATH}/.envrc"
+export OS_AUTH_URL="https://identity-3.${REGION}.cloud.sap/v3"
+export OS_IDENTITY_API_VERSION=3
+export OS_USER_DOMAIN_NAME="${DOMAIN}"
+export OS_DOMAIN_NAME="${DOMAIN}"
+export OS_REGION_NAME="${REGION}"
+EOL
+      direnv allow "${BASE_PATH}/${REGION}/${DOMAIN}"/.envrc
     fi
-    if [ ! -f "${BASE_PATH}/${REGION}/${DOMAIN}/${PROJECT}"/.envrc ]; then
-      cat >"${BASE_PATH}/${REGION}/${DOMAIN}/${PROJECT}"/.envrc <<EOL
-source "${BASE_PATH}/${REGION}"/.envrc
-source ~/"${OS_BASE_PATH}"/.envrc
+    echo -e "\033[0;32mhttps://dashboard.${REGION}.cloud.sap/${DOMAIN}/home\033[0m"
+  fi
+
+  if [ ${k} = 6 ]; then
+    if [ ! -f "${BASE_PATH}/${REGION}/${DOMAIN}/${PROJECT}/.envrc" ]; then
+      # TODO: run openstack --os-* token issue to check if options are correct
+      if [ ! -d "${BASE_PATH}/${REGION}/${DOMAIN}/${PROJECT}" ]; then
+        mkdir -p "${BASE_PATH}/${REGION}/${DOMAIN}/${PROJECT}"
+      fi
+      cat > "${BASE_PATH}/${REGION}/${DOMAIN}/${PROJECT}/.envrc" <<EOL
+source "${BASE_PATH}/${REGION}/.envrc"
+source "${BASE_PATH}/.envrc"
 export OS_AUTH_URL="https://identity-3.${REGION}.cloud.sap/v3"
 export OS_IDENTITY_API_VERSION=3
 export OS_PROJECT_NAME="${PROJECT}"
@@ -132,46 +164,57 @@ export OS_PROJECT_DOMAIN_NAME="${DOMAIN}"
 export OS_USER_DOMAIN_NAME="${DOMAIN}"
 export OS_REGION_NAME="${REGION}"
 EOL
+      if [ "${DOMAIN}" = "ccadmin" ] && [ "${PROJECT}" = "kubernikus" ]; then
+        cat >>"${BASE_PATH}/${REGION}/${DOMAIN}/${PROJECT}"/.envrc <<EOL
+export KUBECONFIG="${BASE_PATH}/${REGION}/${DOMAIN}/${PROJECT}/kubeconfig"
+echo -e '\033[0;32mUse "kauth" to fetch the certificates for the Kubernikus control plane\033[0m'
+EOL
+      fi
       direnv allow "${BASE_PATH}/${REGION}/${DOMAIN}/${PROJECT}"/.envrc
     fi
     echo -e "\033[0;32mhttps://dashboard.${REGION}.cloud.sap/${DOMAIN}/${PROJECT// /-}/home\033[0m"
   fi
   cd "$@"
+  return $?
 }
 
 alias cd=mycd
 
+function kauth() {
+  kubernikusctl auth init --name "k-${OS_REGION_NAME}" --url "https://k-${OS_REGION_NAME}.admin.cloud.sap"
+}
+
 function venv() {
+  set -e
   virtualenv .venv
+  set +e
   . .venv/bin/activate
   pip install python-${1}client
 }
 
 function prole() {
   local ccadmin=~/"openstack/${OS_REGION_NAME}/ccadmin/cloud_admin"
-  mycd ${ccadmin}
-  direnv exec ${ccadmin} openstack role assignment list --user ${OS_USERNAME} --role-domain ${OS_USER_DOMAIN_NAME} --user-domain ${OS_USER_DOMAIN_NAME} --project-domain ${OS_PROJECT_DOMAIN_NAME} --project ${OS_PROJECT_NAME} --names
-  mycd -
+  direnv exec "${ccadmin}" openstack role assignment list --user "${OS_USERNAME}" --role-domain "${OS_USER_DOMAIN_NAME}" --user-domain "${OS_USER_DOMAIN_NAME}" --project-domain "${OS_PROJECT_DOMAIN_NAME}" --project "${OS_PROJECT_NAME}" --names
 }
 
 function srole() {
-  local roles="member|compute_admin|network_admin|audit_viewer"
+  local roles="member|compute_admin|network_admin|audit_viewer|admin"
   local ccadmin=~/"openstack/${OS_REGION_NAME}/ccadmin/cloud_admin"
-  mycd ${ccadmin}
-  local role_ids="$(direnv exec ${ccadmin} openstack role list --user-domain ${OS_USER_DOMAIN_NAME} --project-domain ${OS_PROJECT_DOMAIN_NAME} --project ${OS_PROJECT_NAME} -f value | awk "/ (${roles})\$/{print \$1}")"
+  local role_ids="$(direnv exec "${ccadmin}" openstack role list --user-domain "${OS_USER_DOMAIN_NAME}" --project-domain "${OS_PROJECT_DOMAIN_NAME}" --project "${OS_PROJECT_NAME}" -f value | awk "/ (${roles})\$/{print \$1}")"
   for role_id in ${role_ids}; do
-    direnv exec ${ccadmin} openstack role add --user ${OS_USERNAME} --role-domain ${OS_USER_DOMAIN_NAME} --user-domain ${OS_USER_DOMAIN_NAME} --project-domain ${OS_PROJECT_DOMAIN_NAME} --project ${OS_PROJECT_NAME} ${role_id}
+    direnv exec "${ccadmin}" openstack role add --user "${OS_USERNAME}" --role-domain "${OS_USER_DOMAIN_NAME}" --user-domain "${OS_USER_DOMAIN_NAME}" --project-domain "${OS_PROJECT_DOMAIN_NAME}" --project "${OS_PROJECT_NAME}" ${role_id}
   done
-  mycd -
 }
 
 function drole() {
-  local roles="member|compute_admin|network_admin|audit_viewer"
+  local roles="member|compute_admin|network_admin|audit_viewer|admin"
   local ccadmin=~/"openstack/${OS_REGION_NAME}/ccadmin/cloud_admin"
-  mycd ${ccadmin}
-  local role_ids="$(direnv exec ${ccadmin} openstack role list --user-domain ${OS_USER_DOMAIN_NAME} --project-domain ${OS_PROJECT_DOMAIN_NAME} --project ${OS_PROJECT_NAME} -f value | awk "/ (${roles})\$/{print \$1}")"
+  local role_ids="$(direnv exec "${ccadmin}" openstack role list --user-domain "${OS_USER_DOMAIN_NAME}" --project-domain "${OS_PROJECT_DOMAIN_NAME}" --project "${OS_PROJECT_NAME}" -f value | awk "/ (${roles})\$/{print \$1}")"
   for role_id in ${role_ids}; do
-    direnv exec ${ccadmin} openstack role remove --user ${OS_USERNAME} --role-domain ${OS_USER_DOMAIN_NAME} --user-domain ${OS_USER_DOMAIN_NAME} --project-domain ${OS_PROJECT_DOMAIN_NAME} --project ${OS_PROJECT_NAME} ${role_id}
+    direnv exec "${ccadmin}" openstack role remove --user "${OS_USERNAME}" --role-domain "${OS_USER_DOMAIN_NAME}" --user-domain "${OS_USER_DOMAIN_NAME}" --project-domain "${OS_PROJECT_DOMAIN_NAME}" --project "${OS_PROJECT_NAME}" ${role_id}
   done
-  mycd -
+}
+
+function upload-pubkey() {
+  openstack keypair show "${OS_USERNAME}" || openstack keypair create --public-key ~/.ssh/id_rsa.pub "${OS_USERNAME}"
 }
