@@ -237,7 +237,7 @@ function krc {
 }
 
 alias o=openstack
-export KUBECONFIG=~/.config/ccloud_multitool/kubeconfig
+export KUBECONFIG=/Users/c5276249/.config/ccloud_multitool/kubeconfig
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/sbin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 if [ $commands[kubectl] ]; then
@@ -282,11 +282,6 @@ function cld {
 }
 source <(cld completion zsh --prog-name cld)
 
-# BEGIN ansible-managed: packages
-source ~/.local/share/b1-ccee-aliases.sh
-source ~/.local/share/zsh/b1-ccee-functions.sh
-source ~/.ssh/os_pass
-# END ansible-managed: packages
 
 if [[ ! -d ~/.zplug ]]; then
   git clone https://github.com/zplug/zplug ~/.zplug
@@ -366,3 +361,34 @@ if test $(find /tmp/brew-update-timer -mtime +1); then
 fi
 
 source /Users/c5276249/Library/Preferences/org.dystroy.broot/launcher/bash/br
+# BEGIN ansible-managed: ccee_tooling zsh completion
+# load completions
+autoload -Uz compinit
+compinit
+# END ansible-managed: ccee_tooling zsh completion
+# BEGIN ansible-managed: ccee_tooling
+## set PATH to include python-venv-bindir and ~/.local/bin
+if [ -d "~/.local/share/b1-venvs/bin" ] &&
+   [[ ":$PATH:" != *":~/.local/share/b1-venvs/bin:"* ]]; then
+  PATH="~/.local/share/b1-venvs/bin:$PATH"
+fi
+if [ -d "/Users/c5276249/.local/bin" ] &&
+   [[ ":$PATH:" != *":/Users/c5276249/.local/bin:"* ]]; then
+  PATH="/Users/c5276249/.local/bin:$PATH"
+fi
+export PATH
+
+if [ -r "/Users/c5276249/.local/share/b1-ccee-aliases.sh" ]; then
+  source "/Users/c5276249/.local/share/b1-ccee-aliases.sh"
+fi
+if [ -r "/Users/c5276249/.local/share/zsh/b1-ccee-functions.sh" ]; then
+  source "/Users/c5276249/.local/share/zsh/b1-ccee-functions.sh"
+fi
+
+export KUBECONFIG="/Users/c5276249/.config/ccloud_multitool/kubeconfig"
+# END ansible-managed: ccee_tooling
+# BEGIN ansible-managed: f5-docker-connect
+if [ -f /Users/c5276249/.local/share/f5-vpn-aliases.sh ]; then
+  source /Users/c5276249/.local/share/f5-vpn-aliases.sh
+fi
+# END ansible-managed: f5-docker-connect

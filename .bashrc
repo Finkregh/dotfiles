@@ -121,16 +121,41 @@ source <(kubectl completion bash)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 source /Users/c5276249/Library/Preferences/org.dystroy.broot/launcher/bash/br
-# BEGIN ansible-managed: packages
-source ~/.local/share/b1-ccee-aliases.sh
-source ~/.local/share/bash/b1-ccee-functions.sh
-source ~/.ssh/os_pass
-# END ansible-managed: packages
-# BEGIN ansible-managed: oscd
-if [ -f ~/.bash_os_aliases ]; then
-    . ~/.bash_os_aliases
+# BEGIN ansible-managed: ccee_tooling
+## set PATH to include python-venv-bindir and ~/.local/bin
+if [ -d "~/.local/share/b1-venvs/bin" ] &&
+   [[ ":$PATH:" != *":~/.local/share/b1-venvs/bin:"* ]]; then
+  PATH="~/.local/share/b1-venvs/bin:$PATH"
 fi
-if [ "$(type -t _direnv_hook)" != "function" ]; then
-  eval "$(direnv hook bash)"
+if [ -d "/Users/c5276249/.local/bin" ] &&
+   [[ ":$PATH:" != *":/Users/c5276249/.local/bin:"* ]]; then
+  PATH="/Users/c5276249/.local/bin:$PATH"
 fi
-# END ansible-managed: oscd
+export PATH
+
+if [ -r "/Users/c5276249/.local/share/b1-ccee-aliases.sh" ]; then
+  source "/Users/c5276249/.local/share/b1-ccee-aliases.sh"
+fi
+if [ -r "/Users/c5276249/.local/share/bash/b1-ccee-functions.sh" ]; then
+  source "/Users/c5276249/.local/share/bash/b1-ccee-functions.sh"
+fi
+
+export KUBECONFIG="/Users/c5276249/.config/ccloud_multitool/kubeconfig"
+# END ansible-managed: ccee_tooling
+# BEGIN ansible-managed: f5-docker-connect
+if [ -f /Users/c5276249/.local/share/f5-vpn-aliases.sh ]; then
+  source /Users/c5276249/.local/share/f5-vpn-aliases.sh
+fi
+# END ansible-managed: f5-docker-connect
+# BEGIN ansible-managed: ccee_tooling bash completion
+if [ -r /usr/local/etc/profile.d/bash_completion.sh ]; then
+  source /usr/local/etc/profile.d/bash_completion.sh
+fi
+# END ansible-managed: ccee_tooling bash completion
+# BEGIN ansible-managed: ccee_tooling pyccloud
+## set PYCCLOUD enviornment variables
+## <https://github.wdf.sap.corp/tg17/hammer/blob/master/README.md#installation-and-configuration>
+export PYCCLOUD_SECRETS_REPO_PATH="/Users/c5276249/work/secrets"
+export PYCCLOUD_KUBERNETES_CONFIG="/Users/c5276249/.config/ccloud_multitool/kubeconfig"
+export PYCCLOUD_OS_PW_CMD="security find-generic-password -a $USER -s 'Enterprise Connect' -w"
+# END ansible-managed: ccee_tooling pyccloud
