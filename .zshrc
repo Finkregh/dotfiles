@@ -280,7 +280,9 @@ if [ -e $_zplug_lock ] ; then
     ls -la $_zplug_lock
 fi
 
-source ~/.config/zsh/.purepower
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
+#source /usr/local/opt/gitstatus/gitstatus.prompt.zsh
 
 source /home/ol/.config/broot/launcher/bash/br
 if [ -e /home/ol/.nix-profile/etc/profile.d/nix.sh ]; then . /home/ol/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
