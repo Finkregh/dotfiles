@@ -75,7 +75,10 @@
 [rebase]
     autoStash = true
 [gc]
+    ; <https://devblogs.microsoft.com/devops/supercharging-the-git-commit-graph/>
     writeCommitGraph = true
 [rerere]
     enabled = true
     autoupdate = true
+[init]
+	defaultBranch = main
