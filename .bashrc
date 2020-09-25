@@ -157,5 +157,5 @@ fi
 ## <https://github.wdf.sap.corp/tg17/hammer/blob/master/README.md#installation-and-configuration>
 export PYCCLOUD_SECRETS_REPO_PATH="/Users/c5276249/work/secrets"
 export PYCCLOUD_KUBERNETES_CONFIG="/Users/c5276249/.config/ccloud_multitool/kubeconfig"
-export PYCCLOUD_OS_PW_CMD="security find-generic-password -a $USER -s 'Enterprise Connect' -w"
+export PYCCLOUD_OS_PW_CMD='security find-generic-password -a $USER -s "Enterprise Connect" -w'
 # END ansible-managed: ccee_tooling pyccloud

@@ -24,7 +24,7 @@
 [user]
     email = benjamin.oluf.lorenzen@sap.com
     Name = Oluf Lorenzen
-    signingkey = 0x243278FC323BBE52
+    signingkey = 0xB01ED52E55427415
 
 [alias]
     st = status

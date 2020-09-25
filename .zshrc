@@ -89,7 +89,7 @@ setopt interactivecomments # enable bash-style comments # like this
 setopt auto_cd
 
 
-export PATH="$HOME/Library/Python/3.7/bin:$HOME/Library/Python/2.7/bin:$HOME/bin:$HOME/go/bin:$PATH"
+export PATH="$HOME/Library/Python/3.8/bin:$HOME/Library/Python/2.7/bin:$HOME/bin:$HOME/go/bin:$PATH"
 export EDITOR=nvim
 export VISUAL=nvim
 export BROWSER=google-chrome-stable
@@ -279,15 +279,6 @@ function set-ccadmin {
 	export OS_PROJECT_NAME=cloud_admin
 }
 
-# openstack / k8s via ccloud_multitool
-function cld {
-    exec {fd_ccloud}>>/dev/stdout
-    . =(ccloud-multitool --stdout-fd $fd_ccloud "$@")
-    exec {fd_ccloud}>&-
-}
-source <(cld completion zsh --prog-name cld)
-
-
 if [[ ! -d ~/.zplug ]]; then
   git clone https://github.com/zplug/zplug ~/.zplug
   echo "perhaps run 'cd ~/dotfiles ; stow --no-folding .'"
@@ -354,13 +345,13 @@ if [ ! -e /tmp/brew-update-timer ] ; then
     touch /tmp/brew-update-timer
     brew update
     brew upgrade
-    brew cask upgrade
+    brew upgrade --cask
     brew cleanup --prune 30
 fi
 if test $(find /tmp/brew-update-timer -mtime +1); then
     brew update
     brew upgrade
-    brew cask upgrade
+    brew upgrade --cask
     brew cleanup --prune 30
     touch /tmp/brew-update-timer
 fi
@@ -397,3 +388,10 @@ if [ -f /Users/c5276249/.local/share/f5-vpn-aliases.sh ]; then
   source /Users/c5276249/.local/share/f5-vpn-aliases.sh
 fi
 # END ansible-managed: f5-docker-connect
+# BEGIN ansible-managed: ccee_tooling pyccloud
+## set PYCCLOUD enviornment variables
+## <https://github.wdf.sap.corp/tg17/hammer/blob/master/README.md#installation-and-configuration>
+export PYCCLOUD_SECRETS_REPO_PATH="/Users/c5276249/work/secrets"
+export PYCCLOUD_KUBERNETES_CONFIG="/Users/c5276249/.config/ccloud_multitool/kubeconfig"
+export PYCCLOUD_OS_PW_CMD='security find-generic-password -a $USER -s "Enterprise Connect" -w'
+# END ansible-managed: ccee_tooling pyccloud
