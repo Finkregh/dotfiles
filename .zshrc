@@ -89,7 +89,7 @@ setopt interactivecomments # enable bash-style comments # like this
 setopt auto_cd
 
 
-export PATH="$HOME/Library/Python/3.8/bin:$HOME/Library/Python/2.7/bin:$HOME/bin:$HOME/go/bin:$PATH"
+export PATH="$HOME/Library/Python/3.9/bin:$HOME/Library/Python/2.7/bin:$HOME/bin:$HOME/go/bin:$PATH"
 export EDITOR=nvim
 export VISUAL=nvim
 export BROWSER=google-chrome-stable
@@ -101,10 +101,9 @@ export TERM=xterm-256color
 export JAVA_TOOL_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
 # python crashes otherwise...
 # needs `ln -s /usr/local/Cellar/openssl/1.0.2t/lib/libssl.1.0.0.dylib /usr/local/lib/libssl.dylib ; ln -s /usr/local/Cellar/openssl/1.0.2t/lib/libcrypto.1.0.0.dylib /usr/local/lib/libcrypto.dylib`
-export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/opt/openssl/lib
 
 export GOPATH=$HOME/go
-export GOROOT=/usr/local/opt/go/libexec
+export GOROOT=$(brew --prefix)/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
@@ -242,9 +241,14 @@ function krc {
 }
 
 alias o=openstack
-export KUBECONFIG=/Users/c5276249/.config/ccloud_multitool/kubeconfig
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/sbin:$PATH"
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+alias oldbrew="arch -x86_64 /usr/local/bin/brew"
+alias brew="arch -arm64e /opt/homebrew/bin/brew"
+#export KUBECONFIG=/Users/c5276249/.config/ccloud_multitool/kubeconfig
+export PATH="/opt/homebrew/sbin:/usr/local/sbin:$PATH"
+export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH"
+export MANPATH="$(brew --prefix)/opt/gnu-sed/libexec/gnuman:$MANPATH"
+export MANPATH="$(brew --prefix)/opt/gnu-tar/libexec/gnuman:$MANPATH"
 if [ $commands[kubectl] ]; then
   source <(kubectl completion zsh)
 fi
@@ -252,7 +256,8 @@ fi
 # GITHUB_TOKEN etc
 . ~/.env-secrets
 
-fpath=(/usr/local/share/zsh-completions $fpath)
+FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 
 # openstack-manually
 function set-region {
