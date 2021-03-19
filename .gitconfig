@@ -50,6 +50,9 @@
     #git graphviz HEAD^^..HEAD | dotty /dev/stdin
     #git graphviz --first-parent master | dotty /dev/stdin
     f = fuzzy
+    # show last changed branches and when
+    wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads # https://carolynvanslyck.com/blog/2020/12/git-wip/
+
 
 [gui]
     fontui   = -family terminus -size 9 -weight normal -slant roman -underline 0 -overstrike 0
