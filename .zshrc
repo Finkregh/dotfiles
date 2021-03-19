@@ -3,6 +3,9 @@
 
 export LANG=en_US.UTF-8
 
+# gather timing infos, then run zprof
+#zmodload zsh/zprof
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
