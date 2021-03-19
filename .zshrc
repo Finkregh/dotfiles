@@ -309,6 +309,7 @@ zplug "plugins/git-extras", from:oh-my-zsh
 zplug "plugins/pip", from:oh-my-zsh
 zplug "chmouel/kss", use:"_kss", as:command, use:"kss"
 zplug "bigH/git-fuzzy", use:"bin/git-fuzzy", as:command
+zplug "plugins/asdf", from:oh-my-zsh
 
 zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
@@ -345,6 +346,8 @@ fi
 # ruby garbage
 eval "$(rbenv init -)"
 
+#if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
 # fancy logo, stats, etc
 #neofetch || true
 
@@ -365,6 +368,10 @@ if test $(find /tmp/brew-update-timer -mtime +1); then
 fi
 
 source /Users/c5276249/Library/Preferences/org.dystroy.broot/launcher/bash/br
+
+# dont suspend background jobs if they produce output
+stty -tostop
+
 # BEGIN ansible-managed: ccee_tooling zsh completion
 # load completions
 autoload -Uz compinit
