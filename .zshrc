@@ -378,35 +378,18 @@ autoload -Uz compinit
 compinit
 # END ansible-managed: ccee_tooling zsh completion
 # BEGIN ansible-managed: ccee_tooling
-## set PATH to include python-venv-bindir and ~/.local/bin
-if [ -d "~/.local/share/b1-venvs/bin" ] &&
-   [[ ":$PATH:" != *":~/.local/share/b1-venvs/bin:"* ]]; then
-  PATH="~/.local/share/b1-venvs/bin:$PATH"
+if [ -r "${HOME}/.local/share/b1-ccee-environment.sh" ]; then
+  source "${HOME}/.local/share/b1-ccee-environment.sh"
 fi
-if [ -d "/Users/c5276249/.local/bin" ] &&
-   [[ ":$PATH:" != *":/Users/c5276249/.local/bin:"* ]]; then
-  PATH="/Users/c5276249/.local/bin:$PATH"
+if [ -r "${HOME}/.local/share/b1-ccee-aliases.sh" ]; then
+  source "${HOME}/.local/share/b1-ccee-aliases.sh"
 fi
-export PATH
-
-if [ -r "/Users/c5276249/.local/share/b1-ccee-aliases.sh" ]; then
-  source "/Users/c5276249/.local/share/b1-ccee-aliases.sh"
+if [ -r "${HOME}/.local/share/zsh/b1-ccee-functions.sh" ]; then
+  source "${HOME}/.local/share/zsh/b1-ccee-functions.sh"
 fi
-if [ -r "/Users/c5276249/.local/share/zsh/b1-ccee-functions.sh" ]; then
-  source "/Users/c5276249/.local/share/zsh/b1-ccee-functions.sh"
-fi
-
-export KUBECONFIG="/Users/c5276249/.config/ccloud_multitool/kubeconfig"
 # END ansible-managed: ccee_tooling
-# BEGIN ansible-managed: f5-docker-connect
-if [ -f /Users/c5276249/.local/share/f5-vpn-aliases.sh ]; then
-  source /Users/c5276249/.local/share/f5-vpn-aliases.sh
+# BEGIN ansible-managed: f5_docker_connect
+if [ -f "${HOME}/.local/share/f5-vpn-aliases.sh" ]; then
+  source "${HOME}/.local/share/f5-vpn-aliases.sh"
 fi
-# END ansible-managed: f5-docker-connect
-# BEGIN ansible-managed: ccee_tooling pyccloud
-## set PYCCLOUD enviornment variables
-## <https://github.wdf.sap.corp/tg17/hammer/blob/master/README.md#installation-and-configuration>
-export PYCCLOUD_SECRETS_REPO_PATH="/Users/c5276249/work/secrets"
-export PYCCLOUD_KUBERNETES_CONFIG="/Users/c5276249/.config/ccloud_multitool/kubeconfig"
-export PYCCLOUD_OS_PW_CMD='security find-generic-password -a $USER -s "Enterprise Connect" -w'
-# END ansible-managed: ccee_tooling pyccloud
+# END ansible-managed: f5_docker_connect
