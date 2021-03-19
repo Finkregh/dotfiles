@@ -255,6 +255,7 @@ zplug "plugins/git-extras", from:oh-my-zsh
 zplug "plugins/pip", from:oh-my-zsh
 zplug "chmouel/kss", use:"_kss", as:command, use:"kss"
 zplug "bigH/git-fuzzy", use:"bin/git-fuzzy", as:command
+zplug "plugins/asdf", from:oh-my-zsh
 
 zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
@@ -290,3 +291,6 @@ fi
 
 source /home/ol/.config/broot/launcher/bash/br
 if [ -e /home/ol/.nix-profile/etc/profile.d/nix.sh ]; then . /home/ol/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+# dont suspend background jobs if they produce output
+stty -tostop
