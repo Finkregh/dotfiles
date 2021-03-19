@@ -26,30 +26,32 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Make sure you use single quotes
 
-Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree'
-Plug 'clones/vim-autocomplpop'
-Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-fugitive' " git commands
+Plug 'clones/vim-autocomplpop' " auto-open completion popup
+" Plug 'altercation/vim-colors-solarized'
 Plug 'hukl/Smyck-Color-Scheme', { 'do': 'rm ~/.local/share/nvim/plugged/Smyck-Color-Scheme/colors; mkdir ~/.local/share/nvim/plugged/Smyck-Color-Scheme/colors; ln -s ~/.local/share/nvim/plugged/Smyck-Color-Scheme/smyck.vim ~/.local/share/nvim/plugged/Smyck-Color-Scheme/colors/' }
-Plug 'clones/vim-l9'
-Plug 'taq/vim-git-branch-info'
+Plug 'clones/vim-l9' " helper library
+Plug 'taq/vim-git-branch-info' " info in statusline
 Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'chr4/sslsecure.vim'
-Plug 'fatih/vim-go'
-Plug 'w0rp/ale'
+"Plug 'chr4/sslsecure.vim' " SSL cipher highlight
+Plug 'fatih/vim-go' " golang stuff
+Plug 'w0rp/ale' " async linting engine
+Plug 'PProvost/vim-ps1'
 " this breaks yaml files..
 "Plug 'MicahElliott/Rocannon'
-Plug 'christoomey/vim-conflicted'
+Plug 'christoomey/vim-conflicted' " git conflict solving
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-Plug 'tomtom/tcomment_vim'
+Plug 'editorconfig/editorconfig-vim' " respect editorconfig config lines
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+"Plug 'tomtom/tcomment_vim' " proper comment enabling for various files
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 Plug 'saltstack/salt-vim'
 Plug 'rust-lang/rust.vim'
-Plug 'rhysd/vim-grammarous'
+"Plug 'rhysd/vim-grammarous'
+
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' } " IDE for python
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 "Plug 'junegunn/vim-easy-align'
@@ -401,8 +403,8 @@ let g:ale_fixers = {
 \   'xml': ['xmllint'],
 \   'python': ['black', 'isort'],
 \   'php': ['php_cs_fixer', 'phpcbf'],
-\   'markdown': ['prettier', 'textlint'],
 \}
+"   'markdown': ['prettier', 'textlint'],
 " always show gutter-line (remove pop-in-pop-out flicker)
 let g:ale_sign_column_always = 1
 
