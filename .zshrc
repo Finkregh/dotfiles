@@ -2,6 +2,9 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 
+# gather timing infos, then run zprof
+#zmodload zsh/zprof
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
