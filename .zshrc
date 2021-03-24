@@ -115,7 +115,7 @@ fi
 
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
-if [ -x /usr/bin/keychain ] ; then
+if [ command -v keychain &> /dev/null ] ; then
     sleep 0.$[ ( $RANDOM % 9 ) ]
     eval $(keychain --systemd --quiet --eval --agents gpg,ssh --inherit any --quick)
     /usr/bin/keychain --systemd --quick --inherit any --agents "ssh" ~/.ssh/id_rsa ~/.ssh/id_ed25519
