@@ -49,6 +49,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 Plug 'saltstack/salt-vim'
 Plug 'rust-lang/rust.vim'
+Plug 'rhysd/vim-grammarous'
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 "Plug 'junegunn/vim-easy-align'
