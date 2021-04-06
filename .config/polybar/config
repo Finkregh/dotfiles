@@ -421,9 +421,9 @@ exec = ~/.config/polybar/pkg.sh
 [module/audioplayer]
 type = custom/script
 interval = 10
-format-prefix = "  "
+format-prefix = "   "
 format-prefix-foreground = #1ED760
-exec = playerctl metadata xesam:artist ; echo -n " - "; playerctl metadata xesam:title
+exec = playerctl metadata xesam:artist | tr -d '\n' ; echo -n " - "; playerctl metadata xesam:title | tr -d '\n'
 exec-if = pgrep -x spotify
 click-left = playerctl previous
 click-middle = playerctl play-pause
