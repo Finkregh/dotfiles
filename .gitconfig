@@ -24,7 +24,7 @@
 [user]
 	email = oluf.lorenzen@b1-systems.de
 	Name = Oluf Lorenzen
-	signingkey = 0xED60E77F614BF553
+	signingkey = 0x5AA988986329E245
 
 [alias]
     st = status
