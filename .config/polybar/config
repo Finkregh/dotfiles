@@ -96,7 +96,7 @@ modules-left =
 modules-center = xwindow
 modules-right = cpu memory
 
-tray-position = ${env:POLYBAR_TRAY_POSITION_EXTERNAL:none}
+tray-position = ${env:POLYBAR_TRAY_POSITION_EXTERNAL:left}
 tray-maxsize = ${env:POLYBAR_TRAY_MAXSIZE:40}
 tray-transparent = true
 tray-background = ${colors.background_i3wmthemer}
@@ -129,7 +129,7 @@ modules-left =
 modules-center = xwindow
 modules-right = cpu memory
 
-tray-position = ${env:POLYBAR_TRAY_POSITION_LAPTOP:none}
+tray-position = ${env:POLYBAR_TRAY_POSITION_LAPTOP:left}
 tray-maxsize = 40
 tray-transparent = true
 tray-background = ${colors.background_i3wmthemer}

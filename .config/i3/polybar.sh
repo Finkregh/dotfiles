@@ -4,22 +4,17 @@ _CONNECTED_SCREENS=$(xrandr | grep '\Wconnected' | awk '{ print $1 }')
 
 if [[ $_CONNECTED_SCREENS = eDP1 ]]; then
     export POLYBAR_TRAY_POSITION_EXTERNAL=none
-    export POLYBAR_TRAY_POSITION_LAPTOP=left
 elif [[ $_CONNECTED_SCREENS =~ DP-1-1 ]]; then
     export MONITOR=DP-1-1
     export POLY_DPI=192
-    export POLYBAR_TRAY_POSITION_EXTERNAL=left
 elif [[ $_CONNECTED_SCREENS =~ HDMI-1 ]]; then
-    export MONITOR=DP-1-1
+    export MONITOR=HDMI-1
     export POLY_DPI=192
-    export POLYBAR_TRAY_POSITION_EXTERNAL=left
 elif [[ $_CONNECTED_SCREENS =~ DP1 ]]; then
     export MONITOR=DP1
-    export POLYBAR_TRAY_POSITION_EXTERNAL=left
     export POLYBAR_TRAY_MAXSIZE=20
 else
     export POLYBAR_TRAY_POSITION_EXTERNAL=none
-    export POLYBAR_TRAY_POSITION_LAPTOP=left
 fi
 
 # Terminate already running bar instances
