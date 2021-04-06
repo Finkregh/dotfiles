@@ -269,3 +269,4 @@ fi
 source ~/.config/zsh/.purepower
 
 source /home/ol/.config/broot/launcher/bash/br
+if [ -e /home/ol/.nix-profile/etc/profile.d/nix.sh ]; then . /home/ol/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
