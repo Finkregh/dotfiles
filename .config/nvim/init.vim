@@ -410,7 +410,7 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
-let g:ale_sh_shfmt_options = '-i 4'
+let g:ale_sh_shfmt_options = '-i 2'
 
 " lint after 1000ms after changes are made both on insert mode and normal mode
 let g:ale_lint_on_text_changed = 'always'
