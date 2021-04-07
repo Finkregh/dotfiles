@@ -288,6 +288,19 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Scratchpad terminal.
+# https://faq.i3wm.org/question/2420/dropdown-terminal-in-i3/
+# Using a custom title string with criteria is deliberate and keeps things simple.
+exec --no-startup-id alacritty --title "float-terminal"
+for_window [class="Alacritty" title="float-terminal"] border pixel 4
+#for_window [class="Alacritty" title="float-terminal"] floating enable, move scratchpad;
+#for_window [class="Alacritty" title="float-terminal"] floating enable, move scratchpad, scratchpad show;
+for_window [class="Alacritty" title="float-terminal"] floating enable, move scratchpad, scratchpad show, move position 50 px 50 px, resize grow down 500, resize grow right 900, scratchpad show;
+#for_window [class="Alacritty" title="float-terminal"] floating enable, move scratchpad, scratchpad show, move position 50px 50px, move scratchpad;
+#for_window [class="Alacritty" title="float-terminal"] resize grow left 300, resize grow right 300, resize grow down 150, resize grow up 100, move scratchpad;
+bindsym $mod+b  [class="Alacritty" title="float-terminal"] scratchpad show
+#bindsym Print [instance="alacritty" title="float-terminal"] scratchpad show
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 #bar {
