@@ -21,7 +21,7 @@ set $ws8 todo
 set $ws9 mon
 set $ws10 vwmare
 
-workspace 1:comm output eDP1
+workspace 1:comm output eDP-1
 workspace 2:browser output DP-1-1
 workspace 3:shell output DP-1-1
 workspace 4:editor output DP-1-1
