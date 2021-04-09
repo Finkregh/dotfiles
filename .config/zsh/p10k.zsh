@@ -48,7 +48,8 @@
     status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
-    custom_oscontext        # OpenStack context
+    #custom_oscontext        # OpenStack context
+    custom_ccloudcontext    # ccloud/cld context
     direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
@@ -1480,6 +1481,12 @@
   typeset -g POWERLEVEL9K_CUSTOM_OSCONTEXT="os_context"
   typeset -g POWERLEVEL9K_CUSTOM_OSCONTEXT_FOREGROUND=098
   typeset -g POWERLEVEL9K_CUSTOM_OSCONTEXT_BACKGROUND='none'
+
+  ######## CCloud context
+  function ccloud_context() { if [ ! -z ${KUBECTL_CONTEXT} ] ; then echo -ne "\u2388 " ; echo "${CCLOUD_PROMPT_ESCAPED_ZSH}" ; fi }
+  typeset -g POWERLEVEL9K_CUSTOM_CCLOUDCONTEXT="ccloud_context"
+  typeset -g POWERLEVEL9K_CUSTOM_CCLOUDCONTEXT_FOREGROUND='027'
+  typeset -g POWERLEVEL9K_CUSTOM_CCLOUDCONTEXT_BACKGROUND='none'
 
   # Example of a user-defined prompt segment. Function prompt_example will be called on every
   # prompt if `example` prompt segment is added to POWERLEVEL9K_LEFT_PROMPT_ELEMENTS or
