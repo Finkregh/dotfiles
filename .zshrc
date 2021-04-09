@@ -259,6 +259,20 @@ function krc {
     done
 }
 
+if [[ $(find "~/.cache/zsh/completion-zsh-kubectl" -mtime +7 -print) ]]; then
+    kubectl completion zsh > ~/.cache/zsh/completion-zsh-kubectl
+fi
+[ -f ~/.cache/zsh/completion-zsh-kubectl ] || kubectl completion zsh > ~/.cache/zsh/completion-zsh-kubectl
+source ~/.cache/zsh/completion-zsh-kubectl
+eval $(sed 's|kubectl|k|g' ~/.cache/zsh/completion-zsh-kubectl)
+
+if [[ $(find "~/.cache/zsh/completion-zsh-helm3" -mtime +7 -print) ]]; then
+    helm3 completion zsh > ~/.cache/zsh/completion-zsh-helm3
+fi
+[ -f ~/.cache/zsh/completion-zsh-helm3 ] || helm3 completion zsh > ~/.cache/zsh/completion-zsh-helm3
+source ~/.cache/zsh/completion-zsh-helm3
+#eval $(sed 's|helm3|h|g' ~/.cache/zsh/completion-zsh-helm3)
+
 alias o=openstack
 alias oldbrew="arch -x86_64 /usr/local/bin/brew"
 alias brew="arch -arm64e /opt/homebrew/bin/brew"
@@ -268,9 +282,6 @@ export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH="$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH"
 export MANPATH="$(brew --prefix)/opt/gnu-sed/libexec/gnuman:$MANPATH"
 export MANPATH="$(brew --prefix)/opt/gnu-tar/libexec/gnuman:$MANPATH"
-if [ $commands[kubectl] ]; then
-  source <(kubectl completion zsh)
-fi
 
 # GITHUB_TOKEN etc
 . ~/.env-secrets
