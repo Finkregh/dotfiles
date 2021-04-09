@@ -1475,7 +1475,8 @@
   typeset -g POWERLEVEL9K_TIME_VISUAL_IDENTIFIER_EXPANSION=
   # Custom prefix.
   # typeset -g POWERLEVEL9K_TIME_PREFIX='%fat '
-  #
+
+
   ######## Openstack context
   function os_context() { if [ ! -z ${OS_PROJECT_DOMAIN_NAME} ] ; then echo -ne "\uf473 " ; echo "$OS_REGION_NAME/$OS_PROJECT_DOMAIN_NAME/$OS_PROJECT_NAME" ; fi }
   typeset -g POWERLEVEL9K_CUSTOM_OSCONTEXT="os_context"
