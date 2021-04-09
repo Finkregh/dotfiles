@@ -230,6 +230,22 @@ bindkey -M emacs '^[[3;5~' kill-word
 bindkey -M emacs '^[[3^' kill-word
 
 
+# BEGIN ansible-managed: ccee_tooling
+if [ -r "${HOME}/.local/share/b1-ccee-environment.sh" ]; then
+  source "${HOME}/.local/share/b1-ccee-environment.sh"
+fi
+if [ -r "${HOME}/.local/share/b1-ccee-aliases.sh" ]; then
+  source "${HOME}/.local/share/b1-ccee-aliases.sh"
+fi
+if [ -r "${HOME}/.local/share/zsh/b1-ccee-functions.sh" ]; then
+  source "${HOME}/.local/share/zsh/b1-ccee-functions.sh"
+fi
+# END ansible-managed: ccee_tooling
+# BEGIN ansible-managed: f5_docker_connect
+if [ -f "${HOME}/.local/share/f5-vpn-aliases.sh" ]; then
+  source "${HOME}/.local/share/f5-vpn-aliases.sh"
+fi
+# END ansible-managed: f5_docker_connect
 
 alias k=kubectl
 alias ks="kubectl-sync"
@@ -377,19 +393,3 @@ stty -tostop
 autoload -Uz compinit
 compinit
 # END ansible-managed: ccee_tooling zsh completion
-# BEGIN ansible-managed: ccee_tooling
-if [ -r "${HOME}/.local/share/b1-ccee-environment.sh" ]; then
-  source "${HOME}/.local/share/b1-ccee-environment.sh"
-fi
-if [ -r "${HOME}/.local/share/b1-ccee-aliases.sh" ]; then
-  source "${HOME}/.local/share/b1-ccee-aliases.sh"
-fi
-if [ -r "${HOME}/.local/share/zsh/b1-ccee-functions.sh" ]; then
-  source "${HOME}/.local/share/zsh/b1-ccee-functions.sh"
-fi
-# END ansible-managed: ccee_tooling
-# BEGIN ansible-managed: f5_docker_connect
-if [ -f "${HOME}/.local/share/f5-vpn-aliases.sh" ]; then
-  source "${HOME}/.local/share/f5-vpn-aliases.sh"
-fi
-# END ansible-managed: f5_docker_connect
