@@ -294,3 +294,5 @@ if [ -e /home/ol/.nix-profile/etc/profile.d/nix.sh ]; then . /home/ol/.nix-profi
 
 # dont suspend background jobs if they produce output
 stty -tostop
+
+#xlayoutdisplay --dpi 192
