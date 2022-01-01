@@ -133,8 +133,8 @@ if [ -r "${HOME}/.local/share/bash/b1-ccee-functions.sh" ]; then
 fi
 # END ansible-managed: ccee_tooling
 # BEGIN ansible-managed: ccee_tooling bash completion
-if [ -r /usr/local/etc/profile.d/bash_completion.sh ]; then
-  source /usr/local/etc/profile.d/bash_completion.sh
+if [ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]; then
+  source "/opt/homebrew/etc/profile.d/bash_completion.sh"
 fi
 # END ansible-managed: ccee_tooling bash completion
 # BEGIN ansible-managed: f5_docker_connect
@@ -142,3 +142,4 @@ if [ -f "${HOME}/.local/share/f5-vpn-aliases.sh" ]; then
   source "${HOME}/.local/share/f5-vpn-aliases.sh"
 fi
 # END ansible-managed: f5_docker_connect
+. "$HOME/.cargo/env"

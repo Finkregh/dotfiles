@@ -109,6 +109,7 @@ export GOPATH=$HOME/go
 export GOROOT=$(brew --prefix)/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
+source $HOME/.cargo/env
 
 autoload -Uz compinit
 compinit
@@ -248,30 +249,18 @@ fi
 # END ansible-managed: f5_docker_connect
 
 alias k=kubectl
-alias ks="kubectl-sync"
-alias kl="kubectl-logon"
-alias kc="kubectl config use-context"
-function kn { kubectl config set-context $(kubectl config current-context) --namespace }
-function krc {
-    for context in $(kubectl-sync ls | awk '/kubectl logon/ {print $2}'); do
-        kubectl config use-context $context && \
-        kubectl-logon -u $OS_USERNAME -p $OS_PASSWORD
-    done
-}
-
-if [[ $(find "~/.cache/zsh/completion-zsh-kubectl" -mtime +7 -print) ]]; then
-    kubectl completion zsh > ~/.cache/zsh/completion-zsh-kubectl
-fi
-[ -f ~/.cache/zsh/completion-zsh-kubectl ] || kubectl completion zsh > ~/.cache/zsh/completion-zsh-kubectl
-source ~/.cache/zsh/completion-zsh-kubectl
-eval $(sed 's|kubectl|k|g' ~/.cache/zsh/completion-zsh-kubectl)
-
-if [[ $(find "~/.cache/zsh/completion-zsh-helm3" -mtime +7 -print) ]]; then
-    helm3 completion zsh > ~/.cache/zsh/completion-zsh-helm3
-fi
-[ -f ~/.cache/zsh/completion-zsh-helm3 ] || helm3 completion zsh > ~/.cache/zsh/completion-zsh-helm3
-source ~/.cache/zsh/completion-zsh-helm3
-#eval $(sed 's|helm3|h|g' ~/.cache/zsh/completion-zsh-helm3)
+alias kn="u8s set --namespace"
+alias kc="u8s set --context"
+alias kk="u8s set --kubeconfig"
+alias ke="u8s kubectl -- exec -ti"
+alias kl="u8s kubectl -- logs -f"
+alias kg="u8s kubectl -- get"
+alias kgp="u8s kubectl -- get pods -o wide"
+alias kgpa="u8s kubectl -- get pods -o wide --all-namespaces"
+alias kgn="u8s kubectl -- get nodes -L container-linux-update.v1.coreos.com/version -L failure-domain.beta.kubernetes.io/zone"
+alias kdn="u8s kubectl -- describe node"
+alias kdp="u8s kubectl -- describe pod"
+alias kds="u8s kubectl -- describe service"
 
 alias o=openstack
 alias oldbrew="arch -x86_64 /usr/local/bin/brew"
@@ -400,7 +389,19 @@ source /Users/c5276249/Library/Preferences/org.dystroy.broot/launcher/bash/br
 stty -tostop
 
 # BEGIN ansible-managed: ccee_tooling zsh completion
+# add homebrew functions paths
+if type brew &>/dev/null; then
+  for funcpath  in "$(brew --prefix)/share/zsh-completions" "$(brew --prefix)/share/zsh/functions" "$(brew --prefix)/share/zsh/site-functions" ; do
+    if [ -d "${funcpath}" ] &&
+      [[ ":${FPATH}:" != *":${funcpath}:"* ]]; then
+        FPATH="${funcpath}:${FPATH}"
+        # ensure secure directory rights
+        chmod -R go-w "${funcpath}"
+    fi
+  done
+fi
 # load completions
-autoload -Uz compinit
-compinit
+type compinit $> /dev/null || autoload -Uz compinit
+test -n "${_comp_dumpfile}" || compinit
 # END ansible-managed: ccee_tooling zsh completion
+if [ -e /Users/c5276249/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/c5276249/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

@@ -45,6 +45,7 @@
     wmshow = show master --color-words
     merge = merge --ff-only
     pull = pull --rebase
+    rbc = rebase --continue
     tt = timetrack
     graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format: %h -> { %p }' \"$@\" | sed 's/[0-9a-f]\\+/\"&\"/g' ; echo '}'; }; %f"
     conflicted = !nvim +Conflicted
@@ -93,3 +94,7 @@
     syntax-theme = Monokai Extended
 [interactive]
     #diffFilter = delta --color-only
+[mergetool "vim-conflicted"]
+	cmd = nvim +Conflicted
+[merge]
+	tool = nvim-conflicted

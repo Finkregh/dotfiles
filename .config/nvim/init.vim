@@ -23,7 +23,6 @@ let g:python3_host_prog = '/opt/homebrew/bin/python3'
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Make sure you use single quotes
-
 Plug 'tpope/vim-fugitive' " git commands
 Plug 'clones/vim-autocomplpop' " auto-open completion popup
 " Plug 'altercation/vim-colors-solarized'
@@ -46,6 +45,7 @@ Plug 'editorconfig/editorconfig-vim' " respect editorconfig config lines
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 "Plug 'rhysd/vim-grammarous'
+Plug 'LnL7/vim-nix'
 
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' } " IDE for python
 
@@ -209,6 +209,7 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType htmldjango.html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " ==== colors/display ====
 syntax on
@@ -400,6 +401,7 @@ let g:ale_fixers = {
 \   'xml': ['xmllint'],
 \   'python': ['black', 'isort'],
 \   'php': ['php_cs_fixer', 'phpcbf'],
+\   'nix': ['nixpkgs-fmt'],
 \}
 "   'markdown': ['prettier', 'textlint'],
 " always show gutter-line (remove pop-in-pop-out flicker)
