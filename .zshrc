@@ -32,12 +32,6 @@ export LANG=en_US.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-alias fping="docker exec -ti f5vpn ping"
-alias ftraceroute="docker exec -ti f5vpn traceroute"
-alias ftelnet="docker exec -ti f5vpn telnet"
-alias fcurl="docker exec -ti f5vpn curl"
-alias ftcpdump="docker exec -ti f5vpn tcpdump"
-alias fmtr="docker exec -ti f5vpn mtr"
 
 # rather use nvim instead of vim... faster async editing
 alias vim="nvim"
@@ -92,7 +86,7 @@ setopt interactivecomments # enable bash-style comments # like this
 setopt auto_cd
 
 
-export PATH="$HOME/Library/Python/3.9/bin:$HOME/Library/Python/2.7/bin:$HOME/bin:$HOME/go/bin:$PATH"
+export PATH="$HOME/Library/Python/3.9/bin:$HOME/bin:$HOME/go/bin:$PATH"
 export EDITOR=nvim
 export VISUAL=nvim
 export BROWSER=google-chrome-stable
@@ -231,23 +225,6 @@ bindkey -M emacs '^[[3;5~' kill-word
 bindkey -M emacs '^[[3^' kill-word
 
 
-# BEGIN ansible-managed: ccee_tooling
-if [ -r "${HOME}/.local/share/b1-ccee-environment.sh" ]; then
-  source "${HOME}/.local/share/b1-ccee-environment.sh"
-fi
-if [ -r "${HOME}/.local/share/b1-ccee-aliases.sh" ]; then
-  source "${HOME}/.local/share/b1-ccee-aliases.sh"
-fi
-if [ -r "${HOME}/.local/share/zsh/b1-ccee-functions.sh" ]; then
-  source "${HOME}/.local/share/zsh/b1-ccee-functions.sh"
-fi
-# END ansible-managed: ccee_tooling
-# BEGIN ansible-managed: f5_docker_connect
-if [ -f "${HOME}/.local/share/f5-vpn-aliases.sh" ]; then
-  source "${HOME}/.local/share/f5-vpn-aliases.sh"
-fi
-# END ansible-managed: f5_docker_connect
-
 alias k=kubectl
 alias kn="u8s set --namespace"
 alias kc="u8s set --context"
@@ -277,31 +254,6 @@ export MANPATH="$(brew --prefix)/opt/gnu-tar/libexec/gnuman:$MANPATH"
 
 FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
-# openstack-manually
-function set-region {
-	export OS_REGION_NAME=$1
-	export OS_REGION=$1
-	export OS_AUTH_URL=https://identity-3.$1.cloud.sap/v3
-	kubectl config use-context $1
-	monsoonctl
-	monsoonctl
-}
-
-function set-project {
-	export OS_PROJECT_NAME=$1
-}
-
-function set-domain {
-	export OS_PROJECT_DOMAIN_NAME=$1
-	export OS_USER_DOMAIN_NAME=$1
-}
-
-function set-ccadmin {
-	export OS_PROJECT_DOMAIN_NAME=ccadmin
-	export OS_USER_DOMAIN_NAME=ccadmin
-	export OS_PROJECT_NAME=cloud_admin
-}
 
 if [[ ! -d ~/.zplug ]]; then
   git clone https://github.com/zplug/zplug ~/.zplug
@@ -360,12 +312,9 @@ fi
 #source /usr/local/opt/gitstatus/gitstatus.prompt.zsh
 
 # ruby garbage
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
 
 #if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-# fancy logo, stats, etc
-#neofetch || true
 
 # crude daily homebrew update
 if [ ! -e /tmp/brew-update-timer ] ; then
@@ -383,12 +332,11 @@ if test $(find /tmp/brew-update-timer -mtime +1); then
     touch /tmp/brew-update-timer
 fi
 
-source /Users/c5276249/Library/Preferences/org.dystroy.broot/launcher/bash/br
+#source /Users/c5276249/Library/Preferences/org.dystroy.broot/launcher/bash/br
 
 # dont suspend background jobs if they produce output
 stty -tostop
 
-# BEGIN ansible-managed: ccee_tooling zsh completion
 # add homebrew functions paths
 if type brew &>/dev/null; then
   for funcpath  in "$(brew --prefix)/share/zsh-completions" "$(brew --prefix)/share/zsh/functions" "$(brew --prefix)/share/zsh/site-functions" ; do
@@ -403,5 +351,5 @@ fi
 # load completions
 type compinit $> /dev/null || autoload -Uz compinit
 test -n "${_comp_dumpfile}" || compinit
-# END ansible-managed: ccee_tooling zsh completion
-if [ -e /Users/c5276249/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/c5276249/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+#if [ -e /Users/c5276249/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/c5276249/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

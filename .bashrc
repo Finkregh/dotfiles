@@ -120,26 +120,4 @@ source <(kubectl completion bash)
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-source /Users/c5276249/Library/Preferences/org.dystroy.broot/launcher/bash/br
-# BEGIN ansible-managed: ccee_tooling
-if [ -r "${HOME}/.local/share/b1-ccee-environment.sh" ]; then
-  source "${HOME}/.local/share/b1-ccee-environment.sh"
-fi
-if [ -r "${HOME}/.local/share/b1-ccee-aliases.sh" ]; then
-  source "${HOME}/.local/share/b1-ccee-aliases.sh"
-fi
-if [ -r "${HOME}/.local/share/bash/b1-ccee-functions.sh" ]; then
-  source "${HOME}/.local/share/bash/b1-ccee-functions.sh"
-fi
-# END ansible-managed: ccee_tooling
-# BEGIN ansible-managed: ccee_tooling bash completion
-if [ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]; then
-  source "/opt/homebrew/etc/profile.d/bash_completion.sh"
-fi
-# END ansible-managed: ccee_tooling bash completion
-# BEGIN ansible-managed: f5_docker_connect
-if [ -f "${HOME}/.local/share/f5-vpn-aliases.sh" ]; then
-  source "${HOME}/.local/share/f5-vpn-aliases.sh"
-fi
-# END ansible-managed: f5_docker_connect
 . "$HOME/.cargo/env"
