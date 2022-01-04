@@ -315,6 +315,7 @@ fi
 #eval "$(rbenv init -)"
 
 #if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+if which chezmoi > /dev/null; then eval "$(chezmoi completion zsh)"; fi
 
 # crude daily homebrew update
 if [ ! -e /tmp/brew-update-timer ] ; then
