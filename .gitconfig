@@ -23,9 +23,9 @@
     #pager = delta
 
 [user]
-    email = benjamin.oluf.lorenzen@sap.com
+    email = b.lorenzen@sap.com
     Name = Oluf Lorenzen
-    signingkey = 0xB01ED52E55427415
+    #signingkey = 0xB01ED52E55427415
 
 [alias]
     st = status
@@ -87,7 +87,7 @@
     autoupdate = true
 [init]
 	defaultBranch = main
-	templatedir = /Users/c5276249/.local/share/git/template
+    #templatedir = /Users/c5276249/.local/share/git/template
 [delta]
     plus-color = "#012800"
     minus-color = "#340001"

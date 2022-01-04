@@ -86,7 +86,7 @@ setopt interactivecomments # enable bash-style comments # like this
 setopt auto_cd
 
 
-export PATH="$HOME/Library/Python/3.9/bin:$HOME/bin:$HOME/go/bin:$PATH"
+export PATH="$HOME/Library/Python/3.9/bin:$HOME/bin:$HOME/go/bin:/opt/homebrew/bin:$PATH"
 export EDITOR=nvim
 export VISUAL=nvim
 export BROWSER=google-chrome-stable
