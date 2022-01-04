@@ -23,7 +23,7 @@
     #pager = delta
 
 [user]
-    email = b.lorenzen@sap.com
+    email = {{ .email | quote }}
     Name = Oluf Lorenzen
     #signingkey = 0xB01ED52E55427415
 
@@ -69,7 +69,7 @@
 [diff "localizablestrings"]
     textconv = "iconv -f utf-16 -t utf-8"
 [commit]
-    gpgsign = true
+    gpgsign = false
     verbose = true
 [icdiff]
     options = --highlight --line-numbers
