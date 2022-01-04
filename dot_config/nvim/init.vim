@@ -13,12 +13,7 @@
 let g:python3_host_prog = '/opt/homebrew/bin/python3'
 
 " ==== plugins via plug.vim ====
-" FIXME please...
-"if !filereadable('$HOME/.local/share/nvim/site/autoload/plug.vim')
-"  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-"    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-"endif
+" handled via .chezmoiexternal.toml
 
 call plug#begin('~/.local/share/nvim/plugged')
 
