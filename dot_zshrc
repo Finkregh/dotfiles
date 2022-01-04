@@ -269,7 +269,7 @@ zplug "zsh-users/zsh-completions"
 zplug "plugins/pass", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh, use:"_docker"
-zplug "zdharma/fast-syntax-highlighting"
+zplug "zdharma-continuum/fast-syntax-highlighting"
 zplug "chrissicool/zsh-256color"
 zplug "plugins/colorize", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
