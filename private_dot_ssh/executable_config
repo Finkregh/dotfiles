@@ -10,18 +10,20 @@ Match exec "echo %n | grep -qE '^([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4}$'"
     UserKnownHostsFile    /dev/null
     StrictHostKeyChecking no
 
-Host workhost.b1-managed-service-ccee.c.eu-nl-1.cloud.sap
-    User c5276249
-    ForwardAgent yes
-Host dashboard-dev.b1-managed-service-ccee.c.eu-nl-1.cloud.sap
-    User ccloud
-
 # non-important hosts
 Host 10.*
     User ccloud
 # openstack vms
 Host *.c.*.cloud.sap
     User ccloud
+
+
+Host gmplts
+    HostName gmplts.wdf.sap.corp
+    ForwardAgent yes
+Host hec-lts
+    HostName hec01v000116.wdf.sap.corp
+    ForwardAgent yes
 
 Host *
     ForwardAgent no

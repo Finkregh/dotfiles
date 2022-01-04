@@ -1,7 +1,0 @@
-\.git
-\.gitattributes
-\.git-crypt
-\.gitmodules
-\.gitignore
-
-bin/git-what-branch-src
