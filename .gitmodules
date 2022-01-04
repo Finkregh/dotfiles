@@ -1,3 +1,0 @@
-[submodule "bin/git-what-branch-src"]
-	path = bin/git-what-branch-src
-	url = https://github.com/SethRobertson/git-what-branch.git
