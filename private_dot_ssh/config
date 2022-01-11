@@ -8,7 +8,7 @@ Match exec "echo %n | grep -qE '^([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4}$'"
     UserKnownHostsFile    /dev/null
     StrictHostKeyChecking no
 
-Include config.d/*
+Include ~/.ssh/config.d/*
 
 Host *
     ForwardAgent no
