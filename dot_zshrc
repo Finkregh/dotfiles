@@ -112,6 +112,7 @@ compinit
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+. ~/.zsh_local_aliases
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe.sh ] && eval "$(/usr/bin/lesspipe.sh)"
