@@ -42,6 +42,9 @@ alias vimdiff="nvim -d"
 # rather use exa instead of ls
 alias ls="exa --group-directories-first"
 
+# yolo-ssh
+alias sshnk="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+
 # enable caching
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.cache/zsh
@@ -253,7 +256,7 @@ export MANPATH="$(brew --prefix)/opt/gnu-sed/libexec/gnuman:$MANPATH"
 export MANPATH="$(brew --prefix)/opt/gnu-tar/libexec/gnuman:$MANPATH"
 
 # GITHUB_TOKEN etc
-. ~/.env-secrets
+#. ~/.env-secrets
 
 FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
@@ -342,6 +345,8 @@ fi
 stty -tostop
 
 # add homebrew functions paths
+# perhaps enable linking completions:
+#brew completions link
 if type brew &>/dev/null; then
   for funcpath  in "$(brew --prefix)/share/zsh-completions" "$(brew --prefix)/share/zsh/functions" "$(brew --prefix)/share/zsh/site-functions" ; do
     if [ -d "${funcpath}" ] &&
