@@ -284,6 +284,8 @@ zplug "plugins/pip", from:oh-my-zsh
 zplug "chmouel/kss", use:"_kss", as:command, use:"kss"
 zplug "bigH/git-fuzzy", use:"bin/git-fuzzy", as:command
 zplug "plugins/asdf", from:oh-my-zsh
+zplug "vaporup/ssh-tools", as:command, use:"ssh-*"
+zplug "tj/git-extras", use:"etc/git-extras-completion.zsh", defer:3, if:"[[ $(command -v git) ]]"
 
 zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
@@ -322,6 +324,7 @@ fi
 
 #if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 if which chezmoi > /dev/null; then eval "$(chezmoi completion zsh)"; fi
+if which gopass > /dev/null; then eval "$(gopass completion zsh)"; fi
 
 # crude daily homebrew update
 if [ ! -e /tmp/brew-update-timer ] ; then
