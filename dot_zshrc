@@ -1,12 +1,6 @@
 # Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+#[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
+PS1="READY > "
 
 export LANG=en_US.UTF-8
 
@@ -89,8 +83,6 @@ if command -v keychain &>/dev/null; then
     #    . $HOME/.keychain/$HOSTNAME-sh-gpg
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # Make sure that the terminal is in application mode when zle is active, since
 # only then values from $terminfo are valid
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
@@ -145,9 +137,13 @@ zinit light tj/git-extras
 source ~/.local/share/zinit/plugins/tj---git-extras/etc/git-extras-completion.zsh
 zinit ice as"program" cp"httpstat.sh -> httpstat" pick"httpstat"
 zinit light b4b4r07/httpstat
-# junegunn/fzf-bin
-zinit ice from"gh-r" as"program"
-zinit light junegunn/fzf-bin
+
+zi for \
+    from'gh-r'  \
+    sbin'fzf'   \
+  junegunn/fzf
+zi for \
+    https://github.com/junegunn/fzf/raw/master/shell/{'completion','key-bindings'}.zsh
 
 # sharkdp/fd
 zinit ice as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
@@ -165,10 +161,17 @@ zinit light ogham/exa
 zinit ice wait lucid
 zinit load 'wfxr/forgit'
 
+zinit ice wait'[[ -n ${ZLAST_COMMANDS[(r)cras*]} ]]'
+zinit light zdharma-continuum/zui
+zinit ice wait'[[ -n ${ZLAST_COMMANDS[(r)cras*]} ]]'
+zinit light zdharma-continuum/zinit-crasis
+
 zinit ice blockf
 zinit light zsh-users/zsh-completions
 
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
+zinit ice lucid depth=1; zinit load romkatv/powerlevel10k
 
 if [ ! -e /tmp/zinit-update-timer ] ; then
     touch /tmp/zinit-update-timer
@@ -179,8 +182,6 @@ if test $(find /tmp/zinit-update-timer -mtime +1); then
     touch /tmp/zinit-update-timer
 fi
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
 #source /usr/local/opt/gitstatus/gitstatus.prompt.zsh
 
 # ruby garbage
@@ -216,4 +217,24 @@ stty -tostop
 #if [ -e /Users/c5276249/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/c5276249/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 # Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
+#[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
+
+_my_zsh_custom_plugins=(
+    zsh-users/zsh-autosuggestions
+    zdharma/fast-syntax-highlighting
+    zsh-users/zsh-history-substring-search
+)
+
+__zinit_plugin_loaded_callback() {
+    if [[ "$ZINIT[CUR_PLUGIN]" == "zsh-autosuggestions" ]]; then
+        ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${ZSH_AUTOSUGGEST_ACCEPT_WIDGETS[@]/forward-char}")
+        ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=forward-char
+    elif [[ "$ZINIT[CUR_PLUGIN]" == "zsh-history-substring-search" ]]; then
+        bindkey "\ek" history-substring-search-up
+        bindkey "\ej" history-substring-search-down
+    fi
+}
+
+zinit wait lucid depth=1  \
+    atload='__zinit_plugin_loaded_callback' \
+    for ${_my_zsh_custom_plugins[@]}
