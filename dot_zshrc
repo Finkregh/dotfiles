@@ -1,49 +1,17 @@
 # Fig pre block. Keep at the top of this file.
 [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 export LANG=en_US.UTF-8
 
 # gather timing infos, then run zprof
 #zmodload zsh/zprof
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-
-# rather use nvim instead of vim... faster async editing
-alias vim="nvim"
-alias vimdiff="nvim -d"
-
-# rather use exa instead of ls
-alias ls="exa --group-directories-first"
-
-# yolo-ssh
-alias sshnk="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 
 # enable caching
 zstyle ':completion:*' use-cache on
@@ -51,7 +19,7 @@ zstyle ':completion:*' cache-path ~/.cache/zsh
 
 # complete proc-ids with menu
 zstyle ':completion:*:*:kill:*' menu yes select
-zstyle ':completion:*:kill:*'   force-list always
+zstyle ':completion:*:kill:*' force-list always
 
 #export HISTIGNORE="&:[bf]g:exit"
 #export HISTCONTROL=ignoredups
@@ -70,14 +38,6 @@ if [ -z "$HISTFILE" ]; then
     HISTFILE=$HOME/.zsh_history
 fi
 
-# Show history
-case $HIST_STAMPS in
-  "mm/dd/yyyy") alias history='fc -fl 1' ;;
-  "dd.mm.yyyy") alias history='fc -El 1' ;;
-  "yyyy-mm-dd") alias history='fc -il 1' ;;
-  *) alias history='fc -l 1' ;;
-esac
-
 setopt append_history
 setopt extended_history
 setopt hist_expire_dups_first
@@ -90,57 +50,43 @@ setopt interactivecomments # enable bash-style comments # like this
 # If a command is issued that can’t be executed as a normal command, and the command is the name of a directory, perform the cd command to that directory
 setopt auto_cd
 
+typeset -U path # only have paths once in the array
 
-export PATH="$HOME/Library/Python/3.9/bin:$HOME/bin:$HOME/go/bin:/opt/homebrew/bin:$PATH"
-export EDITOR=nvim
-export VISUAL=nvim
-export BROWSER=google-chrome-stable
-export PAGER="less -r"
-export MANPAGER=less
-export MANWIDTH=${MANWIDTH:-80}
-export COLORTERM="yes"
-export TERM=xterm-256color
-export JAVA_TOOL_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
 # python crashes otherwise...
 # needs `ln -s /usr/local/Cellar/openssl/1.0.2t/lib/libssl.1.0.0.dylib /usr/local/lib/libssl.dylib ; ln -s /usr/local/Cellar/openssl/1.0.2t/lib/libcrypto.1.0.0.dylib /usr/local/lib/libcrypto.dylib`
 
-export GOPATH=$HOME/go
-export GOROOT=$(brew --prefix)/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
-source $HOME/.cargo/env
+#autoload -Uz compinit
+#compinit
+builtin source ~/.zsh_aliases
+# remove fugly macos old zsh version from fpath
+export FPATH=$(echo "$FPATH" | sed -e 's|:/usr/share/zsh/5.8.1/functions||')
+typeset -U fpath
+#print -l $fpath
 
-autoload -Uz compinit
-compinit
-
-. ~/.zsh_functions
+builtin source ~/.zsh_functions
+. ~/.zsh_keybindings
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-. ~/.zsh_local_aliases
+# GITHUB_TOKEN etc
+#. ~/.env-secrets
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe.sh ] && eval "$(/usr/bin/lesspipe.sh)"
 
-#[[ $- = *i* ]] && source ~/bin/liquidprompt/liquidprompt
-
 #export GPG_TTY=$(tty)
 #gpg-connect-agent updatestartuptty /bye >/dev/null
-if command -v keychain &> /dev/null ; then
-    sleep 0.$[ ( $RANDOM % 9 ) ]
+if command -v keychain &>/dev/null; then
+    sleep 0.$((($RANDOM % 9)))
     eval $(keychain --quiet --eval --agents ssh --inherit any --quick)
     keychain --quick --inherit any --agents "ssh" ~/.ssh/id_rsa ~/.ssh/id_ed25519
     #keychain --quick --inherit any --agents "gpg" 0x243278FC323BBE52
 
-    [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
-    [ -f $HOME/.keychain/$HOSTNAME-sh ] && \
+    [ -z "$HOSTNAME" ] && HOSTNAME=$(uname -n)
+    [ -f $HOME/.keychain/$HOSTNAME-sh ] &&
         . $HOME/.keychain/$HOSTNAME-sh
     #[ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] && \
     #    . $HOME/.keychain/$HOSTNAME-sh-gpg
-fi
-
-if [ -e /opt/google-cloud-sdk/completion.zsh.inc ] ; then
-    source /opt/google-cloud-sdk/completion.zsh.inc
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -158,161 +104,79 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
   zle -N zle-line-finish
 fi
 
-bindkey -e                                            # Use emacs key bindings
-
-bindkey '\ew' kill-region                             # [Esc-w] - Kill from the cursor to the mark
-bindkey -s '\el' 'ls\n'                               # [Esc-l] - run command: ls
-bindkey '^r' history-incremental-search-backward      # [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to anchor the search to the beginning of the line.
-if [[ "${terminfo[kpp]}" != "" ]]; then
-  bindkey "${terminfo[kpp]}" up-line-or-history       # [PageUp] - Up a line of history
-fi
-if [[ "${terminfo[knp]}" != "" ]]; then
-  bindkey "${terminfo[knp]}" down-line-or-history     # [PageDown] - Down a line of history
+### Zinit
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
 fi
 
-# start typing + [Up-Arrow] - fuzzy find history forward
-if [[ "${terminfo[kcuu1]}" != "" ]]; then
-  autoload -U up-line-or-beginning-search
-  zle -N up-line-or-beginning-search
-  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+### End of Zinit
+
+zinit light "zsh-users/zsh-autosuggestions"
+# #zplug "zsh-users/zsh-completions"
+zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
+zinit light "z-shell/F-Sy-H"
+zinit light "chrissicool/zsh-256color"
+zinit snippet OMZ::plugins/colorize/colorize.plugin.zsh # ccat
+#zinit snippet OMZ::plugins/git/git.plugin.zsh # <https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git>
+# #zplug "chmouel/kss", use:"_kss", as:command, use:"kss"
+zinit ice as"program" cp"bin/git-fuzzy -> git-fuzzy" pick"git-fuzzy"
+zinit light bigH/git-fuzzy
+
+#zinit snippet OMZ::plugins/asdf", from:oh-my-zsh
+zinit ice as"program" cp"ssh-* -> ssh-tools"
+zinit light vaporup/ssh-tools
+zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX" nocompile
+zinit light tj/git-extras
+source ~/.local/share/zinit/plugins/tj---git-extras/etc/git-extras-completion.zsh
+zinit ice as"program" cp"httpstat.sh -> httpstat" pick"httpstat"
+zinit light b4b4r07/httpstat
+# junegunn/fzf-bin
+zinit ice from"gh-r" as"program"
+zinit light junegunn/fzf-bin
+
+# sharkdp/fd
+zinit ice as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
+zinit light sharkdp/fd
+
+# sharkdp/bat
+zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
+zinit light sharkdp/bat
+
+# ogham/exa, replacement for ls
+zinit ice wait"2" lucid from"gh-r" as"program" mv"bin/exa* -> exa"
+zinit light ogham/exa
+
+# forgit, git interactive stuff
+zinit ice wait lucid
+zinit load 'wfxr/forgit'
+
+zinit ice blockf
+zinit light zsh-users/zsh-completions
+
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+if [ ! -e /tmp/zinit-update-timer ] ; then
+    touch /tmp/zinit-update-timer
+    zinit update --all
 fi
-# start typing + [Down-Arrow] - fuzzy find history backward
-if [[ "${terminfo[kcud1]}" != "" ]]; then
-  autoload -U down-line-or-beginning-search
-  zle -N down-line-or-beginning-search
-  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
-fi
-
-if [[ "${terminfo[khome]}" != "" ]]; then
-  bindkey "${terminfo[khome]}" beginning-of-line      # [Home] - Go to beginning of line
-fi
-if [[ "${terminfo[kend]}" != "" ]]; then
-  bindkey "${terminfo[kend]}"  end-of-line            # [End] - Go to end of line
-fi
-
-bindkey ' ' magic-space                               # [Space] - do history expansion
-
-if [[ "${terminfo[kcbt]}" != "" ]]; then
-  bindkey "${terminfo[kcbt]}" reverse-menu-complete   # [Shift-Tab] - move through the completion menu backwards
-fi
-
-bindkey '^?' backward-delete-char                     # [Backspace] - delete backward
-if [[ "${terminfo[kdch1]}" != "" ]]; then
-  bindkey "${terminfo[kdch1]}" delete-char            # [Delete] - delete forward
-else
-  bindkey "^[[3~" delete-char
-  bindkey "^[3;5~" delete-char
-  bindkey "\e[3~" delete-char
-fi
-
-bindkey '^H' backward-kill-word
-## use Ctrl-left-arrow and Ctrl-right-arrow for jumping to word-beginnings on
-## the command line.
-# URxvt sequences:
-bind2maps emacs viins vicmd -- -s '\eOc' forward-word
-bind2maps emacs viins vicmd -- -s '\eOd' backward-word
-# These are for xterm:
-bind2maps emacs viins vicmd -- -s '\e[1;5C' forward-word
-bind2maps emacs viins vicmd -- -s '\e[1;5D' backward-word
-## the same for alt-left-arrow and alt-right-arrow
-# URxvt again:
-bind2maps emacs viins vicmd -- -s '\e\e[C' forward-word
-bind2maps emacs viins vicmd -- -s '\e\e[D' backward-word
-# Xterm again:
-bind2maps emacs viins vicmd -- -s '^[[1;3C' forward-word
-bind2maps emacs viins vicmd -- -s '^[[1;3D' backward-word
-# Also try ESC Left/Right:
-bind2maps emacs viins vicmd -- -s '\e'${key[Right]} forward-word
-bind2maps emacs viins vicmd -- -s '\e'${key[Left]}  backward-word
-
-# ctrl-delete:
-bindkey -M emacs '^[[3;5~' kill-word
-# urxvt
-bindkey -M emacs '^[[3^' kill-word
-
-
-alias k=kubectl
-alias kn="u8s set --namespace"
-alias kc="u8s set --context"
-alias kk="u8s set --kubeconfig"
-alias ke="u8s kubectl -- exec -ti"
-alias kl="u8s kubectl -- logs -f"
-alias kg="u8s kubectl -- get"
-alias kgp="u8s kubectl -- get pods -o wide"
-alias kgpa="u8s kubectl -- get pods -o wide --all-namespaces"
-alias kgn="u8s kubectl -- get nodes -L container-linux-update.v1.coreos.com/version -L failure-domain.beta.kubernetes.io/zone"
-alias kdn="u8s kubectl -- describe node"
-alias kdp="u8s kubectl -- describe pod"
-alias kds="u8s kubectl -- describe service"
-
-alias o=openstack
-alias oldbrew="arch -x86_64 /usr/local/bin/brew"
-alias brew="arch -arm64e /opt/homebrew/bin/brew"
-#export KUBECONFIG=/Users/c5276249/.config/ccloud_multitool/kubeconfig
-export PATH="/opt/homebrew/sbin:/usr/local/sbin:$PATH"
-export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
-export PATH="$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH"
-export MANPATH="$(brew --prefix)/opt/gnu-sed/libexec/gnuman:$MANPATH"
-export MANPATH="$(brew --prefix)/opt/gnu-tar/libexec/gnuman:$MANPATH"
-
-# GITHUB_TOKEN etc
-#. ~/.env-secrets
-
-FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
-if [[ ! -d ~/.zplug ]]; then
-  git clone https://github.com/zplug/zplug ~/.zplug
-  echo "perhaps run 'cd ~/dotfiles ; stow --no-folding .'"
-  source ~/.zplug/init.zsh && zplug update --self
-fi
-source ~/.zplug/init.zsh
-# let zplug manage itself
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "plugins/pass", from:oh-my-zsh
-zplug "plugins/colored-man-pages", from:oh-my-zsh
-zplug "plugins/docker", from:oh-my-zsh, use:"_docker"
-zplug "zdharma-continuum/fast-syntax-highlighting"
-zplug "chrissicool/zsh-256color"
-zplug "plugins/colorize", from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/git-extras", from:oh-my-zsh
-zplug "plugins/pip", from:oh-my-zsh
-zplug "chmouel/kss", use:"_kss", as:command, use:"kss"
-zplug "bigH/git-fuzzy", use:"bin/git-fuzzy", as:command
-zplug "plugins/asdf", from:oh-my-zsh
-zplug "vaporup/ssh-tools", as:command, use:"ssh-*"
-zplug "tj/git-extras", use:"etc/git-extras-completion.zsh", defer:3, if:"[[ $(command -v git) ]]"
-
-zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
-
-if ! zplug check; then
-    zplug install
-fi
-if [ ! -e /tmp/zplug-update-timer ] ; then
-    touch /tmp/zplug-update-timer
-    zplug update
-fi
-if test $(find /tmp/zplug-update-timer -mtime +1); then
-    zplug update
-    touch /tmp/zplug-update-timer
-fi
-zplug load
-
-## Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-## Initialization code that may require console input (password prompts, [y/n]
-## confirmations, etc.) must go above this block, everything else may go below.
-#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-#fi
-
-# show lockfile if it exists...
-# https://github.com/zplug/zplug/issues/374
-if [ -e $_zplug_lock ] ; then
-    ls -la $_zplug_lock
+if test $(find /tmp/zinit-update-timer -mtime +1); then
+    zinit update --all
+    touch /tmp/zinit-update-timer
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -320,11 +184,11 @@ fi
 #source /usr/local/opt/gitstatus/gitstatus.prompt.zsh
 
 # ruby garbage
-#eval "$(rbenv init -)"
+type rbenv > /dev/null && eval "$(rbenv init -)"
 
-#if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-if which chezmoi > /dev/null; then eval "$(chezmoi completion zsh)"; fi
-if which gopass > /dev/null; then eval "$(gopass completion zsh)"; fi
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+if which chezmoi > /dev/null; then chezmoi completion zsh > /opt/homebrew/share/zsh/site-functions/_chezmoi; fi
+if which gopass > /dev/null; then gopass completion zsh > /opt/homebrew/share/zsh/site-functions/_gopass; fi
 
 # crude daily homebrew update
 if [ ! -e /tmp/brew-update-timer ] ; then
@@ -342,31 +206,14 @@ if test $(find /tmp/brew-update-timer -mtime +1); then
     touch /tmp/brew-update-timer
 fi
 
-#source /Users/c5276249/Library/Preferences/org.dystroy.broot/launcher/bash/br
-
 # dont suspend background jobs if they produce output
 stty -tostop
 
-# add homebrew functions paths
-# perhaps enable linking completions:
-#brew completions link
-if type brew &>/dev/null; then
-  for funcpath  in "$(brew --prefix)/share/zsh-completions" "$(brew --prefix)/share/zsh/functions" "$(brew --prefix)/share/zsh/site-functions" ; do
-    if [ -d "${funcpath}" ] &&
-      [[ ":${FPATH}:" != *":${funcpath}:"* ]]; then
-        FPATH="${funcpath}:${FPATH}"
-        # ensure secure directory rights
-        chmod -R go-w "${funcpath}"
-    fi
-  done
-fi
 # load completions
-type compinit $> /dev/null || autoload -Uz compinit
-test -n "${_comp_dumpfile}" || compinit
+#type compinit $> /dev/null || autoload -Uz compinit
+#test -n "${_comp_dumpfile}" || compinit
 
 #if [ -e /Users/c5276249/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/c5276249/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
-[[ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]] && . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
