@@ -117,18 +117,28 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-rust
 ### End of Zinit
 
-zinit light "zsh-users/zsh-autosuggestions"
+zinit light-mode for \
+    trigger-load'!zshz' blockf \
+        agkozak/zsh-z \
+    "zsh-users/zsh-autosuggestions" \
+    "z-shell/F-Sy-H" \
+    "chrissicool/zsh-256color" \
+    @asdf-vm/asdf
+#    redxtech/zsh-asdf-direnv
+
 # #zplug "zsh-users/zsh-completions"
-zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
-zinit light "z-shell/F-Sy-H"
-zinit light "chrissicool/zsh-256color"
-zinit snippet OMZ::plugins/colorize/colorize.plugin.zsh # ccat
-#zinit snippet OMZ::plugins/git/git.plugin.zsh # <https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git>
+
+zinit lucid wait light-mode for \
+	OMZP::colored-man-pages/colored-man-pages.plugin.zsh \
+	OMZP::colorize/colorize.plugin.zsh
+	#OMZP::asdf/asdf.plugin.zsh
+
+#zinit snippet OMZP::git/git.plugin.zsh # <https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git>
 # #zplug "chmouel/kss", use:"_kss", as:command, use:"kss"
+
 zinit ice as"program" cp"bin/git-fuzzy -> git-fuzzy" pick"git-fuzzy"
 zinit light bigH/git-fuzzy
 
-#zinit snippet OMZ::plugins/asdf", from:oh-my-zsh
 zinit ice as"program" cp"ssh-* -> ssh-tools"
 zinit light vaporup/ssh-tools
 zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX" nocompile
