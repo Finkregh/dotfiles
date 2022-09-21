@@ -50,7 +50,7 @@
     background_jobs         # presence of background jobs
     custom_oscontext        # OpenStack context
     #custom_ccloudcontext    # ccloud/cld context
-    direnv                  # direnv status (https://direnv.net/)
+    #fugly direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     anaconda                # conda environment (https://conda.io/)
