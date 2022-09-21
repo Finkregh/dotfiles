@@ -1,0 +1,14 @@
+# -*- mode: sh; -*-
+# (rootdir)/.envrc : direnv configuration file
+# see https://direnv.net/
+# pyversion=$(head .python-version)
+# pvenv=$(head     .python-virtualenv)
+_py_fileversion="$(head .python-version 2>/dev/null)"
+pyversion=${_py_fileversion:-3.10.6}
+pvenv="$(printf '%q\n' "${PWD##*/}")"
+
+# Create the virtualenv if not yet done
+pyenv virtualenv ${pyversion} ${pvenv}
+layout pyenv ${pyversion}/envs/${pvenv}
+
+pip install --upgrade pip wheel

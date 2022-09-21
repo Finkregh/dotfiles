@@ -51,6 +51,7 @@ typeset -U path # only have paths once in the array
 #autoload -Uz compinit
 #compinit
 builtin source ~/.zsh_aliases
+builtin source ~/.zshenv
 # remove fugly macos old zsh version from fpath
 export FPATH=$(echo "$FPATH" | sed -e 's|:/usr/share/zsh/5.8.1/functions||')
 typeset -U fpath
@@ -125,15 +126,20 @@ zinit light-mode for \
     "chrissicool/zsh-256color" \
     @asdf-vm/asdf
 #    redxtech/zsh-asdf-direnv
+#    "mattberther/zsh-pyenv" \
 
 # #zplug "zsh-users/zsh-completions"
 
 zinit lucid wait light-mode for \
 	OMZP::colored-man-pages/colored-man-pages.plugin.zsh \
-	OMZP::colorize/colorize.plugin.zsh
+	OMZP::colorize/colorize.plugin.zsh \
+    OMZP::git/git.plugin.zsh \
+    OMZP::pyenv \
+    OMZP::virtualenv \
+
+#    OMZP::pyenv/pyenv.plugin.zsh \
 	#OMZP::asdf/asdf.plugin.zsh
 
-#zinit snippet OMZP::git/git.plugin.zsh # <https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git>
 # #zplug "chmouel/kss", use:"_kss", as:command, use:"kss"
 
 zinit ice as"program" cp"bin/git-fuzzy -> git-fuzzy" pick"git-fuzzy"
@@ -146,6 +152,28 @@ zinit light tj/git-extras
 source ~/.local/share/zinit/plugins/tj---git-extras/etc/git-extras-completion.zsh
 zinit ice as"program" cp"httpstat.sh -> httpstat" pick"httpstat"
 zinit light b4b4r07/httpstat
+
+#zinit lucid as'command' pick'bin/pyenv' atinit'export PYENV_ROOT="$PWD"' \
+#    atclone'PYENV_ROOT="$PWD" ./libexec/pyenv init - > zpyenv.zsh' \
+#    atpull"%atclone" src"zpyenv.zsh" nocompile'!' for \
+#        pyenv/pyenv
+
+#zi ice lucid wait \
+# as'command' pick'bin/pyenv' \
+# atload'eval "$(pyenv init - --no-rehash zsh)"' \
+# src'completions/pyenv.zsh' nocompile'!'
+#zi light pyenv/pyenv
+
+#zi ice lucid wait'[[ -n ${ZLAST_COMMANDS[(r)pyenv]} ]]' \
+# as'command' pick"bin/*" \
+# atload'eval "$(pyenv virtualenv-init - zsh)"'
+#zi light pyenv/pyenv-virtualenv
+
+export PYENV_ROOT="$HOME/.pyenv"
+# Load pyenv automatically
+eval "$(pyenv init --path)"
+# Load pyenv-virtualenv automatically
+eval "$(pyenv virtualenv-init -)"
 
 zi for \
     from'gh-r'  \
@@ -178,6 +206,15 @@ zi for \
     sbin'g*x -> grex'  \
   pemistahl/grex
 
+zi for \
+    as"program" \
+    atclone'./direnv hook zsh > zhook.zsh' \
+    from"gh-r" \
+    light-mode \
+    mv"direnv* -> direnv" \
+    src'zhook.zsh' \
+  direnv/direnv
+
 # forgit, git interactive stuff
 zinit ice wait lucid
 zinit load 'wfxr/forgit'
@@ -187,8 +224,8 @@ zinit light zdharma-continuum/zui
 zinit ice wait'[[ -n ${ZLAST_COMMANDS[(r)cras*]} ]]'
 zinit light zdharma-continuum/zinit-crasis
 
-zinit ice blockf
-zinit light zsh-users/zsh-completions
+zinit ice wait blockf lucid atpull'zinit creinstall -q .'
+zinit load zsh-users/zsh-completions
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
@@ -213,7 +250,7 @@ fi
 # ruby garbage
 type rbenv > /dev/null && eval "$(rbenv init -)"
 
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+#if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 if which chezmoi > /dev/null; then chezmoi completion zsh > /opt/homebrew/share/zsh/site-functions/_chezmoi; fi
 if which gopass > /dev/null; then gopass completion zsh > /opt/homebrew/share/zsh/site-functions/_gopass; fi
 

@@ -1,5 +1,5 @@
 export HOMEBREW_PREFIX=/opt/homebrew
-export PATH="$HOME/Library/Python/3.9/bin:$HOME/bin:$PATH"
+export PATH="$HOME/Library/Python/3.10/bin:$HOME/bin:$PATH"
 export EDITOR=nvim
 export VISUAL=nvim
 #export BROWSER=google-chrome-stable
