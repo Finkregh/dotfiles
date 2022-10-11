@@ -18,7 +18,7 @@ zstyle ':completion:*:kill:*' force-list always
 #export HISTCONTROL=ignoredups
 # read this number of lines into history buffer on startup
 # carefull with this, it will increase bash memory footprint and load time
-export HISTSIZE=40000
+export HISTSIZE=90000
 # HISTFILESIZE is set *after* bash reads the history file
 # (which is done after reading any configs like .bashrc)
 # if it is unset at this point it is set to the same value as HISTSIZE
@@ -224,8 +224,13 @@ zinit light zdharma-continuum/zui
 zinit ice wait'[[ -n ${ZLAST_COMMANDS[(r)cras*]} ]]'
 zinit light zdharma-continuum/zinit-crasis
 
-zinit ice wait blockf lucid atpull'zinit creinstall -q .'
-zinit load zsh-users/zsh-completions
+# keep at bottom
+zi for \
+    atload"zicompinit; zicdreplay" \
+    blockf \
+    lucid \
+    wait \
+  zsh-users/zsh-completions
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
@@ -272,6 +277,14 @@ fi
 
 # dont suspend background jobs if they produce output
 stty -tostop
+
+# get system CAs for e.g. python
+if [[ $(uname) == "Darwin" ]]; then
+    security export -t certs -f pemseq -k /System/Library/Keychains/SystemRootCertificates.keychain -o /tmp/bundleCA.pem
+    security export -t certs -f pemseq -k /Library/Keychains/System.keychain -o /tmp/selfSignedCAbundle.pem
+    cat /tmp/selfSignedCAbundle.pem >> /tmp/bundleCA.pem
+    export REQUESTS_CA_BUNDLE=/tmp/bundleCA.pem NODE_EXTRA_CA_CERTS=/tmp/bundleCA.pem SSL_CERT_FILE=/tmp/bundleCA.pem
+fi
 
 # load completions
 #type compinit $> /dev/null || autoload -Uz compinit
