@@ -136,6 +136,7 @@ zinit lucid wait light-mode for \
     OMZP::git/git.plugin.zsh \
     OMZP::pyenv \
     OMZP::virtualenv \
+    OMZP::autojump/autojump.plugin.zsh
 
 #    OMZP::pyenv/pyenv.plugin.zsh \
 	#OMZP::asdf/asdf.plugin.zsh
