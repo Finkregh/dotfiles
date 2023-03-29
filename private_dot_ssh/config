@@ -1,3 +1,5 @@
+Include /Users/I556086/.colima/ssh_config
+
 Include config.d/*
 
 # do not save host keys when connecting to IPs
@@ -20,7 +22,7 @@ Host *
     Compression no
     ControlMaster auto
     ControlPath ~/.ssh/sockets/%C
-    ControlPersist 600
+    ControlPersist 1200
     AddKeysToAgent confirm
     ServerAliveInterval 10
     # modern crypto

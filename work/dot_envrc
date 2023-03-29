@@ -17,5 +17,6 @@ pvenv="$(printf '%q\n' "${PWD##*/}")"
 # Create the virtualenv if not yet done
 pyenv virtualenv ${pyversion} ${pvenv}
 layout pyenv ${pyversion}/envs/${pvenv}
+pyenv activate work
 
 pip install --upgrade pip wheel
