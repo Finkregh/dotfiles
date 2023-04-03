@@ -147,7 +147,7 @@ nnoremap <C-e> :exec ':Fern -reveal=% -drawer -toggle -stay .'<CR>
 set background=dark
 set termguicolors
 let g:onedark_config = {
-    \ 'style': 'warmer',
+    \ 'style': 'warm',
 \}
 colorscheme onedark
 
@@ -194,8 +194,9 @@ let &t_EI = "\<Esc>[2 q"
 
 
 set clipboard=unnamedplus
-nnoremap d "_d
-vnoremap d "_d
+" this disables "dd" == yank
+"nnoremap d "_d
+"vnoremap d "_d
 
 " Preserve undo history across editing sessions.
 if has('persistent_undo')
