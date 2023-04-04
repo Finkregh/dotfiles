@@ -224,3 +224,15 @@ ssl-cert-info() {
     openssl x509 -noout -text -in $1
     ssl-cert-fingerprints $1
 }
+
+vgrep() {
+  if [[ $* == *"--help"* ]]; then
+    command vgrep "$@"
+  else
+    INITIAL_QUERY="$1"
+    VGREP_PREFIX="vgrep --no-header "
+    FZF_DEFAULT_COMMAND="$VGREP_PREFIX '$INITIAL_QUERY'" \
+      fzf --bind "change:reload:$VGREP_PREFIX {q} || true" --multi --phony --tac --query "$INITIAL_QUERY" |
+      awk '{print $1}' | xargs -I{} -o vgrep --show {}
+  fi
+}
