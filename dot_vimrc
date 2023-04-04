@@ -1,0 +1,232 @@
+
+"   ;     '
+"   \\/\ \\ \\/\\/\\ ,._-_  _-_
+"   || | || || || ||  ||   ||
+"   || | || || || ||  ||   ||
+"   \\/  \\ \\ \\ \\  \\,  \\,/
+"
+" from the fabulous <https://git.lain.faith/sorceress/dotfiles>
+
+
+" Install VimPlug
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+
+" Load plugins
+call plug#begin('~/.vim/bundle')
+
+Plug 'aliva/vim-fish', {'for': 'fish'}
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'fadein/vim-FIGlet'
+Plug 'navarasu/onedark.nvim'
+Plug 'NovaDev94/lightline-onedark'
+Plug 'itchyny/lightline.vim'
+Plug 'lambdalisue/fern-git-status.vim'
+Plug 'lambdalisue/fern-hijack.vim'
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+Plug 'lambdalisue/fern.vim'
+Plug 'lilydjwg/colorizer'
+Plug 'mg979/vim-visual-multi'
+Plug 'owickstrom/vim-colors-paramount'
+Plug 'raimondi/delimitmate'
+Plug 'rust-lang/rust.vim', {'for': 'rust'}
+Plug 'tpope/vim-commentary'
+Plug 'vim-scripts/nginx.vim', {'for': 'nginx'}
+Plug 'yuttie/comfortable-motion.vim'
+Plug 'christoomey/vim-conflicted' " git conflict solving
+
+Plug 'lambdalisue/nerdfont.vim'
+Plug 'ryanoasis/vim-devicons'
+
+" don't install these plugins on remote servers
+if has('nvim')
+	Plug 'airblade/vim-gitgutter'
+	Plug 'dyng/ctrlsf.vim'
+	Plug 'folke/todo-comments.nvim'
+	Plug 'hrsh7th/cmp-calc'
+	Plug 'https://github.com/josa42/nvim-lightline-lsp'
+	Plug 'https://github.com/mfussenegger/nvim-lint'
+	Plug 'j-hui/fidget.nvim'
+	Plug 'jghauser/mkdir.nvim'
+	Plug 'jose-elias-alvarez/null-ls.nvim'
+	Plug 'simrat39/rust-tools.nvim'
+	Plug 'stevearc/dressing.nvim'
+	"Plug 'williamboman/nvim-lsp-installer'
+	Plug 'williamboman/mason.nvim'
+	Plug 'williamboman/mason-lspconfig.nvim'
+    Plug 'antoinemadec/FixCursorHold.nvim'
+    Plug 'edluffy/specs.nvim'
+    "Plug 'folke/lsp-colors.nvim' shouldnt be required with current nvim
+    Plug 'folke/trouble.nvim'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/cmp-cmdline'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-path'
+    Plug 'hrsh7th/cmp-vsnip'
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/vim-vsnip'
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'tpope/vim-fugitive'
+endif
+
+call plug#end()
+
+" NixOS config
+if hostname() == "bloodletting"
+	set backupdir=~/.local/state/nvim/backups
+endif
+
+" Lightline config
+let g:lightline = {
+    \ 'colorscheme': 'onedark',
+    \ }
+
+" Comfortable Motion config
+noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(20)<CR>
+noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-20)<CR>
+
+" VM config
+let g:VM_maps                       = {}
+let g:VM_maps["I BS"]           = '<c-BS>'
+
+" Fern config
+let g:fern#renderer = "nerdfont"
+
+function FindSessionDirectory() abort
+  if len(argv()) > 0
+    return fnamemodify(argv()[0], ':p:h')
+  endif
+  return getcwd()
+endfunction!
+
+function! s:init_fern() abort
+  nmap <buffer><expr>
+  \ <Plug>(fern-my-expand-or-collapse)
+  \ fern#smart#leaf(
+  \   "\<Plug>(fern-action-open)",
+  \   "\<Plug>(fern-action-expand)",
+  \   "\<Plug>(fern-action-collapse)",
+  \ )
+
+  " Define NERDTree like mappings
+  nmap <buffer> t <Plug>(fern-action-open:tabedit)
+  nmap <buffer> T <Plug>(fern-action-open:tabedit)gT
+  nmap <buffer> i <Plug>(fern-action-open:split)
+  nmap <buffer> gi <Plug>(fern-action-open:split)<C-w>p
+  nmap <buffer> s <Plug>(fern-action-open:vsplit)
+  nmap <buffer> gs <Plug>(fern-action-open:vsplit)<C-w>p
+  nmap <buffer> ma <Plug>(fern-action-new-path)
+  nmap <buffer> <CR> <Plug>(fern-my-expand-or-collapse)
+  nmap <buffer> P gg
+endfunction
+
+augroup my-fern-startup
+  autocmd! *
+  autocmd FileType fern call s:init_fern()
+  if has('nvim')
+	autocmd TabNewEntered * ++nested exec 'Fern -reveal=% -drawer -stay ' . FindSessionDirectory()
+  endif
+augroup END
+
+" Aliases
+command Header FIGlet -f Gothic
+cmap W w !sudo tee > /dev/null %
+" nnoremap <C-e> :NERDTreeTabsToggle<CR>
+"nnoremap <C-e> :exec ':Fern -reveal=% -drawer -toggle -stay ' . FindSessionDirectory()<CR>
+nnoremap <C-e> :exec ':Fern -reveal=% -drawer -toggle -stay .'<CR>
+
+" Colorscheme
+set background=dark
+set termguicolors
+let g:onedark_config = {
+    \ 'style': 'warm',
+\}
+colorscheme onedark
+
+let bgcolor = synIDattr(hlID("Normal"), "bg")
+let fgcolor = synIDattr(hlID("Identifier"), "fg")
+let colors = "\033]11;" . fgcolor . "\007\033]11;" . bgcolor . "\007"
+
+if has('gui_running') || has('nvim')
+    autocmd VimEnter * call chansend(v:stderr, colors)
+    autocmd VimLeave * call chansend(v:stderr, "\033]110\007\033]111\007")
+else
+    " Set the terminal default background and foreground colors, thereby
+    " improving performance by not needing to set these colors on empty cells.
+    hi Normal guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
+    let &t_ti = &t_ti . colors
+    let &t_te = &t_te . "\033]110\007\033]111\007"
+endif
+
+" Vanilla config
+syntax on
+let python_highlight_all=1
+filetype plugin indent on
+
+set number
+set wrap
+set mouse=a
+set softtabstop=4 noexpandtab
+set ts=4 sw=4
+
+set autoindent
+set smartindent
+set breakindent
+
+set scrolloff=5
+
+set laststatus=2
+set noshowmode
+"set whichwrap+=<,>,h,l
+set mouse=
+
+let &t_SI = "\<Esc>[6 q"
+" let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
+
+
+set clipboard=unnamedplus
+" this disables "dd" == yank
+"nnoremap d "_d
+"vnoremap d "_d
+
+" Preserve undo history across editing sessions.
+if has('persistent_undo')
+    set undodir=~/.vim/undo
+    set undofile
+endif
+
+set ignorecase
+set smartcase
+set hlsearch
+let @/='' " fix search on startup
+
+set encoding=utf-8
+scriptencoding utf-8
+setglobal fileencoding=utf-8
+set ffs=unix,dos
+
+
+" show diff to original file
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+        \ | wincmd p | diffthis
+endif
+set diffopt+=vertical
+
+" In all files, try to jump back to the last spot cursor was in before exiting
+au BufReadPost *
+	\ if line("'\"") > 0 && line("'\"") <= line("$") |
+	\   exe "normal g`\"" |
+	\ endif
+
+" Switch to the directory of the current file, unless it's a help file.
+au BufEnter * if &ft != 'help' | silent! cd %:p:h | endif

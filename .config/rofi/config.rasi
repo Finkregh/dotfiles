@@ -1,0 +1,18 @@
+configuration {
+	modi: "window,run,ssh,combi";
+	lines: 15;
+	columns: 1;
+	font: "FantasqueSansMono Nerd Font 15";
+	bw: 1;
+	padding: 5;
+	fixed-num-lines: true;
+	sidebar-mode: false;
+	combi-modi: "window,run,ssh";
+	separator-style: "solid";
+	hide-scrollbar: true;
+	theme: "/usr/share/rofi/themes//gruvbox-dark-soft.rasi";
+	color-normal: "#1e1e20, #c5c8c6, #1e1e20, #1e1e20, #dc7f41";
+	color-urgent: "#1e1e20, #c5c8c6, #1e1e20, #1e1e20, #dc7f41";
+	color-active: "#1e1e20, #c5c8c6, #1e1e20, #1e1e20, #dc7f41";
+	color-window: "#1e1e20, #dc7f41, #dc7f41";
+}

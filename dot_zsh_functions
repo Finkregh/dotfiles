@@ -1,0 +1,238 @@
+# some or all copied from http://git.grml.org/?p=grml-etc-core.git;a=blob_plain;f=etc/zsh/zshrc;hb=HEAD
+
+#f1# Provides useful information on globbing
+H-Glob() {
+    echo -e "
+    /      directories
+    .      plain files
+    @      symbolic links
+    =      sockets
+    p      named pipes (FIFOs)
+    *      executable plain files (0100)
+    %      device files (character or block special)
+    %b     block special files
+    %c     character special files
+    r      owner-readable files (0400)
+    w      owner-writable files (0200)
+    x      owner-executable files (0100)
+    A      group-readable files (0040)
+    I      group-writable files (0020)
+    E      group-executable files (0010)
+    R      world-readable files (0004)
+    W      world-writable files (0002)
+    X      world-executable files (0001)
+    s      setuid files (04000)
+    S      setgid files (02000)
+    t      files with the sticky bit (01000)
+
+  print *(m-1)          # Files modified up to a day ago
+  print *(a1)           # Files accessed a day ago
+  print *(@)            # Just symlinks
+  print *(Lk+50)        # Files bigger than 50 kilobytes
+  print *(Lk-50)        # Files smaller than 50 kilobytes
+  print **/*.c          # All *.c files recursively starting in \$PWD
+  print **/*.c~file.c   # Same as above, but excluding 'file.c'
+  print (foo|bar).*     # Files starting with 'foo' or 'bar'
+  print *~*.*           # All Files that do not contain a dot
+  chmod 644 *(.^x)      # make all plain non-executable files publically readable
+  print -l *(.c|.h)     # Lists *.c and *.h
+  print **/*(g:users:)  # Recursively match all files that are owned by group 'users'
+  echo /proc/*/cwd(:h:t:s/self//) # Analogous to >ps ax | awk '{print $1}'<"
+}
+alias help-zshglob=H-Glob
+
+function zrcgotwidget() {
+    (( ${+widgets[$1]} ))
+}
+
+function zrcgotkeymap() {
+    [[ -n ${(M)keymaps:#$1} ]]
+}
+
+function zrcbindkey() {
+    if (( ARGC )) && zrcgotwidget ${argv[-1]}; then
+        bindkey "$@"
+    fi
+}
+
+function bind2maps () {
+    local i sequence widget
+    local -a maps
+
+    while [[ "$1" != "--" ]]; do
+        maps+=( "$1" )
+        shift
+    done
+    shift
+
+    if [[ "$1" == "-s" ]]; then
+        shift
+        sequence="$1"
+    else
+        sequence="${key[$1]}"
+    fi
+    widget="$2"
+
+    [[ -z "$sequence" ]] && return 1
+
+    for i in "${maps[@]}"; do
+        zrcbindkey -M "$i" "$sequence" "$widget"
+    done
+}
+
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+    function zle-smkx () {
+        emulate -L zsh
+        printf '%s' ${terminfo[smkx]}
+    }
+    function zle-rmkx () {
+        emulate -L zsh
+        printf '%s' ${terminfo[rmkx]}
+    }
+    function zle-line-init () {
+        zle-smkx
+    }
+    function zle-line-finish () {
+        zle-rmkx
+    }
+    zle -N zle-line-init
+    zle -N zle-line-finish
+else
+    for i in {s,r}mkx; do
+        (( ${+terminfo[$i]} )) || grml_missing_features+=($i)
+    done
+    unset i
+fi
+
+typeset -A key
+key=(
+    Home     "${terminfo[khome]}"
+    End      "${terminfo[kend]}"
+    Insert   "${terminfo[kich1]}"
+    Delete   "${terminfo[kdch1]}"
+    Up       "${terminfo[kcuu1]}"
+    Down     "${terminfo[kcud1]}"
+    Left     "${terminfo[kcub1]}"
+    Right    "${terminfo[kcuf1]}"
+    PageUp   "${terminfo[kpp]}"
+    PageDown "${terminfo[knp]}"
+    BackTab  "${terminfo[kcbt]}"
+)
+
+# Switching shell safely and efficiently? http://www.zsh.org/mla/workers/2001/msg02410.html
+bash() {
+    NO_SWITCH="yes" command bash "$@"
+}
+restart () {
+    exec $SHELL $SHELL_ARGS "$@"
+}
+
+#f2# Find history events by search pattern and list them by date.
+whatwhen()  {
+    emulate -L zsh
+    local usage help ident format_l format_s first_char remain first last
+    usage='USAGE: whatwhen [options] <searchstring> <search range>'
+    help='Use `whatwhen -h'\'' for further explanations.'
+    ident=${(l,${#${:-Usage: }},, ,)}
+    format_l="${ident}%s\t\t\t%s\n"
+    format_s="${format_l//(\\t)##/\\t}"
+    # Make the first char of the word to search for case
+    # insensitive; e.g. [aA]
+    first_char=[${(L)1[1]}${(U)1[1]}]
+    remain=${1[2,-1]}
+    # Default search range is `-100'.
+    first=${2:-\-100}
+    # Optional, just used for `<first> <last>' given.
+    last=$3
+    case $1 in
+        ("")
+            printf '%s\n\n' 'ERROR: No search string specified. Aborting.'
+            printf '%s\n%s\n\n' ${usage} ${help} && return 1
+        ;;
+        (-h)
+            printf '%s\n\n' ${usage}
+            print 'OPTIONS:'
+            printf $format_l '-h' 'show help text'
+            print '\f'
+            print 'SEARCH RANGE:'
+            printf $format_l "'0'" 'the whole history,'
+            printf $format_l '-<n>' 'offset to the current history number; (default: -100)'
+            printf $format_s '<[-]first> [<last>]' 'just searching within a give range'
+            printf '\n%s\n' 'EXAMPLES:'
+            printf ${format_l/(\\t)/} 'whatwhen grml' '# Range is set to -100 by default.'
+            printf $format_l 'whatwhen zsh -250'
+            printf $format_l 'whatwhen foo 1 99'
+        ;;
+        (\?)
+            printf '%s\n%s\n\n' ${usage} ${help} && return 1
+        ;;
+        (*)
+            # -l list results on stout rather than invoking $EDITOR.
+            # -i Print dates as in YYYY-MM-DD.
+            # -m Search for a - quoted - pattern within the history.
+            fc -li -m "*${first_char}${remain}*" $first $last
+        ;;
+    esac
+}
+
+
+#f5# Create Directoy and \kbd{cd} to it
+mkcd() {
+    if (( ARGC != 1 )); then
+        printf 'usage: mkcd <new-directory>\n'
+        return 1;
+    fi
+    if [[ ! -d "$1" ]]; then
+        command mkdir -p "$1"
+    else
+        printf '`%s'\'' already exists: cd-ing.\n' "$1"
+    fi
+    builtin cd "$1"
+}
+
+ssl_hashes=( sha512 sha256 sha1 md5 )
+
+for sh in ${ssl_hashes}; do
+    eval 'ssl-cert-'${sh}'() {
+        emulate -L zsh
+        if [[ -z $1 ]] ; then
+            printf '\''usage: %s <file>\n'\'' "ssh-cert-'${sh}'"
+            return 1
+        fi
+        openssl x509 -noout -fingerprint -'${sh}' -in $1
+    }'
+done; unset sh
+
+ssl-cert-fingerprints() {
+    emulate -L zsh
+    local i
+    if [[ -z $1 ]] ; then
+        printf 'usage: ssl-cert-fingerprints <file>\n'
+        return 1
+    fi
+    for i in ${ssl_hashes}
+        do ssl-cert-$i $1;
+    done
+}
+
+ssl-cert-info() {
+    emulate -L zsh
+    if [[ -z $1 ]] ; then
+        printf 'usage: ssl-cert-info <file>\n'
+        return 1
+    fi
+    openssl x509 -noout -text -in $1
+    ssl-cert-fingerprints $1
+}
+
+vgrep() {
+  if [[ $* == *"--help"* ]]; then
+    command vgrep "$@"
+  else
+    INITIAL_QUERY="$1"
+    VGREP_PREFIX="vgrep --no-header "
+    FZF_DEFAULT_COMMAND="$VGREP_PREFIX '$INITIAL_QUERY'" \
+      fzf --bind "change:reload:$VGREP_PREFIX {q} || true" --multi --phony --tac --query "$INITIAL_QUERY" |
+      awk '{print $1}' | xargs -I{} -o vgrep --show {}
+  fi
+}

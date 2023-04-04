@@ -1,0 +1,3 @@
+#builtin source ~/.zshrc
+#autoload -Uz compinit
+#compinit -D

@@ -1,0 +1,28 @@
+alias cls="clear"
+alias g="git"
+
+alias ipcalc="ipcalc -n"
+alias vless='vim -u /usr/share/vim/vim70/macros/less.vim'
+alias dig='dig +multiline'
+
+# stuff from archlinux-skel
+alias ls='exa --group-directories-first --time-style=long-iso --color=auto -F'
+alias ll='exa -l --group-directories-first --time-style=long-iso --color=auto -F'
+alias la='exa -la --group-directories-first --time-style=long-iso --color=auto -F'
+alias grep='grep --color=tty -d skip'
+alias cp="cp -i"     # confirm before overwriting something
+alias df='df -h'     # human-readable sizes
+alias free='free -m' # show sizes in MB
+
+# debug bash scripts
+alias debug_enable="export PS4='+${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]}: '"
+alias debug_disable="export PS4=''"
+
+#alias man="man -LC"
+alias lintian="lintian --suppress-tags bad-distribution-in-changes-file"
+
+alias ip="ip -c"
+
+# hide secrets
+#alias env="env | sed -E 's/^(OS_PASSWORD=|GITHUB_TOKEN=).*$/\1***********/'"
+#alias set="set | sed -E 's/^(OS_PASSWORD=|GITHUB_TOKEN=).*$/\1***********/'"

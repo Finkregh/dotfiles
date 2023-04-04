@@ -1,0 +1,106 @@
+[push]
+    default = simple
+
+[credential]
+    helper = cache --timeout=28800
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
+
+[color "diff"]
+    whitespace = red reverse
+
+[core]
+    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    autocrlf = input
+    excludesfile = ~/.global_ignore/
+    editor = nvim
+    quotepath = true
+    commitGraph = true
+    #pager = delta
+
+[user]
+    email = {{ .email | quote }}
+    Name = Oluf Lorenzen
+    {{ if ne .signingkey "none" }}
+    signingkey = {{ .signingkey }}
+    {{ end }}
+
+[alias]
+    st = status
+    ci = commit
+    br = branch
+    co = checkout
+    cp = cherry-pick
+    df = diff
+    lg = log -p
+    ph = push origin HEAD
+    phf = push origin HEAD --force-with-lease
+    tree = log --graph --pretty=oneline --abbrev-commit --all --decorate
+    stree = log --pretty=oneline --topo-order --graph --abbrev-commit
+    wdiff = diff --color-words
+    wmdiff = diff master --color-words
+    wshow = show --color-words
+    wmshow = show master --color-words
+    merge = merge --ff-only
+    pull = pull --rebase
+    rbc = rebase --continue
+    tt = timetrack
+    graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format: %h -> { %p }' \"$@\" | sed 's/[0-9a-f]\\+/\"&\"/g' ; echo '}'; }; %f"
+    conflicted = !nvim +Conflicted
+    #git graphviz HEAD^^..HEAD | dotty /dev/stdin
+    #git graphviz --first-parent master | dotty /dev/stdin
+    f = fuzzy
+    # show last changed branches and when
+    wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads # https://carolynvanslyck.com/blog/2020/12/git-wip/
+
+
+[gui]
+    fontui   = -family terminus -size 9 -weight normal -slant roman -underline 0 -overstrike 0
+    fontdiff = -family terminus -size 9 -weight normal -slant roman -underline 0 -overstrike 0
+[mergetool "gvimdiff3"]
+    cmd = gvim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[mergetool "vimdiff3"]
+    cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+
+[diff "odf"]
+      textconv=odt2txt
+[diff "localizablestrings"]
+    textconv = "iconv -f utf-16 -t utf-8"
+[commit]
+    {{ if ne .signingkey "none" }}
+    gpgsign = true
+    {{ else }}
+    gpgsign = false
+    {{ end }}
+    verbose = true
+[icdiff]
+    options = --highlight --line-numbers
+[fetch]
+    prune = true
+[pull]
+    rebase = true
+[rebase]
+    autoStash = true
+[gc]
+    ; <https://devblogs.microsoft.com/devops/supercharging-the-git-commit-graph/>
+    writeCommitGraph = true
+[rerere]
+    enabled = true
+    autoupdate = true
+[init]
+	defaultBranch = main
+    #templatedir = /Users/c5276249/.local/share/git/template
+[delta]
+    plus-color = "#012800"
+    minus-color = "#340001"
+    syntax-theme = Monokai Extended
+[interactive]
+    #diffFilter = delta --color-only
+[mergetool "vim-conflicted"]
+	cmd = nvim +Conflicted
+[merge]
+	tool = nvim-conflicted

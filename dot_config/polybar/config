@@ -1,0 +1,435 @@
+[colors]
+;My colors are set from .Xresources to match everything else
+background_i3wmthemer 	= ${xrdb:background}
+foreground_i3wmthemer 	= ${xrdb:foreground}
+color00_i3wmthemer	      = ${xrdb:color0}
+color01_i3wmthemer      = ${xrdb:color1}
+color02_i3wmthemer	      = ${xrdb:color2}
+color03_i3wmthemer	      = ${xrdb:color3}
+color04_i3wmthemer	      = ${xrdb:color4}
+color05_i3wmthemer	      = ${xrdb:color5}
+color06_i3wmthemer	      = ${xrdb:color6}
+color07_i3wmthemer	      = ${xrdb:color7}
+color08_i3wmthemer	      = ${xrdb:color8}
+color09_i3wmthemer	      = ${xrdb:color9}
+color10_i3wmthemer	    = ${xrdb:color10}
+color11_i3wmthemer	    = ${xrdb:color11}
+color12_i3wmthemer	    = ${xrdb:color12}
+color13_i3wmthemer	    = ${xrdb:color13}
+color14_i3wmthemer	    = ${xrdb:color14}
+color15_i3wmthemer	    = ${xrdb:color15}
+
+
+[bar/top]
+dpi = ${env:POLY_DPI:96}
+monitor = ${env:MONITOR:HDMI-2}
+width = 100%
+height = 25
+
+background = ${colors.background_i3wmthemer}
+foreground =  ${colors.foreground_i3wmthemer}
+
+line-size = 3
+line-color = ${colors.color04_i3wmthemer}
+
+spacing = 2
+padding = 2
+module-margin = 2
+
+font-0 = FantasqueSansMono Nerd Font:size=10;4
+font-1 = MaterialIcons:size=10;6
+font-2 = MiscTermsynu:size=8:antialias=false;2
+font-3 = FontAwesome:size=10;4
+
+modules-left = i3
+modules-right = audioplayer volume backlight wireless-network wired-network battery battery1 date
+
+[bar/top-laptop]
+dpi = 192
+monitor = eDP-1
+width = ${bar/top.width}
+height = 40
+
+background = ${bar/top.background}
+foreground = ${bar/top.foreground}
+
+line-color = ${bar/top.background}
+line-size = 2
+
+spacing = 2
+padding = 2
+module-margin = 2
+
+font-0 = FantasqueSansMono Nerd Font:size=11;4
+font-1 = MaterialIcons:size=10;6
+font-2 = MiscTermsynu:size=8:antialias=false;2
+font-3 = FontAwesome5Free:size=10;4
+
+modules-left = i3
+modules-right = audioplayer volume backlight wireless-network wired-network battery battery1 date
+
+
+[bar/bottom]
+dpi = ${bar/top.dpi}
+monitor = ${bar/top.monitor}
+bottom = true
+width = ${bar/top.width}
+height = ${bar/top.height}
+
+background = ${bar/top.background}
+foreground = ${bar/top.foreground}
+
+line-color = ${bar/top.background}
+line-size = 2
+
+spacing = 3
+padding-right = 4
+module-margin-left = 0
+module-margin-right = 6
+
+font-0 = FantasqueSansMono Nerd Font:size=8;4
+font-1 = MaterialIcons:size=10;6
+font-2 = MiscTermsynu:size=8:antialias=false;2
+font-3 = FontAwesome5Free:size=10;4
+
+modules-left =
+modules-center = xwindow
+modules-right = cpu memory
+
+tray-position = ${env:POLYBAR_TRAY_POSITION_EXTERNAL:left}
+tray-maxsize = ${env:POLYBAR_TRAY_MAXSIZE:40}
+tray-transparent = true
+tray-background = ${colors.background_i3wmthemer}
+tray-padding = 4
+
+[bar/bottom-laptop]
+dpi = ${bar/top-laptop.dpi}
+monitor = ${bar/top-laptop.monitor}
+bottom = true
+width = ${bar/top-laptop.width}
+height = ${bar/top-laptop.height}
+
+background = ${bar/top-laptop.background}
+foreground = ${bar/top-laptop.foreground}
+
+line-color = ${bar/top-laptop.background}
+line-size = 2
+
+spacing = 3
+padding-right = 4
+module-margin-left = 0
+module-margin-right = 6
+
+font-0 = FantasqueSansMono Nerd Font:size=8;4
+font-1 = MaterialIcons:size=10;6
+font-2 = MiscTermsynu:size=8:antialias=false;2
+font-3 = FontAwesome5Free:size=10;4
+
+modules-left =
+modules-center = xwindow
+modules-right = cpu memory
+
+tray-position = ${env:POLYBAR_TRAY_POSITION_LAPTOP:left}
+tray-maxsize = 40
+tray-transparent = true
+tray-background = ${colors.background_i3wmthemer}
+tray-padding = 4
+
+
+[module/backlight]
+type = internal/xbacklight
+format = <ramp> <bar>
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-font = 3
+bar-indicator-foreground = #ff
+bar-fill = ─
+bar-fill-font = 3
+bar-fill-foreground = #c9665e
+bar-empty = ─
+bar-empty-font = 3
+bar-empty-foreground = #44
+
+[module/battery]
+type = internal/battery
+full-at = 90
+battery = BAT0
+
+format-charging = <animation-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity>
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = #f53c3c
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = #ffa900
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+bar-capacity-width = 10
+bar-capacity-format = %{+u}%{+o}%fill%%empty%%{-u}%{-o}
+bar-capacity-fill = █
+bar-capacity-fill-foreground = #ddffffff
+bar-capacity-fill-font = 3
+bar-capacity-empty = █
+bar-capacity-empty-font = 3
+bar-capacity-empty-foreground = #44ffffff
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+[module/battery1]
+type = internal/battery
+full-at = 90
+battery = BAT1
+
+format-charging = <animation-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity>
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = #f53c3c
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = #ffa900
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+bar-capacity-width = 10
+bar-capacity-format = %{+u}%{+o}%fill%%empty%%{-u}%{-o}
+bar-capacity-fill = █
+bar-capacity-fill-foreground = #ddffffff
+bar-capacity-fill-font = 3
+bar-capacity-empty = █
+bar-capacity-empty-font = 3
+bar-capacity-empty-foreground = #44ffffff
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+[module/i3]
+type = internal/i3
+
+fuzzy-match = true
+
+ws-icon-0 = shell;
+ws-icon-1 = browser;
+ws-icon-2 = editor;
+ws-icon-3 = music;
+ws-icon-4 = comm;
+ws-icon-5 = mail;
+ws-icon-6 = hodr;
+ws-icon-default = 
+
+format = <label-state> <label-mode>
+
+; Available tokens:
+;   %mode%
+; Default: %mode%
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-background = ${colors.color04_i3wmthemer}
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+label-focused = %icon%
+label-focused-foreground = ${colors.color04_i3wmthemer}
+label-focused-background = ${colors.background_i3wmthemer}
+label-focused-underline = ${colors.color04_i3wmthemer}
+label-focused-padding = 4
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-unfocused = %icon%
+label-unfocused-padding = 4
+label-unfocused-background = ${colors.background_i3wmthemer}
+label-unfocused-foreground = ${colors.foreground_i3wmthemer}
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-visible = %icon%
+label-visible-padding = 4
+lable-visible-foreground = ${colors.color04_i3wmthemer}
+label-visible-underline = ${colors.color04_i3wmthemer}
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-urgent = %icon%
+label-urgent-padding = 6
+#label-urgent-underline = #bd2c40
+label-urgent-foreground = ${colors.foreground_i3wmthemer}
+label-urgent-background = ${colors.background_i3wmthemer}
+label-urgent-underline = ${colors.color02_i3wmthemer}
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+format = <label> <ramp-coreload>
+label = CPU
+
+ramp-coreload-0 = ▁
+ramp-coreload-0-font = 3
+ramp-coreload-0-foreground = #aaff77
+ramp-coreload-1 = ▂
+ramp-coreload-1-font = 3
+ramp-coreload-1-foreground = #aaff77
+ramp-coreload-2 = ▃
+ramp-coreload-2-font = 3
+ramp-coreload-2-foreground = #aaff77
+ramp-coreload-3 = ▄
+ramp-coreload-3-font = 3
+ramp-coreload-3-foreground = #aaff77
+ramp-coreload-4 = ▅
+ramp-coreload-4-font = 3
+ramp-coreload-4-foreground = #fba922
+ramp-coreload-5 = ▆
+ramp-coreload-5-font = 3
+ramp-coreload-5-foreground = #fba922
+ramp-coreload-6 = ▇
+ramp-coreload-6-font = 3
+ramp-coreload-6-foreground = #ff5555
+ramp-coreload-7 = █
+ramp-coreload-7-font = 3
+ramp-coreload-7-foreground = #ff5555
+
+[module/date]
+type = internal/date
+date =   %%{F#999}%d.%m.%Y%%{F-}  %%{F#fff}%H:%M%%{F-}
+
+[module/memory]
+type = internal/memory
+format = <label> <bar-used>
+label = RAM
+
+bar-used-width = 20
+bar-used-foreground-0 = #aaff77
+bar-used-foreground-1 = #aaff77
+bar-used-foreground-2 = #fba922
+bar-used-foreground-3 = #ff5555
+bar-used-indicator = |
+bar-used-indicator-font = 2
+bar-used-indicator-foreground = #ff
+bar-used-fill = ─
+bar-used-fill-font = 2
+bar-used-empty = ─
+bar-used-empty-font = 2
+bar-used-empty-foreground = #444444
+
+[module/wireless-network]
+type = internal/network
+interface = wlp3s0
+interval = 3.0
+ping-interval = 10
+
+format-connected = <ramp-signal>
+#label-connected = %essid%
+label-connected = %local_ip%
+label-disconnected =    not connected
+label-disconnected-foreground = #66
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+
+animation-packetloss-0 = 
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 
+animation-packetloss-1-foreground = ${bar/top.foreground}
+animation-packetloss-framerate = 500
+
+[module/wired-network]
+type = internal/network
+interface = enp0s25
+interval = 3.0
+
+label-connected = 
+label-disconnected-foreground = #66
+
+[module/volume]
+type = internal/volume
+master-mixer = Master
+
+format-volume = <ramp-volume> <label-volume>
+label-muted =   muted
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+
+[module/temperature]
+type = internal/temperature
+interval = 2
+thermal-zone = 0
+warn-temperature = 70
+
+format = <ramp> <label>
+format-warn = <ramp> <label-warn>
+
+label = %temperature%
+label-foreground = #aaff77
+label-warn = %temperature%
+label-warn-foreground = #fba922
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:120:...%
+label-padding = 4
+
+[module/pkg]
+type = custom/script
+interval = 1200
+format = <label>
+label = "%output:0:30%"
+exec = ~/.config/polybar/pkg.sh
+
+[module/audioplayer]
+type = custom/script
+interval = 10
+format-prefix = "   "
+format-prefix-foreground = #1ED760
+exec = playerctl metadata xesam:artist | tr -d '\n' ; echo -n " - "; playerctl metadata xesam:title | tr -d '\n'
+exec-if = pgrep -x spotify
+click-left = playerctl previous
+click-middle = playerctl play-pause
+click-right = playerctl next
+scroll-up = playerctl -p vlc volume 0.05+
+scroll-down = playerctl -p vlc volume 0.05-
+
+
+; vim:ft=dosini

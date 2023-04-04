@@ -1,0 +1,32 @@
+Include /Users/I556086/.colima/ssh_config
+
+Include config.d/*
+
+# do not save host keys when connecting to IPs
+# IPv4
+Match exec "echo %n | grep -qE '([0-9]{1,3}[\.]){3}[0-9]{1,3}'"
+    UserKnownHostsFile    /dev/null
+    StrictHostKeyChecking no
+# IPv6
+Match exec "echo %n | grep -qE '^([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4}$'"
+    UserKnownHostsFile    /dev/null
+    StrictHostKeyChecking no
+
+Host *
+    ForwardAgent no
+    ForwardX11 no
+    EnableSSHKeysign yes
+    # only use IPv4
+    #AddressFamily inet
+    # we are not on modems anymore
+    Compression no
+    ControlMaster auto
+    ControlPath ~/.ssh/sockets/%C
+    ControlPersist 1200
+    AddKeysToAgent confirm
+    ServerAliveInterval 10
+    # modern crypto
+    HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,ssh-rsa,ecdsa-sha2-nistp521-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp521,ecdsa-sha2-nistp384,ecdsa-sha2-nistp256
+    KexAlgorithms curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group-exchange-sha256
+    MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com
+    Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
