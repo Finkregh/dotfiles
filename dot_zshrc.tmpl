@@ -42,15 +42,19 @@ setopt auto_cd
 
 typeset -U path # only have paths once in the array
 
+{{ if ne .chezmoi.arch "amd64" }}
 # python crashes otherwise...
 # needs `ln -s /usr/local/Cellar/openssl/1.0.2t/lib/libssl.1.0.0.dylib /usr/local/lib/libssl.dylib ; ln -s /usr/local/Cellar/openssl/1.0.2t/lib/libcrypto.1.0.0.dylib /usr/local/lib/libcrypto.dylib`
+{{ end }}
 
 #autoload -Uz compinit
 #compinit
 builtin source ~/.zsh_aliases
 builtin source ~/.zshenv
+{{ if ne .chezmoi.arch "amd64" }}
 # remove fugly macos old zsh version from fpath
 export FPATH=$(echo "$FPATH" | sed -e 's|:/usr/share/zsh/5.8.1/functions||')
+{{ end }}
 typeset -U fpath
 #print -l $fpath
 
@@ -65,19 +69,25 @@ fi
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe.sh ] && eval "$(/usr/bin/lesspipe.sh)"
 
-#export GPG_TTY=$(tty)
-#gpg-connect-agent updatestartuptty /bye >/dev/null
+{{ if ne .signingkey "none" }}
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null
+{{ end }}
 if command -v keychain &>/dev/null; then
     sleep 0.$((($RANDOM % 9)))
     eval $(keychain --quiet --eval --agents ssh --inherit any --quick)
     keychain --quick --inherit any --agents "ssh" ~/.ssh/id_rsa ~/.ssh/id_ed25519
-    #keychain --quick --inherit any --agents "gpg" 0x243278FC323BBE52
+    {{ if ne .signingkey "none" }}
+    keychain --quick --inherit any --agents "gpg" {{ .signingkey }}
+    {{ end }}
 
     [ -z "$HOSTNAME" ] && HOSTNAME=$(uname -n)
     [ -f $HOME/.keychain/$HOSTNAME-sh ] &&
         . $HOME/.keychain/$HOSTNAME-sh
-    #[ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] && \
-    #    . $HOME/.keychain/$HOSTNAME-sh-gpg
+    {{ if ne .signingkey "none" }}
+    [ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] && \
+        . $HOME/.keychain/$HOSTNAME-sh-gpg
+    {{ end }}
 fi
 
 # Make sure that the terminal is in application mode when zle is active, since
