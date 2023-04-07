@@ -259,6 +259,8 @@ exec --no-startup-id clipit &
 exec --no-startup-id flameshot &
 exec --no-startup-id spotify --force-device-scale-factor=1.5 &
 exec --no-startup-id insync start &
+exec --no-startup-id dunst &
+exec --no-startup-id networkd-notify &
 # auto-backlight
 exec --no-startup-id clight &
 
