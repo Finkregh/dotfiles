@@ -116,7 +116,7 @@ floating_modifier $mod
 #bindsym $mod+Return exec uxterm
 #bindsym $mod+Return exec urxvtc
 #bindsym $mod+Return exec konsole
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec wezterm
 
 # kill focused window
 bindsym $mod+Shift+q kill

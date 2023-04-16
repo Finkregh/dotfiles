@@ -271,7 +271,7 @@ if [[ $(uname) == "Darwin" ]]; then
     # FIXME
     #if which chezmoi > /dev/null; then chezmoi completion zsh > /opt/homebrew/share/zsh/site-functions/_chezmoi; fi
     #if which gopass > /dev/null; then gopass completion zsh > /opt/homebrew/share/zsh/site-functions/_gopass; fi
-    
+
     # crude daily homebrew update
     if [ ! -e /tmp/brew-update-timer ] ; then
         touch /tmp/brew-update-timer
@@ -287,7 +287,7 @@ if [[ $(uname) == "Darwin" ]]; then
         brew cleanup --prune 30
         touch /tmp/brew-update-timer
     fi
-    
+
     # get system CAs for e.g. python
     security export -t certs -f pemseq -k /System/Library/Keychains/SystemRootCertificates.keychain -o /tmp/bundleCA.pem
     security export -t certs -f pemseq -k /Library/Keychains/System.keychain -o /tmp/selfSignedCAbundle.pem
