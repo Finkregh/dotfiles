@@ -95,19 +95,6 @@ require("mason-lspconfig").setup_handlers {
     end
 }
 
-local lsp_formatting = function(bufnr)
-    vim.lsp.buf.format({
-        filter = function(client)
-			if vim.bo.filetype == "rust" then
-				return client.name ~= "null-ls"
-			else
-				return true
-			end
-        end,
-        bufnr = bufnr,
-    })
-end
-
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 -- Use an on_attach function to only map the following keys
@@ -161,21 +148,6 @@ nvim_lsp['rust_analyzer'].setup {
 		},
 	}
 }
-
-local null_ls = require("null-ls")
-null_ls.setup({
-	on_attach = on_attach,
-    sources = {
-		null_ls.builtins.completion.spell,
-		null_ls.builtins.formatting.fixjson,
-		null_ls.builtins.formatting.nginx_beautifier,
-		null_ls.builtins.formatting.prettier,
-		null_ls.builtins.formatting.trim_newlines,
-		null_ls.builtins.formatting.trim_whitespace,
-        null_ls.builtins.code_actions.eslint,
-        null_ls.builtins.diagnostics.fish,
-    },
-})
 
 vim.diagnostic.config({
   virtual_text = {

@@ -123,7 +123,6 @@ zinit light-mode for \
     "chrissicool/zsh-256color" \
     @asdf-vm/asdf
 #    redxtech/zsh-asdf-direnv
-#    "mattberther/zsh-pyenv" \
 
 # #zplug "zsh-users/zsh-completions"
 
@@ -131,11 +130,9 @@ zinit lucid wait light-mode for \
 	OMZP::colored-man-pages/colored-man-pages.plugin.zsh \
 	OMZP::colorize/colorize.plugin.zsh \
     OMZP::git/git.plugin.zsh \
-    OMZP::pyenv \
     OMZP::virtualenv
     #OMZP::autojump/autojump.plugin.zsh # clashes with jo... :|
 
-#    OMZP::pyenv/pyenv.plugin.zsh \
 	#OMZP::asdf/asdf.plugin.zsh
 
 # #zplug "chmouel/kss", use:"_kss", as:command, use:"kss"
@@ -151,34 +148,25 @@ source ~/.local/share/zinit/plugins/tj---git-extras/etc/git-extras-completion.zs
 zinit ice as"program" cp"httpstat.sh -> httpstat" pick"httpstat"
 zinit light b4b4r07/httpstat
 
-#zinit lucid as'command' pick'bin/pyenv' atinit'export PYENV_ROOT="$PWD"' \
-#    atclone'PYENV_ROOT="$PWD" ./libexec/pyenv init - > zpyenv.zsh' \
-#    atpull"%atclone" src"zpyenv.zsh" nocompile'!' for \
-#        pyenv/pyenv
+zinit pack"bgn" for pyenv
+zinit pack"bgn+keys" for fzf
+zinit wait pack atload=+"zicompinit; zicdreplay" for system-completions
+zinit id-as=remark pack param='MOD → remark-man; MOD2 → remark-cli' for any-node
+zinit pack param='MOD → markdownlint-cli; MOD2 → remark-cli' for any-node
+zinit id-as=commitlint pack param='MOD → @commitlint/cli; MOD2 → @commitlint/config-conventional' for any-node
 
-#zi ice lucid wait \
-# as'command' pick'bin/pyenv' \
-# atload'eval "$(pyenv init - --no-rehash zsh)"' \
-# src'completions/pyenv.zsh' nocompile'!'
-#zi light pyenv/pyenv
-
-#zi ice lucid wait'[[ -n ${ZLAST_COMMANDS[(r)pyenv]} ]]' \
-# as'command' pick"bin/*" \
-# atload'eval "$(pyenv virtualenv-init - zsh)"'
-#zi light pyenv/pyenv-virtualenv
-
-export PYENV_ROOT="$HOME/.pyenv"
+export PYENV_ROOT="$HOME/.local/share/pyenv"
 # Load pyenv automatically
 eval "$(pyenv init --path)"
 # Load pyenv-virtualenv automatically
 eval "$(pyenv virtualenv-init -)"
 
-zi for \
-    from'gh-r'  \
-    sbin'fzf'   \
-  junegunn/fzf
-zi for \
-    https://github.com/junegunn/fzf/raw/master/shell/{'completion','key-bindings'}.zsh
+
+zinit ice wait"2" as"command" from"gh-r" lucid \
+  mv"zoxide -> zoxide" \
+  atclone"./zoxide init zsh > init.zsh" \
+  atpull"%atclone" src"init.zsh" nocompile'!'
+zinit light ajeetdsouza/zoxide
 
 # sharkdp/fd
 zi for \
@@ -212,6 +200,10 @@ zi for \
     mv"direnv* -> direnv" \
     src'zhook.zsh' \
   direnv/direnv
+
+export ATUIN_NOBIND="true"
+zinit load ellie/atuin
+bindkey '^f' _atuin_search_widget
 
 # forgit, git interactive stuff
 zinit ice wait lucid
@@ -256,6 +248,10 @@ type rbenv > /dev/null && eval "$(rbenv init -)"
 #if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 if which chezmoi > /dev/null; then chezmoi completion zsh > /opt/homebrew/share/zsh/site-functions/_chezmoi; fi
 if which gopass > /dev/null; then gopass completion zsh > /opt/homebrew/share/zsh/site-functions/_gopass; fi
+if [ -e "$(brew --prefix)/share/google-cloud-sdk/" ]; then
+    source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+    source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+fi
 
 # crude daily homebrew update
 if [ ! -e /tmp/brew-update-timer ] ; then

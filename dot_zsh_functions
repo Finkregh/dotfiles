@@ -226,6 +226,7 @@ ssl-cert-info() {
 }
 
 vgrep() {
+  emulate -L bash
   if [[ $* == *"--help"* ]]; then
     command vgrep "$@"
   else
