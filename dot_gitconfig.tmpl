@@ -25,7 +25,9 @@
 [user]
     email = {{ .email | quote }}
     Name = Oluf Lorenzen
+    {{ if ne .signingkey "none" }}
     signingkey = {{ .signingkey }}
+    {{ end }}
 
 [alias]
     st = status
@@ -69,7 +71,11 @@
 [diff "localizablestrings"]
     textconv = "iconv -f utf-16 -t utf-8"
 [commit]
+    {{ if ne .signingkey "none" }}
     gpgsign = true
+    {{ else }}
+    gpgsign = false
+    {{ end }}
     verbose = true
 [icdiff]
     options = --highlight --line-numbers
