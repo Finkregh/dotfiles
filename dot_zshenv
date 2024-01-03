@@ -14,6 +14,7 @@ export GOPATH=$HOME/go
 export GOROOT="${HOMEBREW_PREFIX}/opt/go/libexec"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="$GOROOT/bin:$PATH"
+export PYTHONSTARTUP=~/.pythonrc
 
 #export KUBECONFIG=/Users/c5276249/.config/ccloud_multitool/kubeconfig
 export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:$PATH"

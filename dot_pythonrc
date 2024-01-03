@@ -1,0 +1,16 @@
+import os
+import sys
+import builtins
+
+from functools import partial
+
+try:
+    from rich import inspect, pretty, print, traceback
+
+    help = partial(inspect, help=True)
+    builtins.help = inspect
+    pretty.install()
+    traceback.install()
+    print("rich setup concluded.")
+except ImportError:
+    pass
