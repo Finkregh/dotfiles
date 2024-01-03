@@ -1,0 +1,9 @@
+[tool.ruff]
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D407", # Missing dashed underline after section ("Returns") # formatting docstrings
+    "FA102", # future-required-type-annotation (FA102) # we dont use old python
+    "UP015", # Unnecessary open mode parameters
+    "PTH123", # `open()` should be replaced by `Path.open()`
+]
