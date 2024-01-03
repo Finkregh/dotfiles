@@ -166,7 +166,7 @@ zinit id-as=commitlint pack param='MOD → @commitlint/cli; MOD2 → @commitlint
 
 export PYENV_ROOT="$HOME/.local/share/pyenv"
 # Load pyenv automatically
-eval "$(pyenv init --path)"
+#eval "$(pyenv init --path)"
 # Load pyenv-virtualenv automatically
 eval "$(pyenv virtualenv-init -)"
 
@@ -251,6 +251,7 @@ type rbenv > /dev/null && eval "$(rbenv init -)"
 #if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 if which chezmoi > /dev/null; then chezmoi completion zsh > /opt/homebrew/share/zsh/site-functions/_chezmoi; fi
 if which gopass > /dev/null; then gopass completion zsh > /opt/homebrew/share/zsh/site-functions/_gopass; fi
+if which atuin > /dev/null; then atuin gen-completions --shell zsh > /opt/homebrew/share/zsh/site-functions/_atuin; fi
 {{ if ne .chezmoi.arch "amd64" }}
 if [ -e "$(brew --prefix)/share/google-cloud-sdk/" ]; then
     source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"

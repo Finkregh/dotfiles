@@ -182,13 +182,6 @@ cmp.setup({
 
 require("todo-comments").setup {}
 
--- loading status
-require"fidget".setup{
-	text = {
-		spinner = "star"
-	}
-}
-
 require'nvim-web-devicons'.setup {
 }
 
