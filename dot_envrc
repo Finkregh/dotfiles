@@ -1,0 +1,10 @@
+pyversion=3.11.6
+pvenv="work"
+
+use python "${pyversion}"
+# Create the virtualenv if not yet done
+layout virtualenv "${pyversion}" "${pvenv}"
+# activate it
+layout activate "${pvenv}-${pyversion}"
+
+pip install --upgrade pip
