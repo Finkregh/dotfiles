@@ -4,12 +4,20 @@
 # Should you change your keyboard layout some time, delete
 # this file and re-run i3-config-wizard(1).
 
-# sway specifics
-output eDP-1 scale 2
+# set dpi
+output eDP-1 scale 1
+
+input * {
+    xkb_layout "us"
+    xkb_variant "alt-intl"
+    #xkb_options "grp:win_space_toggle"
+}
+
+
 bar {
     swaybar_command waybar
 }
-set $lock ~/.config/sway/lock.sh
+set $lock swaylock-corrupter --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000
 set $power ~/.config/rofi/modi/power
 set $wifi ~/.config/rofi/modi/nmcli
 
@@ -98,8 +106,8 @@ bindsym $mod+Return exec kitty
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec rofi -show combi
+# start a program launcher
+bindsym $mod+d exec fuzzel
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
@@ -117,7 +125,8 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 bindsym $mod+k focus down
-bindsym $mod+l exec --no-startup-id i3lock -t -i ~/Pictures/wallpapers/tiling/_s_a96b57c96d57e0f0g64h2E0A2F1705165111493A0C315B145D400E45iBF.png
+bindsym $mod+l exec --no-startup-id swaylock --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000 --tiling --image ~/Pictures/wallpapers/tiling/_s_a96b57c96d57e0f0g64h2E0A2F1705165111493A0C315B145D400E45iBF.png
+
 bindsym $mod+odiaeresis focus right
 bindsym $mod+x move workspace to output right
 
@@ -197,7 +206,7 @@ bindsym $mod+Shift+r restart
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 set $mode_system (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3lock-fancy; mode "default"
+    bindsym l exec --no-startup-id swaylock-corrupter --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000; mode "default"
     bindsym s exec --no-startup-id systemctl suspend; mode "default"
     bindsym e exec --no-startup-id i3-msg exit; mode "default"
     bindsym h exec --no-startup-id i3exit hibernate; mode "default"
@@ -220,7 +229,7 @@ exec --no-startup-id variety &
 #exec --no-startup-id /usr/bin/gajim &
 exec --no-startup-id /usr/bin/thunderbird &
 #exec --no-startup-id parcellite &
-exec --no-startup-id clipit &
+exec --no-startup-id copyq --start-server &
 #exec --no-startup-id zeal --platformtheme qt5ct &
 exec --no-startup-id flameshot &
 #exec --no-startup-id spotify --force-device-scale-factor=1.5 &
@@ -228,7 +237,13 @@ exec --no-startup-id insync start &
 # notification stuff
 exec --no-startup-id mako &
 # auto-backlight
-exec --no-startup-id clight &
+#exec --no-startup-id clight &
+
+# screen blank on idle
+exec --no-startup-id swayidle -w \\
+	timeout 300 'swaylock-corrupter --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000' \\
+	timeout 600 'swaymsg "output * power off"' \\
+    resume 'swaymsg "output * power on"' before-sleep 'swaylock-corrupter --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000' &
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
