@@ -18,12 +18,12 @@
 * {
   transition: none;
   box-shadow: none;
+  font-family: 'FantasqueSansM Nerd Font';
+  font-size: 1.1em;
+  font-weight: 200;
 }
 
 #waybar {
-	font-family: 'Source Code Pro', sans-serif;
-	font-size: 1.2em;
-	font-weight: 400;
   color: @base04;
   background: @base01;
 }
@@ -91,8 +91,8 @@
   color: @base0F;
 }
 
-#window {
-  font-size: 0.9em;
+/*#window {
+  font-size: 0.5em;
 	font-weight: 400;
 	font-family: sans-serif;
-}
+}*/
