@@ -50,9 +50,7 @@ if has('nvim')
 	Plug 'hrsh7th/cmp-calc'
 	Plug 'https://github.com/josa42/nvim-lightline-lsp'
 	Plug 'https://github.com/mfussenegger/nvim-lint'
-	Plug 'j-hui/fidget.nvim'
 	Plug 'jghauser/mkdir.nvim'
-	Plug 'jose-elias-alvarez/null-ls.nvim'
 	Plug 'simrat39/rust-tools.nvim'
 	Plug 'stevearc/dressing.nvim'
 	"Plug 'williamboman/nvim-lsp-installer'
@@ -138,7 +136,7 @@ augroup END
 
 " Aliases
 command Header FIGlet -f Gothic
-cmap W w !sudo tee > /dev/null %
+"cmap W w !sudo tee > /dev/null %
 " nnoremap <C-e> :NERDTreeTabsToggle<CR>
 "nnoremap <C-e> :exec ':Fern -reveal=% -drawer -toggle -stay ' . FindSessionDirectory()<CR>
 nnoremap <C-e> :exec ':Fern -reveal=% -drawer -toggle -stay .'<CR>
@@ -173,7 +171,7 @@ filetype plugin indent on
 
 set number
 set wrap
-set mouse=a
+set mouse=
 set softtabstop=4 noexpandtab
 set ts=4 sw=4
 
@@ -193,7 +191,8 @@ let &t_SI = "\<Esc>[6 q"
 let &t_EI = "\<Esc>[2 q"
 
 
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
+set clipboard=
 " this disables "dd" == yank
 "nnoremap d "_d
 "vnoremap d "_d
