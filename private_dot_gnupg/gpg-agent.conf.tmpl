@@ -9,8 +9,8 @@
 default-cache-ttl 18000
 max-cache-ttl 86400
 allow-loopback-pinentry
-{{ if eq .chezmoi.arch "amd64" }}
-pinentry-program /usr/bin/pinentry-gtk-2
-{{ else }}
+{{ if eq .chezmoi.os "darwin" }}
 pinentry-program /opt/homebrew/bin/pinentry-mac
+{{ else }}
+pinentry-program /usr/bin/pinentry-gtk-2
 {{ end }}
