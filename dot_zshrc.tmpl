@@ -159,6 +159,8 @@ zinit light b4b4r07/httpstat
 
 zinit pack"bgn" git for pyenv
 zinit pack"bgn+keys" for fzf
+zi for \
+    https://github.com/junegunn/fzf/raw/master/shell/{'completion','key-bindings'}.zsh
 zinit wait pack atload=+"zicompinit; zicdreplay" for system-completions
 zinit id-as=remark pack param='MOD → remark-man; MOD2 → remark-cli' for any-node
 zinit pack param='MOD → markdownlint-cli; MOD2 → remark-cli' for any-node
@@ -206,6 +208,13 @@ zinit from"gh-r" as"program" mv"direnv* -> direnv" \
     pick"direnv" src="zhook.zsh" for \
         direnv/direnv
 
+# chezmoi
+zinit ice lucid \
+  as'program' from'gh-r' \
+  bpick'chezmoi_*.tar.gz' \
+  cp'completions/chezmoi.zsh -> _chezmoi'
+zinit light twpayne/chezmoi
+
 export ATUIN_NOBIND="true"
 zinit load ellie/atuin
 bindkey '^f' _atuin_search_widget
@@ -249,10 +258,9 @@ fi
 type rbenv > /dev/null && eval "$(rbenv init -)"
 
 #if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-if which chezmoi > /dev/null; then chezmoi completion zsh > /opt/homebrew/share/zsh/site-functions/_chezmoi; fi
-if which gopass > /dev/null; then gopass completion zsh > /opt/homebrew/share/zsh/site-functions/_gopass; fi
-if which atuin > /dev/null; then atuin gen-completions --shell zsh > /opt/homebrew/share/zsh/site-functions/_atuin; fi
 {{ if eq .chezmoi.os "darwin" }}
+if which gopass > /dev/null; then gopass completion zsh > /opt/homebrew/share/zsh/site-functions/_gopass; fi
+#if which atuin > /dev/null; then atuin gen-completions --shell zsh > /opt/homebrew/share/zsh/site-functions/_atuin; fi
 if [ -e "$(brew --prefix)/share/google-cloud-sdk/" ]; then
     source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
     source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
@@ -285,7 +293,6 @@ export REQUESTS_CA_BUNDLE=/tmp/bundleCA.pem NODE_EXTRA_CA_CERTS=/tmp/bundleCA.pe
 
 # dont suspend background jobs if they produce output
 stty -tostop
-
 
 # load completions
 #type compinit $> /dev/null || autoload -Uz compinit

@@ -44,12 +44,10 @@ Plug 'ryanoasis/vim-devicons'
 
 " don't install these plugins on remote servers
 if has('nvim')
-	Plug 'airblade/vim-gitgutter'
-	Plug 'dyng/ctrlsf.vim'
+
 	Plug 'folke/todo-comments.nvim'
 	Plug 'hrsh7th/cmp-calc'
 	Plug 'https://github.com/josa42/nvim-lightline-lsp'
-	Plug 'https://github.com/mfussenegger/nvim-lint'
 	Plug 'jghauser/mkdir.nvim'
 	Plug 'simrat39/rust-tools.nvim'
 	Plug 'stevearc/dressing.nvim'
@@ -73,6 +71,10 @@ if has('nvim')
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'tpope/vim-fugitive'
+    "Plug 'nvimdev/guard.nvim'
+    "Plug 'nvimdev/guard-collection'
+    Plug 'nvimtools/none-ls.nvim'
+    Plug 'jay-babu/mason-null-ls.nvim'
 endif
 
 call plug#end()

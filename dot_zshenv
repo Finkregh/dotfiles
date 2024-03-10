@@ -1,0 +1,36 @@
+export HOMEBREW_PREFIX=/opt/homebrew
+export PATH="$HOME/Library/Python/3.11/bin:$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export EDITOR=nvim
+export VISUAL=nvim
+#export BROWSER=google-chrome-stable
+export PAGER="less -R"
+export MANPAGER="less -R"
+export MANWIDTH=${MANWIDTH:-80}
+export COLORTERM="yes"
+export TERM=xterm-256color
+export JAVA_TOOL_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
+
+export GOPATH=$HOME/go
+export GOROOT="${HOMEBREW_PREFIX}/opt/go/libexec"
+export PATH="$GOPATH/bin:$PATH"
+export PATH="$GOROOT/bin:$PATH"
+
+#export KUBECONFIG=/Users/c5276249/.config/ccloud_multitool/kubeconfig
+export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:$PATH"
+export PATH="${HOMEBREW_PREFIX}/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnubin:$PATH"
+export MANPATH="${HOMEBREW_PREFIX}/opt/gnu-sed/libexec/gnuman:$MANPATH"
+export MANPATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnuman:$MANPATH"
+
+export PATH="$PATH:/usr/local/sbin:/sbin"
+#
+# add homebrew functions paths
+for funcpath in "${HOMEBREW_PREFIX}/share/zsh-completions" "${HOMEBREW_PREFIX}/share/zsh/functions" "${HOMEBREW_PREFIX}/share/zsh/site-functions"; do
+    if [ -d "${funcpath}" ] &&
+        [[ ":${FPATH}:" != *":${funcpath}:"* ]]; then
+        FPATH="${funcpath}:${FPATH}"
+        # ensure secure directory rights
+        chmod -R go-w "${funcpath}"
+    fi
+done

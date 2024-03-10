@@ -94,6 +94,18 @@ require("mason-lspconfig").setup_handlers {
         require("rust-tools").setup {}
     end
 }
+require("mason-null-ls").setup({
+    ensure_installed = {
+        -- Opt to list sources here, when available in mason.
+    },
+    automatic_installation = true,
+    handlers = {},
+})
+require("null-ls").setup({
+    sources = {
+        -- Anything not supported by mason.
+    }
+})
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
@@ -184,5 +196,32 @@ require("todo-comments").setup {}
 
 require'nvim-web-devicons'.setup {
 }
+
+--local ft = require('guard.filetype')
+--
+------ Assuming you have guard-collection
+----ft('lang'):fmt('format-tool-1')
+----          :append('format-tool-2')
+----          :env(env_table)
+----          :lint('lint-tool-1')
+----          :extra(extra_args)
+--
+---- Call setup() LAST!
+--require('guard').setup({
+--    -- the only options for the setup function
+--    fmt_on_save = true,
+--    -- Use lsp if no formatter was defined for this filetype
+--    lsp_as_default_formatter = false,
+--})
+
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.completion.spell,
+    },
+})
 
 EOF
