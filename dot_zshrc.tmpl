@@ -189,11 +189,24 @@ zi for \
     sbin'**/bat -> bat' \
   @sharkdp/bat
 
+{{ if eq .chezmoi.os "darwin" }}
+alias ls=eza
+{{ else }}
+# <https://github.com/eza-community/eza/issues/228>
 # eza, replacement for ls
 zinit wait'1' lucid \
         from"gh-r" as"program" pick"eza" \
         atload"alias ls=eza" \
         light-mode for @eza-community/eza
+{{ end }}
+
+zinit wait'1' lucid blockf nocompletions \
+	from"gh-r" as'program' pick'ripgrep*/rg' \
+	cp"ripgrep-*/complete/_rg -> _rg" \
+	atclone'chown -R $(id -nu):$(id -ng) .; zinit creinstall -q BurntSushi/ripgrep' \
+	atpull'%atclone' \
+	light-mode for @BurntSushi/ripgrep
+
 
 zi for \
     from'gh-r'  \
