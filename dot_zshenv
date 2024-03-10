@@ -1,5 +1,5 @@
 export HOMEBREW_PREFIX=/opt/homebrew
-export PATH="$HOME/Library/Python/3.11/bin:$HOME/bin:$PATH"
+export PATH="$HOME/Library/Python/3.11/bin:$HOME/bin:$HOME/.local/bin:$PATH"
 export EDITOR=nvim
 export VISUAL=nvim
 #export BROWSER=google-chrome-stable
@@ -34,3 +34,4 @@ for funcpath in "${HOMEBREW_PREFIX}/share/zsh-completions" "${HOMEBREW_PREFIX}/s
         chmod -R go-w "${funcpath}"
     fi
 done
+if [-e "$HOME/.cargo/env" ] ; then source "$HOME/.cargo/env" ; fi

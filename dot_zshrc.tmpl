@@ -157,12 +157,12 @@ source ~/.local/share/zinit/plugins/tj---git-extras/etc/git-extras-completion.zs
 zinit ice as"program" cp"httpstat.sh -> httpstat" pick"httpstat"
 zinit light b4b4r07/httpstat
 
-zinit pack"bgn" for pyenv
+zinit pack"bgn" git for pyenv
 zinit pack"bgn+keys" for fzf
 zinit wait pack atload=+"zicompinit; zicdreplay" for system-completions
 zinit id-as=remark pack param='MOD → remark-man; MOD2 → remark-cli' for any-node
 zinit pack param='MOD → markdownlint-cli; MOD2 → remark-cli' for any-node
-zinit id-as=commitlint pack param='MOD → @commitlint/cli; MOD2 → @commitlint/config-conventional' for any-node
+#zinit id-as=commitlint pack param='MOD → @commitlint/cli; MOD2 → @commitlint/config-conventional' for any-node
 
 export PYENV_ROOT="$HOME/.local/share/pyenv"
 # Load pyenv automatically
