@@ -2,7 +2,7 @@
     "name": "topbar",
     "layer": "top",
     "position": "top",
-    "height": 41,
+    "height": 25,
 
     "modules-left": ["sway/workspaces", "sway/mode", "idle_inhibitor", "pulseaudio", "backlight", "network"],
     "modules-center": ["sway/window"],

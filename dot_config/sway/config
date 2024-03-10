@@ -240,9 +240,9 @@ exec --no-startup-id mako &
 #exec --no-startup-id clight &
 
 # screen blank on idle
-exec --no-startup-id swayidle -w \\
-	timeout 300 'swaylock-corrupter --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000' \\
-	timeout 600 'swaymsg "output * power off"' \\
+exec --no-startup-id swayidle -w \
+	timeout 300 'swaylock-corrupter --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000' \
+	timeout 600 'swaymsg "output * power off"' \
     resume 'swaymsg "output * power on"' before-sleep 'swaylock-corrupter --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000' &
 
 # resize window (you can also use the mouse for that)
