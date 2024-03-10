@@ -166,68 +166,17 @@ zinit ice wait lucid as"program" pick"bin/*" atclone"" atinit"" nocompile""\
     atload'eval "$(PYENV_ROOT=$HOME/.local/share/pyenv pyenv virtualenv-init - --no-rehash zsh | grep -v PATH)"'
 zinit load pyenv/pyenv-virtualenv
 
-#zinit ice wait lucid depth'1' \
-#    atclone'./bin/pyenv-virtualenv-init - zsh > _pyenv_virtualenv; echo TEST'\
-#    nocompile \
-#    atpull"%atclone" \
-#    #atload 'eval "$(pyenv virtualenv init - zsh)"'
-#    atload'eval "$(pyenv virtualenv-init - --no-rehash zsh)"'
-#zinit light pyenv/pyenv-virtualenv
-#zinit ice wait lucid depth'1' \
-#    atclone'echo TEST1;PREFIX=$PZPFX ./install.sh; ./bin/pyenv-virtualenv-init - zsh > _pyenv_virtualenv; echo TEST'\
-#    nocompile \
-#    atpull"%atclone" \
-#    #atload 'eval "$(pyenv virtualenv init - zsh)"'
-#    atload'eval "$(pyenv virtualenv-init - --no-rehash zsh)"'
-#zinit light pyenv/pyenv-virtualenv
-
-
-#zinit ice wait lucid depth'1' \
-#    atclone'PYENV_ROOT="${HOME}/.pyenv" ./bin/pyenv-virtualenv-init - > zpyenv-virtualenv.zsh' \
-#    atinit'export PYENV_ROOT="${HOME}/.pyenv"' atpull"%atclone" \
-#    as'command' pick'bin/*' src"zpyenv-virtualenv.zsh" compile'*.zsh' nocompile'!' \
-#    atload'
-#    eval "$(pyenv init -)"' \
-#    id-as'pyenv-virtualenv'
-#zinit light pyenv/pyenv-virtualenv
-
-#zinit ice wait lucid depth'1' \
-#    atclone'PYENV_ROOT="${HOME}/.local/share/pyenv" ./bin/pyenv-virtualenv-init - > zpyenv-virtualenv.zsh' \
-#    atinit'export PYENV_ROOT="${HOME}/.local/share/pyenv"' atpull"%atclone" \
-#    as'command' pick'bin/*' src"zpyenv-virtualenv.zsh" compile'*.zsh' nocompile'!' \
-#    atload'
-#    eval "$(pyenv init -)"' \
-#    id-as'pyenv-virtualenv'
-#zinit light pyenv/pyenv-virtualenv
-#
-#zinit wait lucid for \
-#    has"pyenv" id-as"pyenv" atclone"pyenv init - --no-rehash zsh > pyenv.zsh" atpull"%atclone" run-atpull pick"pyenv.zsh" nocompile"!" atload"!__zshrc_pyenv_atload" pbzweihander/zinit-null \
-#    has"pyenv-virtualenv" id-as"pyenv-virtualenv" atclone"PYENV_ROOT=${HOME}/.local/share/pyenv pyenv virtualenv-init - zsh > pyenv-virtualenv.zsh" atpull"%atclone" run-atpull pick"pyenv-virtualenv.zsh" nocompile"!" pbzweihander/zinit-null
-
-#zi ice lucid wait \
-# as'command' pick'bin/pyenv' \
-# atload'eval "$(pyenv init - --no-rehash zsh)"' \
-# src'completions/pyenv.zsh' nocompile'!'
-#zi light pyenv/pyenv
-
-#export PREFIX="$ZPFX"
-#zi ice lucid wait'[[ -n ${ZLAST_COMMANDS[(r)pyenv]} ]]' \
-# as'command' pick"bin/*" \
-# atload'eval "$(pyenv virtualenv-init - zsh)"'
-#zi light pyenv/pyenv-virtualenv
-#unset PREFIX
+export PYENV_ROOT="$HOME/.local/share/pyenv"
+# Load pyenv automatically
+eval "$(pyenv init --no-rehash - zsh)"
+# Load pyenv-virtualenv automatically
+eval "$(pyenv virtualenv-init --no-rehash - zsh | grep -v PATH)"
 
 zinit pack"bgn+keys" for fzf
 zinit wait pack atload=+"zicompinit; zicdreplay" for system-completions
 zinit id-as=remark pack param='MOD → remark-man; MOD2 → remark-cli' for any-node
 zinit pack param='MOD → markdownlint-cli; MOD2 → remark-cli' for any-node
 #zinit id-as=commitlint pack param='MOD → @commitlint/cli; MOD2 → @commitlint/config-conventional' for any-node
-
-export PYENV_ROOT="$HOME/.local/share/pyenv"
-# Load pyenv automatically
-eval "$(pyenv init --no-rehash - zsh)"
-# Load pyenv-virtualenv automatically
-eval "$(pyenv virtualenv-init --no-rehash - zsh | grep -v PATH)"
 
 
 zinit ice wait"2" as"command" from"gh-r" lucid \
@@ -326,7 +275,6 @@ fi
 # ruby garbage
 type rbenv > /dev/null && eval "$(rbenv init -)"
 
-#if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 {{ if eq .chezmoi.os "darwin" }}
 if which gopass > /dev/null; then gopass completion zsh > /opt/homebrew/share/zsh/site-functions/_gopass; fi
 #if which atuin > /dev/null; then atuin gen-completions --shell zsh > /opt/homebrew/share/zsh/site-functions/_atuin; fi
