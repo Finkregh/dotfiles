@@ -69,7 +69,7 @@ fi
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe.sh ] && eval "$(/usr/bin/lesspipe.sh)"
 
-{{ if (and (ne .signingkey "none") (eq .chezmoi.os "darwin")) }}
+{{ if eq .gpg_keyagent "0" }}
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 {{ end }}
@@ -77,14 +77,14 @@ if command -v keychain &>/dev/null; then
     sleep 0.$((($RANDOM % 9)))
     eval $(keychain --quiet --eval --agents ssh --inherit any --quick)
     keychain --quick --inherit any --agents "ssh" ~/.ssh/id_rsa ~/.ssh/id_ed25519
-    {{ if (and (ne .signingkey "none") (eq .chezmoi.os "darwin")) }}
+    {{ if eq .gpg_keyagent "0" }}
     keychain --quick --inherit any --agents "gpg" {{ .signingkey }}
     {{ end }}
 
     [ -z "$HOSTNAME" ] && HOSTNAME=$(uname -n)
     [ -f $HOME/.keychain/$HOSTNAME-sh ] &&
         . $HOME/.keychain/$HOSTNAME-sh
-    {{ if (and (ne .signingkey "none") (eq .chezmoi.os "darwin")) }}
+    {{ if eq .gpg_keyagent "0" }}
     [ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] && \
         . $HOME/.keychain/$HOSTNAME-sh-gpg
     {{ end }}
