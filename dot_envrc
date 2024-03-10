@@ -1,4 +1,18 @@
-pyversion=3.11.6
+# -*- mode: sh; -*-
+#
+# # version change howto
+# pyenv install 3.11.0
+# pyenv virtualenvs # --> delete all
+# pyenv virtualenv-delete work
+# pyenv virtualenv 3.11.0 work
+#
+# (rootdir)/.envrc : direnv configuration file
+# see https://direnv.net/
+# pyversion=$(head .python-version)
+# pvenv=$(head     .python-virtualenv)
+_py_fileversion="$(head .python-version 2>/dev/null)"
+pyversion=${_py_fileversion:-3.11.6}
+#pvenv="$(printf '%q\n' "${PWD##*/}")"
 pvenv="work"
 
 use python "${pyversion}"
