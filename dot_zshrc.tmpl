@@ -159,8 +159,6 @@ zinit light b4b4r07/httpstat
 
 zinit pack"bgn" git for pyenv
 zinit pack"bgn+keys" for fzf
-zi for \
-    https://github.com/junegunn/fzf/raw/master/shell/{'completion','key-bindings'}.zsh
 zinit wait pack atload=+"zicompinit; zicdreplay" for system-completions
 zinit id-as=remark pack param='MOD → remark-man; MOD2 → remark-cli' for any-node
 zinit pack param='MOD → markdownlint-cli; MOD2 → remark-cli' for any-node
@@ -191,12 +189,11 @@ zi for \
     sbin'**/bat -> bat' \
   @sharkdp/bat
 
-# ogham/exa, replacement for ls
-zi for \
-    atclone'cp -vf completions/exa.zsh _exa'  \
-    from'gh-r' \
-    sbin'**/exa -> exa' \
-  ogham/exa
+# eza, replacement for ls
+zinit wait'1' lucid \
+        from"gh-r" as"program" pick"eza" \
+        atload"alias ls=eza" \
+        light-mode for @eza-community/eza
 
 zi for \
     from'gh-r'  \
