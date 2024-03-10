@@ -11,12 +11,13 @@
 # pyversion=$(head .python-version)
 # pvenv=$(head     .python-virtualenv)
 _py_fileversion="$(head .python-version 2>/dev/null)"
-pyversion=${_py_fileversion:-3.11.0}
+pyversion=${_py_fileversion:-3.11.6}
 pvenv="$(printf '%q\n' "${PWD##*/}")"
 
+use python "${pyversion}"
 # Create the virtualenv if not yet done
-pyenv virtualenv ${pyversion} ${pvenv}
-layout pyenv ${pyversion}/envs/${pvenv}
-pyenv activate work
+layout virtualenv "${pyversion}" "${pvenv}"
+# activate it
+layout activate "${pvenv}-${pyversion}"
 
 pip install --upgrade pip wheel
