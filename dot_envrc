@@ -1,5 +1,7 @@
 # -*- mode: sh; -*-
 #
+export PATH="$HOME/.local/share/zinit/plugins/pyenv---pyenv-virtualenv/bin:$PATH"
+export PATH="$HOME/.local/share/zinit/plugins/pyenv/bin:$PATH"
 # # version change howto
 # pyenv install 3.11.0
 # pyenv virtualenvs # --> delete all
@@ -11,7 +13,7 @@
 # pyversion=$(head .python-version)
 # pvenv=$(head     .python-virtualenv)
 _py_fileversion="$(head .python-version 2>/dev/null)"
-pyversion=${_py_fileversion:-3.11.6}
+pyversion=${_py_fileversion:-3.12.2}
 #pvenv="$(printf '%q\n' "${PWD##*/}")"
 pvenv="work"
 
@@ -21,4 +23,4 @@ layout virtualenv "${pyversion}" "${pvenv}"
 # activate it
 layout activate "${pvenv}-${pyversion}"
 
-pip install --upgrade pip
+pip install --upgrade pip wheel
