@@ -11,8 +11,8 @@
 " Install VimPlug
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 
@@ -41,19 +41,19 @@ Plug 'christoomey/vim-conflicted' " git conflict solving
 
 Plug 'lambdalisue/nerdfont.vim'
 Plug 'ryanoasis/vim-devicons'
+Plug 'vim-autoformat/vim-autoformat' " run :Autoformat
 
 " don't install these plugins on remote servers
 if has('nvim')
-
-	Plug 'folke/todo-comments.nvim'
-	Plug 'hrsh7th/cmp-calc'
-	Plug 'https://github.com/josa42/nvim-lightline-lsp'
-	Plug 'jghauser/mkdir.nvim'
-	Plug 'simrat39/rust-tools.nvim'
-	Plug 'stevearc/dressing.nvim'
-	"Plug 'williamboman/nvim-lsp-installer'
-	Plug 'williamboman/mason.nvim'
-	Plug 'williamboman/mason-lspconfig.nvim'
+    Plug 'folke/todo-comments.nvim'
+    Plug 'hrsh7th/cmp-calc'
+    Plug 'https://github.com/josa42/nvim-lightline-lsp'
+    Plug 'jghauser/mkdir.nvim'
+    Plug 'simrat39/rust-tools.nvim'
+    Plug 'stevearc/dressing.nvim'
+    "Plug 'williamboman/nvim-lsp-installer'
+    Plug 'williamboman/mason.nvim'
+    Plug 'williamboman/mason-lspconfig.nvim'
     Plug 'antoinemadec/FixCursorHold.nvim'
     Plug 'edluffy/specs.nvim'
     "Plug 'folke/lsp-colors.nvim' shouldnt be required with current nvim
@@ -74,6 +74,7 @@ if has('nvim')
     "Plug 'nvimdev/guard.nvim'
     "Plug 'nvimdev/guard-collection'
     Plug 'nvimtools/none-ls.nvim'
+    Plug 'nvimtools/none-ls-extras.nvim'
     Plug 'jay-babu/mason-null-ls.nvim'
 endif
 
@@ -231,3 +232,8 @@ au BufReadPost *
 
 " Switch to the directory of the current file, unless it's a help file.
 au BufEnter * if &ft != 'help' | silent! cd %:p:h | endif
+
+" vim-autoformat
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 0

@@ -49,6 +49,9 @@ let g:lightline#lsp#indicator_info = "\uf129"
 let g:lightline#lsp#indicator_ok = "\uf00c"
 let g:lightline#lsp#indicator_warnings = "\uf071"
 
+" for vimrc autoformat
+let g:python3_host_prog = "/Users/I556086/.local/share/pyenv/versions/3.11.8/envs/work-3.11.8/bin/python3"
+
 " register compoments:
 call lightline#lsp#register()
 
@@ -218,8 +221,9 @@ local null_ls = require("null-ls")
 
 null_ls.setup({
     sources = {
+        require("none-ls.diagnostics.eslint_d"),
         null_ls.builtins.formatting.stylua,
-        null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.formatting.prettier,
         null_ls.builtins.completion.spell,
     },
 })
