@@ -13,7 +13,7 @@ export PATH="$HOME/.local/share/zinit/plugins/pyenv/bin:$PATH"
 # pyversion=$(head .python-version)
 # pvenv=$(head     .python-virtualenv)
 _py_fileversion="$(head .python-version 2>/dev/null)"
-pyversion=${_py_fileversion:-3.12.2}
+pyversion=${_py_fileversion:-3.11.8}
 pvenv="$(printf '%q\n' "${PWD##*/}")"
 
 use python "${pyversion}"
