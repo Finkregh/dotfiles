@@ -50,7 +50,7 @@ let g:lightline#lsp#indicator_ok = "\uf00c"
 let g:lightline#lsp#indicator_warnings = "\uf071"
 
 " for vimrc autoformat
-let g:python3_host_prog = "/Users/I556086/.local/share/pyenv/versions/3.11.8/envs/work-3.11.8/bin/python3"
+let g:python3_host_prog = "$HOME/.local/share/pyenv/versions/3.11.8/envs/work-3.11.8/bin/python3"
 
 " register compoments:
 call lightline#lsp#register()
