@@ -17,9 +17,11 @@ Host *
     ForwardAgent no
     ForwardX11 no
     EnableSSHKeysign yes
+    # tab completion and stuff
+    HashKnownHosts no
     # only use IPv4
     #AddressFamily inet
-    # we are not on modems anymore
+    # we are not on modems anymore. Hopefully. I'm in germany, right... well.. Jokes' on me...
     Compression no
     ControlMaster auto
     ControlPath ~/.ssh/sockets/%C
