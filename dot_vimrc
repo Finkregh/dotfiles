@@ -256,3 +256,12 @@ augroup MkDirOnSave
 	autocmd!
 	autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
+
+" rebalance windows on resize
+" from
+" <https://codeberg.org/scy/dotfiles/commit/e9b79bcc1932c4d64b7c0d3224f873adae87186a>
+set equalalways
+augroup BalanceWindowsOnResize
+	au!
+	au VimResized * wincmd =
+augroup END
