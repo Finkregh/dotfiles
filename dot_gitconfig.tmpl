@@ -67,7 +67,7 @@
     cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 
 [diff "odf"]
-      textconv=odt2txt
+    textconv=odt2txt
 [diff "localizablestrings"]
     textconv = "iconv -f utf-16 -t utf-8"
 [commit]
@@ -94,7 +94,7 @@
     enabled = true
     autoupdate = true
 [init]
-	defaultBranch = main
+    defaultBranch = main
     #templatedir = /Users/c5276249/.local/share/git/template
 [delta]
     plus-color = "#012800"
@@ -103,6 +103,9 @@
 [interactive]
     #diffFilter = delta --color-only
 [mergetool "vim-conflicted"]
-	cmd = nvim +Conflicted
+    cmd = nvim +Conflicted
 [merge]
-	tool = nvim-conflicted
+    tool = nvim-conflicted
+
+[include]
+    path = "~/work/.git-maintenance"
