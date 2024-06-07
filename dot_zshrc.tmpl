@@ -179,11 +179,18 @@ zinit pack param='MOD → markdownlint-cli; MOD2 → remark-cli' for any-node
 #zinit id-as=commitlint pack param='MOD → @commitlint/cli; MOD2 → @commitlint/config-conventional' for any-node
 
 
-zinit ice wait"2" as"command" from"gh-r" lucid \
-  mv"zoxide -> zoxide" \
-  atclone"./zoxide init zsh > init.zsh" \
-  atpull"%atclone" src"init.zsh" nocompile'!'
-zinit light ajeetdsouza/zoxide
+#zinit ice wait"2" as"command" from"gh-r" lucid \
+#  mv"zoxide -> zoxide" \
+#  atclone"./zoxide init zsh > init.zsh" \
+#  atpull"%atclone" src"init.zsh" nocompile'!'
+#zinit light ajeetdsouza/zoxide
+
+# https://github.com/z-shell/zsh-zoxide
+zi ice as'null' from"gh-r" sbin
+zi light ajeetdsouza/zoxide
+zi has'zoxide' wait lucid for \
+  z-shell/zsh-zoxide
+alias cd=z
 
 # sharkdp/fd
 zi for \
