@@ -38,3 +38,11 @@ done
 {{ end }}
 
 if [ -e "$HOME/.cargo/env" ] ; then source "$HOME/.cargo/env" ; fi
+
+export KUBECONFIG=$HOME/.kube/config
+# this will make all `.conf` files available as their own context
+for conf in ~/.kube/*.conf; do
+    export KUBECONFIG="$KUBECONFIG:$conf"
+done
+
+# vim: ft=sh
