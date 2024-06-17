@@ -37,12 +37,14 @@ for funcpath in "${HOMEBREW_PREFIX}/share/zsh-completions" "${HOMEBREW_PREFIX}/s
 done
 {{ end }}
 
-if [ -e "$HOME/.cargo/env" ] ; then source "$HOME/.cargo/env" ; fi
+if [ -e "$HOME/.cargo/env" ]; then source "$HOME/.cargo/env"; fi
 
-export KUBECONFIG=$HOME/.kube/config
-# this will make all `.conf` files available as their own context
-for conf in ~/.kube/*.conf; do
-    export KUBECONFIG="$KUBECONFIG:$conf"
-done
+if [ -e "$HOME/.kube/config" ]; then
+    export KUBECONFIG=$HOME/.kube/config
+    # this will make all `.conf` files available as their own context
+    for conf in ~/.kube/*.conf; do
+        export KUBECONFIG="$KUBECONFIG:$conf"
+    done
+fi
 
 # vim: ft=sh
