@@ -239,6 +239,9 @@ exec --no-startup-id mako &
 # auto-backlight
 #exec --no-startup-id clight &
 
+# drop-down floating terminal
+bindsym $mod+p exec i3-quickterm
+
 # screen blank on idle
 exec --no-startup-id swayidle -w \
 	timeout 300 'swaylock-corrupter --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000' \

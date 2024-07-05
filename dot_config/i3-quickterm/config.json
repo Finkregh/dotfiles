@@ -1,0 +1,9 @@
+{
+    "term": "kitty",
+    "pos": "top",
+    "shells": {
+        "js": "node",
+        "python": "ipython3 --no-banner",
+        "shell": "{$SHELL}"
+    }
+}
