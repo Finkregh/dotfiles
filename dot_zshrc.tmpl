@@ -241,7 +241,10 @@ zinit ice lucid \
 zinit light twpayne/chezmoi
 
 export ATUIN_NOBIND="true"
-zinit load ellie/atuin
+zinit ice as"command" from"gh-r" bpick"atuin-*.tar.gz" mv"atuin*/atuin -> atuin" \
+    atclone"./atuin init zsh > init.zsh; ./atuin gen-completions --shell zsh > _atuin" \
+    atpull"%atclone" src"init.zsh"
+zinit light atuinsh/atuin
 bindkey '^f' _atuin_search_widget
 
 # forgit, git interactive stuff
