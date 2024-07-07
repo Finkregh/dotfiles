@@ -247,6 +247,10 @@ zinit ice as"command" from"gh-r" bpick"atuin-*.tar.gz" mv"atuin*/atuin -> atuin"
 zinit light atuinsh/atuin
 bindkey '^f' _atuin_search_widget
 
+# learn completions from random `--help` output
+zinit wait lucid for \
+  dim-an/cod
+
 # forgit, git interactive stuff
 zinit ice wait lucid
 zinit load 'wfxr/forgit'
