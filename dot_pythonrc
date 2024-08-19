@@ -13,4 +13,13 @@ try:
     traceback.install()
     print("rich setup concluded.")
 except ImportError:
+    print("rich not installed")
+    pass
+
+try:
+    import wat
+
+    print("wat imported.")
+except ImportError:
+    print("wat not installed.")
     pass
