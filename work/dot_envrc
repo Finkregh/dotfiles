@@ -23,3 +23,8 @@ layout virtualenv "${pyversion}" "${pvenv}"
 layout activate "${pvenv}-${pyversion}"
 
 pip install --upgrade pip wheel
+
+if on_git_branch main; then
+    # cleanup branches that have been merged into the local branch (same for remote branches)
+    git branch --merged main | grep -Ev "(^\*|main|dev)" | xargs -n1 -r echo git branch -d
+fi
