@@ -282,6 +282,14 @@ zi for \
 zinit ice lucid depth=1; zinit load romkatv/powerlevel10k
 
 _zinit_update() {
+	if asdf plugin list | grep -q nodejs ; then
+		asdf plugin update --all
+		asdf nodejs update-nodebuild
+		asdf install nodejs $(asdf nodejs resolve lts --latest-available)
+		asdf global nodejs $(asdf nodejs resolve lts --latest-available)
+		asdf reshim
+	fi
+
     zinit self-update
     zinit update --parallel 40
 }
