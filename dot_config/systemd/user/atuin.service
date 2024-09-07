@@ -1,0 +1,9 @@
+[Unit]
+Description=Daemon for Atuin
+
+[Service]
+Type=simple
+ExecStart=/home/ol/.local/share/zinit/plugins/atuinsh---atuin/atuin daemon
+
+[Install]
+WantedBy=default.target
