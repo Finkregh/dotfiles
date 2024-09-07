@@ -1,0 +1,17 @@
+[Unit]
+Description=sway - SirCmpwns Wayland window manager
+Documentation=man:sway(5)
+BindsTo=default.target
+Wants=default.target
+After=default.target
+
+[Install]
+WantedBy=default.target
+
+[Service]
+Type=simple
+EnvironmentFile=-%h/.config/sway/env
+ExecStart=/usr/bin/sway
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=10

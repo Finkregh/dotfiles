@@ -4,6 +4,8 @@
 # Should you change your keyboard layout some time, delete
 # this file and re-run i3-config-wizard(1).
 
+include $HOME/.config/sway/config.d/*
+
 # set dpi
 output eDP-1 scale 1
 
@@ -281,3 +283,5 @@ for_window [class="^.*"] border pixel 1
 # Setups the gaps
 gaps inner 5
 gaps outer 0
+
+include /etc/sway/config.d/*
