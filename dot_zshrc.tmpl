@@ -291,7 +291,12 @@ _zinit_update() {
 		asdf nodejs update-nodebuild
 		asdf install nodejs $(asdf nodejs resolve lts --latest-available)
 		asdf global nodejs $(asdf nodejs resolve lts --latest-available)
+		rehash
+		corepack enable
+		corepack prepare pnpm@latest --activate
+		asdf reshim nodejs
 		asdf reshim
+		rehash
 	fi
 
     zinit self-update
