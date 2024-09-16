@@ -28,3 +28,9 @@ alias ip="ip -c"
 # hide secrets
 #alias env="env | sed -E 's/^(OS_PASSWORD=|GITHUB_TOKEN=).*$/\1***********/'"
 #alias set="set | sed -E 's/^(OS_PASSWORD=|GITHUB_TOKEN=).*$/\1***********/'"
+
+if [[ -e "$(brew --prefix)/opt/curl/bin/curl" ]]; then
+    alias hcurl="$(brew --prefix)/opt/curl/bin/curl"
+fi
+
+jqc() { jq --color-output "$@" | less -R; }
