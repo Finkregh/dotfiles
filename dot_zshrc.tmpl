@@ -51,6 +51,7 @@ typeset -U path # only have paths once in the array
 #compinit
 builtin source ~/.zsh_aliases
 builtin source ~/.zshenv
+if [ -e ~/.zsh_local ] ; then builtin source ~/.zsh_local ; fi
 {{ if eq .chezmoi.os "darwin" }}
 # remove fugly macos old zsh version from fpath
 export FPATH=$(echo "$FPATH" | sed -e 's|:/usr/share/zsh/5.8.1/functions||')
