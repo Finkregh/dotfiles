@@ -34,9 +34,11 @@
     ci = commit
     br = branch
     co = checkout
-    cp = cherry-pick
+    #cp = cherry-pick
+    rb = !bash -c 'git rebase "origin/$(git branch --show-current)"'
     df = diff
     lg = log -p
+    fixup = commit --amend --no-edit
     ph = push origin HEAD
     phf = push origin HEAD --force-with-lease
     tree = log --graph --pretty=oneline --abbrev-commit --all --decorate
