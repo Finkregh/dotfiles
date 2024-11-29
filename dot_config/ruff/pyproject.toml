@@ -10,7 +10,7 @@ ignore = [
     "PTH123", # `open()` should be replaced by `Path.open()`
 ]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "tests/**/*.py" = [
     # at least this three should be fine in tests:
     "S101", # asserts allowed in tests...
@@ -19,4 +19,5 @@ ignore = [
     # The below are debateable
     "PLR2004", # Magic value used in comparison, ...
     "S311",    # Standard pseudo-random generators are not suitable for cryptographic purposes
+#    "ANN101",  # missing-type-self # TODO: set proper type hints
 ]
