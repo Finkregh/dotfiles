@@ -149,7 +149,9 @@ zinit lucid wait light-mode for \
 	OMZP::colored-man-pages/colored-man-pages.plugin.zsh \
 	OMZP::colorize/colorize.plugin.zsh \
     OMZP::git/git.plugin.zsh \
-    #OMZP::virtualenv
+	reegnz/jq-zsh-plugin # interactive jq when you get json from somewhere
+
+bindkey '^j' jq-complete
     #OMZP::autojump/autojump.plugin.zsh # clashes with jo... :| # use zoxide / z
 
 	#OMZP::asdf/asdf.plugin.zsh
