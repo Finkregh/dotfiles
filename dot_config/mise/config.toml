@@ -1,0 +1,41 @@
+[tools]
+node = 'latest'
+python = '3.12'
+bun = "latest"
+"npm:prettier" = "latest"
+"npm:remark-cli" = "latest"
+"npm:markdownlint-cli" = "latest"
+"npm:commitlint" = "latest"
+"pipx:icloudpd" = { version = "latest" } # , extras = "postgres,s3" 
+cargo-binstall = "latest"
+"cargo:eza" = "latest"
+"cargo:bat" = "latest"
+"cargo:hexyl" = "latest"
+"cargo:jless" = "latest"
+"cargo:git-absorb" = "latest"
+
+[tools.uv]
+version = "latest"
+postinstall = "uv --generate-shell-completion zsh > $HOME/.local/share/zinit/completions/_uv && autoload -Uz compinit && compinit -u"
+
+[tools.rg]
+version = "latest"
+postinstall = "rg --generate=complete-zsh > $HOME/.local/share/zinit/completions/_rg && autoload -Uz compinit && compinit -u"
+
+[tools.fd]
+version = "latest"
+postinstall = "fd --gen-completions=zsh > $HOME/.local/share/zinit/completions/_fd && autoload -Uz compinit && compinit -u"
+[tools."cargo:broot"]
+version = "latest"
+postinstall = "broot --print-shell-function zsh > $HOME/.config/broot/launcher/bash/br && source $HOME/.config/broot/launcher/bash/br"
+
+[hooks]
+enter = "mise i -q"
+
+[settings]
+
+[settings.pipx]
+uvx = true
+
+[settings.npm]
+bun = true

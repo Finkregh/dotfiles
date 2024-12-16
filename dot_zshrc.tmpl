@@ -131,17 +131,21 @@ zinit light-mode for \
         agkozak/zsh-z \
     "zsh-users/zsh-autosuggestions" \
     "z-shell/F-Sy-H" \
-    "chrissicool/zsh-256color" \
-    @asdf-vm/asdf
+    "chrissicool/zsh-256color"
 
-if which broot > /dev/null; then
-	zinit light-mode lucid for \
-		atclone'broot --print-shell-function zsh > broot.zsh' \
-		atpull'%atclone' run-atpull \
-		atload'source broot.zsh' \
-		as"null" id-as'Canop/broot' \
-		@zdharma/null
-fi
+zinit as="command" lucid from="gh-r" for \
+    id-as="usage" \
+    atpull="%atclone" \
+    jdx/usage
+    #atclone="./usage* completion zsh > _usage" \
+    #atload='eval "$(mise activate zsh)"' \
+
+zinit as="command" lucid from="gh-r" for \
+    id-as="mise" mv="mise* -> mise" \
+    atclone="./mise* completion zsh > _mise" \
+    atpull="%atclone" \
+    atload='eval "$(mise activate zsh)"' \
+    jdx/mise
 
 # #zplug "zsh-users/zsh-completions"
 
@@ -186,9 +190,6 @@ eval "$(pyenv virtualenv-init --no-rehash - zsh | grep -v PATH)"
 
 zinit pack"bgn+keys" for fzf
 zinit wait pack atload=+"zicompinit; zicdreplay" for system-completions
-zinit id-as=remark pack param='MOD → remark-man; MOD2 → remark-cli' for any-node
-zinit pack param='MOD → markdownlint-cli; MOD2 → remark-cli' for any-node
-#zinit id-as=commitlint pack param='MOD → @commitlint/cli; MOD2 → @commitlint/config-conventional' for any-node
 
 
 #zinit ice wait"2" as"command" from"gh-r" lucid \
@@ -205,17 +206,6 @@ zi has'zoxide' wait lucid for \
 #alias cd=z
 eval "$(zoxide init --cmd cd zsh)"
 
-# sharkdp/fd
-zi for \
-    from'gh-r'  \
-    sbin'**/fd -> fd' \
-  @sharkdp/fd
-
-# sharkdp/bat
-zi for \
-    from'gh-r' \
-    sbin'**/bat -> bat' \
-  @sharkdp/bat
 
 {{ if eq .chezmoi.os "darwin" }}
 alias ls=eza
