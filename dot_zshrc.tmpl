@@ -147,6 +147,12 @@ zinit as="command" lucid from="gh-r" for \
     atload='eval "$(mise activate zsh)"' \
     jdx/mise
 
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+    eval "$(mise activate zsh --shims)"
+else
+    eval "$(mise activate zsh)"
+fi
+
 # #zplug "zsh-users/zsh-completions"
 
 zinit lucid wait light-mode for \
@@ -175,22 +181,9 @@ zinit light b4b4r07/httpstat
 # fzf-ied tab completion
 #zinit light Aloxaf/fzf-tab # seems to break things
 
-export PYENV_ROOT="$HOME/.local/share/pyenv"
-zinit pack"bgn" git for pyenv
-
-zinit ice wait lucid as"program" pick"bin/*" atclone"" atinit"" nocompile""\
-    atload'eval "$(PYENV_ROOT=$HOME/.local/share/pyenv pyenv virtualenv-init - --no-rehash zsh | grep -v PATH)"'
-zinit load pyenv/pyenv-virtualenv
-
-export PYENV_ROOT="$HOME/.local/share/pyenv"
-# Load pyenv automatically
-eval "$(pyenv init --no-rehash - zsh)"
-# Load pyenv-virtualenv automatically
-eval "$(pyenv virtualenv-init --no-rehash - zsh | grep -v PATH)"
 
 zinit pack"bgn+keys" for fzf
 zinit wait pack atload=+"zicompinit; zicdreplay" for system-completions
-
 
 #zinit ice wait"2" as"command" from"gh-r" lucid \
 #  mv"zoxide -> zoxide" \
@@ -207,32 +200,8 @@ zi has'zoxide' wait lucid for \
 eval "$(zoxide init --cmd cd zsh)"
 
 
-{{ if eq .chezmoi.os "darwin" }}
 alias ls=eza
-{{ else }}
-# <https://github.com/eza-community/eza/issues/228>
-# eza, replacement for ls
-zinit wait'1' lucid \
-        from"gh-r" as"program" pick"eza" \
-        atload"alias ls=eza" \
-        light-mode for @eza-community/eza
-{{ end }}
 
-zinit wait'1' lucid blockf nocompletions \
-	from"gh-r" as'program' pick'ripgrep*/rg' \
-	cp"ripgrep-*/complete/_rg -> _rg" \
-	atclone'chown -R $(id -nu):$(id -ng) .; zinit creinstall -q BurntSushi/ripgrep' \
-	atpull'%atclone' \
-	light-mode for @BurntSushi/ripgrep
-
-
-zi for \
-    from'gh-r'  \
-    sbin'g*x -> grex'  \
-  pemistahl/grex
-
-# toml toolkit, formatter etc
-zi for from'gh-r' bpick'*full*' sbin'taplo* -> taplo' @tamasfe/taplo
 
 zinit from"gh-r" as"program" mv"direnv* -> direnv" \
     atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' \
@@ -279,18 +248,18 @@ zi for \
 zinit ice lucid depth=1; zinit load romkatv/powerlevel10k
 
 _zinit_update() {
-	if asdf plugin list | grep -q nodejs ; then
-		asdf plugin update --all
-		asdf nodejs update-nodebuild
-		asdf install nodejs $(asdf nodejs resolve lts --latest-available)
-		asdf global nodejs $(asdf nodejs resolve lts --latest-available)
-		rehash
-		corepack enable
-		corepack prepare pnpm@latest --activate
-		asdf reshim nodejs
-		asdf reshim
-		rehash
-	fi
+#	if asdf plugin list | grep -q nodejs ; then
+#		asdf plugin update --all
+#		asdf nodejs update-nodebuild
+#		asdf install nodejs $(asdf nodejs resolve lts --latest-available)
+#		asdf global nodejs $(asdf nodejs resolve lts --latest-available)
+#		rehash
+#		corepack enable
+#		corepack prepare pnpm@latest --activate
+#		asdf reshim nodejs
+#		asdf reshim
+#		rehash
+#	fi
 
     zinit self-update
     zinit update --parallel 40

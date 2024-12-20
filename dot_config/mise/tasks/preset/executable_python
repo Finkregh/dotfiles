@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+#MISE dir="{{cwd}}"
+#USAGE arg "<version>"
+
+# Run this to add it to a project:
+# mise tasks run preset:python 3.12
+
+
+
+touch mise.toml
+mise trust
+# somehow does not work here: mise use {{arg(name="pyversion", var=true)}}
+mise use "python@$usage_version" python@3.13 python@3.12 python@3.11
+
+mise use -g watchexec@latest
+
+mise config set env._.python.venv.path .venv
+mise config set env._.python.venv.create true -t bool
+
+mise config set tasks.lint.description "Lint with ruff check"
+mise config set tasks.lint.alias "ruff"
+mise config set tasks.lint.run "ruff check ."
+
+mise config set tasks.test.description "test with pytest"
+mise config set tasks.test.alias "pytest"
+mise config set tasks.test.run "pytest tests/"
+
+mise settings set python.uv_venv_auto true

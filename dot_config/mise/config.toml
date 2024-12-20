@@ -1,18 +1,35 @@
 [tools]
 node = 'latest'
-python = '3.12'
+python = ["3.12", "3.13", "3.12", "3.11"]
 bun = "latest"
 "npm:prettier" = "latest"
 "npm:remark-cli" = "latest"
 "npm:markdownlint-cli" = "latest"
 "npm:commitlint" = "latest"
 "pipx:icloudpd" = { version = "latest" } # , extras = "postgres,s3" 
+"pipx:black" = "latest"
+"pipx:ruff" = "latest"
 cargo-binstall = "latest"
 "cargo:eza" = "latest"
 "cargo:bat" = "latest"
 "cargo:hexyl" = "latest"
 "cargo:jless" = "latest"
+"cargo:git-cliff" = "latest"
 "cargo:git-absorb" = "latest"
+
+# toml syntax check + formatter
+taplo = "latest"
+markdownlint-cli2 = "latest"
+shfmt = "latest"
+shellcheck = "latest"
+yamlfmt = "latest"
+yamllint = "latest"
+#"npm:renovate" = "latest"
+#"npm:cspell" = "latest"
+typos = "latest"
+watchexec = "latest"
+grex = "latest"
+chezmoi = "latest"
 
 [tools.uv]
 version = "latest"
@@ -30,12 +47,17 @@ version = "latest"
 postinstall = "broot --print-shell-function zsh > $HOME/.config/broot/launcher/bash/br && source $HOME/.config/broot/launcher/bash/br"
 
 [hooks]
-enter = "mise i -q"
+enter = "mise i -q && mise plugins update"
 
 [settings]
+jobs = 1
+experimental = true
 
 [settings.pipx]
 uvx = true
 
 [settings.npm]
 bun = true
+
+[settings.python]
+uv_venv_auto = true

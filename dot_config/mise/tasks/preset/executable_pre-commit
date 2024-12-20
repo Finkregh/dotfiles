@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#MISE dir="{{cwd}}"
+
+mise use pre-commit
+mise config set tasks.lint.run "pre-commit run -a"
+

@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#MISE dir="{{cwd}}"
+
+# does not work with args
+#MxIxSE depends=["preset:python"]
+
+# Run this to add it to a project:
+# mise tasks run preset:python-pyprojecttoml
+
+touch mise.toml
+mise trust
+
+mise use poetry[pyproject='pyproject.toml']
+# install latest versions from {tests/,}requirements.txt when entering the project directory and when the requirements.txts change
+#mise config set hooks.enter "uv pip install -r pyproject.toml  --all-extras"
+mise config set hooks.enter "poetry install --sync --all-extras"
+
+# this is more or less redundant after the above config, but if you want to run it manually you still can
+mise config set tasks.install_deps.description "Install dependencies"
+mise config set tasks.install_deps.alias "id"
+#mise config set tasks.install_deps.run "uv pip install -r pyproject.toml  --all-extras"
+mise config set tasks.install_deps.run "poetry install --sync --all-extras"
+
+#mise watch --watch pyproject.toml --on-busy-update queue install_deps
+

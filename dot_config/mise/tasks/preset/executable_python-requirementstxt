@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#MISE dir="{{cwd}}"
+
+# does not work with args
+#MxIxSE depends=["preset:python"]
+
+# Run this to add it to a new project:
+# mise tasks run preset:python-requirementstxt
+
+touch mise.toml
+mise trust
+
+# install latest versions from {tests/,}requirements.txt when entering the project directory and when the requirements.txts change
+mise config set hooks.enter 'if [ -e tests/requirements.txt ] ; then extra_file="tests/requirements.txt" ; fi ; uv pip sync requirements.txt $extra_file'
+
+# this is more or less redundant after the above config, but if you want to run it manually you still can
+mise config set tasks.install_deps.description "Install dependencies"
+mise config set tasks.install_deps.alias "id"
+mise config set tasks.install_deps.run 'if [ -e tests/requirements.txt ] ; then extra_file="tests/requirements.txt" ; fi ; uv pip sync requirements.txt $extra_file'
+
+#mise watch --watch requirements.txt --watch tests/requirements.txt --on-busy-update queue install_deps

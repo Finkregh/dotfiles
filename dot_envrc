@@ -1,31 +1,31 @@
 # -*- mode: sh; -*-
 #
-export PATH="$HOME/.local/share/zinit/plugins/pyenv---pyenv-virtualenv/bin:$PATH"
-export PATH="$HOME/.local/share/zinit/plugins/pyenv/bin:$PATH"
-# # version change howto
-# pyenv install 3.11.0
-# pyenv virtualenvs # --> delete all
-# pyenv virtualenv-delete work
-# pyenv virtualenv 3.11.0 work
+#export PATH="$HOME/.local/share/zinit/plugins/pyenv---pyenv-virtualenv/bin:$PATH"
+#export PATH="$HOME/.local/share/zinit/plugins/pyenv/bin:$PATH"
+## # version change howto
+## pyenv install 3.11.0
+## pyenv virtualenvs # --> delete all
+## pyenv virtualenv-delete work
+## pyenv virtualenv 3.11.0 work
+##
+## (rootdir)/.envrc : direnv configuration file
+## see https://direnv.net/
+## pyversion=$(head .python-version)
+## pvenv=$(head     .python-virtualenv)
+#_py_fileversion="$(head .python-version 2>/dev/null)"
+#pyversion=${_py_fileversion:-3.11.8}
+##pvenv="$(printf '%q\n' "${PWD##*/}")"
+#pvenv="work"
 #
-# (rootdir)/.envrc : direnv configuration file
-# see https://direnv.net/
-# pyversion=$(head .python-version)
-# pvenv=$(head     .python-virtualenv)
-_py_fileversion="$(head .python-version 2>/dev/null)"
-pyversion=${_py_fileversion:-3.11.8}
-#pvenv="$(printf '%q\n' "${PWD##*/}")"
-pvenv="work"
-
-use python "${pyversion}"
-# Create the virtualenv if not yet done
-layout virtualenv "${pyversion}" "${pvenv}"
-# activate it
-layout activate "${pvenv}-${pyversion}"
-
-pip install --upgrade pip wheel
-
-if on_git_branch; then
-    # cleanup branches that have been merged into the local branch (same for remote branches)
-    git branch --merged main | grep -Ev "(^\*|main|dev)" | xargs -n1 -r echo git branch -d
-fi
+#use python "${pyversion}"
+## Create the virtualenv if not yet done
+#layout virtualenv "${pyversion}" "${pvenv}"
+## activate it
+#layout activate "${pvenv}-${pyversion}"
+#
+#pip install --upgrade pip wheel
+#
+#if on_git_branch; then
+#    # cleanup branches that have been merged into the local branch (same for remote branches)
+#    git branch --merged main | grep -Ev "(^\*|main|dev)" | xargs -n1 -r echo git branch -d
+#fi
