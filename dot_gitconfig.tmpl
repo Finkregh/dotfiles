@@ -36,6 +36,7 @@
     co = checkout
     #cp = cherry-pick
     rb = !bash -c 'git rebase "origin/$(git branch --show-current)"'
+    eat = !bash -c 'git add -p && git absorb && git rebase -i origin/main && git phf'
     df = diff
     lg = log -p
     fixup = commit --amend --no-edit
