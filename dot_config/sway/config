@@ -19,7 +19,8 @@ input * {
 bar {
     swaybar_command waybar
 }
-set $lock swaylock-corrupter --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000
+#set $lock swaylock-corrupter --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000
+set $lock swaylock-corrupter --daemonize
 set $power ~/.config/rofi/modi/power
 set $wifi ~/.config/rofi/modi/nmcli
 
@@ -127,7 +128,8 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 bindsym $mod+k focus down
-bindsym $mod+l exec --no-startup-id swaylock --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000 --tiling --image ~/Pictures/wallpapers/tiling/_s_a96b57c96d57e0f0g64h2E0A2F1705165111493A0C315B145D400E45iBF.png
+bindsym $mod+l exec --no-startup-id swaylock --daemonize
+#bindsym $mod+l exec --no-startup-id swaylock --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000 --tiling --image ~/Pictures/wallpapers/tiling/_s_a96b57c96d57e0f0g64h2E0A2F1705165111493A0C315B145D400E45iBF.png
 
 bindsym $mod+odiaeresis focus right
 bindsym $mod+x move workspace to output right
@@ -208,7 +210,8 @@ bindsym $mod+Shift+r restart
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 set $mode_system (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id swaylock-corrupter --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000; mode "default"
+    bindsym l exec --no-startup-id swaylock-corrupter --daemonize; mode "default"
+    #bindsym l exec --no-startup-id swaylock-corrupter --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000; mode "default"
     bindsym s exec --no-startup-id systemctl suspend; mode "default"
     bindsym e exec --no-startup-id i3-msg exit; mode "default"
     bindsym h exec --no-startup-id i3exit hibernate; mode "default"
@@ -237,7 +240,7 @@ exec --no-startup-id flameshot &
 #exec --no-startup-id spotify --force-device-scale-factor=1.5 &
 exec --no-startup-id insync start &
 # notification stuff
-exec --no-startup-id mako &
+exec --no-startup-id fnott &
 # auto-backlight
 #exec --no-startup-id clight &
 
@@ -246,9 +249,12 @@ bindsym $mod+p exec i3-quickterm
 
 # screen blank on idle
 exec --no-startup-id swayidle -w \
-	timeout 300 'swaylock-corrupter --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000' \
+	timeout 300 'swaylock-corrupter --daemonize' \
 	timeout 600 'swaymsg "output * power off"' \
-    resume 'swaymsg "output * power on"' before-sleep 'swaylock-corrupter --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000' &
+    resume 'swaymsg "output * power on"' before-sleep 'swaylock-corrupter --daemonize' &
+	#timeout 300 'swaylock-corrupter --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000' \
+	#timeout 600 'swaymsg "output * power off"' \
+    #resume 'swaymsg "output * power on"' before-sleep 'swaylock-corrupter --show-failed-attempts --daemonize --indicator-caps-lock --show-keyboard-layout --ignore-empty-password --indicator --indicator-radius 110 --indicator-idle-visible --clock --datestr "%d.%m.%Y" --grace 5 -c 000000' &
 
 # resize window (you can also use the mouse for that)
 mode "resize" {

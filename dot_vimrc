@@ -55,7 +55,7 @@ if has('nvim')
     Plug 'williamboman/mason.nvim'
     Plug 'williamboman/mason-lspconfig.nvim'
     Plug 'antoinemadec/FixCursorHold.nvim'
-    Plug 'edluffy/specs.nvim'
+    "Plug 'edluffy/specs.nvim'
     "Plug 'folke/lsp-colors.nvim' shouldnt be required with current nvim
     Plug 'folke/trouble.nvim'
     Plug 'hrsh7th/cmp-buffer'
