@@ -79,6 +79,7 @@ enter = "mise i -q && mise plugins update"
 [settings]
 jobs = 1
 experimental = true
+ignored_config_paths = ["~/SAPDevelop/.local/share/chezmoi/mise.toml", "~/.local/share/chezmoi/mise.toml"]
 
 [settings.pipx]
 uvx = true
