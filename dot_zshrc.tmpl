@@ -191,22 +191,17 @@ zinit wait pack atload=+"zicompinit; zicdreplay" for system-completions
 #  atpull"%atclone" src"init.zsh" nocompile'!'
 #zinit light ajeetdsouza/zoxide
 
-# https://github.com/z-shell/zsh-zoxide
-zi ice as'null' from"gh-r" sbin
-zi light ajeetdsouza/zoxide
-zi has'zoxide' wait lucid for \
-  z-shell/zsh-zoxide
-#alias cd=z
-eval "$(zoxide init --cmd cd zsh)"
+## https://github.com/z-shell/zsh-zoxide
+#zi ice as'null' from"gh-r" sbin
+#zi light ajeetdsouza/zoxide
+#zi has'zoxide' wait lucid for \
+#  z-shell/zsh-zoxide
+##alias cd=z
+#eval "$(zoxide init --cmd cd zsh)"
 
 
 alias ls=eza
 
-
-zinit from"gh-r" as"program" mv"direnv* -> direnv" \
-    atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' \
-    pick"direnv" src="zhook.zsh" for \
-        direnv/direnv
 
 # chezmoi
 zinit ice lucid \
@@ -268,10 +263,12 @@ _zinit_update() {
 if [ ! -e /tmp/zinit-update-timer ] ; then
     touch /tmp/zinit-update-timer
     _zinit_update
+	mise self-update -y && mise i -q && mise upgrade --bump && mise plugins update
 fi
 if test $(find /tmp/zinit-update-timer -mtime +1); then
     _zinit_update
     touch /tmp/zinit-update-timer
+	mise self-update -y && mise i -q && mise upgrade --bump && mise plugins update
 fi
 
 # ruby garbage
@@ -313,9 +310,6 @@ export REQUESTS_CA_BUNDLE=/tmp/bundleCA.pem NODE_EXTRA_CA_CERTS=/tmp/bundleCA.pe
 # dont suspend background jobs if they produce output
 stty -tostop
 
-# load completions
-#type compinit $> /dev/null || autoload -Uz compinit
-#test -n "${_comp_dumpfile}" || compinit
-
-
+# locally generated completions
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
 # vim: ft=sh

@@ -1,2 +1,13 @@
 .jj
 .envrc
+
+# Devenv
+devenv.lock
+.devenv/**
+devenv*
+devenv**
+devenv.local.nix
+.devenv**
+
+# direnv
+.direnv

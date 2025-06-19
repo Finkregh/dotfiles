@@ -35,8 +35,8 @@
     br = branch
     co = checkout
     #cp = cherry-pick
-    rb = !bash -c 'git rebase "origin/$(git branch --show-current)"'
-    eat = !bash -c 'git add -p && git absorb && git rebase -i origin/main && git phf'
+    rb = !bash -c 'git fetch && git rebase "origin/$(git branch --show-current)"'
+    eat = !bash -c 'git add -p && git absorb --base origin/main && git rebase -i origin/main && git phf'
     df = diff
     lg = log -p
     fixup = commit --amend --no-edit
@@ -59,6 +59,26 @@
     f = fuzzy
     # show last changed branches and when
     wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads # https://carolynvanslyck.com/blog/2020/12/git-wip/
+	
+	# Difftastic aliases, so `git dlog` is `git log` with difftastic and so on.
+    dlog = -c diff.external=difft log --ext-diff
+    dshow = -c diff.external=difft show --ext-diff
+    ddiff = -c diff.external=difft diff
+
+    # `git log` with patches shown with difftastic.
+    dl = -c diff.external=difft log -p --ext-diff
+    # Show the most recent commit with difftastic.
+    ds = -c diff.external=difft show --ext-diff
+    # `git diff` with difftastic.
+    dft = -c diff.external=difft diff
+
+    # from <https://xahteiwi.eu/resources/hints-and-kinks/git-aliases/#git-aliases>
+    # List branches by their date of last modification
+    recent = branch --sort=-committerdate --format=\"%(committerdate:relative)%09%(refname:short)\"
+    # Delete old topic branches that have been merged
+    delete-merged-branches = !git branch --merged | grep -Ev '(main|master)' | xargs -prn1 git branch -d
+    # Find the origin of a branch point
+    oldest-ancestor = !bash -c 'diff -u <(git rev-list --first-parent \"${1:-main}\") <(git rev-list --first-parent \"${2:-HEAD}\") | sed -ne \"s/^ //p\" | head -1' -
 
 
 [gui]

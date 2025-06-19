@@ -6,6 +6,11 @@ python = "3.12"
 [env._.python]
 venv = {path = ".venv", create=true}
 
+# This auto-updates tools and plugins
+[hooks]
+enter = "mise self-update && mise i -q && mise upgrade --bump && mise plugins update"
+cd = "mise self-update && mise i -q && mise upgrade --bump && mise plugins update"
+
 [tasks]
 
 [tasks.lint]
