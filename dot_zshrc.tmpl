@@ -153,20 +153,13 @@ else
     eval "$(mise activate zsh)"
 fi
 
-# #zplug "zsh-users/zsh-completions"
-
 zinit lucid wait light-mode for \
 	OMZP::colored-man-pages/colored-man-pages.plugin.zsh \
 	OMZP::colorize/colorize.plugin.zsh \
     OMZP::git/git.plugin.zsh \
 	reegnz/jq-zsh-plugin # interactive jq when you get json from somewhere
 
-bindkey '^j' jq-complete
-    #OMZP::autojump/autojump.plugin.zsh # clashes with jo... :| # use zoxide / z
-
-	#OMZP::asdf/asdf.plugin.zsh
-
-# #zplug "chmouel/kss", use:"_kss", as:command, use:"kss"
+bindkey '^j' jq-complete # example, type "curl foo.bar/x.json", then ctrl-j, NOT enter
 
 zinit ice as"program" cp"bin/git-fuzzy -> git-fuzzy" pick"git-fuzzy"
 zinit light bigH/git-fuzzy
@@ -184,31 +177,6 @@ zinit light b4b4r07/httpstat
 
 zinit pack"bgn+keys" for fzf
 zinit wait pack atload=+"zicompinit; zicdreplay" for system-completions
-
-#zinit ice wait"2" as"command" from"gh-r" lucid \
-#  mv"zoxide -> zoxide" \
-#  atclone"./zoxide init zsh > init.zsh" \
-#  atpull"%atclone" src"init.zsh" nocompile'!'
-#zinit light ajeetdsouza/zoxide
-
-## https://github.com/z-shell/zsh-zoxide
-#zi ice as'null' from"gh-r" sbin
-#zi light ajeetdsouza/zoxide
-#zi has'zoxide' wait lucid for \
-#  z-shell/zsh-zoxide
-##alias cd=z
-#eval "$(zoxide init --cmd cd zsh)"
-
-
-alias ls=eza
-
-
-# chezmoi
-zinit ice lucid \
-  as'program' from'gh-r' \
-  bpick'chezmoi_*.tar.gz' \
-  cp'completions/chezmoi.zsh -> _chezmoi'
-zinit light twpayne/chezmoi
 
 export ATUIN_NOBIND="true"
 zinit ice as"command" from"gh-r" bpick"atuin-*.tar.gz" mv"atuin*/atuin -> atuin" \
@@ -243,19 +211,6 @@ zi for \
 zinit ice lucid depth=1; zinit load romkatv/powerlevel10k
 
 _zinit_update() {
-#	if asdf plugin list | grep -q nodejs ; then
-#		asdf plugin update --all
-#		asdf nodejs update-nodebuild
-#		asdf install nodejs $(asdf nodejs resolve lts --latest-available)
-#		asdf global nodejs $(asdf nodejs resolve lts --latest-available)
-#		rehash
-#		corepack enable
-#		corepack prepare pnpm@latest --activate
-#		asdf reshim nodejs
-#		asdf reshim
-#		rehash
-#	fi
-
     zinit self-update
     zinit update --parallel 40
 }

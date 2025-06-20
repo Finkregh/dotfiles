@@ -2,8 +2,7 @@
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
-# rather use exa instead of ls
-alias ls="exa --group-directories-first"
+alias ls=eza
 
 # Show history
 case $HIST_STAMPS in
