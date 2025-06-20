@@ -61,6 +61,7 @@ uv = { version = "latest", postinstall = "uv --generate-shell-completion zsh > $
 cosign = "latest"
 "pipx:tldr" = "latest"
 rust = "latest"
+"ubi:https://github.com/babarot/httpstat" = { version = "latest", exe = "httpstat.sh", rename_exe = "httpstat" }
 
 [tools.rg]
 version = "latest"
