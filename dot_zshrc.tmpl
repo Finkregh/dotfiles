@@ -133,19 +133,20 @@ zinit light-mode for \
     "z-shell/F-Sy-H" \
     "chrissicool/zsh-256color"
 
-#zinit as="command" lucid from="gh-r" for \
-#    id-as="usage" \
-#    atpull="%atclone" \
-#    jdx/usage
-#    #atclone="./usage* completion zsh > _usage" \
-#    #atload='eval "$(mise activate zsh)"' \
-#
-#zinit as="command" lucid from="gh-r" for \
-#    id-as="mise" mv="mise* -> mise" \
-#    atclone="./mise* completion zsh > _mise" \
-#    atpull="%atclone" \
-#    atload='eval "$(mise activate zsh)"' \
-#    jdx/mise
+zinit as="command" lucid from="gh-r" for \
+    id-as="usage" \
+    atpull="%atclone" \
+    jdx/usage
+    #atclone="./usage* completion zsh > _usage" \
+    #atload='eval "$(mise activate zsh)"' \
+
+
+zinit as="command" lucid from="gh-r" {{ if neq .chezmoi.os "darwin" }}bpick="-linux-x64"{{ end }} for \
+    id-as="mise" mv="mise* -> mise" \
+    atclone="./mise* completion zsh > _mise" \
+    atpull="%atclone" \
+    atload='eval "$(mise activate zsh)"' \
+    jdx/mise
 
 if [[ "$TERM_PROGRAM" == "vscode" ]]; then
     eval "$(mise activate zsh --shims)"

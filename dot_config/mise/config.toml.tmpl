@@ -90,3 +90,12 @@ bun = true
 
 [settings.python]
 uv_venv_auto = true
+#{{ if eq .chezmoi.os "darwin" }}
+#precompiled_arch = "apple-darwin"
+#{{ else }}
+#precompiled_arch = "unknown-linux-gnu"
+#{{ end }}
+
+#[settings.node]
+#flavor = "baseline"
+

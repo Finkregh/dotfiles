@@ -6,4 +6,5 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
 export GDK_SCALE=1
 export GDK_DPI_SCALE=1
+QT_SCALE_FACTOR=1
 if [ -e "$HOME/.cargo/env" ] ; then source "$HOME/.cargo/env" ; fi
