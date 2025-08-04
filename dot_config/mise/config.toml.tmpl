@@ -14,7 +14,6 @@ cargo-binstall = "latest"
 "cargo:bat" = "latest"
 "cargo:hexyl" = "latest"
 "cargo:jless" = "latest"
-"cargo:git-cliff" = "latest"
 "cargo:git-absorb" = "latest"
 
 # toml syntax check + formatter
@@ -62,6 +61,7 @@ cosign = "latest"
 "pipx:tldr" = "latest"
 rust = "latest"
 "ubi:https://github.com/babarot/httpstat" = { version = "latest", exe = "httpstat.sh", rename_exe = "httpstat" }
+"ubi:tstack/lnav" = { version = "latest", postinstall = "lnav -i extra" }
 
 [tools.rg]
 version = "latest"
