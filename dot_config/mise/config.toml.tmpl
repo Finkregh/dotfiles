@@ -63,6 +63,12 @@ rust = "latest"
 "ubi:https://github.com/babarot/httpstat" = { version = "latest", exe = "httpstat.sh", rename_exe = "httpstat" }
 "ubi:tstack/lnav" = { version = "latest", postinstall = "lnav -i extra" }
 
+# nvim stuff
+"npm:vim-language-server" = "latest"
+"go:github.com/slarwise/yamlls" = "main"
+"npm:bash-language-server" = "latest"
+"npm:@delance/runtime" = "latest"
+
 [tools.rg]
 version = "latest"
 postinstall = "rg --generate=complete-zsh > $HOME/.local/share/zinit/completions/_rg && autoload -Uz compinit && compinit -u"

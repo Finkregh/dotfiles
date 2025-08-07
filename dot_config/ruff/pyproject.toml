@@ -1,4 +1,6 @@
 [tool.ruff]
+# ruff does not read the python version from setup.py
+target-version = "py310"
 
 [tool.ruff.lint]
 select = ["ALL"]
