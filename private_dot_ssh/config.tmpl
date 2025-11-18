@@ -17,6 +17,7 @@ Host *
     ForwardAgent no
     ForwardX11 no
     EnableSSHKeysign yes
+    {{ if eq .chezmoi.os "darwin" }}UseKeychain yes{{ end }}
     # tab completion and stuff
     HashKnownHosts no
     # only use IPv4
