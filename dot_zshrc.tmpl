@@ -7,6 +7,20 @@ export LANG=en_US.UTF-8
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.cache/zsh
 
+# Download Znap, if it's not there yet.
+_ZNAP_DIR="${HOME}/.local/share/znap/zsnap.git"
+_ZNAP_REPOS_DIR="${HOME}/.local/share/znap/repos"
+if [[ ! -r ${_ZNAP_DIR}/znap.zsh ]]; then
+    mkdir -p ${_ZNAP_DIR}
+    git clone --depth 1 https://github.com/marlonrichert/zsh-snap.git ${_ZNAP_DIR}
+fi
+if [[ ! -r ${_ZNAP_REPOS_DIR}/dircolors-solarized/dircolors.256dark ]]; then
+    git clone https://github.com/seebi/dircolors-solarized.git ${_ZNAP_REPOS_DIR}/dircolors-solarized
+fi
+source ${_ZNAP_DIR}/znap.zsh  # Start Znap
+# set directory where znap clones stuff
+zstyle ':znap:*' repos-dir ~/.local/share/znap/repos
+
 # complete proc-ids with menu
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:kill:*' force-list always
@@ -54,7 +68,7 @@ builtin source ~/.zshenv
 if [ -e ~/.zsh_local ] ; then builtin source ~/.zsh_local ; fi
 {{ if eq .chezmoi.os "darwin" }}
 # remove fugly macos old zsh version from fpath
-export FPATH=$(echo "$FPATH" | sed -e 's|:/usr/share/zsh/5.8.1/functions||')
+export FPATH=$(echo "$FPATH" | sed -e 's|:/usr/share/zsh/5.9/functions||')
 {{ end }}
 typeset -U fpath
 #print -l $fpath
@@ -74,6 +88,24 @@ fi
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 {{ end }}
+{{ if eq .chezmoi.os "darwin" }}
+## mac ssh-agent (dealing with weirdly inconsistent socket path)
+possible_sockets=(/private/tmp/com.apple.launchd.*/Listeners)
+#if [[ ${#possible_sockets[@]} -gt 0 ]]; then
+#    echo "Found multiple possible ssh-agent sockets; you should probably investigate this: ${possible_sockets}" >&2
+#    eval $(ssh-agent -s)
+#fi
+for possible_socket in "${possible_sockets[@]}"; do
+    if [[ -e "$possible_socket" ]]; then
+        export SSH_AUTH_SOCK="$possible_socket"
+        break
+    fi
+done
+#eval $(ssh-agent -s)
+if [[ "$(ssh-add -l | wc -l)" -ne "3" ]]; then
+  ssh-add --apple-use-keychain ~/.ssh/id_rsa ~/.ssh/id_ed25519 ~/.ssh/id_ed25519-vorta
+fi
+{{ else }}
 if command -v keychain &>/dev/null; then
     sleep 0.$((($RANDOM % 9)))
     eval $(keychain --quiet --eval --agents ssh --inherit any --quick)
@@ -90,6 +122,7 @@ if command -v keychain &>/dev/null; then
         . $HOME/.keychain/$HOSTNAME-sh-gpg
     {{ end }}
 fi
+{{ end }}
 
 # Make sure that the terminal is in application mode when zle is active, since
 # only then values from $terminfo are valid
@@ -104,132 +137,100 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
   zle -N zle-line-finish
 fi
 
-### Zinit
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
+if ! command -v mise &>/dev/null; then
+    curl https://mise.run | sh
 fi
-
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zdharma-continuum/zinit-annex-as-monitor \
-    zdharma-continuum/zinit-annex-bin-gem-node \
-    zdharma-continuum/zinit-annex-patch-dl \
-    zdharma-continuum/zinit-annex-rust
-### End of Zinit
-
-zinit light-mode for \
-    trigger-load'!zshz' blockf \
-        agkozak/zsh-z \
-    "zsh-users/zsh-autosuggestions" \
-    "z-shell/F-Sy-H" \
-    "chrissicool/zsh-256color"
-
-zinit as="command" lucid from="gh-r" for \
-    id-as="usage" \
-    atpull="%atclone" \
-    jdx/usage
-    #atclone="./usage* completion zsh > _usage" \
-    #atload='eval "$(mise activate zsh)"' \
-
-
-zinit as="command" lucid from="gh-r" {{ if ne .chezmoi.os "darwin" }}bpick='*-linux-x64'{{ end }} for \
-    id-as="mise" mv="mise* -> mise" \
-    atclone="./mise* completion zsh > _mise" \
-    atpull="%atclone" \
-    atload='eval "$(mise activate zsh)"' \
-    jdx/mise
-
+znap fpath _mise "mise completion zsh"
 if [[ "$TERM_PROGRAM" == "vscode" ]]; then
-    eval "$(mise activate zsh --shims)"
+    znap eval mise-shims 'mise activate zsh --shims)'
 else
-    eval "$(mise activate zsh)"
+    znap eval mise-noshims 'mise activate zsh'
 fi
 
-zinit lucid wait light-mode for \
-	OMZP::colored-man-pages/colored-man-pages.plugin.zsh \
-	OMZP::colorize/colorize.plugin.zsh \
-    OMZP::git/git.plugin.zsh \
-	reegnz/jq-zsh-plugin # interactive jq when you get json from somewhere
+# set 256 color support if terminal supports it
+znap source "chrissicool/zsh-256color"
+# syntax highlighting
+znap source "z-shell/F-Sy-H"
+# autosuggestions
+znap source "zsh-users/zsh-autosuggestions"
 
-bindkey '^j' jq-complete # example, type "curl foo.bar/x.json", then ctrl-j, NOT enter
+znap source ohmyzsh/ohmyzsh plugins/{colored-man-pages/colored-man-pages.plugin.zsh,colorize/colorize.plugin.zsh,git/git.plugin.zsh}
 
-zinit ice as"program" cp"bin/git-fuzzy -> git-fuzzy" pick"git-fuzzy"
-zinit light bigH/git-fuzzy
+#znap source reegnz/jq-zsh-plugin # interactive jq when you get json from somewhere
+#bindkey '^j' jq-complete # example, type "curl foo.bar/x.json", then ctrl-j, NOT enter
 
-zinit ice as"program" cp"ssh-* -> ssh-tools"
-zinit light vaporup/ssh-tools
-zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX" nocompile
-zinit light tj/git-extras
-source ~/.local/share/zinit/plugins/tj---git-extras/etc/git-extras-completion.zsh
+# interactive git commands, uses fzf
+znap clone bigH/git-fuzzy
+path+=(~[bigH/git-fuzzy]/bin)
+
+# ssh-{certinfo,facts,hostkeys,keyinfo,ping,pwd,version}
+znap clone https://codeberg.org/vaporup/ssh-tools.git
+path+=(~[vaporup/ssh-tools]/cmd/bash/*)
+
+# repo summary, repl, changelog population, author commit percentages and more for git
+znap clone https://github.com/tj/git-extras.git
+path+=(~[tj/git-extras]/bin)
+znap fpath _git-extras '< ~[tj/git-extras]/etc/git-extras-completion.zsh'
+#fpath+=(~[tj/git-extras]/etc/git-extras-completion.zsh)
+
 # fzf-ied tab completion
-#zinit light Aloxaf/fzf-tab # seems to break things
+#znap source Aloxaf/fzf-tab # seems to break things
 
-
-zinit pack"bgn+keys" for fzf
-zinit wait pack atload=+"zicompinit; zicdreplay" for system-completions
+znap source junegunn/fzf shell/{completion,key-bindings}.zsh
+# install via mise
+#path+=(~[junegunn/fzf]/bin)
+#~[junegunn/fzf]/install --no-fish --no-bash --bin
 
 export ATUIN_NOBIND="true"
-zinit ice as"command" from"gh-r" bpick"atuin-*.tar.gz" mv"atuin*/atuin -> atuin" \
-    atclone"./atuin init zsh > init.zsh; ./atuin gen-completions --shell zsh > _atuin" \
-    atpull"%atclone" src"init.zsh"
-zinit light atuinsh/atuin
+if command -v atuin &>/dev/null; then
+  eval "$(atuin init zsh)"
+  #export ZSH_AUTOSUGGEST_STRATEGY=(atuin completion)
+fi
 bindkey '^f' _atuin_search_widget
+znap fpath _atuin "atuin gen-completions --shell zsh"
+
+if command -v zoxide &>/dev/null; then
+    eval "$(zoxide init zsh --cmd cd)"
+fi
 
 # learn completions from random `--help` output
-zinit wait lucid for \
-  dim-an/cod
+znap source dim-an/cod
 
-# forgit, git interactive stuff
-zinit ice wait lucid
-zinit load 'wfxr/forgit'
+# git fzf things
+znap source wfxr/forgit
 
-zinit ice wait'[[ -n ${ZLAST_COMMANDS[(r)cras*]} ]]'
-zinit light zdharma-continuum/zui
-zinit ice wait'[[ -n ${ZLAST_COMMANDS[(r)cras*]} ]]'
-zinit light zdharma-continuum/zinit-crasis
+znap fpath _gh 'gh completion -s zsh'
+znap fpath _cargo 'rustup completions zsh cargo'
+znap fpath _uv 'uv --generate-shell-completion zsh'
+znap fpath _rg 'rg --generate=complete-zsh'
+znap fpath _fd 'fd --gen-completions=zsh'
+znap fpath _bat 'bat --completion zsh'
+znap eval _broot 'broot --print-shell-function zsh'
 
-# keep at bottom
-zi for \
-    atload"zicompinit; zicdreplay" \
-    blockf \
-    lucid \
-    wait \
-  zsh-users/zsh-completions
+## keep at bottom
+znap source zsh-users/zsh-completions
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
-zinit ice lucid depth=1; zinit load romkatv/powerlevel10k
+znap source romkatv/powerlevel10k
 
-_zinit_update() {
-    zinit self-update
-    zinit update --parallel 40
+_update_stuff() {
+    touch /tmp/zsh-update-timer
+	mise self-update -y && mise i -q && mise upgrade --bump && mise plugins update
+    znap pull
 }
 
-if [ ! -e /tmp/zinit-update-timer ] ; then
-    touch /tmp/zinit-update-timer
-    _zinit_update
-	mise self-update -y && mise i -q && mise upgrade --bump && mise plugins update
+if [ ! -e /tmp/zsh-update-timer ] ; then
+    _update_stuff
 fi
-if test $(find /tmp/zinit-update-timer -mtime +1); then
-    _zinit_update
-    touch /tmp/zinit-update-timer
-	mise self-update -y && mise i -q && mise upgrade --bump && mise plugins update
+if test $(find /tmp/zsh-update-timer -mtime +1); then
+    _update_stuff
 fi
 
 # ruby garbage
-type rbenv > /dev/null && eval "$(rbenv init -)"
+type rbenv > /dev/null && znap eval rbenv "$(rbenv init -)"
 
 {{ if eq .chezmoi.os "darwin" }}
-if which gopass > /dev/null; then gopass completion zsh > /opt/homebrew/share/zsh/site-functions/_gopass; fi
 #if which atuin > /dev/null; then atuin gen-completions --shell zsh > /opt/homebrew/share/zsh/site-functions/_atuin; fi
 if [ -e "$(brew --prefix)/share/google-cloud-sdk/" ]; then
     source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
@@ -265,6 +266,7 @@ export REQUESTS_CA_BUNDLE=/tmp/bundleCA.pem NODE_EXTRA_CA_CERTS=/tmp/bundleCA.pe
 stty -tostop
 
 # locally generated completions
-fpath+=~/.zfunc; autoload -Uz compinit; compinit
+fpath+=(~/.zfunc)
+#autoload -Uz compinit#; compinit
 
 # vim: ft=sh
