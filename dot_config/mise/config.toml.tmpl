@@ -1,84 +1,179 @@
 [tools]
 node = 'latest'
-python = ["3.12", "3.13", "3.12", "3.11"]
+python = ["3.14", "3.13", "3.12", "3.11"]
 bun = "latest"
-"npm:prettier" = "latest"
-"npm:remark-cli" = "latest"
-"npm:markdownlint-cli" = "latest"
-"npm:commitlint" = "latest"
-"pipx:icloudpd" = { version = "latest" } # , extras = "postgres,s3" 
+rust = "latest"
+
+### Installers and package managers
+cargo-binstall = "latest"
+"pipx:gitlab-ci-verify-bin" = "latest"
+# check software signatures
+cosign = "latest"
+usage = "latest"
+
+# manage dotfiles
+chezmoi = "latest"
+
+### Python tools
+uv = { version = "latest", postinstall = "uv --generate-shell-completion zsh > $HOME/.local/share/zinit/completions/_uv && autoload -Uz compinit && compinit -u" }
+# formatting/linting
 "pipx:black" = "latest"
 "pipx:ruff" = "latest"
-cargo-binstall = "latest"
-"cargo:eza" = "latest"
-"cargo:bat" = "latest"
-"cargo:hexyl" = "latest"
-"cargo:jless" = "latest"
-"cargo:git-absorb" = "latest"
+# requirements, project foo
+"pipx:pipreqs" = "latest"
+"pipx:pipdeptree" = "latest"
+"pipx:validate-pyproject" = "latest"
+"pipx:setuptools-py2cfg" = "latest"
 
-# toml syntax check + formatter
-taplo = "latest"
-markdownlint-cli2 = "latest"
-shfmt = "latest"
-shellcheck = "latest"
-yamlfmt = "latest"
-yamllint = "latest"
-#"npm:renovate" = "latest"
-#"npm:cspell" = "latest"
-typos = "latest"
+# generate dataclasses
+"pipx:dataclass-wizard" = "latest"
+# project/module dependency and inheritance
+"pipx:tach" = "latest"
+
+
+### Shell tools
+# ls replacement
+"cargo:eza" = "latest"
+# enhanced cat
+"cargo:bat" = "latest"
+# hex viewer, like xxd but better
+"cargo:hexyl" = "latest"
+# interactive json viewer
+"cargo:jless" = "latest"
+
+### Development tools
+# watch file changes and run commands
 watchexec = "latest"
-grex = "latest"
-chezmoi = "latest"
+# Makefile alternative
+just = "latest"
+
+# diff that understands syntax
 difftastic = "latest"
 
-"pipx:pipreqs" = "latest"
-"pipx:dataclass-wizard" = "latest"
-"pipx:tach" = "latest"
-"aqua:errata-ai/vale" = "latest"
-uv = { version = "latest", postinstall = "uv --generate-shell-completion zsh > $HOME/.local/share/zinit/completions/_uv && autoload -Uz compinit && compinit -u" }
-"pipx:ansible-lint" = "latest"
-"go:github.com/dimonomid/nerdlog/cmd/nerdlog" = "latest"
-"pipx:git+https://github.com/mschuett/yaml-shellcheck.git" = "v1.6.0"
+# release/changelog via conventional commits
+cocogitto = "latest"
+# manage multiple VCS repositories
 "pipx:vcstool" = "latest"
-"pipx:validate-pyproject" = "latest"
-"pipx:ssh-para" = "latest"
-"pipx:setuptools-py2cfg" = "latest"
-"pipx:pre-commit" = "latest"
-"pipx:pipdeptree" = "latest"
-"pipx:pip-upgrader" = "latest"
-"pipx:gitlab-ci-verify-bin" = "latest"
-"pipx:paperless-asn-qr-codes" = "latest"
-"pipx:git-cliff" = "latest"
+
+# ways to visualize your project's coverage data
 "pipx:cuvner" = "latest"
+
+# generate project scaffolding from templates
+cookiecutter = "latest"
+# update repos from cookiecutter templates
 "pipx:cruft" = "latest"
+
+# LLM/AI
+"npm:cline" = "latest"
+"npm:opencode-ai" = "latest"
+"pipx:beads-mcp" = "latest"
+"npm:beads-ui" = "latest"
+
+### GIT related
+git-lfs = "latest"
+"pipx:pre-commit" = "latest" # use prek instead
+"ubi:j178/prek" = "latest"
+# Automatically absorb staged changes into your current branch
+"cargo:git-absorb" = "latest"
+# conventional commit linter
+"npm:commitlint" = "latest"
 "pipx:commitizen" = "latest"
-"pipx:check-jsonschema" = "latest"
-"pipx:ansible-doc-extractor" = "latest"
+# Changelog generator
+"pipx:git-cliff" = "latest"
 
-"pipx:tern" = { version = "latest", uvx_args = "--python 3.11"}
-"pipx:csvkit" = "latest"
-cosign = "latest"
-"pipx:tldr" = "latest"
-rust = "latest"
-"ubi:https://github.com/babarot/httpstat" = { version = "latest", exe = "httpstat.sh", rename_exe = "httpstat" }
-"ubi:tstack/lnav" = { version = "latest", postinstall = "lnav -i extra" }
-
-# nvim stuff
+# nvim/vim
 "npm:vim-language-server" = "latest"
-"go:github.com/slarwise/yamlls" = "main"
-"npm:bash-language-server" = "latest"
 "npm:@delance/runtime" = "latest"
 
-[tools.rg]
-version = "latest"
-postinstall = "rg --generate=complete-zsh > $HOME/.local/share/zinit/completions/_rg && autoload -Uz compinit && compinit -u"
 
-[tools.fd]
-version = "latest"
-postinstall = "fd --gen-completions=zsh > $HOME/.local/share/zinit/completions/_fd && autoload -Uz compinit && compinit -u"
-[tools."cargo:broot"]
-version = "latest"
-postinstall = "broot --print-shell-function zsh > $HOME/.config/broot/launcher/bash/br && source $HOME/.config/broot/launcher/bash/br"
+### Linting, formatting, etc.
+"npm:prettier" = "latest"
+"npm:prettier-plugin-toml" = "latest"
+"npm:prettier-plugin-sh" = "latest"
+
+# markdown
+"npm:remark-cli" = "latest"
+"npm:markdownlint-cli" = "latest"
+markdownlint-cli2 = "latest"
+
+# format/lint toml
+"ubi:tamasfe/taplo" = "latest"
+# format/lint shell scripts
+shfmt = "latest"
+shellcheck = "latest"
+"npm:bash-language-server" = "latest"
+# format/lint yaml
+yamlfmt = "latest"
+yamllint = "latest"
+"go:github.com/slarwise/yamlls" = "main"
+"pipx:git+https://github.com/mschuett/yaml-shellcheck.git" = "v1.6.0"
+# Text: spellchecker, grammar, and style
+typos = "latest"
+"aqua:errata-ai/vale" = "latest"
+
+# JSON
+"pipx:check-jsonschema" = "latest"
+
+# ansible
+"pipx:ansible-lint" = "latest"
+"pipx:ansible-doc-extractor" = "latest"
+"npm:@ansible/ansible-language-server" = "latest"
+# LUA
+lua-language-server = "latest"
+# nix language server, requires nix preinstalled
+#"cargo:https://github.com/oxalica/nil" = { version = "branch:main", crate = "nil" }
+
+# GitHub Actions
+actionlint = "latest"
+
+### Sysadmin
+# generates regular expressions from user-provided test cases
+grex = "latest"
+# fast, remote-first, multi-host TUI log viewer
+"go:github.com/dimonomid/nerdlog/cmd/nerdlog" = "latest"
+# view/navigate (big) log files
+"ubi:tstack/lnav" = { version = "latest", postinstall = "lnav -i extra" }
+# parallel ssh
+"pipx:ssh-para" = "latest"
+# fancy curl
+"ubi:https://github.com/babarot/httpstat" = { version = "latest", exe = "httpstat.sh", rename_exe = "httpstat" }
+
+# CSV tools
+"pipx:csvkit" = "latest"
+# alternative to manpages
+"pipx:tldr" = "latest"
+# CLI for secrets management
+"pipx:keyring" = "latest"
+# grep alternative
+rg = { version = "latest", postinstall = "rg --generate=complete-zsh > $HOME/.local/share/zinit/completions/_rg && autoload -Uz compinit && compinit -u" }
+# also goes through archives and pdfs
+ripgrep-all = "latest"
+# alternative to find
+fd = { version = "latest", postinstall = "fd --gen-completions=zsh > $HOME/.local/share/zinit/completions/_fd && autoload -Uz compinit && compinit -u" }
+
+# SBOM stuff
+"ubi:CycloneDX/sbom-utility" = "latest"
+"ubi:dineshr93/sq" = "latest"
+# software composition analysis tool and Python library that generates a Software Bill of Materials for container images
+"pipx:tern" = { version = "latest", uvx_args = "--python 3.11" }
+
+
+### Shell/ZSH
+# shell history in database
+atuin = "latest"
+# history-based cd
+"ubi:ajeetdsouza/zoxide" = "latest"
+# explore file hierarchies with a tree-like view, etc
+"cargo:broot" = { version = "latest", postinstall = "broot --print-shell-function zsh > $HOME/.config/broot/launcher/bash/br && source $HOME/.config/broot/launcher/bash/br" }
+
+
+### MacOS
+# window management
+"go:github.com/cristianoliveira/aerospace-marks" = "latest"
+
+### Misc
+"pipx:paperless-asn-qr-codes" = "latest"
+
 
 [hooks]
 enter = "mise i -q && mise plugins update"
@@ -86,7 +181,11 @@ enter = "mise i -q && mise plugins update"
 [settings]
 jobs = 1
 experimental = true
-ignored_config_paths = ["~/SAPDevelop/.local/share/chezmoi/mise.toml", "~/.local/share/chezmoi/mise.toml"]
+ignored_config_paths = [
+    "~/SAPDevelop/.local/share/chezmoi/mise.toml",
+    "~/.local/share/chezmoi/mise.toml",
+]
+idiomatic_version_file_enable_tools = ["node"]
 
 [settings.pipx]
 uvx = true
@@ -96,11 +195,11 @@ bun = true
 
 [settings.python]
 uv_venv_auto = true
-#{{ if eq .chezmoi.os "darwin" }}
+#{{- if eq .chezmoi.os "darwin" }}
 #precompiled_arch = "apple-darwin"
-#{{ else }}
+#{{- else }}
 #precompiled_arch = "unknown-linux-gnu"
-#{{ end }}
+#{{- end }}
 
 #[settings.node]
 #flavor = "baseline"
