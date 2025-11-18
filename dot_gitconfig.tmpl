@@ -29,6 +29,12 @@
     signingkey = {{ .signingkey }}
     {{ end }}
 
+[includeIf "gitdir:~/SAPDevelop/work/private/"]
+    path = ~/work/private/.gitconfig
+
+[includeIf "gitdir:~/work/private/"]
+    path = ~/work/private/.gitconfig
+
 [alias]
     st = status
     ci = commit
@@ -133,3 +139,9 @@
 
 [include]
     path = "~/work/.git-maintenance"
+
+[filter "lfs"]
+       clean = git-lfs clean -- %f
+       smudge = git-lfs smudge -- %f
+       process = git-lfs filter-process
+       required = true

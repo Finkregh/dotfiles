@@ -151,3 +151,6 @@ shift + alt - left   : yabai -m window --grid 1:2:0:0:1:1
 
 # Right
 shift + alt - right  : yabai -m window --grid 1:2:1:0:1:1
+
+## Popover terminal
+ctrl - 0x32 : ~/.config/skhd/kitty_console
