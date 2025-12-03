@@ -1,3 +1,19 @@
+[env]
+_.path = ["{{"{{"}}env.HOME{{"}}"}}/.krew/bin"]
+
+[plugins]
+# jfrog / artifactory cli
+"asdf-mise-plugins-mise-jfrog-cli" = "https://github.com/mise-plugins/mise-jfrog-cli.git"
+# cloud
+"azure-cli" = "https://github.com/mise-plugins/mise-azure-cli.git"
+"gcloud" = "https://github.com/mise-plugins/mise-gcloud.git"
+# python
+"poetry" = "https://github.com/mise-plugins/mise-poetry.git"
+# mobile dev
+"flutter" = "https://github.com/mise-plugins/mise-flutter.git"
+# k8s
+"krew" = "https://github.com/soupglasses/mise-krew"
+
 [tools]
 node = 'latest'
 python = ["3.14", "3.13", "3.12", "3.11"]
@@ -68,6 +84,11 @@ cookiecutter = "latest"
 "npm:opencode-ai" = "latest"
 "pipx:beads-mcp" = "latest"
 "npm:beads-ui" = "latest"
+
+# k8s
+"aqua:kubernetes-sigs/krew" = { version = "latest", postinstall = "krew install krew" }
+# currently has issues finding the krew binary
+#"krew:oidc-login" = "latest"
 
 ### GIT related
 git-lfs = "latest"

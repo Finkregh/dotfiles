@@ -3,8 +3,9 @@ min_version = "2024.9.5"
 [tools]
 python = "3.12"
 
-[env._.python]
-venv = {path = ".venv", create=true}
+[env]
+_.path = ["{{env.HOME}}/.krew/bin"]
+_.python.venv = {path = ".venv", create=true}
 
 # This auto-updates tools and plugins
 [hooks]
