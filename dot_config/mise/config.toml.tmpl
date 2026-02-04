@@ -35,6 +35,12 @@ uv = { version = "latest", postinstall = "uv --generate-shell-completion zsh > $
 # formatting/linting
 "pipx:black" = "latest"
 "pipx:ruff" = "latest"
+# code in docs
+dprint = "latest"
+# rst/sphinx style checker
+"pipx:doc8" = "latest"
+"pipx:rstcheck" = {version = "latest", extras = "sphinx,toml"}
+"pipx:rstfmt" = "latest"
 # requirements, project foo
 "pipx:pipreqs" = "latest"
 "pipx:pipdeptree" = "latest"
@@ -84,6 +90,8 @@ cookiecutter = "latest"
 "npm:opencode-ai" = "latest"
 "pipx:beads-mcp" = "latest"
 "npm:beads-ui" = "latest"
+"pipx:codegraphcontext" = { version = "latest", uvx_args = "--python 3.12" }
+"pipx:memorygraphMCP" = {version = "latest", extras = "falkordblite" }
 
 # k8s
 "aqua:kubernetes-sigs/krew" = { version = "latest", postinstall = "krew install krew" }
@@ -101,6 +109,7 @@ git-lfs = "latest"
 "pipx:commitizen" = "latest"
 # Changelog generator
 "pipx:git-cliff" = "latest"
+"glab" = "latest"
 
 # nvim/vim
 "npm:vim-language-server" = "latest"
@@ -111,6 +120,7 @@ git-lfs = "latest"
 "npm:prettier" = "latest"
 "npm:prettier-plugin-toml" = "latest"
 "npm:prettier-plugin-sh" = "latest"
+"npm:stylelint" = "latest"
 
 # markdown
 "npm:remark-cli" = "latest"
@@ -136,6 +146,9 @@ typos = "latest"
 "pipx:check-jsonschema" = "latest"
 
 # ansible
+"pipx:ansible" = "latest"
+"pipx:ansible-core" = "latest"
+"pipx:ansible-navigator" = "latest"
 "pipx:ansible-lint" = "latest"
 "pipx:ansible-doc-extractor" = "latest"
 "npm:@ansible/ansible-language-server" = "latest"
@@ -180,6 +193,8 @@ fd = { version = "latest", postinstall = "fd --gen-completions=zsh > $HOME/.loca
 
 
 ### Shell/ZSH
+# fuzzy finder
+fzf = "latest"
 # shell history in database
 atuin = "latest"
 # history-based cd

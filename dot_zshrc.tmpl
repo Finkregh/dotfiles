@@ -143,6 +143,7 @@ fi
 znap fpath _mise "mise completion zsh"
 if [[ "$TERM_PROGRAM" == "vscode" ]]; then
     znap eval mise-shims 'mise activate zsh --shims)'
+    . "$(code --locate-shell-integration-path zsh)"
 else
     znap eval mise-noshims 'mise activate zsh'
 fi
@@ -167,11 +168,11 @@ path+=(~[bigH/git-fuzzy]/bin)
 znap clone https://codeberg.org/vaporup/ssh-tools.git
 path+=(~[vaporup/ssh-tools]/cmd/bash/*)
 
-# repo summary, repl, changelog population, author commit percentages and more for git
-znap clone https://github.com/tj/git-extras.git
-path+=(~[tj/git-extras]/bin)
-znap fpath _git-extras '< ~[tj/git-extras]/etc/git-extras-completion.zsh'
-#fpath+=(~[tj/git-extras]/etc/git-extras-completion.zsh)
+## repo summary, repl, changelog population, author commit percentages and more for git
+#znap clone https://github.com/tj/git-extras.git
+#path+=(~[tj/git-extras]/bin)
+#znap fpath _git-extras '< ~[tj/git-extras]/etc/git-extras-completion.zsh'
+##fpath+=(~[tj/git-extras]/etc/git-extras-completion.zsh)
 
 # fzf-ied tab completion
 #znap source Aloxaf/fzf-tab # seems to break things
@@ -206,6 +207,7 @@ znap fpath _rg 'rg --generate=complete-zsh'
 znap fpath _fd 'fd --gen-completions=zsh'
 znap fpath _bat 'bat --completion zsh'
 znap eval _broot 'broot --print-shell-function zsh'
+znap eval _chezmoi 'chezmoi completion zsh'
 
 ## keep at bottom
 znap source zsh-users/zsh-completions
@@ -218,6 +220,8 @@ _update_stuff() {
     touch /tmp/zsh-update-timer
 	mise self-update -y && mise i -q && mise upgrade --bump && mise plugins update
     znap pull
+    uv python upgrade
+    uv tool upgrade --all
 }
 
 if [ ! -e /tmp/zsh-update-timer ] ; then
@@ -253,11 +257,22 @@ if test $(find /tmp/brew-update-timer -mtime +1); then
     touch /tmp/brew-update-timer
 fi
 
-# get system CAs for e.g. python
-security export -t certs -f pemseq -k /System/Library/Keychains/SystemRootCertificates.keychain -o /tmp/bundleCA.pem
-security export -t certs -f pemseq -k /Library/Keychains/System.keychain -o /tmp/selfSignedCAbundle.pem
-cat /tmp/selfSignedCAbundle.pem >> /tmp/bundleCA.pem
-export REQUESTS_CA_BUNDLE=/tmp/bundleCA.pem NODE_EXTRA_CA_CERTS=/tmp/bundleCA.pem SSL_CERT_FILE=/tmp/bundleCA.pem
+CA_DIR="${XDG_DATA_HOME:-${HOME}/.local/share}"
+CA_BUNDLE="${CA_DIR}/ca_bundle.pem"
+mkdir -p "${CA_DIR}"
+
+# Export certificates to CA bundle
+security export -t certs -f pemseq -k /System/Library/Keychains/SystemRootCertificates.keychain -o "$CA_BUNDLE"
+security export -t certs -f pemseq -k /Library/Keychains/System.keychain >> "$CA_BUNDLE"
+chmod 0600 "${CA_BUNDLE}"
+
+# Set environment variables (add to your shell profile)
+export REQUESTS_CA_BUNDLE="$CA_BUNDLE" NODE_EXTRA_CA_CERTS="$CA_BUNDLE" SSL_CERT_FILE="$CA_BUNDLE"
+
+# For GUI tools, you may need:
+launchctl setenv REQUESTS_CA_BUNDLE "$CA_BUNDLE"
+launchctl setenv NODE_EXTRA_CA_CERTS "$CA_BUNDLE"
+launchctl setenv SSL_CERT_FILE "$CA_BUNDLE"
 
 {{ end }}
 
