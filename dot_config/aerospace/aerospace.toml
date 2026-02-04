@@ -4,6 +4,7 @@
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 
+# sketchybar config is broken it seems <https://github.com/FelixKratz/SketchyBar/issues/788>
 # # Run Sketchybar together with AeroSpace
 # # sketchbar has a built-in detection of already running process,
 # # so it won't be run twice on AeroSpace restart
@@ -71,7 +72,9 @@ inner.horizontal = 0
 inner.vertical = 0
 outer.left = 0
 outer.bottom = 0
-outer.top = 30
+# with sketchybar
+#outer.top = 40
+outer.top = 25
 outer.right = 0
 
 # 'main' binding mode declaration
@@ -203,7 +206,7 @@ alt-shift-b = 'move-node-to-workspace B'
 ## See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 #alt-tab = 'workspace-back-and-forth'
 ## See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
-#alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 alt-shift-semicolon = 'mode service'
@@ -241,9 +244,9 @@ shift-down = ['volume set 0', 'mode main']
 3 = ['^AW3', 'main']
 4 = ['^AW3', 'main']
 5 = ['^AW3', 'main']
-6 = ['^Acer', 'main']
-7 = ['^Acer', 'main']
-8 = ['^Acer', 'main']
+6 = ['^Acer', 'HP P34hc G4', 'main']
+7 = ['^Acer', 'HP P34hc G4', 'main']
+8 = ['^Acer', 'HP P34hc G4', 'main']
 9 = 'built-in'
 A = 'built-in'
 B = 'built-in'
@@ -258,9 +261,9 @@ run = ['layout floating']
 if.app-id = 'com.apple.weather'
 run = ['layout floating']
 
-[[on-window-detected]]
-if.app-id = 'com.apple.finder'
-run = ['layout floating']
+#[[on-window-detected]]
+#if.app-id = 'com.apple.finder'
+#run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.raycast.macos'
